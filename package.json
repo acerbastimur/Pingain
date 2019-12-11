@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:ts": "tsc && yarn lint:eslint",
+    "lint": "yarn lint:ts",
+    "format": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix"
   },
   "dependencies": {
     "react": "16.8.6",
@@ -18,9 +22,22 @@
     "@types/react": "^16.9.2",
     "@types/react-native": "^0.60.14",
     "@types/react-test-renderer": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "babel-jest": "^24.1.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-native": "^3.8.1",
     "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.54.1",
+    "prettier": "^1.19.1",
     "react-test-renderer": "16.8.6",
     "typescript": "^3.6.3"
   },
