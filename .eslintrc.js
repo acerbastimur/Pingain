@@ -45,7 +45,16 @@ module.exports = {
           "src/styles/**/*.stories.tsx",
          ]
       }
-    ],
+    ], "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ],
     "react-native/no-unused-styles": "error",
     "react-native/no-inline-styles": "error",
     "react-native/no-color-literals": "error",
