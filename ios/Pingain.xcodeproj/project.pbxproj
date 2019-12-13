@@ -19,6 +19,7 @@
 		2FF69C44C36C3BFE3377EA83 /* libPods-Pingain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 667F2247E543888A62F9BF6C /* libPods-Pingain.a */; };
 		49395644D8B3911AA2B1E090 /* libPods-Pingain-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFAC9C947A4ADC41E9BBFE3 /* libPods-Pingain-tvOSTests.a */; };
 		4BE4B1BD0DED4C8F33518731 /* libPods-Pingain-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CBF7DEB3F8BAA085CA3F090 /* libPods-Pingain-tvOS.a */; };
+		854A955723A2ED95006F0896 /* launcher_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 854A955623A2ED95006F0896 /* launcher_screen.png */; };
 		ABFFEE2C39BE3833F89962C5 /* libPods-PingainTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF842949D567314A29E0A031 /* libPods-PingainTests.a */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		62F41C7701178387C55D7675 /* Pods-Pingain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pingain.release.xcconfig"; path = "Target Support Files/Pods-Pingain/Pods-Pingain.release.xcconfig"; sourceTree = "<group>"; };
 		667F2247E543888A62F9BF6C /* libPods-Pingain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pingain.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8352A02CCE7B7A0203D8388E /* Pods-Pingain-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pingain-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Pingain-tvOSTests/Pods-Pingain-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		854A955623A2ED95006F0896 /* launcher_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launcher_screen.png; path = Pingain/launcher_screen.png; sourceTree = "<group>"; };
 		8FE9A3C7388CD51D3FA05705 /* Pods-Pingain-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pingain-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Pingain-tvOS/Pods-Pingain-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		95F20C8E9698F05A0DC4D2C1 /* Pods-PingainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PingainTests.release.xcconfig"; path = "Target Support Files/Pods-PingainTests/Pods-PingainTests.release.xcconfig"; sourceTree = "<group>"; };
 		9F714B548147F3894FDC5351 /* Pods-Pingain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pingain.debug.xcconfig"; path = "Target Support Files/Pods-Pingain/Pods-Pingain.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				854A955623A2ED95006F0896 /* launcher_screen.png */,
 			);
 			name = Pingain;
 			sourceTree = "<group>";
@@ -194,7 +197,6 @@
 				5DAAA3BCDEB5984D76E0116A /* Pods-PingainTests.debug.xcconfig */,
 				95F20C8E9698F05A0DC4D2C1 /* Pods-PingainTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +310,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				854A955723A2ED95006F0896 /* launcher_screen.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
