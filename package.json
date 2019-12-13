@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "android":"emulator -avd Nexus_5X_API_29_x86",
+    "android": "emulator -avd Nexus_5X_API_29_x86",
     "test": "jest",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:ts": "tsc && yarn lint:eslint",
@@ -18,7 +18,8 @@
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^1.0.0-alpha.23",
     "react-native-splash-screen": "^3.2.0",
-    "react-navigation": "^4.0.10"
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
