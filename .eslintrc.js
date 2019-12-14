@@ -1,81 +1,83 @@
 module.exports = {
   root: true,
   extends: '@react-native-community',
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "airbnb",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:eslint-comments/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:jest/recommended"
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:eslint-comments/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:jest/recommended',
   ],
-  "env": {
-    "browser": true,
-    "jest": true,
-    "react-native/react-native": true
+  env: {
+    browser: true,
+    jest: true,
+    'react-native/react-native': true,
   },
-  "plugins": [
-    "react",
-    "react-native",
-    "@typescript-eslint",
-    "jsx-a11y",
-    "import",
-    "prettier",
-    "jest",
-    "eslint-comments"
+  plugins: [
+    'react',
+    'react-native',
+    '@typescript-eslint',
+    'jsx-a11y',
+    'import',
+    'prettier',
+    'jest',
+    'eslint-comments',
   ],
-  "rules": {
-    "@typescript-eslint/indent": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-use-before-define": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "react/prop-types": "off",
-    "react/button-has-type": "off",
-    "no-use-before-define": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
+  rules: {
+    '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'react/jsx-filename-extension': [1, {extensions: ['.js', '.jsx', '.ts', '.tsx']}],
+    'react/prop-types': 'off',
+    'react/button-has-type': 'off',
+    'no-use-before-define': 'off',
+    'global-require': 0,
+    'import/no-extraneous-dependencies': [
+      'error',
       {
-        "devDependencies": [
-           "config-overrides.js",
-          "src/setupTests.ts",
-          "src/components/**/*.stories.tsx",
-          "src/styles/**/*.stories.tsx",
-         ]
-      }
-    ], "import/extensions": [
-      "error",
-      "ignorePackages",
+        devDependencies: [
+          'config-overrides.js',
+          'src/setupTests.ts',
+          'src/components/**/*.stories.tsx',
+          'src/styles/**/*.stories.tsx',
+        ],
+      },
+    ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
       {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-   ],
-    "react-native/no-unused-styles": "error",
-    "react-native/no-inline-styles": "error",
-    "react-native/no-color-literals": "error",
-    "react/jsx-one-expression-per-line": "off",
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "prettier/prettier": ["error"]
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'react-native/no-unused-styles': 'error',
+    'react-native/no-inline-styles': 'error',
+    'react-native/no-color-literals': 'error',
+    'react/jsx-one-expression-per-line': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 'off',
+    'prettier/prettier': ['error'],
   },
-  "overrides": [
+  overrides: [
     {
-      "files": ["*.style.ts"],
-      "rules": {
-        "@typescript-eslint/camelcase": "off"
-      }
+      files: ['src/'],
+      rules: {
+        '@typescript-eslint/camelcase': 'off',
+      },
     },
     {
-      "files": ["*.test.tsx"],
-      "rules": {
-        "@typescript-eslint/no-explicit-any": "off",
-        "react-native/no-color-literals": "off",
-        "react-native/no-inline-styles": "off"
-      }
-    }
-  ]
+      files: ['*.test.tsx'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        'react-native/no-color-literals': 'off',
+        'react-native/no-inline-styles': 'off',
+      },
+    },
+  ],
 };

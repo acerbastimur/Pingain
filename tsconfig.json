@@ -4,7 +4,11 @@
   "noImplicitReturns": true,
   "skipLibCheck": true,
   "isolatedModules": false,
-   "compilerOptions": {
-    "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+  "compilerOptions": {
+    "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
+    "baseUrl": ".",
+    "paths": {
+      "@": ["./src/assets/*"]
+    }
   }
 }
