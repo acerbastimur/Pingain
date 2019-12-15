@@ -86,9 +86,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
         <TouchableOpacity
           style={s.startButton}
           onPress={() => {
-            console.log("navigate");
-            
-            navigation.navigate('UserTypeSelect');
+            navigation.navigate('UserAuth');
           }}>
           <Text style={s.startText}>Başlayalım!</Text>
         </TouchableOpacity>

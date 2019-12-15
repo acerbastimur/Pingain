@@ -8,12 +8,12 @@ const AppNavigator = createSwitchNavigator(
     Onboarding: {
       screen: Onboarding,
     },
-    UserTypeSelect: {
+    UserAuth: {
       screen: UserTypeSelect,
     },
   },
   {
-    initialRouteName: 'Onboarding',
+    initialRouteName: 'UserAuth',
   },
 );
 

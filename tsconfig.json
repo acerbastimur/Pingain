@@ -6,9 +6,6 @@
   "isolatedModules": false,
   "compilerOptions": {
     "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
-    "baseUrl": ".",
-    "paths": {
-      "@": ["./src/assets/*"]
-    }
+    
   }
 }
