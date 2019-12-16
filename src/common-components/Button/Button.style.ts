@@ -5,12 +5,11 @@ import Colors from '../../styles/Colors';
 
 export default StyleSheet.create({
   touchable: {
-    width: '76%',
-    height: '6.5%',
+    height: '100%',
     backgroundColor: Colors.INFO,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 6,
     shadowColor: '#2D8EFF',
     shadowOffset: {
       width: 0,

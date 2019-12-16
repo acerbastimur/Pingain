@@ -1,6 +1,8 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+
 import ButtonStyle from './Button.style';
 
 interface ButtonProps {
@@ -17,7 +19,8 @@ const Button = (props: ButtonProps) => {
 
   return (
     <TouchableOpacity
-      style={{...s.touchable, borderWidth, borderColor, backgroundColor: backgorundColor}}>
+      style={{...s.touchable, borderWidth, borderColor, backgroundColor: backgorundColor}}
+    >
       <Text style={{...s.text, color: textColor}}>{text}</Text>
     </TouchableOpacity>
   );

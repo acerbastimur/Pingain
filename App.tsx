@@ -9,6 +9,11 @@ export default class App extends React.Component {
     this.state = {};
   }
 
+  componentWillUnmount() {
+    const x = new AbortController();
+    x.abort();
+  }
+
   public render() {
     return (
       <SafeAreaView style={styles.safeAreaFlex}>

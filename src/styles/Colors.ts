@@ -4,4 +4,6 @@ export default class Colors {
   static SECONDARY = '#93A4B8';
 
   static INFO = '#2D8EFF';
+
+  static COMPANY = '#FFBB00';
 }

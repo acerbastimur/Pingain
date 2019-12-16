@@ -37,6 +37,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
           showsButtons={false}>
           <View style={s.itemContainer}>
             <Animatable.Image
+              useNativeDriver
               ref={ref => {
                 pageImageRefs[0] = ref;
               }}
@@ -52,6 +53,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
           </View>
           <View style={s.itemContainer}>
             <Animatable.Image
+              useNativeDriver
               source={require('./images/page2.png')}
               style={s.image}
               ref={ref => {
@@ -66,6 +68,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
           </View>
           <View style={s.itemContainer}>
             <Animatable.Image
+              useNativeDriver
               ref={ref => {
                 pageImageRefs[2] = ref;
               }}
