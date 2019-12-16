@@ -7,15 +7,18 @@
 import * as React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import Button from '../../common-components/Button';
-import UserTypeSelectStyle from './UserTypeSelect.style';
+import AuthTypeSelectStyle from './AuthTypeSelect.style';
 import Colors from '../../styles/Colors';
 import Logo from '../../common-components/Logo';
 
-const UserTypeSelect = props => {
-  const s = UserTypeSelectStyle;
-  const x = new AbortController();
-  x.abort();
+interface AuthTypeSelectProps {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+const AuthTypeSelect = (props: AuthTypeSelectProps) => {
+  const s = AuthTypeSelectStyle;
+  const {navigation} = props;
   return (
     <View style={s.container}>
       <View style={s.logoContainer}>
@@ -34,7 +37,15 @@ const UserTypeSelect = props => {
         <Text style={s.typeTextBold}>Merhaba Pingainer,</Text>
         <Text style={s.typeTextLight}>Aramıza hoşgeldin!</Text>
         <View style={s.buttonContainer}>
-          <Button text="Pingainer Kayıt" backgorundColor={Colors.INFO} textColor="#fff" />
+          <Button
+            text="Pingainer Kayıt"
+            backgorundColor={Colors.INFO}
+            textColor="#fff"
+            onPress={() => {
+              console.log('Pingainer register');
+              navigation.navigate('UserRegister');
+            }}
+          />
         </View>
         <View style={s.line} />
       </View>
@@ -42,10 +53,17 @@ const UserTypeSelect = props => {
         <Text style={s.typeTextBold}>İşletme iseniz,</Text>
         <Text style={s.typeTextLight}>Sizi böyle alalım!</Text>
         <View style={s.buttonContainer}>
-          <Button text="İşletme Kayıt Ol" backgorundColor={Colors.COMPANY} textColor="#fff" />
+          <Button
+            text="İşletme Kayıt Ol"
+            backgorundColor={Colors.COMPANY}
+            textColor="#fff"
+            onPress={() => {
+              console.log('Company register');
+            }}
+          />
         </View>
       </View>
     </View>
   );
 };
-export default UserTypeSelect;
+export default AuthTypeSelect;
