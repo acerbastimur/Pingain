@@ -43,7 +43,10 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
   public render() {
     const {navigation} = this.props;
     return (
-      <KeyboardAwareScrollView contentContainerStyle={this.style.keyboardScrollContainer}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={this.style.keyboardScrollContainer}
+        disableScrollViewPanResponder={false}
+        scrollEnabled={false}>
         <View style={this.style.container}>
           <View style={this.style.logoContainer}>
             <Logo />

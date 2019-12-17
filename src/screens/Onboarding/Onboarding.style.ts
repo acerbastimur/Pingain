@@ -47,8 +47,10 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     height: '8.5%',
-    borderTopStartRadius: 76,
+    borderTopStartRadius: 100,
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: Colors.INFO,
   },
   startButton: {
     alignSelf: 'flex-end',
