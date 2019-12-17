@@ -8,11 +8,11 @@ import * as React from 'react';
 import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import UserRegisterStyle from './UserRegister.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 interface UserRegisterProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -43,7 +43,7 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
   public render() {
     const {navigation} = this.props;
     return (
-      <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
+      <KeyboardAwareScrollView contentContainerStyle={this.style.keyboardScrollContainer}>
         <View style={this.style.container}>
           <View style={this.style.logoContainer}>
             <Logo />
@@ -110,9 +110,14 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
               />
             </View>
             <View style={this.style.loginTextContainer}>
-              <Text style={this.style.loginText}>
-                Pingain üyesiyim. <Text style={this.style.underline}>Giriş Yap</Text>
-              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('UserLogin');
+                }}>
+                <Text style={this.style.loginText}>
+                  Pingain üyesiyim. <Text style={this.style.underline}>Giriş Yap</Text>
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

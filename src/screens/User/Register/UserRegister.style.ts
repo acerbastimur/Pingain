@@ -12,11 +12,11 @@ const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / font
 console.log(screenWidth);
 
 export default StyleSheet.create({
+  keyboardScrollContainer: {flex: 1},
   container: {
     flex: 1,
     flexDirection: 'column',
     paddingHorizontal: '11.5%',
-    
   },
   logoContainer: {
     flex: 0.25,
