@@ -19,7 +19,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'UserRegister',
+    initialRouteName: 'UserLogin',
   },
 );
 
