@@ -29,10 +29,10 @@ const OnboardingComponent = (props: OnboardingProps) => {
               return;
             }
             if (index === 1) {
-              pageImageRefs[1].bounce();
+              pageImageRefs[1].fadeIn();
               return;
             }
-            pageImageRefs[2].fadeIn();
+            pageImageRefs[2].bounce();
           }}
           showsButtons={false}>
           <View style={s.itemContainer}>
@@ -54,11 +54,11 @@ const OnboardingComponent = (props: OnboardingProps) => {
           <View style={s.itemContainer}>
             <Animatable.Image
               useNativeDriver
-              source={require('./images/page2.png')}
-              style={s.image}
               ref={ref => {
                 pageImageRefs[1] = ref;
               }}
+              source={require('./images/page3.png')}
+              style={s.image}
             />
             <Text style={s.title}>Melis ise butik bir kafesi olan işletmeci</Text>
             <View style={s.line} />
@@ -69,11 +69,11 @@ const OnboardingComponent = (props: OnboardingProps) => {
           <View style={s.itemContainer}>
             <Animatable.Image
               useNativeDriver
+              source={require('./images/page2.png')}
+              style={s.image}
               ref={ref => {
                 pageImageRefs[2] = ref;
               }}
-              source={require('./images/page3.png')}
-              style={s.image}
             />
             <Text style={s.title}>Hikayenin sonu ise ikramlar ve ödüller…</Text>
             <View style={s.line} />
