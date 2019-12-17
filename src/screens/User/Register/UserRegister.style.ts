@@ -16,6 +16,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     paddingHorizontal: '11.5%',
+    
   },
   logoContainer: {
     flex: 0.25,
