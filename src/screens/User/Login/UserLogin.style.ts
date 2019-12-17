@@ -80,11 +80,23 @@ export default StyleSheet.create({
   },
   loginTextContainer: {
     flex: 0.2,
+    borderColor: 'purple',
+    borderWidth: 2,
   },
 
   loginText: {
     color: Colors.PRIMARY,
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: responsiveRate(14),
+  },
+  bottomFieldContainer:{
+    flex: 0.4,
+  },
+  forgotPassword: {
+    marginTop: 30,
+    textAlign: 'center',
+    color: Colors.SECONDARY,
     fontWeight: 'bold',
     fontSize: responsiveRate(14),
   },

@@ -94,15 +94,18 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                 }}
               />
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('UserRegister');
-              }}
-              style={this.style.loginTextContainer}>
-              <Text style={this.style.loginText}>
-                Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
-              </Text>
-            </TouchableOpacity>
+            <View style={this.style.bottomFieldContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('UserRegister');
+                }}
+                style={this.style.loginTextContainer}>
+                <Text style={this.style.loginText}>
+                  Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
+                </Text>
+              </TouchableOpacity>
+              <Text style={this.style.forgotPassword}>Şifremi unuttum</Text>
+            </View>
           </View>
         </View>
       </KeyboardAwareScrollView>
