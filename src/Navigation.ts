@@ -19,7 +19,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'AuthTypeSelect',
+    initialRouteName: 'UserRegister',
   },
 );
 
@@ -33,7 +33,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'Onboarding',
+    initialRouteName: 'Auth',
   },
 );
 
