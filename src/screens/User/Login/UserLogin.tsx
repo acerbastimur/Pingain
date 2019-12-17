@@ -1,6 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable eslint-comments/no-duplicate-disable */
+/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
@@ -9,6 +13,8 @@ import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 import UserRegisterStyle from './UserLogin.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
@@ -20,25 +26,16 @@ interface UserRegisterProps {
 export default class UserRegister extends React.Component<UserRegisterProps> {
   style = UserRegisterStyle;
 
+  references = [];
+
   constructor(props: UserRegisterProps) {
     super(props);
     this.state = {};
   }
 
-  inputComponent = (header: string) => (
-    <View style={this.style.inputContainer}>
-      <Text style={this.style.inputText}>Email</Text>
-      <View>
-        <TextInput
-          style={this.style.input}
-          placeholder="Email giriniz"
-          placeholderTextColor={Colors.SECONDARY}
-          selectionColor={Colors.PRIMARY}
-        />
-        <Image source={require('../../../assets/image/tick.png')} style={this.style.image} />
-      </View>
-    </View>
-  );
+  handleSubmit = (values: any) => {
+    alert(JSON.stringify(values));
+  };
 
   public render() {
     const {navigation} = this.props;
@@ -55,60 +52,129 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
             <Text style={this.style.headerTextLight}>Hoşgeldin !</Text>
             <Text style={this.style.headerText2}>Seni gördüğümüze sevindik :)</Text>
           </View>
-          <View style={this.style.formContainer}>
-            <View style={this.style.inputContainer}>
-              <Text style={this.style.inputText}>Email</Text>
-              <View>
-                <TextInput
-                  style={this.style.input}
-                  placeholder="Email giriniz"
-                  placeholderTextColor={Colors.SECONDARY}
-                  selectionColor={Colors.PRIMARY}
-                />
-                <Image
-                  source={require('../../../assets/image/tick.png')}
-                  style={this.style.image}
-                />
+          <Formik
+            validateOnMount
+            initialValues={{
+              email: '',
+              password: '',
+            }}
+            onSubmit={this.handleSubmit}
+            validationSchema={Yup.object().shape({
+              email: Yup.string()
+                .email()
+
+                .required(),
+              password: Yup.string()
+                .min(6)
+                .required(),
+            })}>
+            {({
+              values,
+              handleChange,
+              handleSubmit,
+              errors,
+              touched,
+              setFieldTouched,
+              isValid,
+              isSubmitting,
+            }) => (
+              <View style={this.style.formContainer}>
+                <View style={this.style.inputContainer}>
+                  <Text style={this.style.inputText}>Email</Text>
+                  <Animatable.View
+                    ref={ref => {
+                      const isThere = this.references.filter(t => t.name === 'email')[0];
+                      if (isThere) return;
+                      this.references.push({
+                        name: 'email',
+                        ref,
+                      });
+                    }}>
+                    <TextInput
+                      style={this.style.input}
+                      placeholder="Email giriniz"
+                      placeholderTextColor={Colors.SECONDARY}
+                      selectionColor={Colors.PRIMARY}
+                      value={values.email}
+                      onChangeText={handleChange('email')}
+                      onBlur={() => setFieldTouched('email')}
+                      autoCapitalize="none"
+                    />
+
+                    {!errors.email && touched.email ? (
+                      <Image
+                        source={require('../../../assets/image/tick.png')}
+                        style={this.style.image}
+                      />
+                    ) : null}
+                  </Animatable.View>
+                </View>
+                <View style={this.style.inputContainer}>
+                  <Text style={this.style.inputText}>Şifre</Text>
+                  <Animatable.View
+                    ref={ref => {
+                      const isThere = this.references.filter(t => t.name === 'password')[0];
+                      if (isThere) return;
+                      this.references.push({
+                        name: 'password',
+                        ref,
+                      });
+                    }}>
+                    <TextInput
+                      style={this.style.input}
+                      placeholder="Şifrenizi Giriniz"
+                      placeholderTextColor={Colors.SECONDARY}
+                      selectionColor={Colors.PRIMARY}
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      onBlur={() => setFieldTouched('password')}
+                      autoCapitalize="none"
+                      secureTextEntry
+                    />
+
+                    {!errors.password && touched.password ? (
+                      <Image
+                        source={require('../../../assets/image/tick.png')}
+                        style={this.style.image}
+                      />
+                    ) : null}
+                  </Animatable.View>
+                </View>
+                <View style={this.style.buttonContainer}>
+                  <Button
+                    text="Giriş Yap"
+                    backgorundColor={Colors.INFO}
+                    textColor="#fff"
+                    onPress={() => {
+                      if (isValid) {
+                        handleSubmit();
+                        return;
+                      }
+
+                      if (errors.email) {
+                        this.references.filter(t => t.name === 'email')[0].ref.shake();
+                      }
+                      if (errors.password) {
+                        this.references.filter(t => t.name === 'password')[0].ref.shake();
+                      }
+                    }}
+                  />
+                </View>
+                <View style={this.style.bottomFieldContainer}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('UserRegister');
+                    }}
+                    style={this.style.loginTextContainer}>
+                    <Text style={this.style.loginText}>
+                      Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
+                    </Text>
+                  </TouchableOpacity>
+                  <Text style={this.style.forgotPassword}>Şifremi unuttum</Text>
+                </View>
               </View>
-            </View>
-            <View style={this.style.inputContainer}>
-              <Text style={this.style.inputText}>Şifre</Text>
-              <View>
-                <TextInput
-                  style={this.style.input}
-                  placeholder="Şifre Giriniz"
-                  placeholderTextColor={Colors.SECONDARY}
-                  selectionColor={Colors.PRIMARY}
-                />
-                <Image
-                  source={require('../../../assets/image/tick.png')}
-                  style={this.style.image}
-                />
-              </View>
-            </View>
-            <View style={this.style.buttonContainer}>
-              <Button
-                text="Giriş Yap"
-                backgorundColor={Colors.INFO}
-                textColor="#fff"
-                onPress={() => {
-                  console.log('User register');
-                }}
-              />
-            </View>
-            <View style={this.style.bottomFieldContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('UserRegister');
-                }}
-                style={this.style.loginTextContainer}>
-                <Text style={this.style.loginText}>
-                  Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
-                </Text>
-              </TouchableOpacity>
-              <Text style={this.style.forgotPassword}>Şifremi unuttum</Text>
-            </View>
-          </View>
+            )}
+          </Formik>
         </View>
       </KeyboardAwareScrollView>
     );
