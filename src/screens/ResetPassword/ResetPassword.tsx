@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
@@ -19,26 +20,33 @@ import ResetPasswordStyle from './ResetPassword.style';
 import Colors from '../../styles/Colors';
 import Logo from '../../common-components/Logo';
 import Button from '../../common-components/Button';
+import ModalContainer from '../../common-components/ModalContainer';
 
 interface ResetPasswordProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class ResetPassword extends React.Component<ResetPasswordProps> {
+interface ResetPasswordState {
+  isModalVisible: boolean;
+}
+export default class ResetPassword extends React.Component<ResetPasswordProps, ResetPasswordState> {
   style = ResetPasswordStyle;
 
   references = [];
 
   constructor(props: ResetPasswordProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      isModalVisible: false,
+    };
   }
 
   handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+    this.setState({isModalVisible: true});
   };
 
   public render() {
     const {navigation} = this.props;
+    const {isModalVisible} = this.state;
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
@@ -127,6 +135,12 @@ export default class ResetPassword extends React.Component<ResetPasswordProps> {
             )}
           </Formik>
         </View>
+        <ModalContainer
+          isVisible={isModalVisible}
+          backButton={e => {
+            this.setState({isModalVisible: false});
+          }}
+        />
       </KeyboardAwareScrollView>
     );
   }
