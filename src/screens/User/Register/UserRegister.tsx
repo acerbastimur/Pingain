@@ -166,7 +166,7 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                 <View style={this.style.buttonContainer}>
                   <Button
                     text="Kayıt Ol"
-                    backgorundColor={Colors.INFO}
+                    backgroundColor={Colors.INFO}
                     textColor="#fff"
                     onPress={() => {
                       if (isValid) {

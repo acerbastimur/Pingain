@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "android": "emulator -avd Nexus_5X_API_29_x86",
+    "android": "react-native run-android",
     "test": "jest",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:ts": "tsc && yarn lint:eslint",

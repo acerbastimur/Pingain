@@ -4,6 +4,7 @@ import Onboarding from './screens/Onboarding';
 import AuthTypeSelect from './screens/AuthTypeSelect';
 import UserLogin from './screens/User/Login';
 import UserRegister from './screens/User/Register';
+import ResetPassword from './screens/ResetPassword';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -16,10 +17,13 @@ const AuthNavigator = createStackNavigator(
     UserRegister: {
       screen: UserRegister,
     },
+    ResetPassword: {
+      screen: ResetPassword,
+    },
   },
   {
     headerMode: 'none',
-    initialRouteName: 'UserLogin',
+    initialRouteName: 'ResetPassword',
   },
 );
 

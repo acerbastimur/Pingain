@@ -2,7 +2,7 @@ import {Dimensions, PixelRatio} from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
 import {StyleSheet} from 'react-native';
-import Colors from '../../../styles/Colors';
+import Colors from '../../styles/Colors';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -76,7 +76,7 @@ export default StyleSheet.create({
   buttonContainer: {
     flex: 0.2,
     paddingVertical: '6.75%',
-    marginTop: 20,
+    marginTop: 15,
   },
   loginTextContainer: {
     flex: 0.3,
@@ -97,5 +97,8 @@ export default StyleSheet.create({
     color: Colors.SECONDARY,
     fontWeight: 'bold',
     fontSize: responsiveRate(14),
+  },
+  dismiss: {
+    marginTop: 20,
   },
 });

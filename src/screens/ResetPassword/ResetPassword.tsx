@@ -15,20 +15,20 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import UserRegisterStyle from './UserLogin.style';
-import Colors from '../../../styles/Colors';
-import Logo from '../../../common-components/Logo';
-import Button from '../../../common-components/Button';
+import ResetPasswordStyle from './ResetPassword.style';
+import Colors from '../../styles/Colors';
+import Logo from '../../common-components/Logo';
+import Button from '../../common-components/Button';
 
-interface UserRegisterProps {
+interface ResetPasswordProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class UserRegister extends React.Component<UserRegisterProps> {
-  style = UserRegisterStyle;
+export default class ResetPassword extends React.Component<ResetPasswordProps> {
+  style = ResetPasswordStyle;
 
   references = [];
 
-  constructor(props: UserRegisterProps) {
+  constructor(props: ResetPasswordProps) {
     super(props);
     this.state = {};
   }
@@ -48,15 +48,14 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
             <Logo />
           </View>
           <View style={this.style.headerTextContainer}>
-            <Text style={this.style.headerText}>Selam Pingainer</Text>
-            <Text style={this.style.headerTextLight}>Hoşgeldin !</Text>
-            <Text style={this.style.headerText2}>Seni gördüğümüze sevindik :)</Text>
+            <Text style={this.style.headerText}>Demek</Text>
+            <Text style={this.style.headerTextLight}>Şifreni unuttun !</Text>
+            <Text style={this.style.headerText2}>Merak etme hemen hallederiz</Text>
           </View>
           <Formik
             validateOnMount
             initialValues={{
               email: '',
-              password: '',
             }}
             onSubmit={this.handleSubmit}
             validationSchema={Yup.object().shape({
@@ -64,20 +63,8 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                 .email()
 
                 .required(),
-              password: Yup.string()
-                .min(6)
-                .required(),
             })}>
-            {({
-              values,
-              handleChange,
-              handleSubmit,
-              errors,
-              touched,
-              setFieldTouched,
-              isValid,
-              isSubmitting,
-            }) => (
+            {({values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid}) => (
               <View style={this.style.formContainer}>
                 <View style={this.style.inputContainer}>
                   <Text style={this.style.inputText}>Email</Text>
@@ -103,38 +90,7 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
 
                     {!errors.email && touched.email ? (
                       <Image
-                        source={require('../../../assets/image/tick.png')}
-                        style={this.style.image}
-                      />
-                    ) : null}
-                  </Animatable.View>
-                </View>
-                <View style={this.style.inputContainer}>
-                  <Text style={this.style.inputText}>Şifre</Text>
-                  <Animatable.View
-                    ref={ref => {
-                      const isThere = this.references.filter(t => t.name === 'password')[0];
-                      if (isThere) return;
-                      this.references.push({
-                        name: 'password',
-                        ref,
-                      });
-                    }}>
-                    <TextInput
-                      style={this.style.input}
-                      placeholder="Şifrenizi Giriniz"
-                      placeholderTextColor={Colors.SECONDARY}
-                      selectionColor={Colors.PRIMARY}
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      onBlur={() => setFieldTouched('password')}
-                      autoCapitalize="none"
-                      secureTextEntry
-                    />
-
-                    {!errors.password && touched.password ? (
-                      <Image
-                        source={require('../../../assets/image/tick.png')}
+                        source={require('../../assets/image/tick.png')}
                         style={this.style.image}
                       />
                     ) : null}
@@ -142,8 +98,8 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                 </View>
                 <View style={this.style.buttonContainer}>
                   <Button
-                    text="Giriş Yap"
-                    backgroundColor={Colors.INFO}
+                    text="Şifremi Sıfırla"
+                    backgroundColor={Colors.SECONDARY}
                     textColor="#fff"
                     onPress={() => {
                       if (isValid) {
@@ -154,28 +110,18 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       if (errors.email) {
                         this.references.filter(t => t.name === 'email')[0].ref.shake();
                       }
-                      if (errors.password) {
-                        this.references.filter(t => t.name === 'password')[0].ref.shake();
-                      }
                     }}
                   />
-                </View>
-                <View style={this.style.bottomFieldContainer}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('UserRegister');
-                    }}
-                    style={this.style.loginTextContainer}>
-                    <Text style={this.style.loginText}>
-                      Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('ResetPassword');
-                    }}>
-                    <Text style={this.style.forgotPassword}>Şifremi unuttum</Text>
-                  </TouchableOpacity>
+                  <View style={this.style.dismiss}>
+                    <Button
+                      text="Vazgeç"
+                      backgroundColor="#fff"
+                      textColor={Colors.PRIMARY}
+                      shadow={false}
+                      fontWeight="bold"
+                      onPress={() => {}}
+                    />
+                  </View>
                 </View>
               </View>
             )}

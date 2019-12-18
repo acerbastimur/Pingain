@@ -39,7 +39,7 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
         <View style={s.buttonContainer}>
           <Button
             text="Pingainer Kayıt"
-            backgorundColor={Colors.INFO}
+            backgroundColor={Colors.INFO}
             textColor="#fff"
             onPress={() => {
               console.log('Pingainer register');
@@ -55,7 +55,7 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
         <View style={s.buttonContainer}>
           <Button
             text="İşletme Kayıt Ol"
-            backgorundColor={Colors.COMPANY}
+            backgroundColor={Colors.COMPANY}
             textColor="#fff"
             onPress={() => {
               console.log('Company register');
