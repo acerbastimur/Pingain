@@ -5,6 +5,8 @@ import AuthTypeSelect from './screens/AuthTypeSelect';
 import UserLogin from './screens/User/Login';
 import UserRegister from './screens/User/Register';
 import ResetPassword from './screens/ResetPassword';
+import CompanyRegister from './screens/Company/Register';
+import CompanyLogin from './screens/Company/Login';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -20,10 +22,16 @@ const AuthNavigator = createStackNavigator(
     ResetPassword: {
       screen: ResetPassword,
     },
+    CompanyRegister: {
+      screen: CompanyRegister,
+    },
+    CompanyLogin: {
+      screen: CompanyLogin,
+    },
   },
   {
     headerMode: 'none',
-    initialRouteName: 'UserRegister',
+    initialRouteName: 'AuthTypeSelect',
   },
 );
 
@@ -37,7 +45,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'Onboarding',
   },
 );
 

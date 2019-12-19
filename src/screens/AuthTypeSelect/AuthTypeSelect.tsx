@@ -58,7 +58,7 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
             backgroundColor={Colors.COMPANY}
             textColor="#fff"
             onPress={() => {
-              console.log('Company register');
+              navigation.navigate('CompanyRegister');
             }}
           />
         </View>
