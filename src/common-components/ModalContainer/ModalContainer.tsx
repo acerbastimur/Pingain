@@ -32,7 +32,7 @@ const ModalContainer = ({isVisible = false, backButton}: ModalContainerProps) =>
       avoidKeyboard
       useNativeDriver
       hideModalContentWhileAnimating
-      animationOutTiming={400}>
+      animationOutTiming={150}>
       <View style={s.contentContainer}>
         <View style={s.contentBox}>
           <Text numberOfLines={2} style={s.headerText}>
