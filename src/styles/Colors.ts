@@ -5,5 +5,7 @@ export default class Colors {
 
   static INFO = '#2D8EFF';
 
+  static WARN = '#FF5757';
+
   static COMPANY = '#FFBB00';
 }
