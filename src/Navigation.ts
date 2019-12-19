@@ -23,7 +23,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'ResetPassword',
+    initialRouteName: 'UserRegister',
   },
 );
 

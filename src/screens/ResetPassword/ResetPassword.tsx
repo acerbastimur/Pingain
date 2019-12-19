@@ -94,6 +94,16 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                       onChangeText={handleChange('email')}
                       onBlur={() => setFieldTouched('email')}
                       autoCapitalize="none"
+                      returnKeyType="send"
+                      onSubmitEditing={() => {
+                        if (isValid) {
+                          handleSubmit();
+                        }
+
+                        if (errors.email) {
+                          this.references.filter(t => t.name === 'email')[0].ref.shake();
+                        }
+                      }}
                     />
 
                     {!errors.email && touched.email ? (
@@ -127,7 +137,9 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                       textColor={Colors.PRIMARY}
                       shadow={false}
                       fontWeight="bold"
-                      onPress={() => {}}
+                      onPress={() => {
+                        navigation.goBack();
+                      }}
                     />
                   </View>
                 </View>

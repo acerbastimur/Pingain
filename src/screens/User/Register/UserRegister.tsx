@@ -94,6 +94,15 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       onChangeText={handleChange('email')}
                       onBlur={() => setFieldTouched('email')}
                       autoCapitalize="none"
+                      returnKeyType="next"
+                      onSubmitEditing={() => {
+                        const passwordInput = this.references.filter(
+                          t => t.name === 'passwordInput',
+                        )[0].ref;
+
+                        passwordInput.focus();
+                      }}
+                      blurOnSubmit={false}
                     />
                     {!errors.email && touched.email ? (
                       <Image
@@ -124,6 +133,23 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       onBlur={() => setFieldTouched('password')}
                       autoCapitalize="none"
                       secureTextEntry
+                      returnKeyType="next"
+                      ref={ref => {
+                        const isThere = this.references.filter(t => t.name === 'passwordInput')[0];
+                        if (isThere) return;
+                        this.references.push({
+                          name: 'passwordInput',
+                          ref,
+                        });
+                      }}
+                      onSubmitEditing={() => {
+                        const passwordInput = this.references.filter(
+                          t => t.name === 'passwordConfirmInput',
+                        )[0].ref;
+
+                        passwordInput.focus();
+                      }}
+                      blurOnSubmit={false}
                     />
                     {!errors.password && touched.password ? (
                       <Image
@@ -154,6 +180,33 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       onBlur={() => setFieldTouched('passwordConfirm')}
                       autoCapitalize="none"
                       secureTextEntry
+                      returnKeyType="done"
+                      ref={ref => {
+                        const isThere = this.references.filter(
+                          t => t.name === 'passwordConfirmInput',
+                        )[0];
+                        if (isThere) return;
+                        this.references.push({
+                          name: 'passwordConfirmInput',
+                          ref,
+                        });
+                      }}
+                      onSubmitEditing={() => {
+                        if (isValid) {
+                          handleSubmit();
+                          return;
+                        }
+
+                        if (errors.email) {
+                          this.references.filter(t => t.name === 'email')[0].ref.shake();
+                        }
+                        if (errors.password) {
+                          this.references.filter(t => t.name === 'password')[0].ref.shake();
+                        }
+                        if (errors.passwordConfirm) {
+                          this.references.filter(t => t.name === 'passwordConfirm')[0].ref.shake();
+                        }
+                      }}
                     />
                     {!errors.passwordConfirm && touched.passwordConfirm ? (
                       <Image
