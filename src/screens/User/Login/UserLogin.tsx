@@ -99,6 +99,15 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       onChangeText={handleChange('email')}
                       onBlur={() => setFieldTouched('email')}
                       autoCapitalize="none"
+                      returnKeyType="next"
+                      onSubmitEditing={() => {
+                        const passwordInput = this.references.filter(
+                          t => t.name === 'passwordInput',
+                        )[0].ref;
+
+                        passwordInput.focus();
+                      }}
+                      blurOnSubmit={false}
                     />
 
                     {!errors.email && touched.email ? (
@@ -130,6 +139,28 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
                       onBlur={() => setFieldTouched('password')}
                       autoCapitalize="none"
                       secureTextEntry
+                      returnKeyType="done"
+                      ref={ref => {
+                        const isThere = this.references.filter(t => t.name === 'passwordInput')[0];
+                        if (isThere) return;
+                        this.references.push({
+                          name: 'passwordInput',
+                          ref,
+                        });
+                      }}
+                      onSubmitEditing={() => {
+                        if (isValid) {
+                          handleSubmit();
+                          return;
+                        }
+
+                        if (errors.email) {
+                          this.references.filter(t => t.name === 'email')[0].ref.shake();
+                        }
+                        if (errors.password) {
+                          this.references.filter(t => t.name === 'password')[0].ref.shake();
+                        }
+                      }}
                     />
 
                     {!errors.password && touched.password ? (
