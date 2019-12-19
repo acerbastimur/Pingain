@@ -15,20 +15,20 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import UserLoginStyle from './UserLogin.style';
+import CompanyRegisterStyle from './CompanyLogin.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 
-interface UserLoginProps {
+interface CompanyLoginProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class UserRegister extends React.Component<UserLoginProps> {
-  style = UserLoginStyle;
+export default class CompanyLogin extends React.Component<CompanyLoginProps> {
+  style = CompanyRegisterStyle;
 
   references = [];
 
-  constructor(props: UserLoginProps) {
+  constructor(props: CompanyLoginProps) {
     super(props);
     this.state = {};
   }
@@ -48,9 +48,9 @@ export default class UserRegister extends React.Component<UserLoginProps> {
             <Logo />
           </View>
           <View style={this.style.headerTextContainer}>
-            <Text style={this.style.headerText}>Selam Pingainer</Text>
-            <Text style={this.style.headerTextLight}>Hoşgeldin !</Text>
-            <Text style={this.style.headerText2}>Seni gördüğümüze sevindik :)</Text>
+            <Text style={this.style.headerText}>Merhabalar</Text>
+            <Text style={this.style.headerTextLight}>Pingain’e Hoşgeldiniz</Text>
+            <Text style={this.style.headerText2}>İşinizi geliştirmek için sizinleyiz.</Text>
           </View>
           <Formik
             validateOnMount
@@ -174,7 +174,7 @@ export default class UserRegister extends React.Component<UserLoginProps> {
                 <View style={this.style.buttonContainer}>
                   <Button
                     text="Giriş Yap"
-                    backgroundColor={Colors.INFO}
+                    backgroundColor={Colors.COMPANY}
                     textColor="#fff"
                     onPress={() => {
                       if (isValid) {
@@ -194,11 +194,12 @@ export default class UserRegister extends React.Component<UserLoginProps> {
                 <View style={this.style.bottomFieldContainer}>
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate('UserRegister');
+                      navigation.navigate('CompanyRegister');
                     }}
                     style={this.style.loginTextContainer}>
                     <Text style={this.style.loginText}>
-                      Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
+                      Pingain işletmesi değil misin ?{' '}
+                      <Text style={this.style.underline}>Kayıt ol</Text>
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
