@@ -7,6 +7,16 @@ import UserRegister from './screens/User/Register';
 import ResetPassword from './screens/ResetPassword';
 import CompanyRegister from './screens/Company/Register';
 import CompanyLogin from './screens/Company/Login';
+import GetUserInfo from './screens/User/GetUserInfo';
+
+const UserStack = createStackNavigator(
+  {
+    GetUserInfo: {
+      screen: GetUserInfo,
+    },
+  },
+  {headerMode: 'none', initialRouteName: 'GetUserInfo'},
+);
 
 const AuthNavigator = createStackNavigator(
   {
@@ -43,9 +53,12 @@ const AppNavigator = createSwitchNavigator(
     Auth: {
       screen: AuthNavigator,
     },
+    UserStack: {
+      screen: UserStack,
+    },
   },
   {
-    initialRouteName: 'Onboarding',
+    initialRouteName: 'UserStack',
   },
 );
 
