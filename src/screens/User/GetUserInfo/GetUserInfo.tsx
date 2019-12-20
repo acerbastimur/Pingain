@@ -19,6 +19,7 @@ import GetUserInfoStyle from './GetUserInfo.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
+import ImageUpload from '../../../common-components/ImageUpload';
 
 interface GetUserInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -41,6 +42,21 @@ export default class UserRegister extends React.Component<GetUserInfoProps> {
     const {navigation} = this.props;
     return (
       <KeyboardAwareScrollView
+        contentContainerStyle={this.style.keyboardScrollContainer}
+        scrollEnabled={false}>
+        <View style={this.style.container}>
+          <View style={this.style.uploadPhotoContainer}>
+            <ImageUpload />
+          </View>
+          <View style={this.style.inputsContainer}>
+            <Text>sa</Text>
+          </View>
+          <View style={this.style.buttonContainer}>
+            <Text>sa</Text>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
+      /*  <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
         scrollEnabled={false}>
         <View style={this.style.container}>
@@ -212,7 +228,7 @@ export default class UserRegister extends React.Component<GetUserInfoProps> {
             )}
           </Formik>
         </View>
-      </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView> */
     );
   }
 }

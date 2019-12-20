@@ -15,7 +15,7 @@ const UserStack = createStackNavigator(
       screen: GetUserInfo,
     },
   },
-  {headerMode: 'none'},
+  {headerMode: 'none', initialRouteName: 'GetUserInfo'},
 );
 
 const AuthNavigator = createStackNavigator(
@@ -38,13 +38,10 @@ const AuthNavigator = createStackNavigator(
     CompanyLogin: {
       screen: CompanyLogin,
     },
-    UserStack: {
-      screen: UserStack,
-    },
   },
   {
     headerMode: 'none',
-    initialRouteName: 'UserStack',
+    initialRouteName: 'AuthTypeSelect',
   },
 );
 
@@ -56,9 +53,12 @@ const AppNavigator = createSwitchNavigator(
     Auth: {
       screen: AuthNavigator,
     },
+    UserStack: {
+      screen: UserStack,
+    },
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'UserStack',
   },
 );
 
