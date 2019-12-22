@@ -30,6 +30,12 @@ export default StyleSheet.create({
     width: (screenWidth * 14) / 100,
     height: (screenWidth * 14) / 100,
   },
+  profilePhoto: {
+    width: (screenWidth * 28) / 100,
+    height: (screenWidth * 28) / 100,
+    resizeMode: 'cover',
+    borderRadius: 21,
+  },
   text: {
     color: Colors.SECONDARY,
     fontSize: responsiveFont(14),
