@@ -29,7 +29,6 @@ export default class AppComponent extends React.Component<AppProps, AppState> {
     storageOptions: {
       skipBackup: true,
       path: 'images',
- 
     },
   };
 
@@ -75,8 +74,6 @@ export default class AppComponent extends React.Component<AppProps, AppState> {
           ) : (
             <Image source={require('../../assets/image/plus.png')} style={this.s.plus} />
           )}
-
-          {/*  */}
         </TouchableOpacity>
         <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>
       </View>
