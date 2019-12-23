@@ -8,6 +8,7 @@ import ResetPassword from './screens/ResetPassword';
 import CompanyRegister from './screens/Company/Register';
 import CompanyLogin from './screens/Company/Login';
 import GetUserInfo from './screens/User/GetUserInfo';
+import GetComapanyInfo from './screens/Company/GetCompanyInfo';
 
 const UserStack = createStackNavigator(
   {
@@ -16,6 +17,15 @@ const UserStack = createStackNavigator(
     },
   },
   {headerMode: 'none', initialRouteName: 'GetUserInfo'},
+);
+
+const CompanyStack = createStackNavigator(
+  {
+    GetCompanyInfo: {
+      screen: GetComapanyInfo,
+    },
+  },
+  {headerMode: 'none', initialRouteName: 'GetCompanyInfo'},
 );
 
 const AuthNavigator = createStackNavigator(
@@ -56,9 +66,12 @@ const AppNavigator = createSwitchNavigator(
     UserStack: {
       screen: UserStack,
     },
+    CompanyStack: {
+      screen: CompanyStack,
+    },
   },
   {
-    initialRouteName: 'UserStack',
+    initialRouteName: 'CompanyStack',
   },
 );
 
