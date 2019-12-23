@@ -72,11 +72,16 @@ module.exports = {
       },
     },
     {
-      files: ['*.test.tsx'],
+      files: ['*.tsx', '*.ts'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         'react-native/no-color-literals': 'off',
         'react-native/no-inline-styles': 'off',
+        'jsx-a11y/accessible-emoji': 'off',
+        'react/jsx-closing-bracket-location': 'off',
+        'react/no-unescaped-entities': 'off',
+        'react-native/no-color-literals': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
       },
     },
   ],

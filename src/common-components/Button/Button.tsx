@@ -1,12 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 

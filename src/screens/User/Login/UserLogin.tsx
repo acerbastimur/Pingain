@@ -1,13 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';

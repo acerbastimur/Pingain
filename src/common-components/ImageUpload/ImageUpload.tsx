@@ -1,14 +1,3 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/sort-comp */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
@@ -32,6 +21,13 @@ export default class AppComponent extends React.Component<AppProps, AppState> {
     },
   };
 
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      imageSource: null,
+    };
+  }
+
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
       console.log('Response = ', response);
@@ -54,13 +50,6 @@ export default class AppComponent extends React.Component<AppProps, AppState> {
       }
     });
   };
-
-  constructor(props: AppProps) {
-    super(props);
-    this.state = {
-      imageSource: null,
-    };
-  }
 
   public render() {
     const {imageSource} = this.state;
