@@ -8,7 +8,7 @@ import ResetPassword from './screens/ResetPassword';
 import CompanyRegister from './screens/Company/Register';
 import CompanyLogin from './screens/Company/Login';
 import GetUserInfo from './screens/User/GetUserInfo';
-import GetComapanyInfo from './screens/Company/GetCompanyInfo';
+import GetCompanyInfo from './screens/Company/GetCompanyInfo';
 
 const UserStack = createStackNavigator(
   {
@@ -22,7 +22,7 @@ const UserStack = createStackNavigator(
 const CompanyStack = createStackNavigator(
   {
     GetCompanyInfo: {
-      screen: GetComapanyInfo,
+      screen: GetCompanyInfo,
     },
   },
   {headerMode: 'none', initialRouteName: 'GetCompanyInfo'},

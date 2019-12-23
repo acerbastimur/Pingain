@@ -1,3 +1,3 @@
-import GetComapanyInfo from './GetComapanyInfo';
+import GetCompanyInfo from './GetCompanyInfo';
 
-export default GetComapanyInfo;
+export default GetCompanyInfo;

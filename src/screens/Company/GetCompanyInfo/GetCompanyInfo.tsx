@@ -5,30 +5,46 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import GetComapanyInfoStyle from './GetCompanyInfo.style';
+import GetCompanyInfoStyle from './GetCompanyInfo.style';
 import Colors from '../../../styles/Colors';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
 
-interface GetComapanyInfoProps {
+interface GetCompanyInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class UserRegister extends React.Component<GetComapanyInfoProps> {
-  style = GetComapanyInfoStyle;
+interface GetCompanyInfoState {
+  isUploading: boolean;
+}
+export default class UserRegister extends React.Component<
+  GetCompanyInfoProps,
+  GetCompanyInfoState
+> {
+  style = GetCompanyInfoStyle;
 
   references = [];
 
-  constructor(props: GetComapanyInfoProps) {
+  constructor(props: GetCompanyInfoProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      isUploading: false,
+    };
   }
 
-  handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+  handleSubmit = (values, {resetForm}) => {
+    resetForm();
+    this.setState({isUploading: true});
+    setTimeout(() => {
+      // will be removed as backend's connected
+      this.setState({isUploading: false});
+
+      alert(JSON.stringify(values));
+    }, 1500);
   };
 
   public render() {
     const {navigation} = this.props;
+    const {isUploading} = this.state;
     setTimeout(() => {
       console.log('references', this.references);
     }, 1000);
@@ -74,7 +90,7 @@ export default class UserRegister extends React.Component<GetComapanyInfoProps> 
               }) => (
                 <View style={this.style.formContainer}>
                   <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>İsim</Text>
+                    <Text style={this.style.inputText}>İşletme Yetkilisi</Text>
                     <Animatable.View
                       ref={ref => {
                         const isThere = this.references.filter(t => t.name === 'name')[0];
@@ -86,7 +102,7 @@ export default class UserRegister extends React.Component<GetComapanyInfoProps> 
                       }}>
                       <TextInput
                         style={this.style.input}
-                        placeholder="İsminizi giriniz"
+                        placeholder="İsim Soyisim"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.name}
@@ -114,7 +130,7 @@ export default class UserRegister extends React.Component<GetComapanyInfoProps> 
                     </Animatable.View>
                   </View>
                   <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Soyisim</Text>
+                    <Text style={this.style.inputText}>İşletme Adı</Text>
                     <Animatable.View
                       ref={ref => {
                         const isThere = this.references.filter(t => t.name === 'companyName')[0];
@@ -281,11 +297,13 @@ export default class UserRegister extends React.Component<GetComapanyInfoProps> 
                       text="Devam"
                       backgroundColor={Colors.COMPANY}
                       textColor="#fff"
+                      isLoading={isUploading}
                       onPress={() => {
                         console.log(isValid, errors);
 
                         if (isValid) {
                           handleSubmit();
+
                           return;
                         }
 
@@ -307,179 +325,6 @@ export default class UserRegister extends React.Component<GetComapanyInfoProps> 
           </View>
         </View>
       </KeyboardAwareScrollView>
-      /*  <KeyboardAwareScrollView
-        contentContainerStyle={this.style.keyboardScrollContainer}
-        scrollEnabled={false}>
-        <View style={this.style.container}>
-          <View style={this.style.logoContainer}>
-            <Logo />
-          </View>
-          <View style={this.style.headerTextContainer}>
-            <Text style={this.style.headerText}>Selam Pingainer</Text>
-            <Text style={this.style.headerTextLight}>Hoşgeldin !</Text>
-            <Text style={this.style.headerText2}>Seni gördüğümüze sevindik :)</Text>
-          </View>
-          <Formik
-            validateOnMount
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            onSubmit={this.handleSubmit}
-            validationSchema={Yup.object().shape({
-              email: Yup.string()
-                .email()
-
-                .required(),
-              password: Yup.string()
-                .min(6)
-                .required(),
-            })}>
-            {({
-              values,
-              handleChange,
-              handleSubmit,
-              errors,
-              touched,
-              setFieldTouched,
-              isValid,
-              isSubmitting,
-            }) => (
-              <View style={this.style.formContainer}>
-                <View style={this.style.inputContainer}>
-                  <Text style={this.style.inputText}>Email</Text>
-                  <Animatable.View
-                    ref={ref => {
-                      const isThere = this.references.filter(t => t.name === 'email')[0];
-                      if (isThere) return;
-                      this.references.push({
-                        name: 'email',
-                        ref,
-                      });
-                    }}>
-                    <TextInput
-                      style={this.style.input}
-                      placeholder="Email giriniz"
-                      placeholderTextColor={Colors.SECONDARY}
-                      selectionColor={Colors.PRIMARY}
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                      onBlur={() => setFieldTouched('email')}
-                      autoCapitalize="none"
-                      returnKeyType="next"
-                      onSubmitEditing={() => {
-                        const passwordInput = this.references.filter(
-                          t => t.name === 'passwordInput',
-                        )[0].ref;
-
-                        passwordInput.focus();
-                      }}
-                      blurOnSubmit={false}
-                    />
-
-                    {!errors.email && touched.email ? (
-                      <Image
-                        source={require('../../../assets/image/tick.png')}
-                        style={this.style.image}
-                      />
-                    ) : null}
-                  </Animatable.View>
-                </View>
-                <View style={this.style.inputContainer}>
-                  <Text style={this.style.inputText}>Şifre</Text>
-                  <Animatable.View
-                    ref={ref => {
-                      const isThere = this.references.filter(t => t.name === 'password')[0];
-                      if (isThere) return;
-                      this.references.push({
-                        name: 'password',
-                        ref,
-                      });
-                    }}>
-                    <TextInput
-                      style={this.style.input}
-                      placeholder="Şifrenizi Giriniz"
-                      placeholderTextColor={Colors.SECONDARY}
-                      selectionColor={Colors.PRIMARY}
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      onBlur={() => setFieldTouched('password')}
-                      autoCapitalize="none"
-                      secureTextEntry
-                      returnKeyType="done"
-                      ref={ref => {
-                        const isThere = this.references.filter(t => t.name === 'passwordInput')[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'passwordInput',
-                          ref,
-                        });
-                      }}
-                      onSubmitEditing={() => {
-                        if (isValid) {
-                          handleSubmit();
-                          return;
-                        }
-
-                        if (errors.email) {
-                          this.references.filter(t => t.name === 'email')[0].ref.shake();
-                        }
-                        if (errors.password) {
-                          this.references.filter(t => t.name === 'password')[0].ref.shake();
-                        }
-                      }}
-                    />
-
-                    {!errors.password && touched.password ? (
-                      <Image
-                        source={require('../../../assets/image/tick.png')}
-                        style={this.style.image}
-                      />
-                    ) : null}
-                  </Animatable.View>
-                </View>
-                <View style={this.style.buttonContainer}>
-                  <Button
-                    text="Giriş Yap"
-                    backgroundColor={Colors.INFO}
-                    textColor="#fff"
-                    onPress={() => {
-                      if (isValid) {
-                        handleSubmit();
-                        return;
-                      }
-
-                      if (errors.email) {
-                        this.references.filter(t => t.name === 'email')[0].ref.shake();
-                      }
-                      if (errors.password) {
-                        this.references.filter(t => t.name === 'password')[0].ref.shake();
-                      }
-                    }}
-                  />
-                </View>
-                <View style={this.style.bottomFieldContainer}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('UserRegister');
-                    }}
-                    style={this.style.loginTextContainer}>
-                    <Text style={this.style.loginText}>
-                      Pingainer değil misin? <Text style={this.style.underline}>Kayıt ol</Text>
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('ResetPassword');
-                    }}>
-                    <Text style={this.style.forgotPassword}>Şifremi unuttum</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-          </Formik>
-        </View>
-      </KeyboardAwareScrollView> */
     );
   }
 }
