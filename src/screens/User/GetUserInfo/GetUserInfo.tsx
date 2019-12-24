@@ -57,7 +57,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                 name: '',
                 surname: '',
                 phoneNumber: '',
-                city: 'İl adı',
+                city: '35',
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
