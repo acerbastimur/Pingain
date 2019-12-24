@@ -12,7 +12,7 @@
 #import <React/RCTRootView.h>
 
 #define TIMEOUT_SECONDS 600
-#define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
+#define TEXT_TO_LOOK_FOR @"Welcome to React"
 
 @interface PingainTests : XCTestCase
 
@@ -40,11 +40,13 @@
   BOOL foundElement = NO;
 
   __block NSString *redboxError = nil;
+#ifdef DEBUG
   RCTSetLogFunction(^(RCTLogLevel level, RCTLogSource source, NSString *fileName, NSNumber *lineNumber, NSString *message) {
     if (level >= RCTLogLevelError) {
       redboxError = message;
     }
   });
+#endif
 
   while ([date timeIntervalSinceNow] > 0 && !foundElement && !redboxError) {
     [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
@@ -57,6 +59,10 @@
       return NO;
     }];
   }
+  
+#ifdef DEBUG
+  RCTSetLogFunction(RCTDefaultLogFunction);
+#endif
 
   RCTSetLogFunction(RCTDefaultLogFunction);
 
