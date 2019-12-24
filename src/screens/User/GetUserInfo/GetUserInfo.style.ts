@@ -37,6 +37,13 @@ export default StyleSheet.create({
     flex: 0.2,
     paddingTop: 20,
   },
+  dropdownComponentContainer: {overflow: 'hidden', height: 50},
+  dropdownContainer: {top: -26},
+  dropdownText: {
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '500',
+    color: Colors.PRIMARY,
+  },
   image: {
     width: '6%',
 

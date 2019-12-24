@@ -135,7 +135,7 @@ export default class GetCompanyInfo extends React.Component<GetUserInfoProps> {
                       }}>
                       <TextInput
                         style={this.style.input}
-                        placeholder="Soyisminizi giriniz"
+                        placeholder="İşletme adını giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.companyName}

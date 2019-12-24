@@ -13,6 +13,7 @@ import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Dropdown} from 'react-native-material-dropdown';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import GetUserInfoStyle from './GetUserInfo.style';
@@ -20,6 +21,7 @@ import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
+import CITIES from '../../../assets/constants/Cities';
 
 interface GetUserInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -55,7 +57,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                 name: '',
                 surname: '',
                 phoneNumber: '',
-                instagramAccount: '',
+                city: 'İl adı',
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -68,7 +70,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                 phoneNumber: Yup.string()
                   .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
                   .required(),
-                instagramAccount: Yup.string().min(2),
+                city: Yup.string().required(),
               })}>
               {({
                 values,
@@ -203,13 +205,6 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                             ref,
                           });
                         }}
-                        onSubmitEditing={() => {
-                          const instagramAccountInput = this.references.filter(
-                            t => t.name === 'instagramAccountInput',
-                          )[0].ref;
-
-                          instagramAccountInput.focus();
-                        }}
                         blurOnSubmit={false}
                       />
 
@@ -222,68 +217,19 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                     </Animatable.View>
                   </View>
                   <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Instagram Hesabı</Text>
-                    <Animatable.View
-                      ref={ref => {
-                        const isThere = this.references.filter(
-                          t => t.name === 'instagramAccount',
-                        )[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'instagramAccount',
-                          ref,
-                        });
-                      }}>
-                      <TextInput
-                        style={this.style.input}
-                        placeholder="Instagram hesabınızın linkini giriniz"
-                        placeholderTextColor={Colors.SECONDARY}
-                        selectionColor={Colors.PRIMARY}
-                        value={values.instagramAccount}
-                        maxLength={20}
-                        onChangeText={handleChange('instagramAccount')}
-                        onBlur={() => setFieldTouched('instagramAccount')}
-                        autoCapitalize="none"
-                        returnKeyType="done"
-                        ref={ref => {
-                          const isThere = this.references.filter(
-                            t => t.name === 'instagramAccountInput',
-                          )[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'instagramAccountInput',
-                            ref,
-                          });
-                        }}
-                        onSubmitEditing={() => {
-                          if (isValid) {
-                            handleSubmit();
-                            return;
-                          }
-
-                          if (errors.name) {
-                            this.references.filter(t => t.name === 'name')[0].ref.shake();
-                          }
-                          if (errors.surname) {
-                            this.references.filter(t => t.name === 'surname')[0].ref.shake();
-                          }
-                          if (errors.phoneNumber) {
-                            this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
-                          }
-                          if (errors.instagramAccount) {
-                            this.references
-                              .filter(t => t.name === 'instagramAccount')[0]
-                              .ref.shake();
-                          }
-                        }}
-                      />
-
-                      {!errors.instagramAccount && touched.instagramAccount ? (
-                        <Image
-                          source={require('../../../assets/image/tick.png')}
-                          style={this.style.image}
+                    <Text style={this.style.inputText}>İkamet Edilen İl</Text>
+                    <Animatable.View>
+                      <View style={this.style.dropdownComponentContainer}>
+                        <Dropdown
+                          value={values.city}
+                          onChangeText={handleChange('city')}
+                          data={CITIES}
+                          containerStyle={this.style.dropdownContainer}
+                          itemTextStyle={this.style.dropdownText}
+                          textColor={Colors.SECONDARY}
+                          fontSize={14}
                         />
-                      ) : null}
+                      </View>
                     </Animatable.View>
                   </View>
                   <View style={this.style.buttonContainer}>

@@ -71,7 +71,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'CompanyStack',
+    initialRouteName: 'UserStack',
   },
 );
 
