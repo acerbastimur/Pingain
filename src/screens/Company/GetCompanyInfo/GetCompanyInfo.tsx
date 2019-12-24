@@ -15,7 +15,7 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import GetUserInfoStyle from './GetUserInfo.style';
+import GetUserInfoStyle from './GetCompanyInfo.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
@@ -24,7 +24,7 @@ import ImageUpload from '../../../common-components/ImageUpload';
 interface GetUserInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class GetUserInfo extends React.Component<GetUserInfoProps> {
+export default class GetCompanyInfo extends React.Component<GetUserInfoProps> {
   style = GetUserInfoStyle;
 
   references = [];
@@ -53,7 +53,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
               validateOnMount
               initialValues={{
                 name: '',
-                surname: '',
+                companyName: '',
                 phoneNumber: '',
                 instagramAccount: '',
               }}
@@ -62,11 +62,11 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                 name: Yup.string()
                   .min(2)
                   .required(),
-                surname: Yup.string()
+                companyName: Yup.string()
                   .min(2)
                   .required(),
                 phoneNumber: Yup.string()
-                  .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
+                  .matches(/0[2-5](0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
                   .required(),
                 instagramAccount: Yup.string().min(2),
               })}>
@@ -82,7 +82,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
               }) => (
                 <View style={this.style.formContainer}>
                   <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>İsim</Text>
+                    <Text style={this.style.inputText}>İşletme Yetkilisi</Text>
                     <Animatable.View
                       ref={ref => {
                         const isThere = this.references.filter(t => t.name === 'name')[0];
@@ -94,7 +94,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                       }}>
                       <TextInput
                         style={this.style.input}
-                        placeholder="İsminizi giriniz"
+                        placeholder="İsim Soyisim"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.name}
@@ -104,12 +104,12 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                         autoCapitalize="words"
                         returnKeyType="next"
                         onSubmitEditing={() => {
-                          const surnameInput = this.references.filter(
-                            t => t.name === 'surnameInput',
+                          const companyNameInput = this.references.filter(
+                            t => t.name === 'companyNameInput',
                           )[0].ref;
-                          console.log(surnameInput);
+                          console.log(companyNameInput);
 
-                          surnameInput.focus();
+                          companyNameInput.focus();
                         }}
                         blurOnSubmit={false}
                       />
@@ -123,13 +123,13 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                     </Animatable.View>
                   </View>
                   <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Soyisim</Text>
+                    <Text style={this.style.inputText}>İşletme Adı</Text>
                     <Animatable.View
                       ref={ref => {
-                        const isThere = this.references.filter(t => t.name === 'surname')[0];
+                        const isThere = this.references.filter(t => t.name === 'companyName')[0];
                         if (isThere) return;
                         this.references.push({
-                          name: 'surname',
+                          name: 'companyName',
                           ref,
                         });
                       }}>
@@ -138,17 +138,19 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                         placeholder="Soyisminizi giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.surname}
+                        value={values.companyName}
                         maxLength={30}
-                        onChangeText={handleChange('surname')}
-                        onBlur={() => setFieldTouched('surname')}
+                        onChangeText={handleChange('companyName')}
+                        onBlur={() => setFieldTouched('companyName')}
                         autoCapitalize="words"
                         returnKeyType="next"
                         ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'surnameInput')[0];
+                          const isThere = this.references.filter(
+                            t => t.name === 'companyNameInput',
+                          )[0];
                           if (isThere) return;
                           this.references.push({
-                            name: 'surnameInput',
+                            name: 'companyNameInput',
                             ref,
                           });
                         }}
@@ -162,7 +164,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                         blurOnSubmit={false}
                       />
 
-                      {!errors.surname && touched.surname ? (
+                      {!errors.companyName && touched.companyName ? (
                         <Image
                           source={require('../../../assets/image/tick.png')}
                           style={this.style.image}
@@ -183,7 +185,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                       }}>
                       <TextInput
                         style={this.style.input}
-                        placeholder="Telefon numaranızı giriniz"
+                        placeholder="İşletmenin telefon numarasını giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.phoneNumber}
@@ -264,8 +266,8 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                           if (errors.name) {
                             this.references.filter(t => t.name === 'name')[0].ref.shake();
                           }
-                          if (errors.surname) {
-                            this.references.filter(t => t.name === 'surname')[0].ref.shake();
+                          if (errors.companyName) {
+                            this.references.filter(t => t.name === 'companyName')[0].ref.shake();
                           }
                           if (errors.phoneNumber) {
                             this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
@@ -289,7 +291,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                   <View style={this.style.buttonContainer}>
                     <Button
                       text="Devam"
-                      backgroundColor={Colors.INFO}
+                      backgroundColor={Colors.COMPANY}
                       textColor="#fff"
                       onPress={() => {
                         console.log(isValid, errors);
@@ -302,8 +304,8 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                         if (errors.name) {
                           this.references.filter(t => t.name === 'name')[0].ref.shake();
                         }
-                        if (errors.surname) {
-                          this.references.filter(t => t.name === 'surname')[0].ref.shake();
+                        if (errors.companyName) {
+                          this.references.filter(t => t.name === 'companyName')[0].ref.shake();
                         }
                         if (errors.phoneNumber) {
                           this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
