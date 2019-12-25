@@ -34,7 +34,8 @@ export default class UserRegister extends React.Component<UserLoginProps> {
   }
 
   handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+    const {navigation} = this.props;
+    navigation.navigate('UserNavigator');
   };
 
   public render() {
