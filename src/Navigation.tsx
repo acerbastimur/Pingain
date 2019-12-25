@@ -1,3 +1,6 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react-native/no-inline-styles */
+import * as React from 'react';
 import {View, Image, Text} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -15,16 +18,68 @@ import Campaigns from './screens/User/TabBar/Campaigns';
 import QrRead from './screens/User/TabBar/QrRead';
 import ShareUs from './screens/User/TabBar/ShareUs/ShareUs';
 
-const UserTabNavigation = createBottomTabNavigator({
-  campaigns: {
-    screen: Campaigns,
-    navigationOptions: {
-      tabBarLabel: 'Home',
+const UserTabNavigation = createBottomTabNavigator(
+  {
+    campaigns: {
+      screen: Campaigns,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: (
+          <Image
+            style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            source={require('./assets/image/UserTab/CampaignsTabIcon.png')}
+          />
+        ),
+      },
+    },
+    QrRead: {
+      screen: QrRead,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: (
+          <Image
+            style={{resizeMode: 'contain', width: 50, height: 50, alignSelf: 'center'}}
+            source={require('./assets/image/UserTab/QrCodeTabIcon.png')}
+          />
+        ),
+      },
+    },
+    ShareUs: {
+      screen: ShareUs,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: (
+          <Image
+            style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            source={require('./assets/image/UserTab/ShareUsTabIcon.png')}
+          />
+        ),
+      },
     },
   },
-  QrRead: {screen: QrRead},
-  ShareUs: {screen: ShareUs},
-});
+  {
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        borderColor: '#000',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        height: 80,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 10,
+          height: 10,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 20.0,
+        borderTopWidth: 0,
+        elevation: 16,
+      },
+
+      safeAreaInset: {bottom: 'never', top: 'never'}, // <-- this is the solution
+    },
+  },
+);
 
 const UserNavigator = createSwitchNavigator(
   {

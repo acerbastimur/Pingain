@@ -15,13 +15,13 @@ import ImagePicker from 'react-native-image-picker';
 
 import ImageUploadStyle from './ImageUpload.style';
 
-export interface AppProps {}
+export interface ImageUploadProps {}
 
-export interface AppState {
+export interface ImageUploadState {
   imageSource: string;
 }
 
-export default class AppComponent extends React.Component<AppProps, AppState> {
+export default class ImageUpload extends React.Component<ImageUploadProps, ImageUploadState> {
   s = ImageUploadStyle;
 
   options = {
@@ -56,7 +56,7 @@ export default class AppComponent extends React.Component<AppProps, AppState> {
     });
   };
 
-  constructor(props: AppProps) {
+  constructor(props: ImageUploadProps) {
     super(props);
     this.state = {
       imageSource: null,
