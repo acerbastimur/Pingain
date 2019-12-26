@@ -8,4 +8,6 @@ export default class Colors {
   static WARN = '#FF5757';
 
   static COMPANY = '#FFBB00';
+
+  static SECONDARY_LIGHT = '#D0D9E3';
 }
