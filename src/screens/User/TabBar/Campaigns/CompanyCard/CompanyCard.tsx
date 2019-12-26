@@ -41,7 +41,51 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           </View>
 
           <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
-          <Image style={this.s.headerArrow} source={require('../../../../../assets/image/User/arrow.png')} />
+          <Image
+            style={this.s.headerArrow}
+            source={require('../../../../../assets/image/User/arrow.png')}
+          />
+        </View>
+        <View style={this.s.line} />
+        <View style={this.s.cardBody}>
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/coffeeIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
+            </View>
+          </View>
+
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/mealIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>5</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>7</Text>
+            </View>
+          </View>
+
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/dessertIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>5</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>12</Text>
+            </View>
+          </View>
         </View>
       </Card>
     );
