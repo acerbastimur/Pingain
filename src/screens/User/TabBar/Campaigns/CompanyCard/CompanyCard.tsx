@@ -10,7 +10,8 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
+import {Card} from 'react-native-shadow-cards';
 
 import CompanyCardStyle from './CompanyCard.style';
 
@@ -30,11 +31,63 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
 
   public render() {
     return (
-      <View style={this.s.card}>
-        <Text>sa</Text>
-        <Text>sa</Text>
-        <Text>sa</Text>
-      </View>
+      <Card elevation={6} opacity={0.15} style={this.s.card}>
+        <View style={this.s.cardHeader}>
+          <View style={this.s.cardHeaderImageContainer}>
+            <Image
+              source={require('../../../../../assets/image/User/cafeImageExample.png')}
+              style={this.s.cardHeaderImage}
+            />
+          </View>
+
+          <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
+          <Image
+            style={this.s.headerArrow}
+            source={require('../../../../../assets/image/User/arrow.png')}
+          />
+        </View>
+        <View style={this.s.line} />
+        <View style={this.s.cardBody}>
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/coffeeIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
+            </View>
+          </View>
+
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/mealIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>5</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>7</Text>
+            </View>
+          </View>
+
+          <View style={this.s.cardBodyItem}>
+            <Image
+              style={this.s.cardBodyItemIcon}
+              source={require('../../../../../assets/image/User/dessertIcon.png')}
+            />
+            <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
+            <View style={this.s.cardBodyItemCount}>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>5</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
+              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>12</Text>
+            </View>
+          </View>
+        </View>
+      </Card>
     );
   }
 }

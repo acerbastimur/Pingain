@@ -11,4 +11,8 @@ export default StyleSheet.create({
     borderColor: '#D8DFE8',
     borderBottomWidth: 0.5,
   },
+  image: {
+    width: 25,
+    height: 25,
+  },
 });

@@ -16,6 +16,17 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     this.state = {};
   }
 
+  flatListTextHeader = () => {
+    return (
+      <View style={this.style.flatListHeader}>
+        <Text style={this.style.flatListHeaderTextLight}>Hoşgeldin Pingainer</Text>
+        <Text numberOfLines={1} style={this.style.flatListHeaderTextBold}>
+          Öne Çıkan Kampanyalar
+        </Text>
+      </View>
+    );
+  };
+
   public render() {
     return (
       <View style={this.style.container}>
@@ -23,9 +34,8 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           <TabsHeader />
         </View>
         <View style={this.style.bottomAreaContainer}>
-          <Text>Hoşgeldin Pingainer</Text>
-          <Text>Öne Çıkan Kampanyalar</Text>
           <FlatList
+            ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={[
               {},
