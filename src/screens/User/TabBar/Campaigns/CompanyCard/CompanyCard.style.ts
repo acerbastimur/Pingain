@@ -71,7 +71,7 @@ export default StyleSheet.create({
   cardBodyItemName: {
     paddingLeft: '6%',
     fontFamily: 'Helvetica Neue',
-    fontWeight: 'normal',
+    fontWeight: '400',
     fontSize: responsiveRate(14),
     color: Colors.SECONDARY,
   },
