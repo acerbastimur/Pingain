@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* PingainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PingainTests.m */; };
+		128E1C92B02BF53BA08D5695 /* libPods-Pingain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 667F2247E543888A62F9BF6C /* libPods-Pingain.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,7 +17,6 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* PingainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PingainTests.m */; };
-		2FF69C44C36C3BFE3377EA83 /* libPods-Pingain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 667F2247E543888A62F9BF6C /* libPods-Pingain.a */; };
 		49395644D8B3911AA2B1E090 /* libPods-Pingain-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFAC9C947A4ADC41E9BBFE3 /* libPods-Pingain-tvOSTests.a */; };
 		4BE4B1BD0DED4C8F33518731 /* libPods-Pingain-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CBF7DEB3F8BAA085CA3F090 /* libPods-Pingain-tvOS.a */; };
 		854A955723A2ED95006F0896 /* launcher_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 854A955623A2ED95006F0896 /* launcher_screen.png */; };
@@ -39,6 +39,19 @@
 			remoteInfo = "Pingain-tvOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		85B7F92B23B5F3D9000A22D3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -80,14 +93,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2FF69C44C36C3BFE3377EA83 /* libPods-Pingain.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +106,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				49395644D8B3911AA2B1E090 /* libPods-Pingain-tvOSTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C90876CA9326CF8141B401F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				128E1C92B02BF53BA08D5695 /* libPods-Pingain.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,9 +242,10 @@
 				F8FB39E6CDEF46D5FB8BE2EB /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
-				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				85B7F92B23B5F3D9000A22D3 /* CopyFiles */,
+				C90876CA9326CF8141B401F9 /* Frameworks */,
 			);
 			buildRules = (
 			);

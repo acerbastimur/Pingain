@@ -58,6 +58,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
+    initialRouteName: 'QrRead',
     tabBarOptions: {
       showLabel: false,
       style: {
