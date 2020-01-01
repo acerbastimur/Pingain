@@ -1,10 +1,14 @@
 import * as React from 'react';
 import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from './CompanyCard';
 
-export interface CampaignsProps {}
+export interface CampaignsProps {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
 
 export interface CampaignsState {}
 
@@ -28,6 +32,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
   };
 
   public render() {
+    const {navigation} = this.props;
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
@@ -35,6 +40,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         </View>
         <View style={this.style.bottomAreaContainer}>
           <FlatList
+            keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={[
@@ -76,7 +82,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
               {},
               {},
             ]}
-            renderItem={() => <CompanyCard />}
+            renderItem={() => <CompanyCard navigation={navigation} />}
           />
         </View>
       </View>

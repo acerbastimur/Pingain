@@ -17,11 +17,25 @@ import GetCompanyInfo from './screens/Company/GetCompanyInfo';
 import Campaigns from './screens/User/TabBar/Campaigns';
 import QrRead from './screens/User/TabBar/QrRead';
 import ShareUs from './screens/User/TabBar/ShareUs/ShareUs';
+import CompanyDetails from './screens/User/TabBar/Campaigns/CompanyDetails';
+import UserDetailsEdit from './screens/User/UserDetailsEdit';
+
+const CampaignsStack = createStackNavigator(
+  {
+    CampaignsHome: {
+      screen: Campaigns,
+    },
+    CompanyDetails: {
+      screen: CompanyDetails,
+    },
+  },
+  {initialRouteName: 'CampaignsHome', headerMode: 'none'},
+);
 
 const UserTabNavigation = createBottomTabNavigator(
   {
-    campaigns: {
-      screen: Campaigns,
+    Campaigns: {
+      screen: CampaignsStack,
       navigationOptions: {
         tabBarLabel: 'Home',
         tabBarIcon: (
@@ -58,7 +72,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'QrRead',
+    initialRouteName: 'Campaigns',
     tabBarOptions: {
       showLabel: false,
       style: {
@@ -90,8 +104,11 @@ const UserNavigator = createSwitchNavigator(
     UserTabNavigation: {
       screen: UserTabNavigation,
     },
+    UserDetailsEdit: {
+      screen: UserDetailsEdit,
+    },
   },
-  {initialRouteName: 'UserTabNavigation'},
+  {initialRouteName: 'UserDetailsEdit'},
 );
 
 const CompanyNavigator = createSwitchNavigator(

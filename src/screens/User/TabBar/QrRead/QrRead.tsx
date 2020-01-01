@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-color-literals */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
