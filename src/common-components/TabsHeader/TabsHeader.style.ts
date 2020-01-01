@@ -11,6 +11,7 @@ export default StyleSheet.create({
     borderColor: '#D8DFE8',
     borderBottomWidth: 0.5,
   },
+  imageContainer: {width: 25, height: 25, borderRadius: 25, overflow: 'hidden'},
   image: {
     width: 25,
     height: 25,

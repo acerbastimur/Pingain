@@ -20,8 +20,9 @@ export default StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 25,
+    marginVertical: 20,
     marginHorizontal: 35,
+    height:40,
   },
   cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
   cardHeaderImage: {

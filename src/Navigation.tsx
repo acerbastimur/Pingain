@@ -104,7 +104,7 @@ const UserNavigator = createSwitchNavigator(
       screen: UserTabNavigation,
     },
   },
-  {initialRouteName: 'UserDetailsEdit'},
+  {initialRouteName: 'UserTabNavigation'},
 );
 
 const CompanyNavigator = createSwitchNavigator(

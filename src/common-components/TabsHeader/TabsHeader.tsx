@@ -17,7 +17,7 @@ const TabsHeader = (props: TabsHeaderProps) => {
       </TouchableOpacity>
 
       <Logo width={30} />
-      <TouchableOpacity>
+      <TouchableOpacity style={s.imageContainer}>
         <Image source={require('../../assets/image/User/profileImage.png')} style={s.image} />
       </TouchableOpacity>
     </View>
