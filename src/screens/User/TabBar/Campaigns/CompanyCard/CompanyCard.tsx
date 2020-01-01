@@ -10,12 +10,15 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 
+import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import CompanyCardStyle from './CompanyCard.style';
 
-export interface CompanyCardProps {}
+export interface CompanyCardProps {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
 
 export interface CompanyCardState {}
 
@@ -30,9 +33,14 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
   }
 
   public render() {
+    const {navigation} = this.props;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
-        <View style={this.s.cardHeader}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('CompanyDetails');
+          }}
+          style={this.s.cardHeader}>
           <View style={this.s.cardHeaderImageContainer}>
             <Image
               source={require('../../../../../assets/image/User/cafeImageExample.png')}
@@ -45,7 +53,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
             style={this.s.headerArrow}
             source={require('../../../../../assets/image/User/arrow.png')}
           />
-        </View>
+        </TouchableOpacity>
         <View style={this.s.line} />
         <View style={this.s.cardBody}>
           <View style={this.s.cardBodyItem}>
