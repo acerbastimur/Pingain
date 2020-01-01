@@ -12,49 +12,44 @@ const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / font
 console.log(screenWidth);
 
 export default StyleSheet.create({
+  pageContainer: {flex: 1},
+  headerContainer: {height:56, paddingHorizontal: '6%'},
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777',
+  },
   keyboardScrollContainer: {flex: 1},
   container: {
     flex: 1,
     flexDirection: 'column',
     paddingHorizontal: '11.5%',
   },
-  logoContainer: {
-    flex: 0.25,
-    justifyContent: 'flex-end',
+  ppContainer: {
+    height: 70,
+    marginTop: 28,
   },
-  headerTextContainer: {
-    flex: 0.3,
-    paddingTop: 30,
+  ppOverflow: {
+    width: 70,
+    height: 70,
+    borderRadius: 15,
+    overflow: 'hidden',
   },
   formContainer: {
     flex: 1,
   },
-
-  headerText: {
-    fontFamily: 'Helvetica Neue',
-    fontWeight: 'bold',
-    fontSize: responsiveRate(28),
-    color: Colors.PRIMARY,
-    marginTop: 4,
-  },
-  headerTextLight: {
+  dropdownComponentContainer: {overflow: 'hidden', height: 50},
+  dropdownContainer: {top: -26},
+  dropdownText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
-    fontSize: responsiveRate(28),
     color: Colors.PRIMARY,
   },
-
-  headerText2: {
-    fontFamily: 'Helvetica Neue',
-    fontWeight: '400',
-    fontSize: responsiveRate(18),
-    color: Colors.SECONDARY,
-    paddingTop: 15,
-  },
-  underline: {textDecorationLine: 'underline'},
-  inputContainer: {
-    flex: 0.2,
-    paddingTop: 20,
+  profileImage: {resizeMode: 'contain', width: 70, height: 70},
+   inputContainer: {
+    height: 75,
+    marginTop: 20,
   },
   input: {height: 36, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
@@ -74,18 +69,7 @@ export default StyleSheet.create({
     marginBottom: screenWidth < 350 ? 4 : 8,
   },
   buttonContainer: {
-    flex: 0.2,
-    paddingVertical: '6.75%',
+    height: 52,
     marginTop: 20,
-  },
-  loginTextContainer: {
-    flex: 0.2,
-  },
-
-  loginText: {
-    color: Colors.PRIMARY,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: responsiveRate(14),
   },
 });

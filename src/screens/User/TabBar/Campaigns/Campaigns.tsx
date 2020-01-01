@@ -36,7 +36,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
-          <TabsHeader />
+          <TabsHeader navigation={navigation} />
         </View>
         <View style={this.style.bottomAreaContainer}>
           <FlatList

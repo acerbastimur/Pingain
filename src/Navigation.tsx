@@ -18,7 +18,6 @@ import Campaigns from './screens/User/TabBar/Campaigns';
 import QrRead from './screens/User/TabBar/QrRead';
 import ShareUs from './screens/User/TabBar/ShareUs/ShareUs';
 import CompanyDetails from './screens/User/TabBar/Campaigns/CompanyDetails';
-import UserDetailsEdit from './screens/User/UserDetailsEdit';
 
 const CampaignsStack = createStackNavigator(
   {
@@ -103,9 +102,6 @@ const UserNavigator = createSwitchNavigator(
     },
     UserTabNavigation: {
       screen: UserTabNavigation,
-    },
-    UserDetailsEdit: {
-      screen: UserDetailsEdit,
     },
   },
   {initialRouteName: 'UserDetailsEdit'},

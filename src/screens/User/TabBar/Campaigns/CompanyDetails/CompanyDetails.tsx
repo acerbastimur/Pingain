@@ -18,18 +18,21 @@ import TabsHeader from '../../../../../common-components/TabsHeader';
 import Colors from '../../../../../styles/Colors';
 import {Card} from 'react-native-shadow-cards';
 import CompanyCard from '../CompanyCard';
+import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 
-export interface CompanyDetailsProps {}
+export interface CompanyDetailsProps {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
 
 export interface CompanyDetailsState {}
 
-const CompanyDetails = () => {
+const CompanyDetails = ({navigation}) => {
   const style = CompanyDetailsStyle;
 
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <TabsHeader />
+        <TabsHeader navigation={navigation} />
       </View>
       <View style={style.bodyContainer}>
         <ScrollView>
@@ -117,7 +120,7 @@ const CompanyDetails = () => {
             </View>
           </Card>
 
-          <View> 
+          <View>
             <Text style={style.campaigns}>Kampanyalarımız</Text>
             <CompanyCard />
           </View>
