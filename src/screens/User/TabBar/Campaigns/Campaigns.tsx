@@ -3,9 +3,11 @@ import {View, Button, Text, FlatList} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
+import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from './CompanyCard';
+import CampaignDetailsStore from '../../../../stores/CampaignDetails.store';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -13,6 +15,7 @@ export interface CampaignsProps {
 
 export interface CampaignsState {}
 
+@observer
 export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
   style = CampaignsStyle;
 
@@ -36,7 +39,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   public render() {
     const {navigation} = this.props;
-    const YourOwnComponent = () => <Text>Your Pretty Component Goes Here</Text>;
+    const YourOwnComponent = () => <Text>{CampaignDetailsStore.test}</Text>;
 
     return (
       <View style={this.style.container}>
@@ -94,6 +97,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           title="OPEN BOTTOM SHEET"
           onPress={() => {
             this.RBSheet.open();
+            CampaignDetailsStore.setCampaignDetails();
           }}
         />
         <RBSheet
@@ -102,6 +106,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           }}
           height={300}
           duration={250}
+          closeOnDragDown
           customStyles={{
             container: {
               justifyContent: 'center',
