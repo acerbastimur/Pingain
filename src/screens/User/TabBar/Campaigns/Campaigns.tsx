@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {View, Button, Text, FlatList} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
@@ -14,6 +15,8 @@ export interface CampaignsState {}
 
 export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
   style = CampaignsStyle;
+
+  RBSheet = null;
 
   constructor(props: CampaignsProps) {
     super(props);
@@ -33,6 +36,8 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   public render() {
     const {navigation} = this.props;
+    const YourOwnComponent = () => <Text>Your Pretty Component Goes Here</Text>;
+
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
@@ -85,6 +90,26 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             renderItem={() => <CompanyCard navigation={navigation} />}
           />
         </View>
+        <Button
+          title="OPEN BOTTOM SHEET"
+          onPress={() => {
+            this.RBSheet.open();
+          }}
+        />
+        <RBSheet
+          ref={ref => {
+            this.RBSheet = ref;
+          }}
+          height={300}
+          duration={250}
+          customStyles={{
+            container: {
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          }}>
+          <YourOwnComponent />
+        </RBSheet>
       </View>
     );
   }
