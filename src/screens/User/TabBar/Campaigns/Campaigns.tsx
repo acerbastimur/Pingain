@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Button, Text, FlatList} from 'react-native';
+import {View, Button, Text, FlatList, Dimensions} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
@@ -8,6 +8,9 @@ import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from './CompanyCard';
 import CampaignDetailsStore from '../../../../stores/CampaignDetails.store';
+
+import Colors from '../../../../styles/Colors';
+import CampaignDetails from './CampaignDetails';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -26,6 +29,10 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     this.state = {};
   }
 
+  componentDidMount() {
+    this.RBSheet.open();
+  }
+
   flatListTextHeader = () => {
     return (
       <View style={this.style.flatListHeader}>
@@ -39,7 +46,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   public render() {
     const {navigation} = this.props;
-    const YourOwnComponent = () => <Text>{CampaignDetailsStore.test}</Text>;
 
     return (
       <View style={this.style.container}>
@@ -93,27 +99,24 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             renderItem={() => <CompanyCard navigation={navigation} />}
           />
         </View>
-        <Button
-          title="OPEN BOTTOM SHEET"
-          onPress={() => {
-            this.RBSheet.open();
-            CampaignDetailsStore.setCampaignDetails();
-          }}
-        />
         <RBSheet
           ref={ref => {
             this.RBSheet = ref;
           }}
-          height={300}
           duration={250}
           closeOnDragDown
           customStyles={{
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.1)'},
             container: {
-              justifyContent: 'center',
-              alignItems: 'center',
+              borderTopRightRadius: 40,
+              borderTopLeftRadius: 40,
+              paddingTop: 2,
+              height: 'auto',
+              paddingBottom: 50,
             },
+            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>
-          <YourOwnComponent />
+          <CampaignDetails navigation={navigation} />
         </RBSheet>
       </View>
     );

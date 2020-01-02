@@ -5,10 +5,10 @@ class CampaignDetailsStore {
     console.log('Campaign Detail store was initialized!');
   }
 
-  @observable test = 'hello';
+  @observable isCampaignSwiperScroll = false;
 
-  @action setCampaignDetails() {
-    this.test = 'umut';
+  @action setCampaignSwiperScroll(state: boolean) {
+    this.isCampaignSwiperScroll = state;
   }
 }
 
