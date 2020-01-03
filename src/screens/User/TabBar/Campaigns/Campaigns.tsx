@@ -22,16 +22,12 @@ export interface CampaignsState {}
 export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
   style = CampaignsStyle;
 
-  RBSheet = null;
-
   constructor(props: CampaignsProps) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {
-    this.RBSheet.open();
-  }
+  componentDidMount() {}
 
   flatListTextHeader = () => {
     return (
@@ -101,18 +97,18 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         </View>
         <RBSheet
           ref={ref => {
-            this.RBSheet = ref;
+            CampaignDetailsStore.campaignDetailsHalfModalRef = ref;
           }}
-          duration={250}
+          duration={50}
           closeOnDragDown
+          animationType="slide"
           customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.1)'},
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.02)'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,
               paddingTop: 2,
               height: 'auto',
-              paddingBottom: 50,
             },
             draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>

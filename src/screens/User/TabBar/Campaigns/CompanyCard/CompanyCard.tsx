@@ -15,6 +15,7 @@ import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import CompanyCardStyle from './CompanyCard.style';
+import CampaignDetailsStore from '../../../../../stores/CampaignDetails.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -56,7 +57,11 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
         </TouchableOpacity>
         <View style={this.s.line} />
         <View style={this.s.cardBody}>
-          <View style={this.s.cardBodyItem}>
+          <TouchableOpacity
+            style={this.s.cardBodyItem}
+            onPress={() => {
+              CampaignDetailsStore.campaignDetailsHalfModalRef.open();
+            }}>
             <Image
               style={this.s.cardBodyItemIcon}
               source={require('../../../../../assets/image/User/coffeeIcon.png')}
@@ -67,7 +72,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
               <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
               <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
             </View>
-          </View>
+          </TouchableOpacity>
 
           <View style={this.s.cardBodyItem}>
             <Image

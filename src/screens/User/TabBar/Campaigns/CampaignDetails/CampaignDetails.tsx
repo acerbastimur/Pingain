@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
+import {View, ScrollView, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
@@ -28,26 +28,27 @@ export interface CampaignDetailsState {}
 const CampaignDetails = ({navigation}) => {
   const style = CampaignDetailsStyle;
 
-  const Pin = ({completed}) => (
-    <View
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: 12,
-        overflow: 'hidden',
-        marginRight: 20,
-        marginBottom: 20,
-      }}>
-      <Image
-        style={{width: 45, height: 45, resizeMode: 'contain'}}
-        source={
-          completed
-            ? require('../../../../../assets/image/pin_completed.png')
-            : require('../../../../../assets/image/pin_uncompleted.png')
-        }
-      />
-    </View>
-  );
+  const Pin = ({completed}) => {
+    const itemWidth = Dimensions.get('window').width / 8;
+    return (
+      <View
+        style={{
+          width: itemWidth,
+          height: itemWidth,
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}>
+        <Image
+          style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
+          source={
+            completed
+              ? require('../../../../../assets/image/pin_completed.png')
+              : require('../../../../../assets/image/pin_uncompleted.png')
+          }
+        />
+      </View>
+    );
+  };
   return (
     <View style={style.container}>
       <TouchableOpacity
@@ -83,33 +84,70 @@ const CampaignDetails = ({navigation}) => {
       </View>
       <View style={style.line} />
       <View style={style.pinsContainer}>
-        <Pin completed />
-        <Pin completed />
-        <Pin completed />
-        <Pin completed={false} />
+        <View style={style.pinsLineContainer}>
+          <Pin completed />
+          <Pin completed />
+          <Pin completed />
+          <Pin completed />
+          <Pin completed />
+        </View>
+        <View style={style.pinsLineContainer}>
+          <Pin completed />
+          <Pin completed />
+          <Pin completed />
+          <Pin completed={false} />
+          <Pin completed={false} />
+        </View>
       </View>
-      <Text style={style.otherCampaignsHeaderText}>Cafe Rien’deki diğer kampanyalar</Text>
+
+      <Text style={style.otherCampaignsHeaderText}>Bu işletmedeki diğer kampanyalar</Text>
       <View style={style.swiperContainer}>
         <Swiper
           showsPagination={false}
           showsButtons
-          nextButton={(
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          nextButton={
             <Image
               source={require('../../../../../assets/image/right.png')}
               style={{width: 20, resizeMode: 'contain'}}
             />
-          )}
-          prevButton={(
+          }
+          prevButton={
             <Image
               source={require('../../../../../assets/image/left.png')}
               style={{width: 20, resizeMode: 'contain'}}
             />
-          )}>
+          }>
           <Card elevation={6} opacity={0.15} style={style.card}>
-            <Text>sa</Text>
+            <View style={style.otherCardBodyItem}>
+              <Image
+                style={style.cardBodyItemIcon}
+                source={require('../../../../../assets/image/User/mealIcon.png')}
+              />
+              <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
+              <View style={style.cardBodyItemCount}>
+                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>5</Text>
+                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>7</Text>
+              </View>
+            </View>
           </Card>
           <Card elevation={6} opacity={0.15} style={style.card}>
-            <Text>sa</Text>
+            <View style={style.otherCardBodyItem}>
+              <Image
+                style={style.cardBodyItemIcon}
+                source={require('../../../../../assets/image/User/mealIcon.png')}
+              />
+              <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
+              <View style={style.cardBodyItemCount}>
+                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>5</Text>
+                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
+                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>7</Text>
+              </View>
+            </View>
           </Card>
         </Swiper>
       </View>

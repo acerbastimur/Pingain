@@ -10,7 +10,6 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (fontSize: number) => {
-  if (screenWidth < 350) return ((screenWidth * fontSize) / fontScaleBase) * 0.9;
   return (screenWidth * fontSize) / fontScaleBase;
 };
 console.log(screenWidth);
@@ -64,8 +63,14 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 30,
+    marginVertical: responsiveRate(30),
+  },
+  otherCardBodyItem: {
+    paddingHorizontal: '4%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: 60,
   },
   cardBodyItemIcon: {
     width: 28,
@@ -78,6 +83,13 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: responsiveRate(14),
     color: Colors.PRIMARY,
+  },
+  otherCardBodyItemName: {
+    paddingLeft: '6%',
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '400',
+    fontSize: responsiveRate(14),
+    color: Colors.SECONDARY,
   },
   cardBodyItemCount: {
     flexDirection: 'row',
@@ -105,31 +117,33 @@ export default StyleSheet.create({
   cardItemDessert: {
     color: CampaignColors.DESSERT,
   },
-  pinsContainer: {
+  pinsContainer: {marginBottom: responsiveRate(10)},
+  pinsLineContainer: {
     marginTop: 2,
     padding: '4%',
     flexDirection: 'row',
+    alignItems: 'center',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   otherCampaignsHeaderText: {
-    marginTop: '5%',
     marginHorizontal: '5%',
     fontFamily: 'Helvetica Neue',
     fontWeight: '600',
     fontSize: responsiveRate(16),
     fontStyle: 'normal',
     color: Colors.PRIMARY,
-   },
+  },
   swiperContainer: {
-     height: 180,
+    height: 120,
     width: '100%',
+    marginBottom: responsiveRate(10),
   },
   card: {
+    marginTop: 30,
     borderRadius: 15,
     width: '80%',
-    height: 130,
-    marginTop:30,
+    height: 60,
     alignSelf: 'center',
   },
 });

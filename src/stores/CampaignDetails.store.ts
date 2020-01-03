@@ -5,11 +5,7 @@ class CampaignDetailsStore {
     console.log('Campaign Detail store was initialized!');
   }
 
-  @observable isCampaignSwiperScroll = false;
-
-  @action setCampaignSwiperScroll(state: boolean) {
-    this.isCampaignSwiperScroll = state;
-  }
+  @observable campaignDetailsHalfModalRef: any = null;
 }
 
 export default new CampaignDetailsStore();
