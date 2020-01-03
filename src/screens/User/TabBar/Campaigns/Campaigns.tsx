@@ -1,10 +1,16 @@
 import * as React from 'react';
-import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {View, Button, Text, FlatList, Dimensions} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
+import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from './CompanyCard';
+import CampaignDetailsStore from '../../../../stores/CampaignDetails.store';
+
+import Colors from '../../../../styles/Colors';
+import CampaignDetails from './CampaignDetails';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -12,6 +18,7 @@ export interface CampaignsProps {
 
 export interface CampaignsState {}
 
+@observer
 export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
   style = CampaignsStyle;
 
@@ -19,6 +26,8 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {}
 
   flatListTextHeader = () => {
     return (
@@ -33,6 +42,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   public render() {
     const {navigation} = this.props;
+
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
@@ -85,6 +95,25 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             renderItem={() => <CompanyCard navigation={navigation} />}
           />
         </View>
+        <RBSheet
+          ref={ref => {
+            CampaignDetailsStore.campaignDetailsHalfModalRef = ref;
+          }}
+          duration={50}
+          closeOnDragDown
+          animationType="slide"
+          customStyles={{
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.02)'},
+            container: {
+              borderTopRightRadius: 40,
+              borderTopLeftRadius: 40,
+              paddingTop: 2,
+              height: 'auto',
+            },
+            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          }}>
+          <CampaignDetails navigation={navigation} />
+        </RBSheet>
       </View>
     );
   }
