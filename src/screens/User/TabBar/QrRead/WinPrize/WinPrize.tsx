@@ -86,24 +86,27 @@ const WinPrize = ({navigation}) => {
           Yepyeni bir <Text style={style.textHighlight}>Ödül</Text> kazandın!
         </Text>
         <Text style={style.greetingText}>Başka bir kampanyada buluşalım...</Text>
-        <Animatable.Image
-          animation="bounceIn"
-          duration={2000}
-          useNativeDriver
-          delay={500}
-          source={require('../../../../../assets/image/winPrize.png')}
-          style={style.winImage}
-        />
-        <Animatable.Image
-          animation="bounceIn"
-          duration={2000}
-          useNativeDriver
-          delay={500}
-          source={require('../../../../../assets/image/winPrize.png')}
-          style={style.winImage}
-        />
+
+        <View style={style.qrImageContainer}>
+          <Animatable.Image
+            animation="bounceIn"
+            duration={2000}
+            useNativeDriver
+            delay={500}
+            source={require('../../../../../assets/image/winPrize.png')}
+            style={style.winImage}
+          />
+          <Animatable.Image
+            animation="bounceIn"
+            duration={2000}
+            useNativeDriver
+            delay={500}
+            source={require('../../../../../assets/image/qrExample.png')}
+            style={style.qrImage}
+          />
+        </View>
       </View>
-      <Text style={style.showQr}>QR kodunu göstererek ödülünü alabilirsin.</Text>
+      <Text style={style.showQrText}>QR kodunu göstererek ödülünü alabilirsin.</Text>
     </View>
   );
 };

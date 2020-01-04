@@ -132,14 +132,25 @@ export default StyleSheet.create({
     color: Colors.TEXT_HIGHLIGHTED,
     fontWeight: '600',
   },
+  qrImageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   winImage: {
     marginTop: responsiveRate(14),
     resizeMode: 'contain',
-    width: responsiveRate(200),
-    height: responsiveRate(200),
+    width: responsiveRate(230),
+    height: responsiveRate(230),
     alignSelf: 'center',
   },
-  showQr: {
+  qrImage: {
+    resizeMode: 'contain',
+    width: responsiveRate(100),
+    height: responsiveRate(100),
+    position: 'absolute',
+    top: responsiveRate(100)
+  },
+  showQrText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'normal',
     fontSize: responsiveRate(14),
