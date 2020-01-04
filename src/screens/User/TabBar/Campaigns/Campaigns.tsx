@@ -26,7 +26,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     super(props);
     this.state = {};
   }
- 
 
   flatListTextHeader = () => {
     return (
@@ -102,7 +101,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           closeOnDragDown
           animationType="slide"
           customStyles={{
-            wrapper: {backgroundColor: 'rgba(250,250,250,0.4)'},
+            wrapper: {backgroundColor: 'transparent'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,

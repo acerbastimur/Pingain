@@ -14,16 +14,16 @@ import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
-import WinPinStyle from './WinPin.style';
+import WinPrizeStyle from './WinPrize.style';
 import Colors from '../../../../../styles/Colors';
 import Button from '../../../../../common-components/Button';
 
-export interface WinPinProps {
+export interface WinPrizeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const WinPin = ({navigation}) => {
-  const style = WinPinStyle;
+const WinPrize = ({navigation}) => {
+  const style = WinPrizeStyle;
   const Pin = ({completed}) => {
     const itemWidth = Dimensions.get('window').width / 8;
     return (
@@ -73,27 +73,39 @@ const WinPin = ({navigation}) => {
         />
         <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
         <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemPlus]}>+ 1</Text>
+          <Image
+            source={require('../../../../../assets/image/tick.png')}
+            style={style.cardBodyDone}
+          />
         </View>
       </View>
       <View style={style.line} />
       <View style={style.greetingContainer}>
-        <Text style={style.greetingHeaderText}>Tebrikler Pingainer!</Text>
+        <Text style={style.greetingHeaderText}>Afiyet Olsun pingainer!</Text>
         <Text style={style.greetingText}>
-          Yepyeni bir <Text style={style.textHighlight}>Pin</Text> kazandın!
+          Yepyeni bir <Text style={style.textHighlight}>Ödül</Text> kazandın!
         </Text>
-        <Text style={style.greetingText}>Kampanyayı tamamla, Ödülü kazan!</Text>
+        <Text style={style.greetingText}>Başka bir kampanyada buluşalım...</Text>
         <Animatable.Image
           animation="bounceIn"
           duration={2000}
           useNativeDriver
           delay={500}
-          source={require('../../../../../assets/image/winPin.png')}
+          source={require('../../../../../assets/image/winPrize.png')}
+          style={style.winImage}
+        />
+        <Animatable.Image
+          animation="bounceIn"
+          duration={2000}
+          useNativeDriver
+          delay={500}
+          source={require('../../../../../assets/image/winPrize.png')}
           style={style.winImage}
         />
       </View>
+      <Text style={style.showQr}>QR kodunu göstererek ödülünü alabilirsin.</Text>
     </View>
   );
 };
 
-export default WinPin;
+export default WinPrize;
