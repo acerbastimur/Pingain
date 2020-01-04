@@ -7,7 +7,7 @@ import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from './CompanyCard';
-import CampaignDetailsStore from '../../../../stores/CampaignDetails.store';
+import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 
 import Colors from '../../../../styles/Colors';
 import CampaignDetails from './CampaignDetails';
@@ -26,8 +26,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {}
+ 
 
   flatListTextHeader = () => {
     return (
@@ -97,13 +96,13 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         </View>
         <RBSheet
           ref={ref => {
-            CampaignDetailsStore.campaignDetailsHalfModalRef = ref;
+            CampaignDetailsModalStore.campaignDetailsHalfModalRef = ref;
           }}
           duration={50}
           closeOnDragDown
           animationType="slide"
           customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.02)'},
+            wrapper: {backgroundColor: 'rgba(250,250,250,0.4)'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,

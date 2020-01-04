@@ -18,6 +18,7 @@ import TabsHeader from '../../../../../common-components/TabsHeader';
 import Colors from '../../../../../styles/Colors';
 import CompanyCard from '../CompanyCard';
 import Logo from '../../../../../common-components/Logo';
+import Button from '../../../../../common-components/Button';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -27,7 +28,6 @@ export interface CampaignDetailsState {}
 
 const CampaignDetails = ({navigation}) => {
   const style = CampaignDetailsStyle;
-
   const Pin = ({completed}) => {
     const itemWidth = Dimensions.get('window').width / 8;
     return (
@@ -99,58 +99,79 @@ const CampaignDetails = ({navigation}) => {
           <Pin completed={false} />
         </View>
       </View>
-
-      <Text style={style.otherCampaignsHeaderText}>Bu işletmedeki diğer kampanyalar</Text>
-      <View style={style.swiperContainer}>
-        <Swiper
-          showsPagination={false}
-          showsButtons
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          nextButton={
-            <Image
-              source={require('../../../../../assets/image/right.png')}
-              style={{width: 20, resizeMode: 'contain'}}
+      {false ? (
+        <View>
+          <Text style={style.otherCampaignsHeaderText}>Bu işletmedeki diğer kampanyalar</Text>
+          <View style={style.swiperContainer}>
+            <Swiper
+              showsPagination={false}
+              showsButtons
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              nextButton={
+                <Image
+                  source={require('../../../../../assets/image/right.png')}
+                  style={{width: 20, resizeMode: 'contain'}}
+                />
+              }
+              prevButton={
+                <Image
+                  source={require('../../../../../assets/image/left.png')}
+                  style={{width: 20, resizeMode: 'contain'}}
+                />
+              }>
+              <Card elevation={6} opacity={0.15} style={style.card}>
+                <View style={style.otherCardBodyItem}>
+                  <Image
+                    style={style.cardBodyItemIcon}
+                    source={require('../../../../../assets/image/User/mealIcon.png')}
+                  />
+                  <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
+                  <View style={style.cardBodyItemCount}>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>5</Text>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>7</Text>
+                  </View>
+                </View>
+              </Card>
+              <Card elevation={6} opacity={0.15} style={style.card}>
+                <View style={style.otherCardBodyItem}>
+                  <Image
+                    style={style.cardBodyItemIcon}
+                    source={require('../../../../../assets/image/User/mealIcon.png')}
+                  />
+                  <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
+                  <View style={style.cardBodyItemCount}>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>5</Text>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
+                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>7</Text>
+                  </View>
+                </View>
+              </Card>
+            </Swiper>
+          </View>
+        </View>
+      ) : (
+        <View style={style.noOtherCampaignsContainer}>
+          <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
+          <Text style={style.shareUsText}>
+            Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
+            <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
+            destek vermek için arkadaşlarını
+            <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
+          </Text>
+          <View style={style.shareButtonContainer}>
+            <Button
+              text="Bağlantıyı kopyala"
+              backgroundColor={Colors.INFO}
+              textColor="#fff"
+              shadow
             />
-          }
-          prevButton={
-            <Image
-              source={require('../../../../../assets/image/left.png')}
-              style={{width: 20, resizeMode: 'contain'}}
-            />
-          }>
-          <Card elevation={6} opacity={0.15} style={style.card}>
-            <View style={style.otherCardBodyItem}>
-              <Image
-                style={style.cardBodyItemIcon}
-                source={require('../../../../../assets/image/User/mealIcon.png')}
-              />
-              <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-              <View style={style.cardBodyItemCount}>
-                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>5</Text>
-                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
-                <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>7</Text>
-              </View>
-            </View>
-          </Card>
-          <Card elevation={6} opacity={0.15} style={style.card}>
-            <View style={style.otherCardBodyItem}>
-              <Image
-                style={style.cardBodyItemIcon}
-                source={require('../../../../../assets/image/User/mealIcon.png')}
-              />
-              <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
-              <View style={style.cardBodyItemCount}>
-                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>5</Text>
-                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
-                <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>7</Text>
-              </View>
-            </View>
-          </Card>
-        </Swiper>
-      </View>
+          </View>
+        </View>
+      )}
     </View>
   );
 };

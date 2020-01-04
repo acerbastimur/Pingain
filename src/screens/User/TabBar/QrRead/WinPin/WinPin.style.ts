@@ -95,11 +95,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     right: '4%',
-    borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 8,
-    borderColor: Colors.SECONDARY_VERY_LIGHT,
-    borderRadius: 6,
   },
   cardBodyItemCountText: {
     marginHorizontal: 2,
@@ -108,63 +105,42 @@ export default StyleSheet.create({
     fontSize: responsiveRate(14),
     fontStyle: 'normal',
   },
-  cardItemCoffee: {
+  cardItemPlus: {
     color: CampaignColors.COFFEE,
-  },
-  cardItemMeal: {
-    color: CampaignColors.MEAL,
-  },
-  cardItemDessert: {
-    color: CampaignColors.DESSERT,
-  },
-  pinsContainer: {marginBottom: responsiveRate(14)},
-  pinsLineContainer: {
-    marginTop: 2,
-    padding: '4%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  otherCampaignsHeaderText: {
-    marginHorizontal: '5%',
-    fontFamily: 'Helvetica Neue',
     fontWeight: '600',
-    fontSize: responsiveRate(16),
+  },
+  greetingContainer: {
+    marginTop: responsiveRate(16),
+    paddingTop: responsiveRate(10),
+    marginBottom: responsiveRate(50),
+  },
+  greetingHeaderText: {
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+    fontSize: responsiveRate(22),
     fontStyle: 'normal',
     color: Colors.PRIMARY,
+    textAlign: 'center',
+    marginBottom: responsiveRate(12),
   },
-
-  swiperContainer: {
-    height: 120,
-    width: '100%',
-    marginBottom: responsiveRate(10),
-  },
-  card: {
-    marginTop: 30,
-    borderRadius: 15,
-    width: '80%',
-    height: 60,
-    alignSelf: 'center',
-  },
-  noOtherCampaignsContainer: {marginBottom: responsiveRate(30)},
-  shareUsText: {
-    marginHorizontal: '5%',
+  greetingText: {
     fontFamily: 'Helvetica Neue',
-    fontWeight: '500',
-    fontSize: responsiveRate(14),
+    fontWeight: 'normal',
+    fontSize: responsiveRate(16),
     fontStyle: 'normal',
     color: Colors.SECONDARY,
-    paddingTop: responsiveRate(16),
-    letterSpacing: 0.2,
-    lineHeight: 20,
+    textAlign: 'center',
+    marginBottom: responsiveRate(12),
   },
-  shareButtonContainer: {
-    marginTop: responsiveRate(18),
-    height: responsiveRate(52),
-    paddingHorizontal: '4%',
-  },
-  textHighlighted: {
+  textHighlight: {
     color: Colors.TEXT_HIGHLIGHTED,
+    fontWeight: '600',
+  },
+  winImage: {
+    marginTop: responsiveRate(14),
+    resizeMode: 'contain',
+    width: responsiveRate(300),
+    height: responsiveRate(300),
+    alignSelf: 'center',
   },
 });

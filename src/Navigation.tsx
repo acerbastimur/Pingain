@@ -71,7 +71,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Campaigns',
+    initialRouteName: 'QrRead',
     tabBarOptions: {
       showLabel: false,
       style: {
