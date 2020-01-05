@@ -71,7 +71,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'QrRead',
+    initialRouteName: 'ShareUs',
     tabBarOptions: {
       showLabel: false,
       style: {

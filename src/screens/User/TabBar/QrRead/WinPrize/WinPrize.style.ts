@@ -63,7 +63,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical: responsiveRate(30),
+    marginVertical: responsiveRate(20),
   },
   otherCardBodyItem: {
     paddingHorizontal: '4%',
@@ -137,10 +137,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   winImage: {
-    marginTop: responsiveRate(14),
     resizeMode: 'contain',
-    width: responsiveRate(230),
-    height: responsiveRate(230),
+    width: responsiveRate(250),
+    height: responsiveRate(250),
     alignSelf: 'center',
   },
   qrImage: {
@@ -148,7 +147,9 @@ export default StyleSheet.create({
     width: responsiveRate(100),
     height: responsiveRate(100),
     position: 'absolute',
-    top: responsiveRate(100)
+    top: responsiveRate(100),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   showQrText: {
     fontFamily: 'Helvetica Neue',

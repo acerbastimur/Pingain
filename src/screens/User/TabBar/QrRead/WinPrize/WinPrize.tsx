@@ -14,6 +14,7 @@ import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
+import QRCode from 'react-native-qrcode-svg';
 import WinPrizeStyle from './WinPrize.style';
 import Colors from '../../../../../styles/Colors';
 import Button from '../../../../../common-components/Button';
@@ -96,14 +97,14 @@ const WinPrize = ({navigation}) => {
             source={require('../../../../../assets/image/winPrize.png')}
             style={style.winImage}
           />
-          <Animatable.Image
+          <Animatable.View
             animation="bounceIn"
-            duration={2000}
-            useNativeDriver
-            delay={500}
-            source={require('../../../../../assets/image/qrExample.png')}
+            duration={2300}
             style={style.qrImage}
-          />
+            useNativeDriver
+            delay={500}>
+            <QRCode size={Dimensions.get('screen').width > 350 ? 100 : 70} color={Colors.PRIMARY} value="Umut" ecl="H" />
+          </Animatable.View>
         </View>
       </View>
       <Text style={style.showQrText}>QR kodunu göstererek ödülünü alabilirsin.</Text>

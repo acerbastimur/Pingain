@@ -30,9 +30,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   componentDidMount() {
     this.scanner.reactivate();
-    setTimeout(() => {
-      WinModalStore.winPrizeHalfModalRef.open();
-    }, 1000);
   }
 
   onSuccess = e => {
