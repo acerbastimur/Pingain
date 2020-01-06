@@ -37,12 +37,22 @@ const UserTabNavigation = createBottomTabNavigator(
       screen: CampaignsStack,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: (
-          <Image
-            style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-            source={require('./assets/image/UserTab/CampaignsTabIcon.png')}
-          />
-        ),
+        tabBarIcon: e => {
+          if (e.focused) {
+            return (
+              <Image
+                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+                source={require('./assets/image/UserTab/CampaignsTabIcon.png')}
+              />
+            );
+          }
+          return (
+            <Image
+              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              source={require('./assets/image/UserTab/CampaignsTabIconDisabled.png')}
+            />
+          );
+        },
       },
     },
     QrRead: {
