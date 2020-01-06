@@ -15,7 +15,7 @@ import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import CompanyCardStyle from './CompanyCard.style';
-import CampaignDetailsStore from '../../../../../stores/CampaignDetails.store';
+import CampaignDetailsStore from '../../../../../stores/CampaignDetailsModal.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
