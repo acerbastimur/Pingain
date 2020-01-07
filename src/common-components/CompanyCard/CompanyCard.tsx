@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/sort-comp */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
@@ -15,26 +13,23 @@ import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import CompanyCardStyle from './CompanyCard.style';
-import CampaignDetailsStore from '../../../../../stores/CampaignDetailsModal.store';
+import CampaignDetailsStore from '../../stores/CampaignDetailsModal.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  isCampaign1Done: boolean;
 }
 
-export interface CompanyCardState {}
-
-export default class CompanyCard extends React.Component<CompanyCardProps, CompanyCardState> {
+export default class CompanyCard extends React.Component<CompanyCardProps, any> {
   s = CompanyCardStyle;
 
   constructor(props: CompanyCardProps) {
     super(props);
-    this.state = {
-      imageSource: null,
-    };
+    this.state = {};
   }
 
   public render() {
-    const {navigation} = this.props;
+    const {navigation, isCampaign1Done} = this.props;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
         <TouchableOpacity
@@ -44,16 +39,13 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           style={this.s.cardHeader}>
           <View style={this.s.cardHeaderImageContainer}>
             <Image
-              source={require('../../../../../assets/image/User/cafeImageExample.png')}
+              source={require('../../assets/image/User/cafeImageExample.png')}
               style={this.s.cardHeaderImage}
             />
           </View>
 
           <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
-          <Image
-            style={this.s.headerArrow}
-            source={require('../../../../../assets/image/User/arrow.png')}
-          />
+          <Image style={this.s.headerArrow} source={require('../../assets/image/User/arrow.png')} />
         </TouchableOpacity>
         <View style={this.s.line} />
         <View style={this.s.cardBody}>
@@ -64,20 +56,26 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
             }}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../../../../assets/image/User/coffeeIcon.png')}
+              source={require('../../assets/image/User/coffeeIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
-            <View style={this.s.cardBodyItemCount}>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
+            <View style={[this.s.cardBodyItemCount, this.s.coffeeDoneBackground]}>
+              {isCampaign1Done ? (
+                <Image style={this.s.tick} source={require('../../assets/image/tickWhite.png')} />
+              ) : (
+                <View style={this.s.row}>
+                  <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
+                  <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
+                  <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
+                </View>
+              )}
             </View>
           </TouchableOpacity>
 
           <View style={this.s.cardBodyItem}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../../../../assets/image/User/mealIcon.png')}
+              source={require('../../assets/image/User/mealIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
             <View style={this.s.cardBodyItemCount}>
@@ -90,7 +88,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           <View style={this.s.cardBodyItem}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../../../../assets/image/User/dessertIcon.png')}
+              source={require('../../assets/image/User/dessertIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
             <View style={this.s.cardBodyItemCount}>

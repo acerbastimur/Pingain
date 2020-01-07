@@ -2,8 +2,8 @@ import {Dimensions} from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
 import {StyleSheet} from 'react-native';
-import Colors from '../../../../../styles/Colors';
-import CampaignColors from '../../../../../styles/CampaignColors';
+import Colors from '../../styles/Colors';
+import CampaignColors from '../../styles/CampaignColors';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginVertical: 20,
     marginHorizontal: 35,
-    height:40,
+    height: 40,
   },
   cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
   cardHeaderImage: {
@@ -69,6 +69,7 @@ export default StyleSheet.create({
     height: 28,
     resizeMode: 'contain',
   },
+  row: {flexDirection: 'row'},
   cardBodyItemName: {
     paddingLeft: '6%',
     fontFamily: 'Helvetica Neue',
@@ -101,5 +102,16 @@ export default StyleSheet.create({
   },
   cardItemDessert: {
     color: CampaignColors.DESSERT,
+  },
+  tick: {
+    resizeMode: 'contain',
+    width: 18,
+    height: 18,
+  },
+  coffeeDoneBackground: {
+    backgroundColor: CampaignColors.COFFEE,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

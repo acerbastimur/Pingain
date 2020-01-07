@@ -16,8 +16,8 @@ import GetUserInfo from './screens/User/GetUserInfo';
 import GetCompanyInfo from './screens/Company/GetCompanyInfo';
 import Campaigns from './screens/User/TabBar/Campaigns';
 import QrRead from './screens/User/TabBar/QrRead';
-import ShareUs from './screens/User/TabBar/ShareUs/ShareUs';
-import CompanyDetails from './screens/User/TabBar/Campaigns/CompanyDetails';
+import Prizes from './screens/User/TabBar/Prizes';
+import CompanyDetails from './common-components/CompanyDetails';
 
 const CampaignsStack = createStackNavigator(
   {
@@ -36,7 +36,6 @@ const UserTabNavigation = createBottomTabNavigator(
     Campaigns: {
       screen: CampaignsStack,
       navigationOptions: {
-        tabBarLabel: 'Home',
         tabBarIcon: e => {
           if (e.focused) {
             return (
@@ -58,7 +57,6 @@ const UserTabNavigation = createBottomTabNavigator(
     QrRead: {
       screen: QrRead,
       navigationOptions: {
-        tabBarLabel: 'Home',
         tabBarIcon: (
           <Image
             style={{resizeMode: 'contain', width: 50, height: 50, alignSelf: 'center'}}
@@ -67,21 +65,30 @@ const UserTabNavigation = createBottomTabNavigator(
         ),
       },
     },
-    ShareUs: {
-      screen: ShareUs,
+    Prizes: {
+      screen: Prizes,
       navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: (
-          <Image
-            style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-            source={require('./assets/image/UserTab/ShareUsTabIcon.png')}
-          />
-        ),
+        tabBarIcon: e => {
+          if (e.focused) {
+            return (
+              <Image
+                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+                source={require('./assets/image/UserTab/PrizesIcon.png')}
+              />
+            );
+          }
+          return (
+            <Image
+              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              source={require('./assets/image/UserTab/PrizesIconDisabled.png')}
+            />
+          );
+        },
       },
     },
   },
   {
-    initialRouteName: 'ShareUs',
+    initialRouteName: 'Prizes',
     tabBarOptions: {
       showLabel: false,
       style: {

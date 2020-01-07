@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
 import {View, Button, Text, FlatList, Dimensions} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
@@ -6,20 +8,18 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import CompanyCard from './CompanyCard';
+import CompanyCard from '../../../../common-components/CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 
 import Colors from '../../../../styles/Colors';
-import CampaignDetails from './CampaignDetails';
+import CampaignDetails from '../../../../common-components/CampaignDetails';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export interface CampaignsState {}
-
 @observer
-export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
+export default class Campaigns extends React.Component<CampaignsProps, any> {
   style = CampaignsStyle;
 
   constructor(props: CampaignsProps) {
@@ -51,46 +51,10 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={[
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-            ]}
-            renderItem={() => <CompanyCard navigation={navigation} />}
+            data={[{isCampaign1Done: true}, {isCampaign1Done: true}]}
+            renderItem={({item}) => (
+              <CompanyCard navigation={navigation} isCampaign1Done={item.isCampaign1Done} />
+            )}
           />
         </View>
         <RBSheet
