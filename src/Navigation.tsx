@@ -31,6 +31,24 @@ const CampaignsStack = createStackNavigator(
   {initialRouteName: 'CampaignsHome', headerMode: 'none'},
 );
 
+const QrReadStack = createStackNavigator(
+  {
+    QrReadHome: {
+      screen: QrRead,
+    },
+  },
+  {initialRouteName: 'QrReadHome', headerMode: 'none'},
+);
+
+const PrizesStack = createStackNavigator(
+  {
+    PrizesHome: {
+      screen: Prizes,
+    },
+  },
+  {initialRouteName: 'PrizesHome', headerMode: 'none'},
+);
+
 const UserTabNavigation = createBottomTabNavigator(
   {
     Campaigns: {
@@ -55,7 +73,7 @@ const UserTabNavigation = createBottomTabNavigator(
       },
     },
     QrRead: {
-      screen: QrRead,
+      screen: QrReadStack,
       navigationOptions: {
         tabBarIcon: (
           <Image
@@ -66,7 +84,7 @@ const UserTabNavigation = createBottomTabNavigator(
       },
     },
     Prizes: {
-      screen: Prizes,
+      screen: PrizesStack,
       navigationOptions: {
         tabBarIcon: e => {
           if (e.focused) {
