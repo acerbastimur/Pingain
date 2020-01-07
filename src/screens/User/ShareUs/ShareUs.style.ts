@@ -13,10 +13,10 @@ console.log(screenWidth);
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    height: 'auto',
+    paddingHorizontal: '11.5%',
+    marginBottom: responsiveRate(30),
   },
-  headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
-  body: {paddingHorizontal: '11.5%', flex: 1},
   topTextLight: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
@@ -39,8 +39,9 @@ export default StyleSheet.create({
   },
   bodyImage: {
     resizeMode: 'contain',
-    width: (Dimensions.get('screen').width * 77) / 100,
-    height: (Dimensions.get('screen').width * 77) / 100,
+    width: (Dimensions.get('screen').width * 50) / 100,
+    height: (Dimensions.get('screen').width * 50) / 100,
+    alignSelf: 'center',
   },
   bottomTextBold: {
     fontFamily: 'Helvetica Neue',
