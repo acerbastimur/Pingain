@@ -14,18 +14,17 @@ import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import CampaignDetailsStyle from './CampaignDetails.style';
-import TabsHeader from '../../../../../common-components/TabsHeader';
-import Colors from '../../../../../styles/Colors';
+import TabsHeader from '../TabsHeader';
+import Colors from '../../styles/Colors';
 import CompanyCard from '../CompanyCard';
-import Logo from '../../../../../common-components/Logo';
-import Button from '../../../../../common-components/Button';
+import Logo from '../Logo';
+import Button from '../Button';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export interface CampaignDetailsState {}
-
+ 
 const CampaignDetails = ({navigation}) => {
   const style = CampaignDetailsStyle;
   const Pin = ({completed}) => {
@@ -42,8 +41,8 @@ const CampaignDetails = ({navigation}) => {
           style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
           source={
             completed
-              ? require('../../../../../assets/image/pin_completed.png')
-              : require('../../../../../assets/image/pin_uncompleted.png')
+              ? require('../../assets/image/pin_completed.png')
+              : require('../../assets/image/pin_uncompleted.png')
           }
         />
       </View>
@@ -58,7 +57,7 @@ const CampaignDetails = ({navigation}) => {
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
           <Image
-            source={require('../../../../../assets/image/User/cafeImageExample.png')}
+            source={require('../../assets/image/User/cafeImageExample.png')}
             style={style.cardHeaderImage}
           />
         </View>
@@ -66,14 +65,14 @@ const CampaignDetails = ({navigation}) => {
         <Text style={style.cardHeaderText}>Cafe Rien</Text>
         <Image
           style={style.headerArrow}
-          source={require('../../../../../assets/image/User/arrow.png')}
+          source={require('../../assets/image/User/arrow.png')}
         />
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
         <Image
           style={style.cardBodyItemIcon}
-          source={require('../../../../../assets/image/User/coffeeIcon.png')}
+          source={require('../../assets/image/User/coffeeIcon.png')}
         />
         <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
         <View style={style.cardBodyItemCount}>
@@ -110,23 +109,23 @@ const CampaignDetails = ({navigation}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={
+              nextButton={(
                 <Image
-                  source={require('../../../../../assets/image/right.png')}
+                  source={require('../../assets/image/right.png')}
                   style={{width: 20, resizeMode: 'contain'}}
                 />
-              }
-              prevButton={
+              )}
+              prevButton={(
                 <Image
-                  source={require('../../../../../assets/image/left.png')}
+                  source={require('../../assets/image/left.png')}
                   style={{width: 20, resizeMode: 'contain'}}
                 />
-              }>
+              )}>
               <Card elevation={6} opacity={0.15} style={style.card}>
                 <View style={style.otherCardBodyItem}>
                   <Image
                     style={style.cardBodyItemIcon}
-                    source={require('../../../../../assets/image/User/mealIcon.png')}
+                    source={require('../../assets/image/User/mealIcon.png')}
                   />
                   <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
                   <View style={style.cardBodyItemCount}>
@@ -140,7 +139,7 @@ const CampaignDetails = ({navigation}) => {
                 <View style={style.otherCardBodyItem}>
                   <Image
                     style={style.cardBodyItemIcon}
-                    source={require('../../../../../assets/image/User/mealIcon.png')}
+                    source={require('../../assets/image/User/mealIcon.png')}
                   />
                   <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
                   <View style={style.cardBodyItemCount}>
