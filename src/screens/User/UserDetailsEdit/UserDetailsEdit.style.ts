@@ -13,7 +13,7 @@ console.log(screenWidth);
 
 export default StyleSheet.create({
   pageContainer: {flex: 1},
-  headerContainer: {height:56, paddingHorizontal: '6%'},
+  headerContainer: {height: 56, paddingHorizontal: '6%'},
   centerText: {
     flex: 1,
     fontSize: 18,
@@ -47,7 +47,7 @@ export default StyleSheet.create({
     color: Colors.PRIMARY,
   },
   profileImage: {resizeMode: 'contain', width: 70, height: 70},
-   inputContainer: {
+  inputContainer: {
     height: 75,
     marginTop: 20,
   },

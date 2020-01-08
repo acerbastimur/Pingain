@@ -1,24 +1,40 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Text, Image} from 'react-native';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import TabsHeaderStyle from './TabsHeader.style';
 import Logo from '../Logo';
 
 interface TabsHeaderProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  rightButtonText?: string;
+  rightEditIcon?: boolean;
+  onPress: () => void;
 }
-const TabsHeader = (props: TabsHeaderProps) => {
+const TabsHeader = ({navigation, rightButtonText, rightEditIcon, onPress}: TabsHeaderProps) => {
   const s = TabsHeaderStyle;
+  const rightComponent = () => {
+    if (rightButtonText) {
+      return <Text style={s.buttonText}>{rightButtonText}</Text>;
+    }
+    if (rightEditIcon) {
+      return <Image source={require('../../assets/image/editIcon.png')} style={s.image} />;
+    }
 
+    return <Image source={require('../../assets/image/User/profileImage.png')} style={s.image} />;
+  };
   return (
     <View style={s.container}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity>
         <Image source={require('../../assets/image/User/searchIcon.png')} style={s.image} />
       </TouchableOpacity>
 
       <Logo width={30} />
-      <TouchableOpacity style={s.imageContainer}>
-        <Image source={require('../../assets/image/User/profileImage.png')} style={s.image} />
+      <TouchableOpacity
+        style={[rightButtonText ? s.rightTextContainer : s.imageContainer]}
+        onPress={onPress}>
+        {rightComponent()}
       </TouchableOpacity>
     </View>
   );

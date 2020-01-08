@@ -45,7 +45,12 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
-          <TabsHeader navigation={navigation} />
+          <TabsHeader
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate('UserDetails');
+            }}
+          />
         </View>
         <View style={this.style.bottomAreaContainer}>
           <FlatList

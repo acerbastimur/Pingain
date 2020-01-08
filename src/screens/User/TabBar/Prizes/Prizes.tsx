@@ -30,10 +30,6 @@ export default class Prizes extends React.Component<PrizesProps, any> {
     this.state = {};
   }
 
-  componentDidMount() {
-    GeneralStore.shareUsModalRef.open();
-  }
-
   flatListTextHeader = () => {
     return (
       <View style={this.style.flatListHeader}>
@@ -51,7 +47,12 @@ export default class Prizes extends React.Component<PrizesProps, any> {
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
-          <TabsHeader navigation={navigation} />
+          <TabsHeader
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate('UserDetails');
+            }}
+          />
         </View>
         <View style={this.style.bottomAreaContainer}>
           <FlatList
