@@ -31,6 +31,7 @@ import CITIES from '../../../assets/constants/Cities';
 interface UserDetailsEditProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+
 export default class UserDetailsEdit extends React.Component<UserDetailsEditProps> {
   style = UserDetailsEditStyle;
 
@@ -52,8 +53,30 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
+            rightButtonText="Kaydet"
             onPress={() => {
-              navigation.navigate('UserDetails');
+              /* navigation.navigate('UserDetails'); */
+
+              if (isValid) {
+                handleSubmit();
+                return;
+              }
+
+              if (errors.name) {
+                this.references.filter(t => t.name === 'name')[0].ref.shake();
+              }
+              if (errors.surname) {
+                this.references.filter(t => t.name === 'surname')[0].ref.shake();
+              }
+              if (errors.email) {
+                this.references.filter(t => t.name === 'email')[0].ref.shake();
+              }
+              if (errors.password) {
+                this.references.filter(t => t.name === 'password')[0].ref.shake();
+              }
+              if (errors.phoneNumer) {
+                this.references.filter(t => t.name === 'phoneNumer')[0].ref.shake();
+              }
             }}
           />
         </View>
@@ -126,7 +149,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         placeholder="İsminizi giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.email}
+                        value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={() => setFieldTouched('name')}
                         autoCapitalize="none"
@@ -164,7 +187,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         placeholder="Soyisminizi Giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.password}
+                        value={values.surname}
                         onChangeText={handleChange('surname')}
                         onBlur={() => setFieldTouched('surname')}
                         autoCapitalize="none"
@@ -209,7 +232,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         placeholder="Email Giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.passwordConfirm}
+                        value={values.email}
                         onChangeText={handleChange('email')}
                         onBlur={() => setFieldTouched('email')}
                         autoCapitalize="none"
@@ -270,7 +293,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         placeholder="Şifre Giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.passwordConfirm}
+                        value={values.password}
                         onChangeText={handleChange('password')}
                         onBlur={() => setFieldTouched('password')}
                         autoCapitalize="none"
@@ -318,7 +341,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         placeholder="Telefon Numarası Giriniz"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
-                        value={values.passwordConfirm}
+                        value={values.phoneNumber}
                         onChangeText={handleChange('phoneNumber')}
                         onBlur={() => setFieldTouched('phoneNumber')}
                         autoCapitalize="none"
@@ -362,30 +385,6 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         />
                       </View>
                     </Animatable.View>
-                  </View>
-
-                  <View style={this.style.buttonContainer}>
-                    <Button
-                      text="Kaydet"
-                      backgroundColor={Colors.INFO}
-                      textColor="#fff"
-                      onPress={() => {
-                        if (isValid) {
-                          handleSubmit();
-                          return;
-                        }
-
-                        if (errors.email) {
-                          this.references.filter(t => t.name === 'email')[0].ref.shake();
-                        }
-                        if (errors.password) {
-                          this.references.filter(t => t.name === 'password')[0].ref.shake();
-                        }
-                        if (errors.passwordConfirm) {
-                          this.references.filter(t => t.name === 'passwordConfirm')[0].ref.shake();
-                        }
-                      }}
-                    />
                   </View>
                 </View>
               )}

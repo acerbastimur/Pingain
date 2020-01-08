@@ -19,18 +19,38 @@ import Colors from '../../styles/Colors';
 import CompanyCard from '../CompanyCard';
 import Logo from '../Logo';
 import Button from '../Button';
+import CampaignDetailsModalStore from '../../stores/CampaignDetailsModal.store';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
- 
-const CampaignDetails = ({navigation}) => {
+const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
   const style = CampaignDetailsStyle;
   const Pin = ({completed}) => {
     const itemWidth = Dimensions.get('window').width / 8;
+    if (completed) {
+      return (
+        <View
+          style={{
+            width: itemWidth,
+            height: itemWidth,
+            borderRadius: 12,
+            overflow: 'hidden',
+          }}>
+          <Image
+            style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
+            source={require('../../assets/image/pin_completed.png')}
+          />
+        </View>
+      );
+    }
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('QrRead');
+          CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
+        }}
         style={{
           width: itemWidth,
           height: itemWidth,
@@ -39,13 +59,9 @@ const CampaignDetails = ({navigation}) => {
         }}>
         <Image
           style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-          source={
-            completed
-              ? require('../../assets/image/pin_completed.png')
-              : require('../../assets/image/pin_uncompleted.png')
-          }
+          source={require('../../assets/image/pin_uncompleted.png')}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
   return (
@@ -53,6 +69,7 @@ const CampaignDetails = ({navigation}) => {
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('CompanyDetails');
+          CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
@@ -63,10 +80,7 @@ const CampaignDetails = ({navigation}) => {
         </View>
 
         <Text style={style.cardHeaderText}>Cafe Rien</Text>
-        <Image
-          style={style.headerArrow}
-          source={require('../../assets/image/User/arrow.png')}
-        />
+        <Image style={style.headerArrow} source={require('../../assets/image/User/arrow.png')} />
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
@@ -109,18 +123,18 @@ const CampaignDetails = ({navigation}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={(
+              nextButton={
                 <Image
                   source={require('../../assets/image/right.png')}
                   style={{width: 20, resizeMode: 'contain'}}
                 />
-              )}
-              prevButton={(
+              }
+              prevButton={
                 <Image
                   source={require('../../assets/image/left.png')}
                   style={{width: 20, resizeMode: 'contain'}}
                 />
-              )}>
+              }>
               <Card elevation={6} opacity={0.15} style={style.card}>
                 <View style={style.otherCardBodyItem}>
                   <Image
