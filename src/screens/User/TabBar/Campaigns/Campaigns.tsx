@@ -57,7 +57,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={[{isCampaign1Done: true}, {isCampaign1Done: true}]}
+            data={[{isCampaign1Done: true}, {isCampaign1Done: true}, {isCampaign1Done: false}]}
             renderItem={({item}) => (
               <CompanyCard navigation={navigation} isCampaign1Done={item.isCampaign1Done} />
             )}
