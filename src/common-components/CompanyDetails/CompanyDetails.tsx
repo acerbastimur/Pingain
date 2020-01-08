@@ -22,13 +22,18 @@ export interface CompanyDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const CompanyDetails = ({navigation}) => {
+const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
   const style = CompanyDetailsStyle;
 
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <TabsHeader navigation={navigation} />
+        <TabsHeader
+          navigation={navigation}
+          onPress={() => {
+            navigation.navigate('UserDetails');
+          }}
+        />
       </View>
       <View style={style.bodyContainer}>
         <ScrollView>

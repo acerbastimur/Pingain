@@ -80,7 +80,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           <WinPrize navigation={navigation} />
         </RBSheet>
         <View style={this.style.headerContainer}>
-          <TabsHeader navigation={navigation} />
+          <TabsHeader
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate('UserDetails');
+            }}
+          />
         </View>
         <View style={this.style.cameraContainer}>
           <QRCodeScanner

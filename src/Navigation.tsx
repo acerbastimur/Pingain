@@ -18,7 +18,23 @@ import Campaigns from './screens/User/TabBar/Campaigns';
 import QrRead from './screens/User/TabBar/QrRead';
 import Prizes from './screens/User/TabBar/Prizes';
 import CompanyDetails from './common-components/CompanyDetails';
+import UserDetails from './screens/User/UserDetails';
+import UserDetailsEdit from './screens/User/UserDetailsEdit';
 
+const UserDetailsStack = createStackNavigator(
+  {
+    UserDetails: {
+      screen: UserDetails,
+    },
+    UserDetailsEdit: {
+      screen: UserDetailsEdit,
+    },
+  },
+  {
+    initialRouteName: 'UserDetails',
+    headerMode: 'none',
+  },
+);
 const CampaignsStack = createStackNavigator(
   {
     CampaignsHome: {
@@ -26,6 +42,9 @@ const CampaignsStack = createStackNavigator(
     },
     CompanyDetails: {
       screen: CompanyDetails,
+    },
+    UserDetails: {
+      screen: UserDetailsStack,
     },
   },
   {initialRouteName: 'CampaignsHome', headerMode: 'none'},
@@ -36,6 +55,9 @@ const QrReadStack = createStackNavigator(
     QrReadHome: {
       screen: QrRead,
     },
+    UserDetails: {
+      screen: UserDetailsStack,
+    },
   },
   {initialRouteName: 'QrReadHome', headerMode: 'none'},
 );
@@ -44,6 +66,9 @@ const PrizesStack = createStackNavigator(
   {
     PrizesHome: {
       screen: Prizes,
+    },
+    UserDetails: {
+      screen: UserDetailsStack,
     },
   },
   {initialRouteName: 'PrizesHome', headerMode: 'none'},
@@ -106,7 +131,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Prizes',
+    initialRouteName: 'Campaigns',
     tabBarOptions: {
       showLabel: false,
       style: {
@@ -139,7 +164,7 @@ const UserNavigator = createSwitchNavigator(
       screen: UserTabNavigation,
     },
   },
-  {initialRouteName: 'UserTabNavigation'},
+  {initialRouteName: 'GetUserInfo'},
 );
 
 const CompanyNavigator = createSwitchNavigator(
@@ -194,7 +219,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'UserNavigator',
+    initialRouteName: 'Onboarding',
   },
 );
 

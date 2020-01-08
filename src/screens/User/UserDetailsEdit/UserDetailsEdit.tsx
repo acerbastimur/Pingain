@@ -50,7 +50,12 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
     return (
       <View style={this.style.pageContainer}>
         <View style={this.style.headerContainer}>
-          <TabsHeader navigation={navigation} />
+          <TabsHeader
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate('UserDetails');
+            }}
+          />
         </View>
         <KeyboardAwareScrollView
           contentContainerStyle={this.style.keyboardScrollContainer}
