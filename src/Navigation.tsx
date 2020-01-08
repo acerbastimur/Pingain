@@ -149,10 +149,11 @@ const UserTabNavigation = createBottomTabNavigator(
         shadowOpacity: 0.3,
         shadowRadius: 20.0,
         borderTopWidth: 0,
-        borderColor: '#000',
+        elevation: 20,
+
+        borderColor: '#aaa',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
-        elevation: 16,
       },
 
       safeAreaInset: {bottom: 'never', top: 'never'}, // <-- this is the solution
