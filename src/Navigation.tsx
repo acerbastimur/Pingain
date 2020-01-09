@@ -225,7 +225,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'CompanyNavigator',
+    initialRouteName: 'UserNavigator',
   },
 );
 

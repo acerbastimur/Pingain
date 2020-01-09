@@ -15,8 +15,7 @@ const responsiveRate = (rateNumber: number) => {
   }
   return (screenWidth * rateNumber) / fontScaleBase;
 };
-console.log(screenWidth);
-
+ 
 export default StyleSheet.create({
   modal: {
     padding: 0,

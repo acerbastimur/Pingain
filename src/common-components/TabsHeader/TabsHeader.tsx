@@ -7,7 +7,7 @@ import TabsHeaderStyle from './TabsHeader.style';
 import Logo from '../Logo';
 
 interface TabsHeaderProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  navigation: NavigationScreenProp<any, any>;
   rightButtonText?: string;
   rightEditIcon?: boolean;
   onPress: () => void;
@@ -24,6 +24,9 @@ const TabsHeader = ({navigation, rightButtonText, rightEditIcon, onPress}: TabsH
 
     return <Image source={require('../../assets/image/User/profileImage.png')} style={s.image} />;
   };
+
+  console.log(navigation.dangerouslyGetParent().state);
+
   return (
     <View style={s.container}>
       <TouchableOpacity>

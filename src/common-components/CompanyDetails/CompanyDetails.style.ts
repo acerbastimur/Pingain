@@ -13,8 +13,7 @@ const responsiveRate = (fontSize: number) => {
   if (screenWidth < 350) return ((screenWidth * fontSize) / fontScaleBase) * 0.9;
   return (screenWidth * fontSize) / fontScaleBase;
 };
-console.log(screenWidth);
-
+ 
 export default StyleSheet.create({
   container: {
     flex: 1,

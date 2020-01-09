@@ -137,8 +137,6 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                 this.formErrors = errors;
                 this.isFormValid = isValid;
 
-                console.log(this.values, this.formErrors, this.isFormValid);
-
                 return (
                   <View style={this.style.formContainer}>
                     <View style={this.style.inputContainer}>

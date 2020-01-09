@@ -9,7 +9,6 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
-console.log(screenWidth);
 
 export default StyleSheet.create({
   pageContainer: {flex: 1},
