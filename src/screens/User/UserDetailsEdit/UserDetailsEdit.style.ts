@@ -27,8 +27,9 @@ export default StyleSheet.create({
     paddingHorizontal: '11.5%',
   },
   ppContainer: {
-    height: 70,
+    height: 80,
     marginTop: 28,
+    width: 80,
   },
   ppOverflow: {
     width: 70,
@@ -38,6 +39,7 @@ export default StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+    marginTop: responsiveRate(10),
   },
   dropdownComponentContainer: {overflow: 'hidden', height: 50},
   dropdownContainer: {top: -26},

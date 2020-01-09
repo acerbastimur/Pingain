@@ -27,6 +27,7 @@ import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';
+import ImageUpload from '../../../common-components/ImageUpload';
 
 interface UserDetailsEditProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -92,12 +93,14 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
           scrollEnabled={false}>
           <ScrollView style={this.style.container}>
             <View style={this.style.ppContainer}>
-              <View style={this.style.ppOverflow}>
-                <Image
-                  source={require('../../../assets/image/User/profileImage.png')}
-                  style={this.style.profileImage}
-                />
-              </View>
+              {/*  <View style={this.style.ppOverflow}>
+               
+                <ImageUpload />
+              </View> */}
+              <ImageUpload
+                hideText
+                defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
+              />
             </View>
 
             <Formik
@@ -337,6 +340,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                           onChangeText={handleChange('phoneNumber')}
                           onBlur={() => setFieldTouched('phoneNumber')}
                           autoCapitalize="none"
+                          keyboardType="decimal-pad"
                           returnKeyType="done"
                           ref={ref => {
                             const isThere = this.references.filter(
