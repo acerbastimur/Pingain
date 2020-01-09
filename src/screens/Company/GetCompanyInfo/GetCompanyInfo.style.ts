@@ -19,7 +19,14 @@ export default StyleSheet.create({
     paddingHorizontal: '11.5%',
   },
   uploadPhotoContainer: {
-    flex: 2,
+    flex: 1.6,
+    justifyContent: 'center',
+  },
+  uploadPhotoItem: {
+    width: 200,
+    height: responsiveRate(140),
+    paddingTop: responsiveRate(20),
+    alignSelf: 'center',
   },
   inputsContainer: {
     flex: 4,

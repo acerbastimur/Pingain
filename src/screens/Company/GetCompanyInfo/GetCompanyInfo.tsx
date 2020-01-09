@@ -46,7 +46,9 @@ export default class GetCompanyInfo extends React.Component<GetUserInfoProps> {
         scrollEnabled={false}>
         <View style={this.style.container}>
           <View style={this.style.uploadPhotoContainer}>
-            <ImageUpload />
+            <View style={this.style.uploadPhotoItem}>
+              <ImageUpload />
+            </View>
           </View>
           <View style={this.style.inputsContainer}>
             <Formik
