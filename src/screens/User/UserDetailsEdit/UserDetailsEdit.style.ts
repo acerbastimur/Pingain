@@ -72,4 +72,7 @@ export default StyleSheet.create({
     height: 52,
     marginTop: 20,
   },
+  dropDownContainer: {
+    marginBottom: responsiveRate(100),
+  },
 });
