@@ -28,7 +28,10 @@ export default StyleSheet.create({
   image: {
     width: 25,
     height: 25,
+    resizeMode: 'contain',
   },
+  backButtonContainer: {},
+  backIcon: {width: 18, height: 18, resizeMode: 'contain'},
   buttonText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',

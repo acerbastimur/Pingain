@@ -16,9 +16,7 @@ export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export interface QrReadState {}
-
-export default class QrRead extends React.Component<QrReadProps, QrReadState> {
+export default class QrRead extends React.Component<QrReadProps, any> {
   style = QrReadStyle;
 
   scanner: QRCodeScanner = null;
@@ -29,7 +27,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   }
 
   componentDidMount() {
-    this.scanner.reactivate();
+    /*     this.scanner.reactivate();
+     */
   }
 
   onSuccess = e => {
