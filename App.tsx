@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text, Button, SafeAreaView, StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
-import Navigation from './src/Navigation';
+import Navigation from './src/navigations/Navigation';
 
 export default class App extends React.Component {
   constructor(props: any) {
