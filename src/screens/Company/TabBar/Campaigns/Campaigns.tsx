@@ -8,12 +8,13 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
+import NoCampaign from './NoCampaign';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 export interface CampaignsState {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  noCampaign: boolean;
 }
 
 @observer
@@ -22,12 +23,19 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   constructor(props: CampaignsProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      noCampaign: true,
+    };
   }
 
   public render() {
     const {navigation} = this.props;
+    const {noCampaign} = this.state;
 
-    return <Text>Company Campaign</Text>;
+    return (
+      <View style={this.style.container}>
+        {noCampaign ? <NoCampaign navigation={navigation} /> : <Text>there is a campaign</Text>}
+      </View>
+    );
   }
 }

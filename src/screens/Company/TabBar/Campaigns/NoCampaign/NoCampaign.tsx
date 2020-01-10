@@ -25,6 +25,10 @@ export default class NoCampaign extends React.Component<NoCampaignProps, any> {
   public render() {
     const {navigation} = this.props;
 
-    return <Text>No campaign</Text>;
+    return (
+      <View>
+        <Text>No campaign</Text>
+      </View>
+    );
   }
 }
