@@ -13,7 +13,7 @@ const responsiveRate = (fontSize: number) => {
   if (screenWidth < 350) return ((screenWidth * fontSize) / fontScaleBase) * 0.9;
   return (screenWidth * fontSize) / fontScaleBase;
 };
- 
+
 export default StyleSheet.create({
   card: {margin: 20, borderRadius: 15},
   cardHeader: {
@@ -104,12 +104,12 @@ export default StyleSheet.create({
   },
   tick: {
     resizeMode: 'contain',
-    width: 18,
-    height: 18,
+    width: responsiveRate(18),
+    height: responsiveRate(18),
   },
   coffeeDoneBackground: {
     backgroundColor: CampaignColors.COFFEE,
-    width: 50,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -16,7 +16,8 @@ const responsiveRate = (fontSize: number) => {
  
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
+    paddingBottom: 80,
   },
   headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
   bodyContainer: {
