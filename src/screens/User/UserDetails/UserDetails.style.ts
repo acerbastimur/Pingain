@@ -9,8 +9,9 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
- 
+
 export default StyleSheet.create({
+  container: {height: '100%', paddingBottom: 80},
   headerContainer: {height: 56, paddingHorizontal: '6%'},
 
   ppOverflow: {
@@ -20,7 +21,7 @@ export default StyleSheet.create({
     overflow: 'hidden',
     marginRight: '4%',
   },
-  scrollContainerStyle: {paddingBottom: responsiveRate(100)},
+  scrollContainerStyle: {},
   profileImage: {resizeMode: 'contain', width: 60, height: 60},
 
   profileInfoContainer: {

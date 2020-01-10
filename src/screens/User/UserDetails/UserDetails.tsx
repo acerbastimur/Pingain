@@ -41,7 +41,7 @@ export default class UserDetails extends React.Component<UserDetailsProps> {
   public render() {
     const {navigation} = this.props;
     return (
-      <View>
+      <View style={this.style.container}>
         <View style={this.style.headerContainer}>
           <TabsHeader
             rightEditIcon
