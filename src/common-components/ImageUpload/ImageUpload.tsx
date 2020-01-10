@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/sort-comp */
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/sort-comp */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
@@ -15,7 +14,10 @@ import ImagePicker from 'react-native-image-picker';
 
 import ImageUploadStyle from './ImageUpload.style';
 
-export interface ImageUploadProps {}
+export interface ImageUploadProps {
+  defaultImage?: any;
+  hideText?: boolean;
+}
 
 export interface ImageUploadState {
   imageSource: string;
@@ -29,7 +31,6 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
     storageOptions: {
       skipBackup: true,
       path: 'images',
- 
     },
   };
 
@@ -59,26 +60,27 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
   constructor(props: ImageUploadProps) {
     super(props);
     this.state = {
-      imageSource: null,
+      imageSource: props.defaultImage ? props.defaultImage : null,
     };
   }
 
   public render() {
     const {imageSource} = this.state;
+    const {hideText, defaultImage} = this.props;
     console.log(imageSource);
 
     return (
       <View style={this.s.container}>
-        <TouchableOpacity style={this.s.box} onPress={this.pickImage}>
+        <TouchableOpacity
+          style={[this.s.box, {borderWidth: defaultImage ? 1 : 4}]}
+          onPress={this.pickImage}>
           {imageSource ? (
             <Image source={{uri: imageSource}} style={this.s.profilePhoto} />
           ) : (
             <Image source={require('../../assets/image/plus.png')} style={this.s.plus} />
           )}
-
-          {/*  */}
         </TouchableOpacity>
-        <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>
+        {hideText ? null : <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>}
       </View>
     );
   }

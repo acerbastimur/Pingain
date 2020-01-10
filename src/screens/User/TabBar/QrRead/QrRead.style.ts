@@ -8,11 +8,10 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
-console.log(screenWidth);
-
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
+    paddingBottom: 80,
   },
   headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
   centerText: {
@@ -33,7 +32,7 @@ export default StyleSheet.create({
     padding: 16,
   },
   cameraContainer: {
-     flex: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -63,7 +62,7 @@ export default StyleSheet.create({
   },
   bottomContentBackground: {
     backgroundColor: 'white',
-    opacity: 0.5,
+    opacity: 0.9,
     borderRadius: 2,
     position: 'absolute',
     width: '100%',

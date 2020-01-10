@@ -16,9 +16,7 @@ export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export interface QrReadState {}
-
-export default class QrRead extends React.Component<QrReadProps, QrReadState> {
+export default class QrRead extends React.Component<QrReadProps, any> {
   style = QrReadStyle;
 
   scanner: QRCodeScanner = null;
@@ -29,7 +27,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   }
 
   componentDidMount() {
-    this.scanner.reactivate();
+    /*     this.scanner.reactivate();
+     */
   }
 
   onSuccess = e => {
@@ -47,14 +46,17 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           }}
           duration={50}
           closeOnDragDown
-          animationType="slide"
+          animationType="none"
           customStyles={{
-            wrapper: {backgroundColor: 'transparent'},
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,
               paddingTop: 2,
               height: 'auto',
+              shadowOffset: {width: 0, height: 2},
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
             },
             draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>
@@ -66,14 +68,17 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           }}
           duration={50}
           closeOnDragDown
-          animationType="slide"
+          animationType="none"
           customStyles={{
-            wrapper: {backgroundColor: 'transparent'},
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,
               paddingTop: 2,
               height: 'auto',
+              shadowOffset: {width: 0, height: 2},
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
             },
             draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>

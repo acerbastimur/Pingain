@@ -9,8 +9,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
-console.log(screenWidth);
-
+ 
 export default StyleSheet.create({
   keyboardScrollContainer: {flex: 1},
   container: {
@@ -19,7 +18,14 @@ export default StyleSheet.create({
     paddingHorizontal: '11.5%',
   },
   uploadPhotoContainer: {
-    flex: 2,
+    flex: 1.6,
+    justifyContent: 'center',
+  },
+  uploadPhotoItem: {
+    width: 200,
+    height: responsiveRate(140),
+    paddingTop: responsiveRate(20),
+    alignSelf: 'center',
   },
   inputsContainer: {
     flex: 4,

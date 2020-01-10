@@ -131,13 +131,15 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Campaigns',
+    initialRouteName: 'QrRead',
     tabBarOptions: {
       showLabel: false,
       style: {
-        borderColor: '#000',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
+        backgroundColor: 'white',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
         height: 80,
         shadowColor: '#000',
         shadowOffset: {
@@ -147,7 +149,11 @@ const UserTabNavigation = createBottomTabNavigator(
         shadowOpacity: 0.3,
         shadowRadius: 20.0,
         borderTopWidth: 0,
-        elevation: 16,
+        elevation: 20,
+
+        borderColor: '#aaa',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
       },
 
       safeAreaInset: {bottom: 'never', top: 'never'}, // <-- this is the solution
@@ -164,7 +170,7 @@ const UserNavigator = createSwitchNavigator(
       screen: UserTabNavigation,
     },
   },
-  {initialRouteName: 'GetUserInfo'},
+  {initialRouteName: 'UserTabNavigation'},
 );
 
 const CompanyNavigator = createSwitchNavigator(
@@ -219,7 +225,7 @@ const AppNavigator = createSwitchNavigator(
     },
   },
   {
-    initialRouteName: 'Onboarding',
+    initialRouteName: 'UserNavigator',
   },
 );
 

@@ -57,7 +57,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={[{isCampaign1Done: true}, {isCampaign1Done: true}]}
+            data={[{isCampaign1Done: true}, {isCampaign1Done: true}, {isCampaign1Done: false}]}
             renderItem={({item}) => (
               <CompanyCard navigation={navigation} isCampaign1Done={item.isCampaign1Done} />
             )}
@@ -69,14 +69,17 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
           }}
           duration={50}
           closeOnDragDown
-          animationType="slide"
+          animationType="none"
           customStyles={{
-            wrapper: {backgroundColor: 'transparent'},
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
               borderTopRightRadius: 40,
               borderTopLeftRadius: 40,
               paddingTop: 2,
               height: 'auto',
+              shadowOffset: {width: 0, height: 2},
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
             },
             draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>
