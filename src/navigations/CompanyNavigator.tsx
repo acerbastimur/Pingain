@@ -8,7 +8,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import GetCompanyInfo from '../screens/Company/GetCompanyInfo';
 import Campaigns from '../screens/Company/TabBar/Campaigns';
 import QrGenerate from '../screens/Company/TabBar/QrGenerate';
-import QrRead from '../screens/User/TabBar/QrRead';
+import QrRead from '../screens/Company/TabBar/QrRead';
 
 const CampaignsStack = createStackNavigator(
   {

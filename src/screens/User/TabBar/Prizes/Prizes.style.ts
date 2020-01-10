@@ -13,7 +13,7 @@ const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / font
 export default StyleSheet.create({
   container: {
     height: '100%',
-    paddingBottom: 80,
+    paddingBottom: 70,
   },
   headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
   bottomAreaContainer: {
