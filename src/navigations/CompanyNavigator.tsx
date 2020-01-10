@@ -46,14 +46,14 @@ const CompanyTabNavigation = createBottomTabNavigator(
             return (
               <Image
                 style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-                source={require('../assets/image/UserTab/CampaignsTabIcon.png')}
+                source={require('../assets/image/CompanyTab/CampaignsTabIcon.png')}
               />
             );
           }
           return (
             <Image
               style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-              source={require('../assets/image/UserTab/CampaignsTabIconDisabled.png')}
+              source={require('../assets/image/CompanyTab/CampaignsTabIconDisabled.png')}
             />
           );
         },
@@ -65,7 +65,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
         tabBarIcon: (
           <Image
             style={{resizeMode: 'contain', width: 50, height: 50, alignSelf: 'center'}}
-            source={require('../assets/image/UserTab/QrCodeTabIcon.png')}
+            source={require('../assets/image/CompanyTab/QrCodeTabIcon.png')}
           />
         ),
       },
@@ -78,14 +78,14 @@ const CompanyTabNavigation = createBottomTabNavigator(
             return (
               <Image
                 style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-                source={require('../assets/image/UserTab/PrizesIcon.png')}
+                source={require('../assets/image/CompanyTab/ReadQrIcon.png')}
               />
             );
           }
           return (
             <Image
               style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
-              source={require('../assets/image/UserTab/PrizesIconDisabled.png')}
+              source={require('../assets/image/CompanyTab/ReadQrIconDisabled.png')}
             />
           );
         },
@@ -93,7 +93,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'QrRead',
+    initialRouteName: 'Campaigns',
     tabBarOptions: {
       showLabel: false,
       style: {

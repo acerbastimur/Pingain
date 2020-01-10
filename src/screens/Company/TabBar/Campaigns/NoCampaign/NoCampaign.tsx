@@ -7,20 +7,17 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
-import CampaignsStyle from './Campaigns.style';
+import NoCampaignStyle from './NoCampaign.style';
 
-export interface CampaignsProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
-}
-export interface CampaignsState {
+export interface NoCampaignProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 @observer
-export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
-  style = CampaignsStyle;
+export default class NoCampaign extends React.Component<NoCampaignProps, any> {
+  style = NoCampaignStyle;
 
-  constructor(props: CampaignsProps) {
+  constructor(props: NoCampaignProps) {
     super(props);
     this.state = {};
   }
@@ -28,6 +25,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
   public render() {
     const {navigation} = this.props;
 
-    return <Text>Company Campaign</Text>;
+    return <Text>No campaign</Text>;
   }
 }
