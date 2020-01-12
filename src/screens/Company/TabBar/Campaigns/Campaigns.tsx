@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {Card} from 'react-native-shadow-cards';
 
@@ -97,6 +97,21 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
                 <View style={this.style.otherCardBodyItem}>
                   <Image
                     style={this.style.cardBodyActionIcon}
+                    source={require('../../../../assets/image/Company/createCampaignIcon.png')}
+                  />
+                  <Text style={this.style.otherCardBodyItemName}>Kampanya Oluştur / Düzenle</Text>
+                  <View style={this.style.arrowContainer}>
+                    <Image
+                      style={this.style.arrow}
+                      source={require('../../../../assets/image/Company/createCampaignNavigationIcon.png')}
+                    />
+                  </View>
+                </View>
+              </Card>
+              <Card elevation={6} opacity={0.15} style={this.style.card}>
+                <View style={this.style.otherCardBodyItem}>
+                  <Image
+                    style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/lastActions.png')}
                   />
                   <Text style={this.style.otherCardBodyItemName}>Son İşlem Yapanlar</Text>
@@ -109,6 +124,25 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
                 </View>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
+                <TouchableOpacity
+                  style={this.style.otherCardBodyItem}
+                  onPress={() => {
+                    navigation.navigate('Statistics');
+                  }}>
+                  <Image
+                    style={this.style.cardBodyActionIcon}
+                    source={require('../../../../assets/image/Company/statisticsIcon.png')}
+                  />
+                  <Text style={this.style.otherCardBodyItemName}>İstatistikler</Text>
+                  <View style={this.style.arrowContainer}>
+                    <Image
+                      style={this.style.arrow}
+                      source={require('../../../../assets/image/Company/statisticsArrow.png')}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </Card>
+              <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <View style={this.style.otherCardBodyItem}>
                   <Image
                     style={this.style.cardBodyActionIcon}
@@ -119,21 +153,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
                     <Image
                       style={this.style.arrow}
                       source={require('../../../../assets/image/Company/payNavigationIcon.png')}
-                    />
-                  </View>
-                </View>
-              </Card>
-              <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
-                  <Image
-                    style={this.style.cardBodyActionIcon}
-                    source={require('../../../../assets/image/Company/createCampaignIcon.png')}
-                  />
-                  <Text style={this.style.otherCardBodyItemName}>Kampanya Oluştur / Düzenle</Text>
-                  <View style={this.style.arrowContainer}>
-                    <Image
-                      style={this.style.arrow}
-                      source={require('../../../../assets/image/Company/createCampaignNavigationIcon.png')}
                     />
                   </View>
                 </View>
