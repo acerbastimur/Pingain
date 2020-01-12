@@ -30,7 +30,7 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
       <View style={style.headerContainer}>
         <TabsHeader
           navigation={navigation}
-          onPress={() => {
+          onRightPress={() => {
             navigation.navigate('UserDetails');
           }}
         />

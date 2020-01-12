@@ -47,7 +47,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
-            onPress={() => {
+            onRightPress={() => {
               navigation.navigate('UserDetails');
             }}
           />

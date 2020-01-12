@@ -49,7 +49,7 @@ export default class Prizes extends React.Component<PrizesProps, any> {
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
-            onPress={() => {
+            onRightPress={() => {
               navigation.navigate('UserDetails');
             }}
           />
