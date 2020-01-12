@@ -61,7 +61,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
           <TabsHeader
             navigation={navigation}
             rightButtonText="Kaydet"
-            onPress={() => {
+            onRightPress={() => {
               /* navigation.navigate('UserDetails'); */
 
               if (this.isFormValid) {

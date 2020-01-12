@@ -93,7 +93,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Campaigns',
+    initialRouteName: 'QrGenerate',
     tabBarOptions: {
       showLabel: false,
       style: {

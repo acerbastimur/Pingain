@@ -46,7 +46,7 @@ export default class UserDetails extends React.Component<UserDetailsProps> {
           <TabsHeader
             rightEditIcon
             navigation={navigation}
-            onPress={() => {
+            onRightPress={() => {
               console.log('done');
               navigation.navigate('UserDetailsEdit');
             }}

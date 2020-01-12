@@ -87,7 +87,7 @@ export default class QrRead extends React.Component<QrReadProps, any> {
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
-            onPress={() => {
+            onRightPress={() => {
               navigation.navigate('UserDetails');
             }}
           />
