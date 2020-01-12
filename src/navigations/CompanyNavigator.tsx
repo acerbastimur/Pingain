@@ -20,7 +20,7 @@ const CampaignsStack = createStackNavigator(
       screen: Statistics,
     },
   },
-  {initialRouteName: 'Statistics', headerMode: 'none'},
+  {initialRouteName: 'CampaignsHome', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(
