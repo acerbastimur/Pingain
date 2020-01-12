@@ -24,7 +24,7 @@ export default StyleSheet.create({
   },
   campaignsContainer: {
     flexDirection: 'row',
-    marginTop: responsiveRate(30),
+    marginTop: responsiveRate(40),
   },
   campaignCardContainer: {
     height: responsiveRate(100),
@@ -51,13 +51,32 @@ export default StyleSheet.create({
   campaignCardDessert: {
     borderColor: CampaignColors.DESSERT,
   },
+  campaignCardCoffeeText: {
+    color: CampaignColors.COFFEE,
+  },
+  campaignCardMealText: {
+    color: CampaignColors.MEAL,
+  },
+  campaignCardDessertText: {
+    color: CampaignColors.DESSERT,
+  },
+  campaignCardCoffeeSelected: {
+    backgroundColor: CampaignColors.COFFEE,
+  },
+  campaignCardMealSelected: {
+    backgroundColor: CampaignColors.MEAL,
+  },
+  campaignCardDessertSelected: {
+    backgroundColor: CampaignColors.DESSERT,
+  },
+  selectedText: {color: 'white'},
   bottomText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
     fontSize: responsiveRate(12),
     textAlign: 'center',
     color: Colors.PRIMARY,
-    marginTop: screenWidth < 350 ? responsiveRate(20) : responsiveRate(30),
+    marginTop: screenWidth < 350 ? responsiveRate(20) : responsiveRate(40),
   },
   campaignCardImg: {
     width: 22,
