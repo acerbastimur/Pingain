@@ -33,7 +33,10 @@ export default class Statistics extends React.Component<StatisticsProps, any> {
           <TabsHeader
             navigation={navigation}
             onRightPress={() => {
-              navigation.navigate('UserDetails');
+              return null;
+            }}
+            onLeftPress={() => {
+              navigation.navigate('Home');
             }}
           />
         </View>

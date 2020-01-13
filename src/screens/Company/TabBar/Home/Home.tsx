@@ -7,22 +7,22 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {Card} from 'react-native-shadow-cards';
 
 import {observer} from 'mobx-react';
-import CampaignsStyle from './Campaigns.style';
+import HomeStyle from './Home.style';
 import NoCampaign from './NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
 
-export interface CampaignsProps {
+export interface HomeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export interface CampaignsState {
+export interface HomeState {
   noCampaign: boolean;
 }
 
 @observer
-export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
-  style = CampaignsStyle;
+export default class Home extends React.Component<HomeProps, HomeState> {
+  style = HomeStyle;
 
-  constructor(props: CampaignsProps) {
+  constructor(props: HomeProps) {
     super(props);
     this.state = {
       noCampaign: false,
@@ -109,7 +109,11 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
                 </View>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('LastTransaction');
+                  }}
+                  style={this.style.otherCardBodyItem}>
                   <Image
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/lastActions.png')}
@@ -121,7 +125,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
                       source={require('../../../../assets/image/Company/lastActionNavigationIcon.png')}
                     />
                   </View>
-                </View>
+                </TouchableOpacity>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity

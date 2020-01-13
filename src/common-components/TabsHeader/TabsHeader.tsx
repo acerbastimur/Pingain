@@ -42,7 +42,8 @@ const TabsHeader = ({
       navigation.state.routeName === 'CampaignsHome' ||
       navigation.state.routeName === 'QrReadHome' ||
       navigation.state.routeName === 'PrizesHome' ||
-      navigation.state.routeName === 'QrGenerateHome'
+      navigation.state.routeName === 'QrGenerateHome' ||
+      navigation.state.routeName === 'Home'
     ) {
       return (
         <TouchableOpacity>
