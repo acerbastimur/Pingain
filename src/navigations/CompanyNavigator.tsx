@@ -11,20 +11,28 @@ import QrGenerate from '../screens/Company/TabBar/QrGenerate';
 import QrRead from '../screens/Company/TabBar/QrRead';
 import Statistics from '../screens/Company/TabBar/Home/Statistics';
 import LastTransactions from '../screens/Company/TabBar/Home/LastTransactions';
+import Campaigns from '../screens/Company/TabBar/Home/Campaigns';
+import CampaignCreate from '../screens/Company/TabBar/Home/Campaigns/CampaignCreate';
 
 const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
     },
-    Statistics: {
-      screen: Statistics,
-    },
     LastTransaction: {
       screen: LastTransactions,
     },
+    Statistics: {
+      screen: Statistics,
+    },
+    CompanyCampaigns: {
+      screen: Campaigns,
+    },
+    CampaignCreate: {
+      screen: CampaignCreate,
+    },
   },
-  {initialRouteName: 'LastTransaction', headerMode: 'none'},
+  {initialRouteName: 'CampaignCreate', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(
