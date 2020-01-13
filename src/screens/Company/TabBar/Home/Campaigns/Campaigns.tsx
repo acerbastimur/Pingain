@@ -53,7 +53,11 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
           </View>
           <View style={this.style.campaignCardsContainer}>
             <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
+              <TouchableOpacity
+                style={this.style.otherCardBodyItem}
+                onPress={() => {
+                  navigation.navigate('CampaignCreate', {edit: true});
+                }}>
                 <Image
                   style={this.style.cardBodyItemIcon}
                   source={require('../../../../../assets/image/User/mealIcon.png')}
@@ -65,7 +69,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                     source={require('../../../../../assets/image/Company/statisticsArrow.png')}
                   />
                 </View>
-              </View>
+              </TouchableOpacity>
             </Card>
             <Card elevation={6} opacity={0.15} style={this.style.card}>
               <View style={this.style.otherCardBodyItem}>
@@ -104,6 +108,9 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
               text="Yeni Kampanya Oluştur"
               textColor="#fff"
               shadow
+              onPress={() => {
+                navigation.navigate('CampaignCreate', {edit: false});
+              }}
             />
           </View>
         </ScrollView>

@@ -17,7 +17,7 @@ export default StyleSheet.create({
     paddingHorizontal: '6%',
   },
   headerContainer: {height: '8%'},
-  scrollView: {borderWidth: 1},
+  scrollView: {},
   scrollViewContainer: {paddingBottom: 90, paddingHorizontal: '6%'},
   listHeader: {paddingTop: 30},
   listHeaderTextBold: {
@@ -67,20 +67,31 @@ export default StyleSheet.create({
     height: 50,
   },
   dropdownContainer: {
-    width: 60,
-    height: 40,
+    width: 'auto',
+    height: responsiveRate(45),
     borderRadius: 5,
-    borderColor: Colors.SECONDARY_LIGHT,
+    borderColor: Colors.SECONDARY_VERY_LIGHT,
     borderWidth: 1,
     padding: 10,
     position: 'absolute',
     justifyContent: 'center',
     right: 0,
   },
+  dropdownFullWidth: {width: '100%', borderWidth: 0},
   dropdownPlaceholder: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     color: Colors.SECONDARY,
     width: 'auto',
+    fontSize: responsiveRate(16),
+  },
+  dropdownInputContainerStyle: {borderBottomColor: 'transparent'},
+  dropdownInnerContainer: {
+    top: -10,
+  },
+  buttonsContainer: {marginTop: responsiveRate(30)},
+  buttonContainer: {
+    height: responsiveRate(56),
+    marginTop: responsiveRate(10),
   },
 });

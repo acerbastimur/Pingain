@@ -25,6 +25,8 @@ export interface CampaignCreateProps {
 export interface CampaignCreateState {
   campaignName: string;
   actionCount: number;
+  prizeCount: number;
+  campaignType: number;
 }
 
 export default class CampaignCreate extends React.Component<
@@ -40,6 +42,8 @@ export default class CampaignCreate extends React.Component<
     this.state = {
       campaignName: '',
       actionCount: 7,
+      prizeCount: 1,
+      campaignType: 1,
     };
   }
 
@@ -49,7 +53,8 @@ export default class CampaignCreate extends React.Component<
 
   public render() {
     const {navigation} = this.props;
-    const {campaignName, actionCount} = this.state;
+    const {campaignName, actionCount, prizeCount, campaignType} = this.state;
+    const isItEditPage = navigation.getParam('edit');
 
     return (
       <View style={this.style.container}>
@@ -96,7 +101,41 @@ export default class CampaignCreate extends React.Component<
               <View style={this.style.dropdownAreaContainer}>
                 <Text style={this.style.dropdownPlaceholder}>Örn: 7 Filtre kahve işleminde</Text>
                 <View style={this.style.dropdownContainer}>
-                  {/*  <Dropdown
+                  <Dropdown
+                    value={prizeCount}
+                    onChangeText={value => this.setState({prizeCount: value})}
+                    data={[
+                      {value: 1, label: 1},
+                      {value: 2, label: 2},
+                      {value: 3, label: 3},
+                      {value: 4, label: 4},
+                      {value: 5, label: 5},
+                      {value: 6, label: 6},
+                      {value: 7, label: 7},
+                      {value: 8, label: 8},
+                      {value: 9, label: 9},
+                      {value: 10, label: 10},
+                      {value: 11, label: 11},
+                      {value: 12, label: 12},
+                      {value: 13, label: 13},
+                      {value: 14, label: 14},
+                      {value: 15, label: 15},
+                    ]}
+                    itemTextStyle={this.style.dropdownText}
+                    inputContainerStyle={this.style.dropdownInputContainerStyle}
+                    containerStyle={this.style.dropdownInnerContainer}
+                    textColor={Colors.COMPANY}
+                    fontSize={16}
+                  />
+                </View>
+              </View>
+            </View>
+            <View style={this.style.inputContainer}>
+              <Text style={this.style.inputText}>Ödül sayısı Sayısı</Text>
+              <View style={this.style.dropdownAreaContainer}>
+                <Text style={this.style.dropdownPlaceholder}>Örn: 1 Filtre Kahve hediye</Text>
+                <View style={this.style.dropdownContainer}>
+                  <Dropdown
                     value={actionCount}
                     onChangeText={value => this.setState({actionCount: value})}
                     data={[
@@ -117,11 +156,50 @@ export default class CampaignCreate extends React.Component<
                       {value: 15, label: 15},
                     ]}
                     itemTextStyle={this.style.dropdownText}
-                    containerStyle={{top: -10}}
+                    inputContainerStyle={this.style.dropdownInputContainerStyle}
+                    containerStyle={this.style.dropdownInnerContainer}
                     textColor={Colors.COMPANY}
-                    fontSize={14}
-                  /> */}
+                    fontSize={16}
+                  />
                 </View>
+              </View>
+            </View>
+            <View style={this.style.inputContainer}>
+              <Text style={this.style.inputText}>Kampanya Kategorisi</Text>
+              <View style={this.style.dropdownAreaContainer}>
+                <View style={[this.style.dropdownContainer, this.style.dropdownFullWidth]}>
+                  <Dropdown
+                    value={campaignType}
+                    onChangeText={value => this.setState({campaignType: value})}
+                    data={[
+                      {value: 1, label: 'İçecek'},
+                      {value: 2, label: 'Yemek'},
+                      {value: 3, label: 'Tatlı'},
+                    ]}
+                    itemTextStyle={this.style.dropdownText}
+                    containerStyle={this.style.dropdownInnerContainer}
+                    textColor={Colors.PRIMARY}
+                    fontSize={16}
+                  />
+                </View>
+              </View>
+            </View>
+            <View style={this.style.buttonsContainer}>
+              <View style={this.style.buttonContainer}>
+                <Button
+                  backgroundColor={Colors.COMPANY}
+                  text={isItEditPage ? 'Kampanyayı Güncelle' : 'Kampanya Oluştur'}
+                  textColor="#fff"
+                  shadow
+                />
+              </View>
+              <View style={this.style.buttonContainer}>
+                <Button
+                  backgroundColor="transparent"
+                  text="Kampanyayı durdur"
+                  textColor={Colors.WARN}
+                  shadow={false}
+                />
               </View>
             </View>
           </View>

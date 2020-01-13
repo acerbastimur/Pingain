@@ -32,7 +32,7 @@ const HomeStack = createStackNavigator(
       screen: CampaignCreate,
     },
   },
-  {initialRouteName: 'CampaignCreate', headerMode: 'none'},
+  {initialRouteName: 'Home', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(
