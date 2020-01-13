@@ -94,7 +94,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
             </View>
             <View style={this.style.actionsContainer}>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('CompanyCampaigns');
+                  }}
+                  style={this.style.otherCardBodyItem}>
                   <Image
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/createCampaignIcon.png')}
@@ -106,7 +110,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                       source={require('../../../../assets/image/Company/createCampaignNavigationIcon.png')}
                     />
                   </View>
-                </View>
+                </TouchableOpacity>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
@@ -147,7 +151,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                 </TouchableOpacity>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
+                <TouchableOpacity style={this.style.otherCardBodyItem}>
                   <Image
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/walletIcon.png')}
@@ -159,7 +163,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                       source={require('../../../../assets/image/Company/payNavigationIcon.png')}
                     />
                   </View>
-                </View>
+                </TouchableOpacity>
               </Card>
             </View>
           </ScrollView>
