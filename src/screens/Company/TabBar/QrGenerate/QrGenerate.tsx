@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
@@ -44,13 +45,13 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
     };
   }
 
-  campaignButton = campaign => {
+  campaignButton = (campaign, key) => {
     const {activeCampaign} = this.state;
 
     switch (campaign.campaignName) {
       case 1:
         return (
-          <View style={this.style.campaignCardContainer}>
+          <View key={key} style={this.style.campaignCardContainer}>
             {activeCampaign === 1 ? (
               <View
                 style={[
@@ -66,6 +67,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
               </View>
             ) : (
               <TouchableOpacity
+                key={key}
                 onPress={() => {
                   this.setState({activeCampaign: CampaignTypes.Coffee});
                 }}
@@ -84,7 +86,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
 
       case 2:
         return (
-          <View style={this.style.campaignCardContainer}>
+          <View style={this.style.campaignCardContainer} key={key}>
             {activeCampaign === 2 ? (
               <View
                 style={[
@@ -100,6 +102,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
               </View>
             ) : (
               <TouchableOpacity
+                key={key}
                 onPress={() => {
                   this.setState({activeCampaign: CampaignTypes.Meal});
                 }}
@@ -117,7 +120,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
         );
       case 3:
         return (
-          <View style={this.style.campaignCardContainer}>
+          <View style={this.style.campaignCardContainer} key={key}>
             {activeCampaign === 3 ? (
               <View
                 style={[
@@ -135,6 +138,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
               </View>
             ) : (
               <TouchableOpacity
+                key={key}
                 onPress={() => {
                   this.setState({activeCampaign: CampaignTypes.Dessert});
                 }}
@@ -151,13 +155,13 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
           </View>
         );
       default:
-        return <Text>Error</Text>;
+        return <Text key={key}>Error</Text>;
     }
   };
 
   public render() {
     const {navigation} = this.props;
-    const {campaigns, activeCampaign} = this.state;
+    const {campaigns} = this.state;
 
     const myJson = `{
   "itemNo":"dc607b66-31b8-45aa-af55-e5f5f3f2eab7",
@@ -185,8 +189,8 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
           />
         </View>
         <View style={this.style.campaignsContainer}>
-          {campaigns.map(campaign => {
-            return this.campaignButton(campaign);
+          {campaigns.map((campaign, index) => {
+            return this.campaignButton(campaign, index);
           })}
         </View>
         <Text style={this.style.bottomText}>Kampanya seçimi yaparak QR kodu uzatabilirsiniz.</Text>

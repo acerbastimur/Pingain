@@ -6,21 +6,25 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import GetCompanyInfo from '../screens/Company/GetCompanyInfo';
-import Campaigns from '../screens/Company/TabBar/Campaigns';
+import Home from '../screens/Company/TabBar/Home';
 import QrGenerate from '../screens/Company/TabBar/QrGenerate';
 import QrRead from '../screens/Company/TabBar/QrRead';
-import Statistics from '../screens/Company/TabBar/Campaigns/Statistics';
+import Statistics from '../screens/Company/TabBar/Home/Statistics';
+import LastTransactions from '../screens/Company/TabBar/Home/LastTransactions';
 
-const CampaignsStack = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
-    CampaignsHome: {
-      screen: Campaigns,
+    Home: {
+      screen: Home,
     },
     Statistics: {
       screen: Statistics,
     },
+    LastTransaction: {
+      screen: LastTransactions,
+    },
   },
-  {initialRouteName: 'CampaignsHome', headerMode: 'none'},
+  {initialRouteName: 'LastTransaction', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(
@@ -42,8 +46,8 @@ const QrReadStack = createStackNavigator(
 );
 const CompanyTabNavigation = createBottomTabNavigator(
   {
-    Campaigns: {
-      screen: CampaignsStack,
+    Home: {
+      screen: HomeStack,
       navigationOptions: {
         tabBarIcon: e => {
           if (e.focused) {
@@ -97,7 +101,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Campaigns',
+    initialRouteName: 'Home',
     tabBarOptions: {
       showLabel: false,
       style: {
