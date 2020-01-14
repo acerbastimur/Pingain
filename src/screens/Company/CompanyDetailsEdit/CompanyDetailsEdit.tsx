@@ -61,6 +61,10 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
           <TabsHeader
             navigation={navigation}
             rightButtonText="Kaydet"
+            rightTextColor={Colors.COMPANY}
+            onLeftPress={() => {
+              navigation.navigate('Home');
+            }}
             onRightPress={() => {
               /* navigation.navigate('UserDetails'); */
 
@@ -105,6 +109,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
               </View> */}
               <ImageUpload
                 hideText
+                borderColor={Colors.COMPANY}
                 defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
               />
             </View>
@@ -112,12 +117,14 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
             <Formik
               validateOnMount
               initialValues={{
-                name: '',
-                surname: '',
-                email: '',
-                password: '',
+                cmpName: '',
+                managerName: '',
                 phoneNumber: '',
+                instaAccount: '',
+                address: '',
                 city: '35',
+                password: '',
+                cmpFeatures: [],
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({

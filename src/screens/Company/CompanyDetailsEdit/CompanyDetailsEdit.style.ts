@@ -49,7 +49,6 @@ export default StyleSheet.create({
     height: screenWidth < 350 ? 65 : 75,
     marginTop: 28,
     width: screenWidth < 350 ? 65 : 75,
-    
   },
 
   formContainer: {
@@ -68,7 +67,12 @@ export default StyleSheet.create({
     height: 75,
     marginTop: 20,
   },
-  input: {height: 36, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: {
+    height: 36,
+    color: '#D8DFE8',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.SECONDARY_LIGHT,
+  },
   image: {
     width: '6%',
     borderColor: '#D8DFE8',

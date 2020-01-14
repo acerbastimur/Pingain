@@ -39,7 +39,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
           <TabsHeader
             navigation={navigation}
             onRightPress={() => {
-              navigation.navigate('UserDetails');
+              navigation.navigate('CompanyDetailsEdit');
             }}
           />
         </View>

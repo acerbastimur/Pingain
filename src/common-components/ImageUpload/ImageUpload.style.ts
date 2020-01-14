@@ -26,6 +26,7 @@ export default StyleSheet.create({
     borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   plus: {
     width: (screenWidth * 14) / 100,
@@ -35,8 +36,7 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-    borderRadius: 21,
-  },
+   },
   text: {
     color: Colors.SECONDARY,
     fontSize: responsiveFont(14),
