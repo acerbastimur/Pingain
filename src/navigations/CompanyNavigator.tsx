@@ -13,6 +13,7 @@ import Statistics from '../screens/Company/TabBar/Home/Statistics';
 import LastTransactions from '../screens/Company/TabBar/Home/LastTransactions';
 import Campaigns from '../screens/Company/TabBar/Home/Campaigns';
 import CampaignCreate from '../screens/Company/TabBar/Home/Campaigns/CampaignCreate';
+import CompanyDetailsEdit from '../screens/Company/CompanyDetailsEdit';
 
 const HomeStack = createStackNavigator(
   {
@@ -31,14 +32,20 @@ const HomeStack = createStackNavigator(
     CampaignCreate: {
       screen: CampaignCreate,
     },
+    CompanyDetailsEdit: {
+      screen: CompanyDetailsEdit,
+    },
   },
-  {initialRouteName: 'Home', headerMode: 'none'},
+  {initialRouteName: 'CompanyDetailsEdit', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(
   {
     QrGenerateHome: {
       screen: QrGenerate,
+    },
+    CompanyDetailsEdit: {
+      screen: CompanyDetailsEdit,
     },
   },
   {initialRouteName: 'QrGenerateHome', headerMode: 'none'},
@@ -48,6 +55,9 @@ const QrReadStack = createStackNavigator(
   {
     QrReadHome: {
       screen: QrRead,
+    },
+    CompanyDetailsEdit: {
+      screen: CompanyDetailsEdit,
     },
   },
   {initialRouteName: 'QrReadHome', headerMode: 'none'},
