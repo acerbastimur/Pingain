@@ -56,6 +56,7 @@ export default StyleSheet.create({
     marginTop: responsiveRate(10),
   },
   dropdownComponentContainer: {overflow: 'hidden', height: 50},
+  featuresContainer: {overflow: 'hidden', height: 50},
   dropdownContainer: {top: -26},
   dropdownText: {
     fontFamily: 'Helvetica Neue',

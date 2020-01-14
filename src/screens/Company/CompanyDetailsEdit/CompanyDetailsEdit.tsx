@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, CheckBox, TextInput} from 'react-native';
+import {View, Text, Image, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {
   NavigationScreenProp,
@@ -312,7 +312,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           onChangeText={handleChange('instaAccount')}
                           onBlur={() => setFieldTouched('instaAccount')}
                           autoCapitalize="none"
-                          returnKeyType="next"
+                          returnKeyType="done"
                           ref={ref => {
                             const isThere = this.references.filter(
                               t => t.name === 'instaAccountInput',
@@ -359,7 +359,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           onChangeText={handleChange('adress')}
                           onBlur={() => setFieldTouched('adress')}
                           autoCapitalize="words"
-                          returnKeyType="next"
+                          returnKeyType="done"
                           ref={ref => {
                             const isThere = this.references.filter(
                               t => t.name === 'addressInput',
@@ -370,13 +370,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                               ref,
                             });
                           }}
-                          onSubmitEditing={() => {
-                            const nextInput = this.references.filter(
-                              t => t.name === 'passwordInput',
-                            )[0].ref;
-
-                            nextInput.focus();
-                          }}
                         />
                         {!errors.address && touched.address ? (
                           <Image
@@ -384,6 +377,22 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                             style={this.style.image}
                           />
                         ) : null}
+                      </Animatable.View>
+                    </View>
+                    <View style={[this.style.inputContainer, this.style.dropDownContainer]}>
+                      <Text style={this.style.inputText}>İkamet Edilen İl</Text>
+                      <Animatable.View>
+                        <View style={this.style.dropdownComponentContainer}>
+                          <Dropdown
+                            value={values.city}
+                            onChangeText={handleChange('city')}
+                            data={CITIES}
+                            containerStyle={this.style.dropdownContainer}
+                            itemTextStyle={this.style.dropdownText}
+                            textColor={Colors.SECONDARY}
+                            fontSize={14}
+                          />
+                        </View>
                       </Animatable.View>
                     </View>
                     <View style={this.style.inputContainer}>
@@ -427,21 +436,12 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         ) : null}
                       </Animatable.View>
                     </View>
-                    <View style={[this.style.inputContainer, this.style.dropDownContainer]}>
-                      <Text style={this.style.inputText}>İkamet Edilen İl</Text>
-                      <Animatable.View>
-                        <View style={this.style.dropdownComponentContainer}>
-                          <Dropdown
-                            value={values.city}
-                            onChangeText={handleChange('city')}
-                            data={CITIES}
-                            containerStyle={this.style.dropdownContainer}
-                            itemTextStyle={this.style.dropdownText}
-                            textColor={Colors.SECONDARY}
-                            fontSize={14}
-                          />
-                        </View>
-                      </Animatable.View>
+                    <View style={this.style.inputContainer}>
+                      <Text style={this.style.inputText}>Şifre</Text>
+
+                      <View style={this.style.featuresContainer}>
+                        <CheckBox style={{width:50,height:50}} value={false} />
+                      </View>
                     </View>
                   </View>
                 );
