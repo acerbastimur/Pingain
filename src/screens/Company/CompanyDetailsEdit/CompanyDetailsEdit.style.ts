@@ -56,7 +56,6 @@ export default StyleSheet.create({
     marginTop: responsiveRate(10),
   },
   dropdownComponentContainer: {overflow: 'hidden', height: 50},
-  featuresContainer: {overflow: 'hidden', height: 50},
   dropdownContainer: {top: -26},
   dropdownText: {
     fontFamily: 'Helvetica Neue',
@@ -96,5 +95,17 @@ export default StyleSheet.create({
   },
   dropDownContainer: {
     marginBottom: responsiveRate(10),
+  },
+  featuresContainer: {height: 'auto', marginTop: responsiveRate(20)},
+
+  checkboxLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: responsiveRate(10),
+  },
+  checkboxStyle: {width: 130},
+  checkboxText: {
+    color: Colors.SECONDARY,
+    fontSize: responsiveRate(16),
   },
 });

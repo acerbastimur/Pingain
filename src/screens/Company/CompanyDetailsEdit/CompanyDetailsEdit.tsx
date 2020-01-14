@@ -10,6 +10,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import {View, Text, Image, TextInput} from 'react-native';
+import CheckBox from 'react-native-check-box';
 import * as Animatable from 'react-native-animatable';
 import {
   NavigationScreenProp,
@@ -44,7 +45,18 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
     address: '',
     city: '35',
     password: '',
-    cmpFeatures: [],
+    cmpFeatures: {
+      internet: false,
+      electricity: false,
+      animalFriendly: false,
+      matchStreaming: false,
+      selfService: false,
+      outdoor: false,
+      liveMusic: false,
+      packageService: false,
+      reservation: false,
+      quiteArea: false,
+    },
   };
 
   formErrors = null;
@@ -129,7 +141,18 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 address: '',
                 city: '35',
                 password: '',
-                cmpFeatures: [],
+                cmpFeatures: {
+                  internet: false,
+                  electricity: false,
+                  animalFriendly: false,
+                  matchStreaming: false,
+                  selfService: false,
+                  outdoor: false,
+                  liveMusic: false,
+                  packageService: false,
+                  reservation: false,
+                  quiteArea: false,
+                },
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -150,9 +173,18 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 password: Yup.string()
                   .min(6)
                   .required(),
-                cmpFeatures: Yup.array(),
+                cmpFeatures: Yup.object(),
               })}>
-              {({values, handleChange, errors, touched, setFieldTouched, isValid}) => {
+              {({
+                values,
+                handleChange,
+                errors,
+                touched,
+                setFieldTouched,
+                isValid,
+                setValues,
+                setFieldValue,
+              }) => {
                 this.values = values;
                 this.formErrors = errors;
                 this.isFormValid = isValid;
@@ -174,6 +206,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           style={this.style.input}
                           placeholder="İşletme Adını Giriniz"
                           placeholderTextColor={Colors.SECONDARY}
+                          scrollEnabled={false}
                           selectionColor={Colors.PRIMARY}
                           value={values.cmpName}
                           onChangeText={handleChange('cmpName')}
@@ -210,6 +243,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         <TextInput
                           style={this.style.input}
                           placeholder="İsminizi Giriniz"
+                          scrollEnabled={false}
+
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.managerName}
@@ -260,6 +295,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholder="Telefon"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
+                          scrollEnabled={false}
+
                           value={values.phoneNumber}
                           onChangeText={handleChange('phoneNumber')}
                           onBlur={() => setFieldTouched('phoneNumber')}
@@ -308,6 +345,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholder="instagram.com/xxx"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
+                          scrollEnabled={false}
+
                           value={values.instaAccount}
                           onChangeText={handleChange('instaAccount')}
                           onBlur={() => setFieldTouched('instaAccount')}
@@ -356,6 +395,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.address}
+                          scrollEnabled={false}
+
                           onChangeText={handleChange('adress')}
                           onBlur={() => setFieldTouched('adress')}
                           autoCapitalize="words"
@@ -410,6 +451,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           style={this.style.input}
                           placeholder="*******"
                           placeholderTextColor={Colors.SECONDARY}
+                          scrollEnabled={false}
+
                           selectionColor={Colors.PRIMARY}
                           value={values.password}
                           onChangeText={handleChange('password')}
@@ -436,12 +479,153 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         ) : null}
                       </Animatable.View>
                     </View>
-                    <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Şifre</Text>
+                    <View style={this.style.featuresContainer}>
+                      <Text style={this.style.inputText}>İşletme Özellikleri</Text>
 
-                      <View style={this.style.featuresContainer}>
-                        <CheckBox style={{width:50,height:50}} value={false} />
+                      <View style={this.style.checkboxLine}>
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.internet) {
+                              return setFieldValue('cmpFeatures.internet', false);
+                            }
+                            return setFieldValue('cmpFeatures.internet', true);
+                          }}
+                          isChecked={values.cmpFeatures.internet}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="İnternet"
+                          style={this.style.checkboxStyle}
+                        />
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.electricity) {
+                              return setFieldValue('cmpFeatures.electricity', false);
+                            }
+                            return setFieldValue('cmpFeatures.electricity', true);
+                          }}
+                          isChecked={values.cmpFeatures.electricity}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Elektrik"
+                          style={this.style.checkboxStyle}
+                        />
                       </View>
+                      <View style={this.style.checkboxLine}>
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.animalFriendly) {
+                              return setFieldValue('cmpFeatures.animalFriendly', false);
+                            }
+                            return setFieldValue('cmpFeatures.animalFriendly', true);
+                          }}
+                          isChecked={values.cmpFeatures.animalFriendly}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Hayvan Sever"
+                          style={this.style.checkboxStyle}
+                        />
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.matchStreaming) {
+                              return setFieldValue('cmpFeatures.matchStreaming', false);
+                            }
+                            return setFieldValue('cmpFeatures.matchStreaming', true);
+                          }}
+                          isChecked={values.cmpFeatures.matchStreaming}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Maç Yayını"
+                          style={this.style.checkboxStyle}
+                        />
+                      </View>
+                      <View style={this.style.checkboxLine}>
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.selfService) {
+                              return setFieldValue('cmpFeatures.selfService', false);
+                            }
+                            return setFieldValue('cmpFeatures.selfService', true);
+                          }}
+                          isChecked={values.cmpFeatures.selfService}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Self Servis"
+                          style={this.style.checkboxStyle}
+                        />
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.outdoor) {
+                              return setFieldValue('cmpFeatures.outdoor', false);
+                            }
+                            return setFieldValue('cmpFeatures.outdoor', true);
+                          }}
+                          isChecked={values.cmpFeatures.outdoor}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Dış Mekan"
+                          style={this.style.checkboxStyle}
+                        />
+                      </View>
+                      <View style={this.style.checkboxLine}>
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.liveMusic) {
+                              return setFieldValue('cmpFeatures.liveMusic', false);
+                            }
+                            return setFieldValue('cmpFeatures.liveMusic', true);
+                          }}
+                          isChecked={values.cmpFeatures.liveMusic}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Canlı Müzik"
+                          style={this.style.checkboxStyle}
+                        />
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.packageService) {
+                              return setFieldValue('cmpFeatures.packageService', false);
+                            }
+                            return setFieldValue('cmpFeatures.packageService', true);
+                          }}
+                          isChecked={values.cmpFeatures.packageService}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Paket Servis"
+                          style={this.style.checkboxStyle}
+                        />
+                      </View>
+                      <View style={this.style.checkboxLine}>
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.reservation) {
+                              return setFieldValue('cmpFeatures.reservation', false);
+                            }
+                            return setFieldValue('cmpFeatures.reservation', true);
+                          }}
+                          isChecked={values.cmpFeatures.reservation}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Rezervasyon"
+                          style={this.style.checkboxStyle}
+                        />
+                        <CheckBox
+                          onClick={() => {
+                            if (values.cmpFeatures.quiteArea) {
+                              return setFieldValue('cmpFeatures.quiteArea', false);
+                            }
+                            return setFieldValue('cmpFeatures.quiteArea', true);
+                          }}
+                          isChecked={values.cmpFeatures.quiteArea}
+                          rightTextStyle={this.style.checkboxText}
+                          checkBoxColor={Colors.SECONDARY}
+                          rightText="Sessiz Ortam"
+                          style={this.style.checkboxStyle}
+                        />
+                      </View>
+                    </View>
+
+                    <View style={this.style.featuresContainer}>
+                      <Text style={this.style.inputText}>İşletme Özellikleri</Text>
                     </View>
                   </View>
                 );
