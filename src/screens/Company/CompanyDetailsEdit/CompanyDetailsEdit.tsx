@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, CheckBox, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {
   NavigationScreenProp,
@@ -36,7 +36,16 @@ interface CompanyDetailsEditProps {
 export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEditProps> {
   style = CompanyDetailsEditStyle;
 
-  values = {name: null, surname: null, email: null, password: null, phoneNumber: null};
+  values = {
+    cmpName: '',
+    managerName: '',
+    phoneNumber: '',
+    instaAccount: '',
+    address: '',
+    city: '35',
+    password: '',
+    cmpFeatures: [],
+  };
 
   formErrors = null;
 
@@ -94,7 +103,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
         <KeyboardAwareScrollView
           contentContainerStyle={this.style.keyboardScrollContainer}
           disableScrollViewPanResponder={false}
-          scrollEnabled={false}>
+          scrollEnabled>
           <ScrollView style={this.style.container}>
             <View style={this.style.listHeader}>
               <Text style={this.style.listHeaderTextLight}>İşletmenizi Yansıtacak</Text>
@@ -103,10 +112,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
               </Text>
             </View>
             <View style={this.style.ppContainer}>
-              {/*  <View style={this.style.ppOverflow}>
-               
-                <ImageUpload />
-              </View> */}
               <ImageUpload
                 hideText
                 borderColor={Colors.COMPANY}
@@ -128,22 +133,24 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
-                name: Yup.string()
+                cmpName: Yup.string()
                   .min(2)
                   .required(),
-                surname: Yup.string()
+                managerName: Yup.string()
                   .min(2)
                   .required(),
-                email: Yup.string()
-                  .email()
+                phoneNumber: Yup.string().required(),
+                instaAccount: Yup.string()
+                  .min(2)
                   .required(),
+                address: Yup.string()
+                  .min(8)
+                  .required(),
+                city: Yup.string().required(),
                 password: Yup.string()
                   .min(6)
                   .required(),
-                phoneNumber: Yup.string()
-                  .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
-                  .required(),
-                city: Yup.string().required(),
+                cmpFeatures: Yup.array(),
               })}>
               {({values, handleChange, errors, touched, setFieldTouched, isValid}) => {
                 this.values = values;
@@ -153,36 +160,35 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 return (
                   <View style={this.style.formContainer}>
                     <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>İsim</Text>
+                      <Text style={this.style.inputText}>İşletme Adı</Text>
                       <Animatable.View
                         ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'name')[0];
+                          const isThere = this.references.filter(t => t.name === 'cmpName')[0];
                           if (isThere) return;
                           this.references.push({
-                            name: 'name',
+                            name: 'cmpName',
                             ref,
                           });
                         }}>
                         <TextInput
                           style={this.style.input}
-                          placeholder="İsminizi giriniz"
+                          placeholder="İşletme Adını Giriniz"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
-                          value={values.name}
-                          onChangeText={handleChange('name')}
-                          onBlur={() => setFieldTouched('name')}
-                          autoCapitalize="none"
+                          value={values.cmpName}
+                          onChangeText={handleChange('cmpName')}
+                          onBlur={() => setFieldTouched('cmpName')}
+                          autoCapitalize="words"
                           returnKeyType="next"
                           onSubmitEditing={() => {
-                            const surnameInput = this.references.filter(
-                              t => t.name === 'surnameInput',
+                            const nextInput = this.references.filter(
+                              t => t.name === 'managerNameInput',
                             )[0].ref;
-
-                            surnameInput.focus();
+                            nextInput.focus();
                           }}
                           blurOnSubmit={false}
                         />
-                        {!errors.name && touched.name ? (
+                        {!errors.cmpName && touched.cmpName ? (
                           <Image
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
@@ -191,139 +197,46 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       </Animatable.View>
                     </View>
                     <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Soyisim</Text>
+                      <Text style={this.style.inputText}>İşletme Yetkilisi</Text>
                       <Animatable.View
                         ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'surname')[0];
+                          const isThere = this.references.filter(t => t.name === 'managerName')[0];
                           if (isThere) return;
                           this.references.push({
-                            name: 'surname',
+                            name: 'managerName',
                             ref,
                           });
                         }}>
                         <TextInput
                           style={this.style.input}
-                          placeholder="Soyisminizi Giriniz"
+                          placeholder="İsminizi Giriniz"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
-                          value={values.surname}
-                          onChangeText={handleChange('surname')}
-                          onBlur={() => setFieldTouched('surname')}
-                          autoCapitalize="none"
+                          value={values.managerName}
+                          onChangeText={handleChange('managerName')}
+                          onBlur={() => setFieldTouched('managerName')}
+                          autoCapitalize="words"
                           returnKeyType="next"
                           ref={ref => {
                             const isThere = this.references.filter(
-                              t => t.name === 'surnameInput',
+                              t => t.name === 'managerNameInput',
                             )[0];
                             if (isThere) return;
                             this.references.push({
-                              name: 'surnameInput',
+                              name: 'managerNameInput',
                               ref,
                             });
                           }}
                           onSubmitEditing={() => {
-                            const emailInput = this.references.filter(
-                              t => t.name === 'emailInput',
-                            )[0].ref;
-
-                            emailInput.focus();
-                          }}
-                          blurOnSubmit={false}
-                        />
-                        {!errors.surname && touched.surname ? (
-                          <Image
-                            source={require('../../../assets/image/tick.png')}
-                            style={this.style.image}
-                          />
-                        ) : null}
-                      </Animatable.View>
-                    </View>
-                    <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Email</Text>
-                      <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'email')[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'email',
-                            ref,
-                          });
-                        }}>
-                        <TextInput
-                          style={this.style.input}
-                          placeholder="Email Giriniz"
-                          placeholderTextColor={Colors.SECONDARY}
-                          selectionColor={Colors.PRIMARY}
-                          value={values.email}
-                          onChangeText={handleChange('email')}
-                          onBlur={() => setFieldTouched('email')}
-                          autoCapitalize="none"
-                          returnKeyType="next"
-                          ref={ref => {
-                            const isThere = this.references.filter(t => t.name === 'emailInput')[0];
-                            if (isThere) return;
-                            this.references.push({
-                              name: 'emailInput',
-                              ref,
-                            });
-                          }}
-                          onSubmitEditing={() => {
-                            const passwordInput = this.references.filter(
-                              t => t.name === 'passwordInput',
-                            )[0].ref;
-
-                            passwordInput.focus();
-                          }}
-                        />
-                        {!errors.email && touched.email ? (
-                          <Image
-                            source={require('../../../assets/image/tick.png')}
-                            style={this.style.image}
-                          />
-                        ) : null}
-                      </Animatable.View>
-                    </View>
-                    <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Şifre</Text>
-                      <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'password')[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'password',
-                            ref,
-                          });
-                        }}>
-                        <TextInput
-                          style={this.style.input}
-                          placeholder="Şifre Giriniz"
-                          placeholderTextColor={Colors.SECONDARY}
-                          selectionColor={Colors.PRIMARY}
-                          value={values.password}
-                          onChangeText={handleChange('password')}
-                          onBlur={() => setFieldTouched('password')}
-                          autoCapitalize="none"
-                          returnKeyType="next"
-                          secureTextEntry
-                          ref={ref => {
-                            const isThere = this.references.filter(
-                              t => t.name === 'passwordInput',
-                            )[0];
-                            if (isThere) return;
-                            this.references.push({
-                              name: 'passwordInput',
-                              ref,
-                            });
-                          }}
-                          onSubmitEditing={() => {
-                            const phoneNumberInput = this.references.filter(
+                            const nextInput = this.references.filter(
                               t => t.name === 'phoneNumberInput',
                             )[0].ref;
 
-                            phoneNumberInput.focus();
+                            nextInput.focus();
                           }}
+                          blurOnSubmit={false}
                         />
-                        {!errors.password && touched.password ? (
+                        {!errors.managerName && touched.managerName ? (
                           <Image
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
@@ -344,15 +257,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         }}>
                         <TextInput
                           style={this.style.input}
-                          placeholder="Telefon Numarası Giriniz"
+                          placeholder="Telefon"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.phoneNumber}
                           onChangeText={handleChange('phoneNumber')}
                           onBlur={() => setFieldTouched('phoneNumber')}
                           autoCapitalize="none"
-                          keyboardType="decimal-pad"
-                          returnKeyType="done"
+                          keyboardType="number-pad"
+                          returnKeyType="next"
                           ref={ref => {
                             const isThere = this.references.filter(
                               t => t.name === 'phoneNumberInput',
@@ -363,8 +276,150 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                               ref,
                             });
                           }}
+                          onSubmitEditing={() => {
+                            const nextInput = this.references.filter(
+                              t => t.name === 'instaAccountInput',
+                            )[0].ref;
+
+                            nextInput.focus();
+                          }}
                         />
                         {!errors.phoneNumber && touched.phoneNumber ? (
+                          <Image
+                            source={require('../../../assets/image/tick.png')}
+                            style={this.style.image}
+                          />
+                        ) : null}
+                      </Animatable.View>
+                    </View>
+                    <View style={this.style.inputContainer}>
+                      <Text style={this.style.inputText}>Instagram Hesabı</Text>
+                      <Animatable.View
+                        ref={ref => {
+                          const isThere = this.references.filter(t => t.name === 'instaAccount')[0];
+                          if (isThere) return;
+                          this.references.push({
+                            name: 'instaAccount',
+                            ref,
+                          });
+                        }}>
+                        <TextInput
+                          style={this.style.input}
+                          placeholder="instagram.com/xxx"
+                          placeholderTextColor={Colors.SECONDARY}
+                          selectionColor={Colors.PRIMARY}
+                          value={values.instaAccount}
+                          onChangeText={handleChange('instaAccount')}
+                          onBlur={() => setFieldTouched('instaAccount')}
+                          autoCapitalize="none"
+                          returnKeyType="next"
+                          ref={ref => {
+                            const isThere = this.references.filter(
+                              t => t.name === 'instaAccountInput',
+                            )[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'instaAccountInput',
+                              ref,
+                            });
+                          }}
+                          onSubmitEditing={() => {
+                            const nextInput = this.references.filter(
+                              t => t.name === 'addressInput',
+                            )[0].ref;
+
+                            nextInput.focus();
+                          }}
+                        />
+                        {!errors.instaAccount && touched.instaAccount ? (
+                          <Image
+                            source={require('../../../assets/image/tick.png')}
+                            style={this.style.image}
+                          />
+                        ) : null}
+                      </Animatable.View>
+                    </View>
+                    <View style={this.style.inputContainer}>
+                      <Text style={this.style.inputText}>Adresi</Text>
+                      <Animatable.View
+                        ref={ref => {
+                          const isThere = this.references.filter(t => t.name === 'adress')[0];
+                          if (isThere) return;
+                          this.references.push({
+                            name: 'adress',
+                            ref,
+                          });
+                        }}>
+                        <TextInput
+                          style={this.style.input}
+                          placeholder="Adresinizin Google Haritalar linkini girinizi"
+                          placeholderTextColor={Colors.SECONDARY}
+                          selectionColor={Colors.PRIMARY}
+                          value={values.address}
+                          onChangeText={handleChange('adress')}
+                          onBlur={() => setFieldTouched('adress')}
+                          autoCapitalize="words"
+                          returnKeyType="next"
+                          ref={ref => {
+                            const isThere = this.references.filter(
+                              t => t.name === 'addressInput',
+                            )[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'addressInput',
+                              ref,
+                            });
+                          }}
+                          onSubmitEditing={() => {
+                            const nextInput = this.references.filter(
+                              t => t.name === 'passwordInput',
+                            )[0].ref;
+
+                            nextInput.focus();
+                          }}
+                        />
+                        {!errors.address && touched.address ? (
+                          <Image
+                            source={require('../../../assets/image/tick.png')}
+                            style={this.style.image}
+                          />
+                        ) : null}
+                      </Animatable.View>
+                    </View>
+                    <View style={this.style.inputContainer}>
+                      <Text style={this.style.inputText}>Şifre</Text>
+                      <Animatable.View
+                        ref={ref => {
+                          const isThere = this.references.filter(t => t.name === 'password')[0];
+                          if (isThere) return;
+                          this.references.push({
+                            name: 'password',
+                            ref,
+                          });
+                        }}>
+                        <TextInput
+                          style={this.style.input}
+                          placeholder="*******"
+                          placeholderTextColor={Colors.SECONDARY}
+                          selectionColor={Colors.PRIMARY}
+                          value={values.password}
+                          onChangeText={handleChange('password')}
+                          onBlur={() => setFieldTouched('password')}
+                          autoCapitalize="none"
+                          keyboardType="decimal-pad"
+                          returnKeyType="done"
+                          ref={ref => {
+                            const isThere = this.references.filter(
+                              t => t.name === 'passwordInput',
+                            )[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'passwordInput',
+                              ref,
+                            });
+                          }}
+                        />
+                        {!errors.password && touched.password ? (
                           <Image
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}

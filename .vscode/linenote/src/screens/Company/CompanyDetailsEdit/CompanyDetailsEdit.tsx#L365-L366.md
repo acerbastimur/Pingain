@@ -1,0 +1,1 @@
+tüm keyboard typelarını düzelt

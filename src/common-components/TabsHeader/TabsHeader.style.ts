@@ -44,7 +44,7 @@ export default StyleSheet.create({
   buttonText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
-    fontSize: responsiveRate(16),
+    fontSize: responsiveRate(18),
     color: Colors.INFO,
     fontStyle: 'normal',
     letterSpacing: 0.2,

@@ -69,7 +69,7 @@ export default StyleSheet.create({
   },
   input: {
     height: 36,
-    color: '#D8DFE8',
+    color: Colors.SECONDARY,
     borderBottomWidth: 1,
     borderBottomColor: Colors.SECONDARY_LIGHT,
   },
