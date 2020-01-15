@@ -8,8 +8,8 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
 import NoCampaignStyle from './NoCampaign.style';
-import Button from '../../../../../common-components/Button';
-import Colors from '../../../../../styles/Colors';
+import Button from '../Button';
+import Colors from '../../styles/Colors';
 
 export interface NoCampaignProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -39,7 +39,7 @@ export default class NoCampaign extends React.Component<NoCampaignProps, any> {
         <View style={this.style.imageContainer}>
           <Image
             style={this.style.image}
-            source={require('../../../../../assets/image/Company/NoCampaignImage.png')}
+            source={require('../../assets/image/Company/NoCampaignImage.png')}
           />
         </View>
         <View style={this.style.buttonContainer}>
