@@ -38,7 +38,7 @@ export default StyleSheet.create({
   formContainer: {
     flex: 1,
   },
-  input: {height: 36, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   inputContainer: {
     flex: 0.2,
     paddingTop: 20,

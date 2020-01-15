@@ -52,7 +52,7 @@ export default StyleSheet.create({
     height: 75,
     marginTop: 20,
   },
-  input: {height: 36, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
     width: '6%',
     borderColor: '#D8DFE8',

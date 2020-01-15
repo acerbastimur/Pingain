@@ -43,7 +43,7 @@ export default StyleSheet.create({
   inputContainer: {
     paddingTop: 20,
   },
-  input: {height: 36, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   inputText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '700',

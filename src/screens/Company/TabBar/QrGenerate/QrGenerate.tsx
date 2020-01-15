@@ -178,6 +178,9 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
             onLeftPress={() => {
               navigation.navigate('UserDetails');
             }}
+            onRightPress={() => {
+              navigation.navigate('CompanyDetailsEdit');
+            }}
           />
         </View>
         <View style={this.style.qrContainer}>

@@ -16,6 +16,7 @@ interface TabsHeaderProps {
   navigation: NavigationScreenProp<any, any>;
   rightButtonText?: string;
   rightEditIcon?: boolean;
+  rightTextColor?: string;
   onRightPress?: () => void;
   onLeftPress?: () => void;
 }
@@ -25,11 +26,12 @@ const TabsHeader = ({
   rightEditIcon,
   onLeftPress,
   onRightPress,
+  rightTextColor,
 }: TabsHeaderProps) => {
   const s = TabsHeaderStyle;
   const rightComponent = () => {
     if (rightButtonText) {
-      return <Text style={s.buttonText}>{rightButtonText}</Text>;
+      return <Text style={[s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
     }
     if (rightEditIcon) {
       return <Image source={require('../../assets/image/editIcon.png')} style={s.image} />;
@@ -68,7 +70,9 @@ const TabsHeader = ({
   return (
     <View style={s.container}>
       {leftComponent()}
-      <Logo width={30} />
+      <View style={s.logoContainer} pointerEvents="box-none">
+        <Logo width={30} />
+      </View>
       <TouchableOpacity
         style={[rightButtonText ? s.rightTextContainer : s.imageContainer]}
         onPress={onRightPress}>

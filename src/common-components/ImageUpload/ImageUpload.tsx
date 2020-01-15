@@ -17,6 +17,8 @@ import ImageUploadStyle from './ImageUpload.style';
 export interface ImageUploadProps {
   defaultImage?: any;
   hideText?: boolean;
+  borderColor?: string;
+  borderWidth?: number;
 }
 
 export interface ImageUploadState {
@@ -66,13 +68,18 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   public render() {
     const {imageSource} = this.state;
-    const {hideText, defaultImage} = this.props;
+    const {hideText, defaultImage, borderWidth, borderColor} = this.props;
     console.log(imageSource);
 
     return (
       <View style={this.s.container}>
         <TouchableOpacity
-          style={[this.s.box, {borderWidth: defaultImage ? 1 : 4}]}
+          style={[
+            this.s.box,
+            {borderWidth: defaultImage ? 1 : 4},
+            {borderWidth: borderWidth || 4},
+            {borderColor},
+          ]}
           onPress={this.pickImage}>
           {imageSource ? (
             <Image source={{uri: imageSource}} style={this.s.profilePhoto} />

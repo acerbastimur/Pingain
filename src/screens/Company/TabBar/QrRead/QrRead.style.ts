@@ -13,7 +13,7 @@ export default StyleSheet.create({
     height: '100%',
     paddingBottom: 80,
   },
-  headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
+  headerContainer: {height: '9%', paddingHorizontal: '6%'},
   centerText: {
     flex: 1,
     fontSize: 18,
