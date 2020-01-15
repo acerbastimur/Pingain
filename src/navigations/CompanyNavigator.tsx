@@ -36,7 +36,7 @@ const HomeStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  {initialRouteName: 'CompanyDetailsEdit', headerMode: 'none'},
+  {initialRouteName: 'Home', headerMode: 'none'},
 );
 
 const QrGenerateStack = createStackNavigator(

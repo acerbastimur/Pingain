@@ -84,30 +84,31 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
             rightButtonText="Kaydet"
             rightTextColor={Colors.COMPANY}
             onLeftPress={() => {
-              navigation.navigate('Home');
+              return null;
             }}
             onRightPress={() => {
-              /* navigation.navigate('UserDetails'); */
-
               if (this.isFormValid) {
                 this.handleSubmit();
                 return;
               }
 
-              if (this.formErrors.name) {
-                this.references.filter(t => t.name === 'name')[0].ref.shake();
+              if (this.formErrors.cmpName) {
+                this.references.filter(t => t.name === 'cmpName')[0].ref.shake();
               }
-              if (this.formErrors.surname) {
-                this.references.filter(t => t.name === 'surname')[0].ref.shake();
-              }
-              if (this.formErrors.email) {
-                this.references.filter(t => t.name === 'email')[0].ref.shake();
-              }
-              if (this.formErrors.password) {
-                this.references.filter(t => t.name === 'password')[0].ref.shake();
+              if (this.formErrors.managerName) {
+                this.references.filter(t => t.name === 'managerName')[0].ref.shake();
               }
               if (this.formErrors.phoneNumber) {
                 this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+              }
+              if (this.formErrors.instaAccount) {
+                this.references.filter(t => t.name === 'instaAccount')[0].ref.shake();
+              }
+              if (this.formErrors.address) {
+                this.references.filter(t => t.name === 'address')[0].ref.shake();
+              }
+              if (this.formErrors.password) {
+                this.references.filter(t => t.name === 'password')[0].ref.shake();
               }
             }}
           />
@@ -127,6 +128,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
               <ImageUpload
                 hideText
                 borderColor={Colors.COMPANY}
+                borderWidth={2}
                 defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
               />
             </View>
@@ -182,7 +184,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 touched,
                 setFieldTouched,
                 isValid,
-                setValues,
                 setFieldValue,
               }) => {
                 this.values = values;
@@ -206,7 +207,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           style={this.style.input}
                           placeholder="İşletme Adını Giriniz"
                           placeholderTextColor={Colors.SECONDARY}
-                          scrollEnabled={false}
                           selectionColor={Colors.PRIMARY}
                           value={values.cmpName}
                           onChangeText={handleChange('cmpName')}
@@ -243,8 +243,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         <TextInput
                           style={this.style.input}
                           placeholder="İsminizi Giriniz"
-                          scrollEnabled={false}
-
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.managerName}
@@ -295,8 +293,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholder="Telefon"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
-                          scrollEnabled={false}
-
                           value={values.phoneNumber}
                           onChangeText={handleChange('phoneNumber')}
                           onBlur={() => setFieldTouched('phoneNumber')}
@@ -345,8 +341,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholder="instagram.com/xxx"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
-                          scrollEnabled={false}
-
                           value={values.instaAccount}
                           onChangeText={handleChange('instaAccount')}
                           onBlur={() => setFieldTouched('instaAccount')}
@@ -382,10 +376,10 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <Text style={this.style.inputText}>Adresi</Text>
                       <Animatable.View
                         ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'adress')[0];
+                          const isThere = this.references.filter(t => t.name === 'address')[0];
                           if (isThere) return;
                           this.references.push({
-                            name: 'adress',
+                            name: 'address',
                             ref,
                           });
                         }}>
@@ -395,10 +389,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.address}
-                          scrollEnabled={false}
-
-                          onChangeText={handleChange('adress')}
-                          onBlur={() => setFieldTouched('adress')}
+                          onChangeText={handleChange('address')}
+                          onBlur={() => setFieldTouched('address')}
                           autoCapitalize="words"
                           returnKeyType="done"
                           ref={ref => {
@@ -451,8 +443,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           style={this.style.input}
                           placeholder="*******"
                           placeholderTextColor={Colors.SECONDARY}
-                          scrollEnabled={false}
-
                           selectionColor={Colors.PRIMARY}
                           value={values.password}
                           onChangeText={handleChange('password')}
@@ -460,6 +450,7 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           autoCapitalize="none"
                           keyboardType="decimal-pad"
                           returnKeyType="done"
+                          secureTextEntry
                           ref={ref => {
                             const isThere = this.references.filter(
                               t => t.name === 'passwordInput',
@@ -624,8 +615,22 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       </View>
                     </View>
 
-                    <View style={this.style.featuresContainer}>
-                      <Text style={this.style.inputText}>İşletme Özellikleri</Text>
+                    <View style={this.style.cmpImagesUploadContainer}>
+                      <Text style={this.style.inputText}>İşletme Görselleri</Text>
+                      <Text style={this.style.inputSubText}>
+                        İşletmenizi ait fotoğrafları yükleyiniz
+                      </Text>
+                      <View style={this.style.cmpImagesContainer}>
+                        <View style={this.style.profileImage}>
+                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                        </View>
+                        <View style={this.style.profileImage}>
+                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                        </View>
+                        <View style={this.style.profileImage}>
+                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                        </View>
+                      </View>
                     </View>
                   </View>
                 );

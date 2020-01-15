@@ -123,7 +123,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'QrRead',
+    initialRouteName: 'Campaigns',
     tabBarOptions: {
       showLabel: false,
       style: {

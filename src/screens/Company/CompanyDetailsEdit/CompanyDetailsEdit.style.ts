@@ -68,7 +68,7 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   input: {
-    height: 36,
+    height: 40,
     color: Colors.SECONDARY,
     borderBottomWidth: 1,
     borderBottomColor: Colors.SECONDARY_LIGHT,
@@ -89,6 +89,14 @@ export default StyleSheet.create({
     color: Colors.PRIMARY,
     marginBottom: screenWidth < 350 ? 4 : 8,
   },
+  inputSubText: {
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '500',
+    fontSize: responsiveRate(16),
+    color: Colors.SECONDARY,
+    marginTop: screenWidth < 350 ? 6 : 10,
+    marginBottom: screenWidth < 350 ? 4 : 6,
+  },
   buttonContainer: {
     height: 52,
     marginTop: 20,
@@ -97,6 +105,11 @@ export default StyleSheet.create({
     marginBottom: responsiveRate(10),
   },
   featuresContainer: {height: 'auto', marginTop: responsiveRate(20)},
+  cmpImagesUploadContainer: {
+    height: 'auto',
+    marginBottom: responsiveRate(25),
+    marginTop: responsiveRate(20),
+  },
 
   checkboxLine: {
     flexDirection: 'row',
@@ -107,5 +120,11 @@ export default StyleSheet.create({
   checkboxText: {
     color: Colors.SECONDARY,
     fontSize: responsiveRate(16),
+  },
+  cmpImagesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 'auto',
+    marginTop: responsiveRate(10),
   },
 });
