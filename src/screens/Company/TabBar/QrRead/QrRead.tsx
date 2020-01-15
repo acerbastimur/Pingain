@@ -13,6 +13,10 @@ export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
+export interface QrReadState {
+  shouldQrReaderActive: boolean;
+}
+
 export default class QrRead extends React.Component<QrReadProps, any> {
   style = QrReadStyle;
 
@@ -20,12 +24,18 @@ export default class QrRead extends React.Component<QrReadProps, any> {
 
   constructor(props: QrReadProps) {
     super(props);
-    this.state = {};
+    this.state = {shouldQrReaderActive: false};
   }
 
   componentDidMount() {
-    /*     this.scanner.reactivate();
-     */
+    const {navigation} = this.props;
+
+    navigation.addListener('willFocus', route => {
+      this.setState({shouldQrReaderActive: true});
+    });
+    navigation.addListener('willBlur', route => {
+      this.setState({shouldQrReaderActive: false});
+    });
   }
 
   onSuccess = e => {
@@ -35,6 +45,8 @@ export default class QrRead extends React.Component<QrReadProps, any> {
 
   public render() {
     const {navigation} = this.props;
+    const {shouldQrReaderActive} = this.state;
+
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
@@ -46,23 +58,25 @@ export default class QrRead extends React.Component<QrReadProps, any> {
           />
         </View>
         <View style={this.style.cameraContainer}>
-          <QRCodeScanner
-            ref={node => {
-              this.scanner = node;
-            }}
-            cameraStyle={this.style.cameraStyle}
-            onRead={this.onSuccess}
-            fadeIn
-            bottomContent={
-              <View style={this.style.bottomContentContainer}>
-                <View style={this.style.bottomContentBackground} />
-                <Text style={this.style.bottomContentText}>
-                  QR kodu okutarak pini kazanabilirsin.
-                </Text>
-              </View>
-            }
-            bottomViewStyle={this.style.bottomViewStyle}
-          />
+          {shouldQrReaderActive && (
+            <QRCodeScanner
+              ref={node => {
+                this.scanner = node;
+              }}
+              cameraStyle={this.style.cameraStyle}
+              onRead={this.onSuccess}
+              fadeIn
+              bottomContent={
+                <View style={this.style.bottomContentContainer}>
+                  <View style={this.style.bottomContentBackground} />
+                  <Text style={this.style.bottomContentText}>
+                    QR kodu okutarak pini kazanabilirsin.
+                  </Text>
+                </View>
+              }
+              bottomViewStyle={this.style.bottomViewStyle}
+            />
+          )}
           <View style={this.style.cameraCenterArea} />
         </View>
       </View>
