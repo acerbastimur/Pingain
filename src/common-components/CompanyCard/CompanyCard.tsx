@@ -18,6 +18,7 @@ import CampaignDetailsStore from '../../stores/CampaignDetailsModal.store';
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
   isCampaign1Done: boolean;
+  shouldHeaderHide?: boolean;
 }
 
 export default class CompanyCard extends React.Component<CompanyCardProps, any> {
@@ -29,25 +30,32 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
   }
 
   public render() {
-    const {navigation, isCampaign1Done} = this.props;
+    const {navigation, isCampaign1Done, shouldHeaderHide} = this.props;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('CompanyDetails');
-          }}
-          style={this.s.cardHeader}>
-          <View style={this.s.cardHeaderImageContainer}>
-            <Image
-              source={require('../../assets/image/User/cafeImageExample.png')}
-              style={this.s.cardHeaderImage}
-            />
-          </View>
+        {!shouldHeaderHide && (
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('CompanyDetails');
+              }}
+              style={this.s.cardHeader}>
+              <View style={this.s.cardHeaderImageContainer}>
+                <Image
+                  source={require('../../assets/image/User/cafeImageExample.png')}
+                  style={this.s.cardHeaderImage}
+                />
+              </View>
 
-          <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
-          <Image style={this.s.headerArrow} source={require('../../assets/image/User/arrow.png')} />
-        </TouchableOpacity>
-        <View style={this.s.line} />
+              <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
+              <Image
+                style={this.s.headerArrow}
+                source={require('../../assets/image/User/arrow.png')}
+              />
+            </TouchableOpacity>
+            <View style={this.s.line} />
+          </View>
+        )}
         <View style={this.s.cardBody}>
           <TouchableOpacity
             style={this.s.cardBodyItem}

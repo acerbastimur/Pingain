@@ -123,7 +123,7 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
 
           <View>
             <Text style={style.campaigns}>Kampanyalarımız</Text>
-            <CompanyCard navigation={navigation} isCampaign1Done />
+            <CompanyCard navigation={navigation} isCampaign1Done shouldHeaderHide />
           </View>
         </ScrollView>
       </View>
