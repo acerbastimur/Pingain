@@ -48,6 +48,9 @@ export default class NoCampaign extends React.Component<NoCampaignProps, any> {
             backgroundColor={Colors.COMPANY}
             shadow
             textColor="#fff"
+            onPress={() => {
+              navigation.navigate('CampaignCreate', {edit: false});
+            }}
           />
         </View>
       </View>
