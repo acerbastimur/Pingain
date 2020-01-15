@@ -123,6 +123,7 @@ const UserTabNavigation = createBottomTabNavigator(
     },
   },
   {
+    lazy: true,
     initialRouteName: 'Campaigns',
     tabBarOptions: {
       showLabel: false,
