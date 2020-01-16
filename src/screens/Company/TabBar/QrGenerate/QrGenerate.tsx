@@ -9,6 +9,7 @@ import QRCode from 'react-native-qrcode-svg';
 import QrGenerateStyle from './QrGenerate.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import Colors from '../../../../styles/Colors';
+import NoCampaign from '../../../../common-components/NoCampaign';
 
 enum CampaignTypes {
   Coffee = 1,
@@ -22,6 +23,7 @@ export interface QrGenerateProps {
 export interface QrGenerateState {
   campaigns: Array<any>;
   activeCampaign: CampaignTypes;
+  noCampaign: boolean;
 }
 
 export default class QrGenerate extends React.Component<QrGenerateProps, QrGenerateState> {
@@ -30,6 +32,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
   constructor(props: QrGenerateProps) {
     super(props);
     this.state = {
+      noCampaign: false,
       activeCampaign: CampaignTypes.Coffee,
       campaigns: [
         {
@@ -161,7 +164,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
 
   public render() {
     const {navigation} = this.props;
-    const {campaigns} = this.state;
+    const {campaigns, noCampaign} = this.state;
 
     const myJson = `{
   "itemNo":"dc607b66-31b8-45aa-af55-e5f5f3f2eab7",
@@ -183,20 +186,28 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
             }}
           />
         </View>
-        <View style={this.style.qrContainer}>
-          <QRCode
-            size={(Dimensions.get('window').width * 60) / 100}
-            color={Colors.TEXT_HIGHLIGHTED}
-            value={myJson}
-            ecl="L"
-          />
-        </View>
-        <View style={this.style.campaignsContainer}>
-          {campaigns.map((campaign, index) => {
-            return this.campaignButton(campaign, index);
-          })}
-        </View>
-        <Text style={this.style.bottomText}>Kampanya seçimi yaparak QR kodu uzatabilirsiniz.</Text>
+        {noCampaign ? (
+          <NoCampaign navigation={navigation} />
+        ) : (
+          <View>
+            <View style={this.style.qrContainer}>
+              <QRCode
+                size={(Dimensions.get('window').width * 60) / 100}
+                color={Colors.TEXT_HIGHLIGHTED}
+                value={myJson}
+                ecl="L"
+              />
+            </View>
+            <View style={this.style.campaignsContainer}>
+              {campaigns.map((campaign, index) => {
+                return this.campaignButton(campaign, index);
+              })}
+            </View>
+            <Text style={this.style.bottomText}>
+              Kampanya seçimi yaparak QR kodu uzatabilirsiniz.
+            </Text>
+          </View>
+        )}
       </View>
     );
   }
