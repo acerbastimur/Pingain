@@ -9,7 +9,7 @@ import QRCode from 'react-native-qrcode-svg';
 import QrGenerateStyle from './QrGenerate.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import Colors from '../../../../styles/Colors';
-import NoCampaign from '../../../../common-components/NoCampaign';
+import NoCampaign from '../../NoCampaign';
 
 enum CampaignTypes {
   Coffee = 1,

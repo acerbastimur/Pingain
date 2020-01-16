@@ -8,7 +8,7 @@ import {Card} from 'react-native-shadow-cards';
 
 import {observer} from 'mobx-react';
 import HomeStyle from './Home.style';
-import NoCampaign from '../../../../common-components/NoCampaign';
+import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
 
 export interface HomeProps {
