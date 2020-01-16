@@ -72,7 +72,7 @@ export default StyleSheet.create({
     marginBottom: screenWidth < 350 ? 4 : 8,
   },
   buttonContainer: {
-    height: responsiveRate(58),
+    height: screenHeight > 700 ? responsiveRate(60) : responsiveRate(65),
     marginTop: responsiveRate(40),
   },
   loginTextContainer: {

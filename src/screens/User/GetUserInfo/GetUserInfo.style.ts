@@ -31,7 +31,7 @@ export default StyleSheet.create({
     flex: 4,
   },
   buttonContainer: {
-    flex: 0.2,
+    flex: screenHeight > 700 ? 0.23 : 0.26,
     paddingVertical: '6.75%',
     marginTop: 20,
   },
@@ -41,7 +41,7 @@ export default StyleSheet.create({
   input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   inputContainer: {
     flex: 0.2,
-    paddingTop: 20,
+    paddingTop: 24,
   },
   dropdownComponentContainer: {overflow: 'hidden', height: 50},
   dropdownContainer: {top: -26},
