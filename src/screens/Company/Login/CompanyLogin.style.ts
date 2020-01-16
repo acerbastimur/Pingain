@@ -9,7 +9,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
- 
+
 export default StyleSheet.create({
   keyboardScrollContainer: {flex: 1},
   container: {
@@ -53,13 +53,11 @@ export default StyleSheet.create({
   underline: {textDecorationLine: 'underline'},
   inputContainer: {
     flex: 0.2,
-    paddingTop: 20,
+    paddingTop: screenHeight > 700 ? 20 : 30,
   },
   input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
     width: '6%',
-    borderColor: '#D8DFE8',
-    borderBottomWidth: 1,
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',
@@ -73,12 +71,12 @@ export default StyleSheet.create({
     marginBottom: screenWidth < 350 ? 4 : 8,
   },
   buttonContainer: {
-    flex: 0.2,
+    flex: screenHeight > 700 ? 0.22 : 0.24,
     paddingVertical: '6.75%',
     marginTop: 20,
   },
   loginTextContainer: {
-    flex: 0.3,
+    flex: 0.36,
   },
 
   loginText: {
@@ -91,7 +89,7 @@ export default StyleSheet.create({
     flex: 0.4,
   },
   forgotPassword: {
-    marginTop: 30,
+    marginTop: responsiveRate(30),
     textAlign: 'center',
     color: Colors.SECONDARY,
     fontWeight: 'bold',

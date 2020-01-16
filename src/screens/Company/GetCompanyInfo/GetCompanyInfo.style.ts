@@ -31,7 +31,7 @@ export default StyleSheet.create({
     flex: 4,
   },
   buttonContainer: {
-    flex: 0.2,
+    flex: screenHeight > 670 ? 0.2 : 0.22,
     paddingVertical: '6.75%',
     marginTop: 20,
   },
@@ -45,7 +45,6 @@ export default StyleSheet.create({
   },
   image: {
     width: '6%',
-
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',

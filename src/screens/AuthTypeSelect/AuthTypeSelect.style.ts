@@ -9,7 +9,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveFont = (fontSize: number) => (screenWidth * fontSize) / fontScaleBase;
- 
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -70,7 +70,7 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 30,
-    height: '23%',
+    height: screenHeight > 700 ? '23%' : '28%',
   },
 
   line: {

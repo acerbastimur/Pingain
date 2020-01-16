@@ -55,8 +55,6 @@ export default StyleSheet.create({
   input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
     width: '6%',
-    borderColor: '#D8DFE8',
-    borderBottomWidth: 1,
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',

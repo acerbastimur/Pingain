@@ -9,7 +9,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
- 
+
 export default StyleSheet.create({
   keyboardScrollContainer: {flex: 1},
   container: {
@@ -58,8 +58,6 @@ export default StyleSheet.create({
   input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
     width: '6%',
-    borderColor: '#D8DFE8',
-    borderBottomWidth: 1,
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',

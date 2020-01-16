@@ -75,8 +75,6 @@ export default StyleSheet.create({
   },
   image: {
     width: '6%',
-    borderColor: '#D8DFE8',
-    borderBottomWidth: 1,
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',

@@ -43,7 +43,7 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
             textColor="#fff"
             onPress={() => {
               console.log('Pingainer register');
-              navigation.navigate('UserRegister');
+              navigation.navigate('UserLogin');
             }}
           />
         </View>
