@@ -119,7 +119,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     },
   },
   {
-    lazy: true,
+    lazy: false,
     initialRouteName: 'Home',
     tabBarOptions: {
       showLabel: false,
