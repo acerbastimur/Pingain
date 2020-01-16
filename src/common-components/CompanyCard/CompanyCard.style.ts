@@ -64,8 +64,8 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   cardBodyItemIcon: {
-    width: 28,
-    height: 28,
+    width: responsiveRate(28),
+    height: responsiveRate(28),
     resizeMode: 'contain',
   },
   row: {flexDirection: 'row'},
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     fontSize: responsiveRate(14),
-    color: Colors.SECONDARY,
+    color: Colors.PRIMARY_LIGHT,
   },
   cardBodyItemCount: {
     flexDirection: 'row',

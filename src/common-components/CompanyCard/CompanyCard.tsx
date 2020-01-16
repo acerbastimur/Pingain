@@ -61,6 +61,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
             style={this.s.cardBodyItem}
             onPress={() => {
               CampaignDetailsStore.campaignDetailsHalfModalRef.open();
+              console.log('open modal',CampaignDetailsStore.campaignDetailsHalfModalRef);
             }}>
             <Image
               style={this.s.cardBodyItemIcon}

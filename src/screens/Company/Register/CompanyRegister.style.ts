@@ -7,9 +7,9 @@ import Colors from '../../../styles/Colors';
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-const fontScaleBase = 414; // iPhone 11 Pro
-const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
- 
+const fontScaleBase = 896; // iPhone 11 Pro
+const responsiveRate = (rateNumber: number) => (screenHeight * rateNumber) / fontScaleBase;
+
 export default StyleSheet.create({
   keyboardScrollContainer: {flex: 1},
   container: {
@@ -52,14 +52,13 @@ export default StyleSheet.create({
   },
   underline: {textDecorationLine: 'underline'},
   inputContainer: {
-    flex: 0.2,
-    paddingTop: 20,
+    height: responsiveRate(90),
+    marginTop: responsiveRate(20),
   },
+  firstInputPadding: {paddingTop: 0},
   input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
   image: {
     width: '6%',
-    borderColor: '#D8DFE8',
-    borderBottomWidth: 1,
     height: 36,
     resizeMode: 'contain',
     position: 'absolute',
@@ -73,18 +72,18 @@ export default StyleSheet.create({
     marginBottom: screenWidth < 350 ? 4 : 8,
   },
   buttonContainer: {
-    flex: 0.2,
-    paddingVertical: '6.75%',
-    marginTop: 20,
+    height: screenHeight > 700 ? responsiveRate(60) : responsiveRate(65),
+    marginTop: responsiveRate(40),
   },
   loginTextContainer: {
-    flex: 0.2,
+    height: 50,
+    marginTop: responsiveRate(35),
   },
 
   loginText: {
     color: Colors.PRIMARY,
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: responsiveRate(14),
+    fontSize: responsiveRate(16),
   },
 });

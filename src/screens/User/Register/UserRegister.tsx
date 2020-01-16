@@ -74,7 +74,7 @@ export default class UserRegister extends React.Component<UserRegisterProps> {
             })}>
             {({values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid}) => (
               <View style={this.style.formContainer}>
-                <View style={this.style.inputContainer}>
+                <View style={[this.style.inputContainer, this.style.firstInputPadding]}>
                   <Text style={this.style.inputText}>Email</Text>
                   <Animatable.View
                     ref={ref => {

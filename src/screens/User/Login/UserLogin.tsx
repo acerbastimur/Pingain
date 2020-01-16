@@ -196,6 +196,7 @@ export default class UserRegister extends React.Component<UserLoginProps> {
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('UserRegister');
+                      console.log('User register button is pressed');
                     }}
                     style={this.style.loginTextContainer}>
                     <Text style={this.style.loginText}>
