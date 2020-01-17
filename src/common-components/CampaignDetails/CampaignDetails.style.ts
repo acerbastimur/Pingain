@@ -139,6 +139,8 @@ export default StyleSheet.create({
     width: '100%',
     marginBottom: responsiveRate(10),
   },
+  swipperButton: {width: 20, resizeMode: 'contain', alignSelf: 'center'},
+
   card: {
     marginTop: 30,
     borderRadius: 15,

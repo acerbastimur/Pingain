@@ -33,6 +33,9 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
           onRightPress={() => {
             navigation.navigate('UserDetails');
           }}
+          onLeftPress={() => {
+            return null;
+          }}
         />
       </View>
       <View style={style.bodyContainer}>

@@ -112,7 +112,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
           <Pin completed={false} />
         </View>
       </View>
-      {false ? (
+      {true ? (
         <View>
           <Text style={style.otherCampaignsHeaderText}>Bu işletmedeki diğer kampanyalar</Text>
           <View style={style.swiperContainer}>
@@ -123,19 +123,19 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={
+              nextButton={(
                 <Image
                   source={require('../../assets/image/right.png')}
-                  style={{width: 20, resizeMode: 'contain'}}
+                  style={style.swipperButton}
                 />
-              }
-              prevButton={
+              )}
+              prevButton={(
                 <Image
                   source={require('../../assets/image/left.png')}
-                  style={{width: 20, resizeMode: 'contain'}}
+                  style={style.swipperButton}
                 />
-              }>
-              <Card elevation={6} opacity={0.15} style={style.card}>
+              )}>
+              <Card elevation={6} opacity={0.2} style={style.card}>
                 <View style={style.otherCardBodyItem}>
                   <Image
                     style={style.cardBodyItemIcon}
