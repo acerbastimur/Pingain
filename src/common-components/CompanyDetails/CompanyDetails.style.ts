@@ -13,7 +13,7 @@ const responsiveRate = (fontSize: number) => {
   if (screenWidth < 350) return ((screenWidth * fontSize) / fontScaleBase) * 0.9;
   return (screenWidth * fontSize) / fontScaleBase;
 };
- 
+
 export default StyleSheet.create({
   container: {
     height: '100%',
@@ -59,8 +59,8 @@ export default StyleSheet.create({
     marginLeft: '4%',
   },
   followButton: {
-    width: 65,
-    height: 33,
+    width: screenWidth > 350 ? 65 : 60,
+    height: screenWidth > 350 ? 33 : 28,
     borderColor: Colors.INFO,
     borderWidth: 1,
     borderRadius: 6,

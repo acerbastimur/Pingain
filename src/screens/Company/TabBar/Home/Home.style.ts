@@ -71,7 +71,7 @@ export default StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     fontSize: responsiveRate(16),
-    color: Colors.SECONDARY,
+    color: Colors.PRIMARY_LIGHT,
   },
   cardBodyItemCount: {
     flexDirection: 'row',

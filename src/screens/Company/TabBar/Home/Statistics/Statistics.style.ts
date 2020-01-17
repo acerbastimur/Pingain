@@ -43,7 +43,7 @@ export default StyleSheet.create({
     marginTop: responsiveRate(15),
     borderRadius: 15,
     width: '88.5%',
-    height: responsiveRate(95),
+    height: responsiveRate(90),
     alignSelf: 'center',
     justifyContent: 'center',
   },

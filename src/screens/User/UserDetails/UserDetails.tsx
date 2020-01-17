@@ -20,6 +20,7 @@ import {Card} from 'react-native-shadow-cards';
 import UserDetailsStyle from './UserDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CompanyCard from '../../../common-components/CompanyCard';
+import WinModalStore from '../../../stores/WinModal.store';
 
 interface UserDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -50,6 +51,7 @@ export default class UserDetails extends React.Component<UserDetailsProps> {
               console.log('done');
               navigation.navigate('UserDetailsEdit');
             }}
+            onLeftPress={() => null}
           />
         </View>
         <ScrollView contentContainerStyle={this.style.scrollContainerStyle}>

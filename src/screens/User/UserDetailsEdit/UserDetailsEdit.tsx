@@ -85,6 +85,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                 this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
               }
             }}
+            onLeftPress={() => null}
           />
         </View>
         <KeyboardAwareScrollView
@@ -99,6 +100,8 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
               </View> */}
               <ImageUpload
                 hideText
+                borderColor={Colors.SECONDARY}
+                borderWidth={1}
                 defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
               />
             </View>

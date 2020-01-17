@@ -62,10 +62,10 @@ export default class CampaignCreate extends React.Component<
           <TabsHeader
             navigation={navigation}
             onRightPress={() => {
-              return null;
+              navigation.navigate('CompanyDetailsEdit');
             }}
             onLeftPress={() => {
-              navigation.navigate('Home');
+              return null;
             }}
           />
         </View>

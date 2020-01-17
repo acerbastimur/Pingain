@@ -418,6 +418,8 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         <View style={this.style.dropdownComponentContainer}>
                           <Dropdown
                             value={values.city}
+                            rippleDuration={0}
+                            animationDuration={0}
                             onChangeText={handleChange('city')}
                             data={CITIES}
                             containerStyle={this.style.dropdownContainer}

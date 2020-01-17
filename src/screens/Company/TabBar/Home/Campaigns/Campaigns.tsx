@@ -35,7 +35,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
           <TabsHeader
             navigation={navigation}
             onRightPress={() => {
-              return null;
+              navigation.navigate('CompanyDetailsEdit');
             }}
             onLeftPress={() => {
               navigation.navigate('Home');

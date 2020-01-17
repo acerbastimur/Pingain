@@ -37,7 +37,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
             height: itemWidth,
             borderRadius: 12,
             overflow: 'hidden',
-          }}>
+           }}>
           <Image
             style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
             source={require('../../assets/image/pin_completed.png')}
@@ -101,15 +101,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
           <Pin completed />
           <Pin completed />
           <Pin completed />
-          <Pin completed />
-          <Pin completed />
-        </View>
-        <View style={style.pinsLineContainer}>
-          <Pin completed />
-          <Pin completed />
-          <Pin completed />
-          <Pin completed={false} />
-          <Pin completed={false} />
+          <Pin completed={false} /> 
         </View>
       </View>
       {true ? (
@@ -123,18 +115,18 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={(
+              nextButton={
                 <Image
                   source={require('../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
-              )}
-              prevButton={(
+              }
+              prevButton={
                 <Image
                   source={require('../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
-              )}>
+              }>
               <Card elevation={6} opacity={0.2} style={style.card}>
                 <View style={style.otherCardBodyItem}>
                   <Image

@@ -144,7 +144,8 @@ export default StyleSheet.create({
   card: {
     marginTop: 30,
     borderRadius: 15,
-    width: '80%',
+    width: '76%',
+    marginHorizontal:"4%",
     height: 60,
     alignSelf: 'center',
   },

@@ -14,6 +14,8 @@ import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.s
 
 import Colors from '../../../../styles/Colors';
 import CampaignDetails from '../../../../common-components/CampaignDetails';
+import WinPrize from '../QrRead/WinPrize';
+import WinModalStore from '../../../../stores/WinModal.store';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -84,6 +86,28 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
             draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
           }}>
           <CampaignDetails navigation={navigation} />
+        </RBSheet>
+        <RBSheet
+          ref={ref => {
+            WinModalStore.winPrizeHalfModalRef = ref;
+          }}
+          duration={50}
+          closeOnDragDown
+          animationType="none"
+          customStyles={{
+            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
+            container: {
+              borderTopRightRadius: 40,
+              borderTopLeftRadius: 40,
+              paddingTop: 2,
+              height: 'auto',
+              shadowOffset: {width: 0, height: 2},
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
+            },
+            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          }}>
+          <WinPrize navigation={navigation} />
         </RBSheet>
       </View>
     );

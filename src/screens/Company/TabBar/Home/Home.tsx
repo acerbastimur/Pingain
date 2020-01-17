@@ -25,7 +25,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
     this.state = {
-      noCampaign: true,
+      noCampaign: false,
     };
   }
 
