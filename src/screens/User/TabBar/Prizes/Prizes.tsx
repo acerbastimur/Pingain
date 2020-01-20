@@ -2,19 +2,19 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Button, Text, FlatList, Dimensions} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
 import PrizesStyle from './Prizes.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import CompanyCard from '../../../../common-components/CompanyCard';
+import CompanyCard from '../../CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 import GeneralStore from '../../../../stores/General.store';
 
 import Colors from '../../../../styles/Colors';
-import CampaignDetails from '../../../../common-components/CampaignDetails';
+import CampaignDetails from '../../CampaignDetails';
 import ShareUs from '../../ShareUs/ShareUs';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';

@@ -8,18 +8,15 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, ScrollView, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import CampaignDetailsStyle from './CampaignDetails.style';
-import TabsHeader from '../TabsHeader';
-import Colors from '../../styles/Colors';
-import CompanyCard from '../CompanyCard';
-import Logo from '../Logo';
-import Button from '../Button';
-import CampaignDetailsModalStore from '../../stores/CampaignDetailsModal.store';
+import Colors from '../../../styles/Colors';
+import Button from '../../../common-components/Button';
+import CampaignDetailsModalStore from '../../../stores/CampaignDetailsModal.store';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -37,10 +34,10 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
             height: itemWidth,
             borderRadius: 12,
             overflow: 'hidden',
-           }}>
+          }}>
           <Image
             style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-            source={require('../../assets/image/pin_completed.png')}
+            source={require('../../../assets/image/pin_completed.png')}
           />
         </View>
       );
@@ -59,7 +56,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
         }}>
         <Image
           style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-          source={require('../../assets/image/pin_uncompleted.png')}
+          source={require('../../../assets/image/pin_uncompleted.png')}
         />
       </TouchableOpacity>
     );
@@ -74,19 +71,19 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
           <Image
-            source={require('../../assets/image/User/cafeImageExample.png')}
+            source={require('../../../assets/image/User/cafeImageExample.png')}
             style={style.cardHeaderImage}
           />
         </View>
 
         <Text style={style.cardHeaderText}>Cafe Rien</Text>
-        <Image style={style.headerArrow} source={require('../../assets/image/User/arrow.png')} />
+        <Image style={style.headerArrow} source={require('../../../assets/image/User/arrow.png')} />
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
         <Image
           style={style.cardBodyItemIcon}
-          source={require('../../assets/image/User/coffeeIcon.png')}
+          source={require('../../../assets/image/User/coffeeIcon.png')}
         />
         <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
         <View style={style.cardBodyItemCount}>
@@ -101,7 +98,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
           <Pin completed />
           <Pin completed />
           <Pin completed />
-          <Pin completed={false} /> 
+          <Pin completed={false} />
         </View>
       </View>
       {true ? (
@@ -115,23 +112,23 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={
+              nextButton={(
                 <Image
-                  source={require('../../assets/image/right.png')}
+                  source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
-              }
-              prevButton={
+              )}
+              prevButton={(
                 <Image
-                  source={require('../../assets/image/left.png')}
+                  source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
-              }>
+              )}>
               <Card elevation={6} opacity={0.2} style={style.card}>
                 <View style={style.otherCardBodyItem}>
                   <Image
                     style={style.cardBodyItemIcon}
-                    source={require('../../assets/image/User/mealIcon.png')}
+                    source={require('../../../assets/image/User/mealIcon.png')}
                   />
                   <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
                   <View style={style.cardBodyItemCount}>
@@ -145,7 +142,7 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 <View style={style.otherCardBodyItem}>
                   <Image
                     style={style.cardBodyItemIcon}
-                    source={require('../../assets/image/User/mealIcon.png')}
+                    source={require('../../../assets/image/User/mealIcon.png')}
                   />
                   <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
                   <View style={style.cardBodyItemCount}>
