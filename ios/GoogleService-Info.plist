@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>533483126856-dompet31pl4n2d3o7pgaugqf9tiuoemi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.533483126856-dompet31pl4n2d3o7pgaugqf9tiuoemi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApiCTF5-108Gu28VqjvgPJ0I0WWy-ufsU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>533483126856</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pingain.app</string>
+	<key>PROJECT_ID</key>
+	<string>pingain-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pingain-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:533483126856:ios:60f792558500c81925d87d</string>
+	<key>DATABASE_URL</key>
+	<string>https://pingain-app.firebaseio.com</string>
+</dict>
+</plist>

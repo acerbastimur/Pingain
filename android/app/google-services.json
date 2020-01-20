@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "533483126856",
+    "firebase_url": "https://pingain-app.firebaseio.com",
+    "project_id": "pingain-app",
+    "storage_bucket": "pingain-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533483126856:android:226b1380fe5ba36225d87d",
+        "android_client_info": {
+          "package_name": "com.pingain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533483126856-i69r22lrq1s68gcgdmabd3mnoi03h8dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW20_Tuy5lFH3vXuL866xK2gHVpmmwKuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533483126856-i69r22lrq1s68gcgdmabd3mnoi03h8dt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "533483126856-dompet31pl4n2d3o7pgaugqf9tiuoemi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pingain.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
