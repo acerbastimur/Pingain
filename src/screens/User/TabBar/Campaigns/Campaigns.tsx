@@ -9,11 +9,11 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import CompanyCard from '../../../../common-components/CompanyCard';
+import CompanyCard from '../../CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 
 import Colors from '../../../../styles/Colors';
-import CampaignDetails from '../../../../common-components/CampaignDetails';
+import CampaignDetails from '../../CampaignDetails';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
 

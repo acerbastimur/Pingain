@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {View, Image, Text} from 'react-native';
+import {Image} from 'react-native';
 import {createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -10,7 +10,7 @@ import UserDetails from '../screens/User/UserDetails';
 import UserDetailsEdit from '../screens/User/UserDetailsEdit';
 import Campaigns from '../screens/User/TabBar/Campaigns';
 import QrRead from '../screens/User/TabBar/QrRead';
-import CompanyDetails from '../common-components/CompanyDetails';
+import CompanyDetails from '../screens/User/CompanyDetails';
 import Prizes from '../screens/User/TabBar/Prizes';
 
 const UserDetailsStack = createStackNavigator(

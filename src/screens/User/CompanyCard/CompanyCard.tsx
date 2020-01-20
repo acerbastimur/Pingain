@@ -13,7 +13,7 @@ import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import CompanyCardStyle from './CompanyCard.style';
-import CampaignDetailsStore from '../../stores/CampaignDetailsModal.store';
+import CampaignDetailsStore from '../../../stores/CampaignDetailsModal.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -42,7 +42,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
               style={this.s.cardHeader}>
               <View style={this.s.cardHeaderImageContainer}>
                 <Image
-                  source={require('../../assets/image/User/cafeImageExample.png')}
+                  source={require('../../../assets/image/User/cafeImageExample.png')}
                   style={this.s.cardHeaderImage}
                 />
               </View>
@@ -50,7 +50,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
               <Text style={this.s.cardHeaderText}>Cafe Rien</Text>
               <Image
                 style={this.s.headerArrow}
-                source={require('../../assets/image/User/arrow.png')}
+                source={require('../../../assets/image/User/arrow.png')}
               />
             </TouchableOpacity>
             <View style={this.s.line} />
@@ -61,16 +61,15 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
             style={this.s.cardBodyItem}
             onPress={() => {
               CampaignDetailsStore.campaignDetailsHalfModalRef.open();
-              console.log('open modal',CampaignDetailsStore.campaignDetailsHalfModalRef);
-            }}>
+             }}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../assets/image/User/coffeeIcon.png')}
+              source={require('../../../assets/image/User/coffeeIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
             <View style={[this.s.cardBodyItemCount, this.s.coffeeDoneBackground]}>
               {isCampaign1Done ? (
-                <Image style={this.s.tick} source={require('../../assets/image/tickWhite.png')} />
+                <Image style={this.s.tick} source={require('../../../assets/image/tickWhite.png')} />
               ) : (
                 <View style={this.s.row}>
                   <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
@@ -84,7 +83,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           <View style={this.s.cardBodyItem}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../assets/image/User/mealIcon.png')}
+              source={require('../../../assets/image/User/mealIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
             <View style={this.s.cardBodyItemCount}>
@@ -97,7 +96,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           <View style={this.s.cardBodyItem}>
             <Image
               style={this.s.cardBodyItemIcon}
-              source={require('../../assets/image/User/dessertIcon.png')}
+              source={require('../../../assets/image/User/dessertIcon.png')}
             />
             <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
             <View style={this.s.cardBodyItemCount}>

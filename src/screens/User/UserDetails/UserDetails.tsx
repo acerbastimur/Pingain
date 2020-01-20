@@ -19,8 +19,7 @@ import {
 import {Card} from 'react-native-shadow-cards';
 import UserDetailsStyle from './UserDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
-import CompanyCard from '../../../common-components/CompanyCard';
-import WinModalStore from '../../../stores/WinModal.store';
+import CompanyCard from '../CompanyCard';
 
 interface UserDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -48,7 +47,6 @@ export default class UserDetails extends React.Component<UserDetailsProps> {
             rightEditIcon
             navigation={navigation}
             onRightPress={() => {
-              console.log('done');
               navigation.navigate('UserDetailsEdit');
             }}
             onLeftPress={() => null}

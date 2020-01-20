@@ -1,27 +1,24 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet} from 'react-native';
-import Colors from '../../styles/Colors';
-import CampaignColors from '../../styles/CampaignColors';
+import Colors from '../../../styles/Colors';
+import CampaignColors from '../../../styles/CampaignColors';
 
-const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (fontSize: number) => {
+  if (screenWidth < 350) return ((screenWidth * fontSize) / fontScaleBase) * 0.9;
   return (screenWidth * fontSize) / fontScaleBase;
 };
 
 export default StyleSheet.create({
-  container: {
-    paddingHorizontal: '6%',
-  },
+  card: {margin: 20, borderRadius: 15},
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 15,
-    marginHorizontal: 30,
+    marginVertical: 20,
+    marginHorizontal: 35,
     height: 40,
   },
   cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
@@ -57,43 +54,30 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     borderRadius: 50,
   },
+  cardBody: {marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: 30},
   cardBodyItem: {
-    paddingHorizontal: '4%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical: responsiveRate(30),
-  },
-  otherCardBodyItem: {
-    paddingHorizontal: '4%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    height: 60,
+    marginTop: 20,
   },
   cardBodyItemIcon: {
-    width: 28,
-    height: 28,
+    width: responsiveRate(28),
+    height: responsiveRate(28),
     resizeMode: 'contain',
   },
+  row: {flexDirection: 'row'},
   cardBodyItemName: {
     paddingLeft: '6%',
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     fontSize: responsiveRate(14),
-    color: Colors.PRIMARY,
-  },
-  otherCardBodyItemName: {
-    paddingLeft: '6%',
-    fontFamily: 'Helvetica Neue',
-    fontWeight: '400',
-    fontSize: responsiveRate(14),
-    color: Colors.SECONDARY,
+    color: Colors.PRIMARY_LIGHT,
   },
   cardBodyItemCount: {
     flexDirection: 'row',
     position: 'absolute',
-    right: '4%',
+    right: 0,
     borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 8,
@@ -116,57 +100,15 @@ export default StyleSheet.create({
   cardItemDessert: {
     color: CampaignColors.DESSERT,
   },
-  pinsContainer: {marginBottom: responsiveRate(14)},
-  pinsLineContainer: {
-    marginTop: 2,
-    padding: '4%',
-    flexDirection: 'row',
+  tick: {
+    resizeMode: 'contain',
+    width: responsiveRate(18),
+    height: responsiveRate(18),
+  },
+  coffeeDoneBackground: {
+    backgroundColor: CampaignColors.COFFEE,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
     alignItems: 'center',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  otherCampaignsHeaderText: {
-    marginHorizontal: '5%',
-    fontFamily: 'Helvetica Neue',
-    fontWeight: '600',
-    fontSize: responsiveRate(16),
-    fontStyle: 'normal',
-    color: Colors.PRIMARY,
-  },
-
-  swiperContainer: {
-    height: 120,
-    width: '100%',
-    marginBottom: responsiveRate(10),
-  },
-  swipperButton: {width: 20, resizeMode: 'contain', alignSelf: 'center'},
-
-  card: {
-    marginTop: 30,
-    borderRadius: 15,
-    width: '76%',
-    marginHorizontal:"4%",
-    height: 60,
-    alignSelf: 'center',
-  },
-  noOtherCampaignsContainer: {marginBottom: responsiveRate(30)},
-  shareUsText: {
-    marginHorizontal: '5%',
-    fontFamily: 'Helvetica Neue',
-    fontWeight: '500',
-    fontSize: responsiveRate(14),
-    fontStyle: 'normal',
-    color: Colors.SECONDARY,
-    paddingTop: responsiveRate(16),
-    letterSpacing: 0.2,
-    lineHeight: 20,
-  },
-  shareButtonContainer: {
-    marginTop: responsiveRate(18),
-    height: responsiveRate(52),
-    paddingHorizontal: '4%',
-  },
-  textHighlighted: {
-    color: Colors.TEXT_HIGHLIGHTED,
   },
 });
