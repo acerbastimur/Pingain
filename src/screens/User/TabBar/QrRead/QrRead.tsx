@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';

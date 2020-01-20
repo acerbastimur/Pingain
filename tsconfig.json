@@ -6,6 +6,7 @@
   "isolatedModules": false,
   "compilerOptions": {
     "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "lib": ["es2015"]
   }
 }
