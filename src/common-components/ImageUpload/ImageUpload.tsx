@@ -38,7 +38,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
-      console.log('Response = ', response);
+      console.log('Response = ', response.uri);
 
       if (response.didCancel) {
         console.log('User cancelled image picker');
