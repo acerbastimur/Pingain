@@ -28,9 +28,9 @@ export default class Loading extends React.Component<LoadingProps, any> {
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
-    auth().signOut()
-    auth().onAuthStateChanged(user => {
+    const {navigation} = this.props;
+    auth().signOut();
+    auth().onAuthStateChanged(user => { 
       navigation.navigate(user ? 'CompanyNavigator' : 'Auth');
     });
   }

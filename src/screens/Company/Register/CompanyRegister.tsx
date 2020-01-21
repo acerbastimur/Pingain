@@ -50,7 +50,7 @@ export default class CompanyRegister extends React.Component<
   }
 
   handleSubmit = ({email, password}: RegisterForm) => {
-    RegisterService.registerCompany(email, password)
+    RegisterService.registerCompanyAuth(email, password)
       .then(user => {
         console.log('Succesfully');
         console.log(user);
@@ -83,6 +83,7 @@ export default class CompanyRegister extends React.Component<
             initialValues={{
               email: '',
               password: '',
+              passwordConfirm: '',
             }}
             onSubmit={this.handleSubmit}
             validationSchema={Yup.object().shape({
@@ -204,7 +205,7 @@ export default class CompanyRegister extends React.Component<
                       onBlur={() => setFieldTouched('passwordConfirm')}
                       autoCapitalize="none"
                       secureTextEntry
-                      returnKeyType="done"
+                      returnKeyType="default"
                       ref={ref => {
                         const isThere = this.references.filter(
                           t => t.name === 'passwordConfirmInput',

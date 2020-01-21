@@ -1,6 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable eslint-comments/no-duplicate-disable */
@@ -15,27 +16,38 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import GetUserInfoStyle from './GetCompanyInfo.style';
+import GetCompanyInfoStyle from './GetCompanyInfo.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
+import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
 
-interface GetUserInfoProps {
+interface GetCompanyInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class GetCompanyInfo extends React.Component<GetUserInfoProps> {
-  style = GetUserInfoStyle;
+
+export default class GetCompanyInfo extends React.Component<GetCompanyInfoProps> {
+  style = GetCompanyInfoStyle;
 
   references = [];
 
-  constructor(props: GetUserInfoProps) {
+  constructor(props: GetCompanyInfoProps) {
     super(props);
     this.state = {};
   }
 
-  handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+  handleSubmit = (
+    name: string,
+    companyName: string,
+    phoneNumber: string,
+    instagramAccount: string,
+  ) => {
+    SetCompanyInfoService.SetCompanyInfo(name, companyName, phoneNumber, instagramAccount).then(
+      () => {
+        console.log('WRITTEN');
+      },
+    );
   };
 
   public render() {
@@ -59,7 +71,9 @@ export default class GetCompanyInfo extends React.Component<GetUserInfoProps> {
                 phoneNumber: '',
                 instagramAccount: '',
               }}
-              onSubmit={this.handleSubmit}
+              onSubmit={({name, companyName, phoneNumber, instagramAccount}) =>
+                this.handleSubmit(name, companyName, phoneNumber, instagramAccount)
+              }
               validationSchema={Yup.object().shape({
                 name: Yup.string()
                   .min(2)

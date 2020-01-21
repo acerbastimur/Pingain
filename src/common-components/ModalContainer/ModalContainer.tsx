@@ -32,7 +32,6 @@ const ModalContainer = ({
   errorMessage,
 }: ModalContainerProps) => {
   const s = ModalContainerStyle;
-  console.log(modalType);
 
   return (
     <Modal
@@ -77,7 +76,11 @@ const ModalContainer = ({
                 textColor={Colors.WARN}
                 fontWeight="normal"
                 onPress={() => {
-                  backButton(true);
+                  try {
+                    backButton(true);
+                  } catch (err) {
+                    console.log('Something went wrong on ModalContainer.tsx');
+                  }
                 }}
               />
             </View>
