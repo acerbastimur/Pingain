@@ -19,26 +19,51 @@ import CompanyRegisterStyle from './CompanyRegister.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
+import RegisterService from '../../../services/company/Auth/Register.service';
+import ModalContainer from '../../../common-components/ModalContainer';
 
 interface CompanyRegisterProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class CompanyRegister extends React.Component<CompanyRegisterProps> {
+interface CompanyRegisterState {
+  isErrorModalActive: boolean;
+}
+
+interface RegisterForm {
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+export default class CompanyRegister extends React.Component<
+  CompanyRegisterProps,
+  CompanyRegisterState
+> {
   style = CompanyRegisterStyle;
 
   references = [];
 
   constructor(props: CompanyRegisterProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      isErrorModalActive: false,
+    };
   }
 
-  handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+  handleSubmit = ({email, password}: RegisterForm) => {
+    RegisterService.registerCompany(email, password)
+      .then(user => {
+        console.log('Succesfully');
+        console.log(user);
+      })
+      .catch(err => {
+        console.log('Error on register');
+        this.setState({isErrorModalActive: true});
+      });
   };
 
   public render() {
     const {navigation} = this.props;
+    const {isErrorModalActive} = this.state;
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
@@ -252,6 +277,14 @@ export default class CompanyRegister extends React.Component<CompanyRegisterProp
             )}
           </Formik>
         </View>
+        <ModalContainer
+          isVisible={isErrorModalActive}
+          modalType={2}
+          errorMessage="Bu email kullanılmakta"
+          backButton={e => {
+            this.setState({isErrorModalActive: false});
+          }}
+        />
       </KeyboardAwareScrollView>
     );
   }
