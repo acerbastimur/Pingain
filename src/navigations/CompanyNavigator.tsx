@@ -159,7 +159,7 @@ const CompanyNavigator = createSwitchNavigator(
       screen: CompanyTabNavigation,
     },
   },
-  {initialRouteName: 'CompanyTabNavigation'},
+  {initialRouteName: 'GetCompanyInfo'},
 );
 
 export default CompanyNavigator;

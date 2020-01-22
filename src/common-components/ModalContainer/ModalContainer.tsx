@@ -13,12 +13,24 @@ import ModalContainerStyle from './ModalContainer.style';
 import Colors from '../../styles/Colors';
 import Button from '../Button';
 
+enum ModalType {
+  ResetPassword = 1,
+  ErrorMessage = 2,
+}
+
 interface ModalContainerProps {
   isVisible: boolean;
+  modalType: ModalType;
+  errorMessage?: string;
   backButton: (e: any) => void;
 }
 
-const ModalContainer = ({isVisible = false, backButton}: ModalContainerProps) => {
+const ModalContainer = ({
+  isVisible = false,
+  backButton,
+  modalType = ModalType.ResetPassword,
+  errorMessage,
+}: ModalContainerProps) => {
   const s = ModalContainerStyle;
 
   return (
@@ -36,31 +48,39 @@ const ModalContainer = ({isVisible = false, backButton}: ModalContainerProps) =>
       <View style={s.contentContainer}>
         <View style={s.contentBox}>
           <Text numberOfLines={2} style={s.headerText}>
-            Şifreni sıfırlamak istediğine emin misin?
+            {modalType === ModalType.ResetPassword
+              ? 'Şifreni sıfırlamak istediğine emin misin?'
+              : 'Kayıt yapılamadı'}
           </Text>
           <Text numberOfLines={1} style={s.subText}>
-            Bu işlem geri alınamaz.
+            {modalType === ModalType.ResetPassword ? 'Bu işlem geri alınamaz.' : errorMessage}
           </Text>
 
           <View style={s.buttonsContainer}>
+            {modalType === ModalType.ResetPassword ? (
+              <View style={s.buttonContainer}>
+                <Button
+                  text="Şifremi Sıfırla"
+                  backgroundColor={Colors.SECONDARY}
+                  textColor="#fff"
+                  onPress={() => {}}
+                />
+              </View>
+            ) : null}
             <View style={s.buttonContainer}>
               <Button
-                text="Şifremi Sıfırla"
-                backgroundColor={Colors.SECONDARY}
-                textColor="#fff"
-                onPress={() => {}}
-              />
-            </View>
-            <View style={s.buttonContainer}>
-              <Button
-                text="Vazgeç"
+                text={modalType === ModalType.ResetPassword ? 'Vazgeç' : 'Geri'}
                 backgroundColor="#fff"
                 borderColor={Colors.WARN}
                 borderWidth={1}
                 textColor={Colors.WARN}
                 fontWeight="normal"
                 onPress={() => {
-                  backButton(true);
+                  try {
+                    backButton(true);
+                  } catch (err) {
+                    console.log('Something went wrong on ModalContainer.tsx');
+                  }
                 }}
               />
             </View>

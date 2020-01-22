@@ -7,6 +7,7 @@ import Onboarding from '../screens/Onboarding';
 import AuthNavigator from './AuthNavigator';
 import UserNavigator from './UserNavigator';
 import CompanyNavigator from './CompanyNavigator';
+import Loading from '../common-components/Loading';
 
 const AppNavigator = createSwitchNavigator(
   {
@@ -22,9 +23,12 @@ const AppNavigator = createSwitchNavigator(
     CompanyNavigator: {
       screen: CompanyNavigator,
     },
+    Loading: {
+      screen: Loading,
+    },
   },
   {
-    initialRouteName: 'UserNavigator',
+    initialRouteName: 'Loading',
   },
 );
 

@@ -149,6 +149,7 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
         </View>
         <ModalContainer
           isVisible={isModalVisible}
+          modalType={1}
           backButton={e => {
             this.setState({isModalVisible: false});
           }}

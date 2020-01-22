@@ -17,6 +17,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     paddingHorizontal: '11.5%',
   },
+  indicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   uploadPhotoContainer: {
     flex: 1.6,
     justifyContent: 'center',
