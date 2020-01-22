@@ -19,26 +19,48 @@ import CompanyRegisterStyle from './CompanyLogin.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
+import LoginService from '../../../services/company/Auth/Login.service';
+import ModalContainer from '../../../common-components/ModalContainer';
 
 interface CompanyLoginProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class CompanyLogin extends React.Component<CompanyLoginProps> {
+
+interface CompanyLoginState {
+  isErrorModalActive: boolean;
+}
+
+interface RegisterForm {
+  email: string;
+  password: string;
+}
+
+export default class CompanyLogin extends React.Component<CompanyLoginProps, CompanyLoginState> {
   style = CompanyRegisterStyle;
 
   references = [];
 
   constructor(props: CompanyLoginProps) {
     super(props);
-    this.state = {};
+    this.state = {isErrorModalActive: false};
   }
 
-  handleSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+  handleSubmit = ({email, password}: RegisterForm) => {
+    LoginService.loginCompanyAuth(email, password)
+      .then(user => {
+        console.log('Succesfully');
+        console.log(user);
+      })
+      .catch(err => {
+        console.log('Error on register');
+        this.setState({isErrorModalActive: true});
+      });
   };
 
   public render() {
     const {navigation} = this.props;
+    const {isErrorModalActive} = this.state;
+
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
@@ -213,6 +235,14 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps> {
             )}
           </Formik>
         </View>
+        <ModalContainer
+          isVisible={isErrorModalActive}
+          modalType={2}
+          errorMessage="Email veya şifre hatalı"
+          backButton={e => {
+            this.setState({isErrorModalActive: false});
+          }}
+        />
       </KeyboardAwareScrollView>
     );
   }

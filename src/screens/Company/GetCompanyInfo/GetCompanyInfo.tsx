@@ -52,6 +52,7 @@ export default class GetCompanyInfo extends React.Component<
     phoneNumber: string,
     instagramAccount: string,
   ) => {
+    const {navigation} = this.props;
     const logoUri = this.imageUploadRef.state.imageSource;
     this.setState({isLoading: true});
     SetCompanyInfoService.setCompanyInfo(
@@ -61,9 +62,8 @@ export default class GetCompanyInfo extends React.Component<
       instagramAccount,
       logoUri,
     ).then(() => {
-      console.log('WRITTEN');
+      navigation.navigate('CompanyTabNavigation');
     });
-    console.log();
   };
 
   public render() {

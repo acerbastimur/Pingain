@@ -10,9 +10,13 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import LoadingStyle from './Loading.style';
+import GeneralStore from '../../stores/General.store';
+import AuthRole from '../../schemes/AuthRole.enum';
+import GetCompanyInfoService from '../../services/company/General/GetCompanyInfo.service';
 
 export interface LoadingProps {
   isLoading: boolean;
@@ -27,11 +31,78 @@ export default class Loading extends React.Component<LoadingProps, any> {
     this.state = {};
   }
 
+  checkUserRole = async (user: FirebaseAuthTypes.User) => {
+    const companyCheckRef = firestore()
+      .collection('companies')
+      .doc(user.uid);
+
+    await companyCheckRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          console.log('This is a company account');
+          GeneralStore.authRole = AuthRole.Company;
+        } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+        }
+      })
+      .catch(function(error) {
+        console.log('Error getting document:', error);
+      });
+
+    const userCheckRef = firestore()
+      .collection('users')
+      .doc(user.uid);
+
+    await userCheckRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          console.log('This is a user account');
+          GeneralStore.authRole = AuthRole.User;
+        } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+        }
+      })
+      .catch(error => {
+        console.log('Error getting document:', error);
+      });
+  };
+
+  checkIfCompanyFilledProfile = async (user: FirebaseAuthTypes.User) => {
+    let isCompanyProfileFilled = false;
+    await GetCompanyInfoService.getCompanyInfo().then(companyInfo => {
+      console.log('Company info is ', companyInfo);
+
+      if (companyInfo.companyName) {
+        isCompanyProfileFilled = true;
+      }
+    });
+    return isCompanyProfileFilled;
+  };
+
   componentDidMount() {
     const {navigation} = this.props;
-    auth().signOut();
-    auth().onAuthStateChanged(user => { 
-      navigation.navigate(user ? 'CompanyNavigator' : 'Auth');
+    // auth().signOut();
+    auth().onAuthStateChanged(async user => {
+      if (user) {
+        await this.checkUserRole(user);
+        if (GeneralStore.authRole === AuthRole.Company) {
+          // check if company fillfulled their information
+          const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile(user);
+          if (isCompanyProfileFilled) {
+            navigation.navigate('CompanyTabNavigation');
+          } else {
+            navigation.navigate('GetCompanyInfo');
+          }
+        } else {
+          // check if user fillfulled their information
+        }
+      } else {
+        navigation.navigate('Auth');
+      }
     });
   }
 

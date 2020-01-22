@@ -1,12 +1,15 @@
 import {observable, action} from 'mobx';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import AuthRole from '../schemes/AuthRole.enum';
 
-class WinModalStore {
+class GeneralStore {
   constructor() {
-    console.log('Win Modal Store was initialized!');
+    console.log('General Store was initialized!');
   }
 
   @observable shareUsModalRef: RBSheet = null;
+
+  @observable authRole: AuthRole = null;
 }
 
-export default new WinModalStore();
+export default new GeneralStore();
