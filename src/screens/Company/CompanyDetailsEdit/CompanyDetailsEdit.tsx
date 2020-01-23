@@ -34,6 +34,7 @@ import CompanyStore from '../../../stores/Company.store';
 import Button from '../../../common-components/Button';
 import Company from '../../../schemes/Company';
 import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
+import LoginService from '../../../services/company/Auth/Login.service';
 
 interface CompanyDetailsEditProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -84,9 +85,13 @@ export default class CompanyDetailsEdit extends React.Component<
     password,
     phoneNumber,
   }: CompanyDetailsForm) => {
+    if (password) {
+      LoginService.setNewPassword(password);
+    }
+
     const newCompanyLogo = CompanyStore.newCompanyLogoUri;
     this.setState({loading: true});
-    SetCompanyInfoService.updateCompanyDetails(
+    await SetCompanyInfoService.updateCompanyDetails(
       cmpName,
       managerName,
       phoneNumber,
@@ -465,7 +470,6 @@ export default class CompanyDetailsEdit extends React.Component<
                           onChangeText={handleChange('password')}
                           onBlur={() => setFieldTouched('password')}
                           autoCapitalize="none"
-                          keyboardType="decimal-pad"
                           returnKeyType="done"
                           secureTextEntry
                           ref={ref => {

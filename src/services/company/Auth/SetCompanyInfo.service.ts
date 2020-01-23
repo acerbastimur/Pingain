@@ -107,7 +107,7 @@ export default class SetCompanyInfoService {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
       const companyUid = auth().currentUser.uid;
- 
+
       if (companyLogo) {
         const uploadCompanyLogo = await this.uploadCompanyLogoToStorage(companyLogo, companyUid);
       }
