@@ -1,0 +1,36 @@
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import Company from '../../../schemes/Company';
+import CompanyStore from '../../../stores/Company.store';
+import {Campaign} from '../../../schemes/CompanyCampaign';
+
+export default class GetCompanyCampaignsService {
+  static async getAllCompanyCampaigns(): Promise<Array<Campaign>> {
+    /*     
+
+    const companyColRef = firestore()
+      .collection('campaigns')
+      .doc(uid);
+    const dataSnapshot = (await companyColRef.get()).data();
+    console.log(dataSnapshot); */
+    const {uid} = auth().currentUser;
+    const userCampaignKeys = CompanyStore.companyDetails.campaigns;
+    const userCampaigns: Array<Campaign> = [];
+    if (userCampaignKeys) {
+      const campaigns = await Promise.all(
+        userCampaignKeys.map(async (campaignKey, index) => {
+          const companyColRef = firestore()
+            .collection('campaigns')
+            .doc(campaignKey);
+          const dataSnapshot = (await companyColRef.get()).data() as Campaign;
+          userCampaigns.push(dataSnapshot);
+        }),
+      );
+    }
+
+    console.log(userCampaigns);
+    CompanyStore.campaigns = userCampaigns; // update Company Store
+    return userCampaigns;
+  }
+}

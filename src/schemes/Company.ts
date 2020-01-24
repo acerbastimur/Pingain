@@ -24,6 +24,7 @@ export default interface Company {
   city: string;
   mail: string;
   companyFeatures: Array<CompanyFeatures>;
+  campaigns: Array<string>;
   companyImages: Array<string>;
   companyLogo: string;
   companyName: string;

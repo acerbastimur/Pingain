@@ -17,6 +17,8 @@ import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/AuthRole.enum';
 import GetCompanyInfoService from '../../services/company/General/GetCompanyInfo.service';
+import GetCompanyCampaignsService from '../../services/company/General/GetCompanyCampaigns.service';
+import CompanyStore from '../../stores/Company.store';
 
 export interface LoadingProps {
   isLoading: boolean;
@@ -93,7 +95,9 @@ export default class Loading extends React.Component<LoadingProps, any> {
           // check if company fillfulled their information
           const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile(user);
           if (isCompanyProfileFilled) {
-            navigation.navigate('CompanyTabNavigation');
+            GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
+              navigation.navigate('CompanyTabNavigation');
+            });
           } else {
             navigation.navigate('GetCompanyInfo');
           }
