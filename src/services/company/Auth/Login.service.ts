@@ -18,4 +18,21 @@ export default class LoginService {
         });
     });
   }
+
+  static setNewPassword(newPassword: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      auth()
+        .currentUser.updatePassword(newPassword)
+        .then(e => {
+          console.log(e);
+
+          resolve();
+        })
+        .catch(err => {
+          console.log(err);
+
+          reject();
+        });
+    });
+  }
 }

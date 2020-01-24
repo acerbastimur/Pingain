@@ -1,1 +1,0 @@
-tüm form için editle

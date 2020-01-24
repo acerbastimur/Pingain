@@ -11,14 +11,17 @@
 import * as React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
 
 import ImageUploadStyle from './ImageUpload.style';
+import CompanyStore from '../../stores/Company.store';
 
 export interface ImageUploadProps {
   defaultImage?: any;
   hideText?: boolean;
   borderColor?: string;
   borderWidth?: number;
+  companyLogo?: boolean;
 }
 
 export interface ImageUploadState {
@@ -38,7 +41,9 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
-      console.log('Response = ', response.uri);
+      const {companyLogo} = this.props;
+
+      // console.log('Response = ', response.uri);
 
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -55,6 +60,11 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
         this.setState({
           imageSource: source,
         });
+
+        if (companyLogo) {
+          CompanyStore.newCompanyLogoUri = source;
+          //  console.log(CompanyStore);
+        }
       }
     });
   };
@@ -62,8 +72,23 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
   constructor(props: ImageUploadProps) {
     super(props);
     this.state = {
-      imageSource: props.defaultImage ? props.defaultImage : null,
+      imageSource: null,
     };
+  }
+
+  componentDidMount() {
+    const {defaultImage} = this.props;
+    console.log('image upload mounted', defaultImage);
+
+    if (!defaultImage) return;
+
+    storage()
+      .ref()
+      .child(defaultImage)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({imageSource: url});
+      });
   }
 
   public render() {

@@ -19,7 +19,7 @@ export interface CompanyStatistics {
 }
 
 export default interface Company {
-  adress: string;
+  address: string;
   adminName: string;
   city: string;
   mail: string;
