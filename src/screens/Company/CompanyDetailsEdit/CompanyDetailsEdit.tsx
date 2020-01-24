@@ -1,5 +1,5 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable no-param-reassign */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */

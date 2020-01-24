@@ -10,28 +10,23 @@ import {observer} from 'mobx-react';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
+import CompanyStore from '../../../../stores/Company.store';
 
 export interface HomeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export interface HomeState {
-  noCampaign: boolean;
-}
 
 @observer
-export default class Home extends React.Component<HomeProps, HomeState> {
+export default class Home extends React.Component<HomeProps, any> {
   style = HomeStyle;
 
   constructor(props: HomeProps) {
     super(props);
-    this.state = {
-      noCampaign: false,
-    };
+    this.state = {};
   }
 
   public render() {
     const {navigation} = this.props;
-    const {noCampaign} = this.state;
 
     return (
       <View style={this.style.container}>
@@ -43,7 +38,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
             }}
           />
         </View>
-        {noCampaign ? (
+        {CompanyStore.campaigns ? (
           <NoCampaign navigation={navigation} />
         ) : (
           <ScrollView style={this.style.scrollViewStyle}>
