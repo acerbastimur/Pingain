@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
@@ -9,7 +10,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TextInput} from 'react-native';
+import {View, Text, Image, TextInput, ActivityIndicator} from 'react-native';
 import CheckBox from 'react-native-check-box';
 import * as Animatable from 'react-native-animatable';
 import {
@@ -22,61 +23,118 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Dropdown} from 'react-native-material-dropdown';
+import {observer} from 'mobx-react';
+import auth from '@react-native-firebase/auth';
 import CompanyDetailsEditStyle from './CompanyDetailsEdit.style';
 import Colors from '../../../styles/Colors';
-import Logo from '../../../common-components/Logo';
-import Button from '../../../common-components/Button';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';
 import ImageUpload from '../../../common-components/ImageUpload';
+import CompanyStore from '../../../stores/Company.store';
+import Button from '../../../common-components/Button';
+import Company from '../../../schemes/Company';
+import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
+import LoginService from '../../../services/company/Auth/Login.service';
 
 interface CompanyDetailsEditProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+interface CompanyDetailsEditState {
+  selectCheckBox: boolean;
+  loading: boolean;
+  imageKeys: Array<number>;
+}
+interface CompanyDetailsForm {
+  cmpName: string;
+  managerName: string;
+  phoneNumber: string;
+  instaAccount: string;
+  address: string;
+  city: string;
+  password: string;
+  cmpFeatures: [];
+}
 
-export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEditProps> {
+@observer
+export default class CompanyDetailsEdit extends React.Component<
+  CompanyDetailsEditProps,
+  CompanyDetailsEditState
+> {
   style = CompanyDetailsEditStyle;
-
-  values = {
-    cmpName: '',
-    managerName: '',
-    phoneNumber: '',
-    instaAccount: '',
-    address: '',
-    city: '35',
-    password: '',
-    cmpFeatures: {
-      internet: false,
-      electricity: false,
-      animalFriendly: false,
-      matchStreaming: false,
-      selfService: false,
-      outdoor: false,
-      liveMusic: false,
-      packageService: false,
-      reservation: false,
-      quiteArea: false,
-    },
-  };
-
-  formErrors = null;
-
-  isFormValid = false;
 
   references = [];
 
+  companyImages = [null, null, null];
+
+  companyNewLogo = null;
+
   constructor(props: CompanyDetailsEditProps) {
     super(props);
-    this.state = {};
+    this.state = {selectCheckBox: false, loading: false, imageKeys: [0, 0, 0, 0]};
+    const {companyImages} = CompanyStore.companyDetails;
+    this.companyImages = companyImages || [null, null, null];
   }
 
-  handleSubmit = () => {
-    alert(JSON.stringify(this.values));
+  handleSubmit = async ({
+    address,
+    city,
+    cmpFeatures,
+    cmpName,
+    instaAccount,
+    managerName,
+    password,
+    phoneNumber,
+  }: CompanyDetailsForm) => {
+    if (password) {
+      LoginService.setNewPassword(password);
+    }
+
+    const newCompanyLogo = CompanyStore.newCompanyLogoUri;
+    this.setState({loading: true});
+    await SetCompanyInfoService.updateCompanyDetails(
+      cmpName,
+      managerName,
+      phoneNumber,
+      instaAccount,
+      address,
+      city,
+      cmpFeatures,
+      this.companyImages,
+      newCompanyLogo,
+    ).then(() => {
+      this.setState({
+        loading: false,
+      });
+      setTimeout(() => {
+        this.setState({imageKeys: new Array(4).fill(Math.random() * 100)});
+      }, 1000);
+    });
   };
 
   public render() {
     const {navigation} = this.props;
-    return (
+    const {selectCheckBox, loading, imageKeys} = this.state;
+    const {
+      companyName,
+      adminName,
+      address,
+      city,
+      companyFeatures = [],
+      companyImages,
+      companyLogo,
+      instagramAccount,
+      phoneNumber,
+    } = CompanyStore.companyDetails;
+
+    const {uid} = auth().currentUser;
+    console.table(companyImages);
+
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.pageContainer}>
         <View style={this.style.headerContainer}>
           <TabsHeader
@@ -85,31 +143,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
             rightTextColor={Colors.COMPANY}
             onLeftPress={() => {
               return null;
-            }}
-            onRightPress={() => {
-              if (this.isFormValid) {
-                this.handleSubmit();
-                return;
-              }
-
-              if (this.formErrors.cmpName) {
-                this.references.filter(t => t.name === 'cmpName')[0].ref.shake();
-              }
-              if (this.formErrors.managerName) {
-                this.references.filter(t => t.name === 'managerName')[0].ref.shake();
-              }
-              if (this.formErrors.phoneNumber) {
-                this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
-              }
-              if (this.formErrors.instaAccount) {
-                this.references.filter(t => t.name === 'instaAccount')[0].ref.shake();
-              }
-              if (this.formErrors.address) {
-                this.references.filter(t => t.name === 'address')[0].ref.shake();
-              }
-              if (this.formErrors.password) {
-                this.references.filter(t => t.name === 'password')[0].ref.shake();
-              }
             }}
           />
         </View>
@@ -126,35 +159,29 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
             </View>
             <View style={this.style.ppContainer}>
               <ImageUpload
+                key={imageKeys[0]}
                 hideText
                 borderColor={Colors.COMPANY}
                 borderWidth={2}
-                defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
+                defaultImage={companyLogo || null}
+                companyLogo
               />
             </View>
 
             <Formik
               validateOnMount
+              validateOnChange
+              key={imageKeys[0]}
+              validateOnBlur
               initialValues={{
-                cmpName: '',
-                managerName: '',
-                phoneNumber: '',
-                instaAccount: '',
-                address: '',
-                city: '35',
+                cmpName: companyName,
+                managerName: adminName,
+                phoneNumber,
+                instaAccount: instagramAccount,
+                address,
+                city,
                 password: '',
-                cmpFeatures: {
-                  internet: false,
-                  electricity: false,
-                  animalFriendly: false,
-                  matchStreaming: false,
-                  selfService: false,
-                  outdoor: false,
-                  liveMusic: false,
-                  packageService: false,
-                  reservation: false,
-                  quiteArea: false,
-                },
+                cmpFeatures: companyFeatures,
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -164,18 +191,14 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 managerName: Yup.string()
                   .min(2)
                   .required(),
-                phoneNumber: Yup.string().required(),
-                instaAccount: Yup.string()
-                  .min(2)
+                phoneNumber: Yup.string()
+                  .matches(/0[2-5](0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
                   .required(),
-                address: Yup.string()
-                  .min(8)
-                  .required(),
-                city: Yup.string().required(),
-                password: Yup.string()
-                  .min(6)
-                  .required(),
-                cmpFeatures: Yup.object(),
+                instaAccount: Yup.string().min(2),
+                address: Yup.string().min(8),
+                city: Yup.string(),
+                password: Yup.string().min(6),
+                cmpFeatures: Yup.array(),
               })}>
               {({
                 values,
@@ -185,11 +208,9 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                 setFieldTouched,
                 isValid,
                 setFieldValue,
+                validateForm,
+                handleSubmit,
               }) => {
-                this.values = values;
-                this.formErrors = errors;
-                this.isFormValid = isValid;
-
                 return (
                   <View style={this.style.formContainer}>
                     <View style={this.style.inputContainer}>
@@ -450,7 +471,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                           onChangeText={handleChange('password')}
                           onBlur={() => setFieldTouched('password')}
                           autoCapitalize="none"
-                          keyboardType="decimal-pad"
                           returnKeyType="done"
                           secureTextEntry
                           ref={ref => {
@@ -478,12 +498,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <View style={this.style.checkboxLine}>
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.internet) {
-                              return setFieldValue('cmpFeatures.internet', false);
+                            const isExist = values.cmpFeatures.indexOf(1) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 1);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.internet', true);
+                            values.cmpFeatures.push(1);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.internet}
+                          isChecked={values.cmpFeatures.indexOf(1) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="İnternet"
@@ -491,12 +514,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.electricity) {
-                              return setFieldValue('cmpFeatures.electricity', false);
+                            const isExist = values.cmpFeatures.indexOf(2) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 2);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.electricity', true);
+                            values.cmpFeatures.push(2);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.electricity}
+                          isChecked={values.cmpFeatures.indexOf(2) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Elektrik"
@@ -506,12 +532,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <View style={this.style.checkboxLine}>
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.animalFriendly) {
-                              return setFieldValue('cmpFeatures.animalFriendly', false);
+                            const isExist = values.cmpFeatures.indexOf(3) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 3);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.animalFriendly', true);
+                            values.cmpFeatures.push(3);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.animalFriendly}
+                          isChecked={values.cmpFeatures.indexOf(3) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Hayvan Sever"
@@ -519,12 +548,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.matchStreaming) {
-                              return setFieldValue('cmpFeatures.matchStreaming', false);
+                            const isExist = values.cmpFeatures.indexOf(4) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 4);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.matchStreaming', true);
+                            values.cmpFeatures.push(4);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.matchStreaming}
+                          isChecked={values.cmpFeatures.indexOf(4) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Maç Yayını"
@@ -534,12 +566,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <View style={this.style.checkboxLine}>
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.selfService) {
-                              return setFieldValue('cmpFeatures.selfService', false);
+                            const isExist = values.cmpFeatures.indexOf(5) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 5);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.selfService', true);
+                            values.cmpFeatures.push(5);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.selfService}
+                          isChecked={values.cmpFeatures.indexOf(5) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Self Servis"
@@ -547,12 +582,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.outdoor) {
-                              return setFieldValue('cmpFeatures.outdoor', false);
+                            const isExist = values.cmpFeatures.indexOf(6) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 6);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.outdoor', true);
+                            values.cmpFeatures.push(6);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.outdoor}
+                          isChecked={values.cmpFeatures.indexOf(6) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Dış Mekan"
@@ -562,12 +600,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <View style={this.style.checkboxLine}>
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.liveMusic) {
-                              return setFieldValue('cmpFeatures.liveMusic', false);
+                            const isExist = values.cmpFeatures.indexOf(7) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 7);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.liveMusic', true);
+                            values.cmpFeatures.push(7);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.liveMusic}
+                          isChecked={values.cmpFeatures.indexOf(7) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Canlı Müzik"
@@ -575,12 +616,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.packageService) {
-                              return setFieldValue('cmpFeatures.packageService', false);
+                            const isExist = values.cmpFeatures.indexOf(8) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 8);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.packageService', true);
+                            values.cmpFeatures.push(8);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.packageService}
+                          isChecked={values.cmpFeatures.indexOf(8) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Paket Servis"
@@ -590,12 +634,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       <View style={this.style.checkboxLine}>
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.reservation) {
-                              return setFieldValue('cmpFeatures.reservation', false);
+                            const isExist = values.cmpFeatures.indexOf(9) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 9);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.reservation', true);
+                            values.cmpFeatures.push(9);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.reservation}
+                          isChecked={values.cmpFeatures.indexOf(9) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Rezervasyon"
@@ -603,12 +650,15 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                         <CheckBox
                           onClick={() => {
-                            if (values.cmpFeatures.quiteArea) {
-                              return setFieldValue('cmpFeatures.quiteArea', false);
+                            const isExist = values.cmpFeatures.indexOf(10) !== -1;
+                            if (isExist) {
+                              values.cmpFeatures = values.cmpFeatures.filter(item => item !== 10);
+                              return this.setState({selectCheckBox: !selectCheckBox});
                             }
-                            return setFieldValue('cmpFeatures.quiteArea', true);
+                            values.cmpFeatures.push(10);
+                            return this.setState({selectCheckBox: !selectCheckBox});
                           }}
-                          isChecked={values.cmpFeatures.quiteArea}
+                          isChecked={values.cmpFeatures.indexOf(10) !== -1}
                           rightTextStyle={this.style.checkboxText}
                           checkBoxColor={Colors.SECONDARY}
                           rightText="Sessiz Ortam"
@@ -616,7 +666,6 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                         />
                       </View>
                     </View>
-
                     <View style={this.style.cmpImagesUploadContainer}>
                       <Text style={this.style.inputText}>İşletme Görselleri</Text>
                       <Text style={this.style.inputSubText}>
@@ -624,15 +673,83 @@ export default class CompanyDetailsEdit extends React.Component<CompanyDetailsEd
                       </Text>
                       <View style={this.style.cmpImagesContainer}>
                         <View style={this.style.profileImage}>
-                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                          <ImageUpload
+                            key={imageKeys[1]}
+                            hideText
+                            borderColor={Colors.PRIMARY}
+                            borderWidth={1}
+                            defaultImage={
+                              companyImages && companyImages[0] ? companyImages[0] : null
+                            }
+                            ref={ref => {
+                              if (ref && ref.state && ref.state.imageSource) {
+                                this.companyImages[0] = ref.state.imageSource;
+                              }
+                            }}
+                          />
                         </View>
                         <View style={this.style.profileImage}>
-                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                          <ImageUpload
+                            key={imageKeys[2]}
+                            hideText
+                            borderColor={Colors.PRIMARY}
+                            borderWidth={1}
+                            defaultImage={
+                              companyImages && companyImages.length > 1 && companyImages[1]
+                                ? companyImages[1]
+                                : null
+                            }
+                            ref={ref => {
+                              if (ref && ref.state && ref.state.imageSource) {
+                                this.companyImages[1] = ref.state.imageSource;
+                              }
+                            }}
+                          />
                         </View>
                         <View style={this.style.profileImage}>
-                          <ImageUpload hideText borderColor={Colors.PRIMARY} borderWidth={1} />
+                          <ImageUpload
+                            key={imageKeys[3]}
+                            hideText
+                            borderColor={Colors.PRIMARY}
+                            borderWidth={1}
+                            defaultImage={
+                              companyImages && companyImages.length > 2 ? companyImages[2] : null
+                            }
+                            ref={ref => {
+                              if (ref && ref.state && ref.state.imageSource) {
+                                this.companyImages[2] = ref.state.imageSource;
+                              }
+                            }}
+                          />
                         </View>
                       </View>
+                    </View>
+                    <View style={this.style.buttonContainer}>
+                      <Button
+                        text="Devam"
+                        backgroundColor={Colors.COMPANY}
+                        textColor="#fff"
+                        onPress={() => {
+                          validateForm();
+                          if (isValid) {
+                            handleSubmit();
+                            return;
+                          }
+
+                          if (errors.cmpName) {
+                            this.references.filter(t => t.name === 'cmpName')[0].ref.shake();
+                          }
+                          if (errors.instaAccount) {
+                            this.references.filter(t => t.name === 'instaAccount')[0].ref.shake();
+                          }
+                          if (errors.managerName) {
+                            this.references.filter(t => t.name === 'managerName')[0].ref.shake();
+                          }
+                          if (errors.phoneNumber) {
+                            this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+                          }
+                        }}
+                      />
                     </View>
                   </View>
                 );
