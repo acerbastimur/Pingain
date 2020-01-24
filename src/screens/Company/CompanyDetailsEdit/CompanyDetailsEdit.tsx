@@ -171,6 +171,7 @@ export default class CompanyDetailsEdit extends React.Component<
             <Formik
               validateOnMount
               validateOnChange
+              key={imageKeys[0]}
               validateOnBlur
               initialValues={{
                 cmpName: companyName,
