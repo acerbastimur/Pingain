@@ -7,6 +7,7 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import {Card} from 'react-native-shadow-cards';
 
 import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
@@ -27,6 +28,8 @@ export default class Home extends React.Component<HomeProps, any> {
 
   public render() {
     const {navigation} = this.props;
+    const campaigns = toJS(CompanyStore.campaigns);
+    console.table(campaigns);
 
     return (
       <View style={this.style.container}>
@@ -38,54 +41,113 @@ export default class Home extends React.Component<HomeProps, any> {
             }}
           />
         </View>
-        {CompanyStore.campaigns ? (
-          <NoCampaign navigation={navigation} />
-        ) : (
+        {campaigns && campaigns.length > 0 ? (
           <ScrollView style={this.style.scrollViewStyle}>
             <Text style={this.style.headerText}>Anasayfa</Text>
             <View style={this.style.campaignsContainer}>
-              <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
-                  <Image
-                    style={this.style.cardBodyItemIcon}
-                    source={require('../../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={this.style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-                  <View style={this.style.cardBodyItemCount}>
-                    <Text style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
-                      5
-                    </Text>
-                  </View>
-                </View>
-              </Card>
-              <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
-                  <Image
-                    style={this.style.cardBodyItemIcon}
-                    source={require('../../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={this.style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-                  <View style={this.style.cardBodyItemCount}>
-                    <Text style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
-                      5
-                    </Text>
-                  </View>
-                </View>
-              </Card>
-              <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <View style={this.style.otherCardBodyItem}>
-                  <Image
-                    style={this.style.cardBodyItemIcon}
-                    source={require('../../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={this.style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-                  <View style={this.style.cardBodyItemCount}>
-                    <Text style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
-                      5
-                    </Text>
-                  </View>
-                </View>
-              </Card>
+              {campaigns.map(campaign => {
+                switch (campaign.campaignType) {
+                  case 1:
+                    return (
+                      <Card
+                        key={Math.random() * 100}
+                        elevation={6}
+                        opacity={0.15}
+                        style={this.style.card}>
+                        <View style={this.style.otherCardBodyItem}>
+                          <Image
+                            style={this.style.cardBodyItemIcon}
+                            source={require('../../../../assets/image/User/coffeeIcon.png')}
+                          />
+                          <Text style={this.style.otherCardBodyItemName}>
+                            {campaign.campaignName}
+                          </Text>
+                          <View style={this.style.cardBodyItemCount}>
+                            <Text
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemCoffee]}>
+                              5
+                            </Text>
+                          </View>
+                        </View>
+                      </Card>
+                    );
+                  case 2:
+                    return (
+                      <Card
+                        key={Math.random() * 100}
+                        elevation={6}
+                        opacity={0.15}
+                        style={this.style.card}>
+                        <View style={this.style.otherCardBodyItem}>
+                          <Image
+                            style={this.style.cardBodyItemIcon}
+                            source={require('../../../../assets/image/User/mealIcon.png')}
+                          />
+                          <Text style={this.style.otherCardBodyItemName}>
+                            {campaign.campaignName}
+                          </Text>
+                          <View style={this.style.cardBodyItemCount}>
+                            <Text
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
+                              5
+                            </Text>
+                          </View>
+                        </View>
+                      </Card>
+                    );
+                  case 3:
+                    return (
+                      <Card
+                        key={Math.random() * 100}
+                        elevation={6}
+                        opacity={0.15}
+                        style={this.style.card}>
+                        <View style={this.style.otherCardBodyItem}>
+                          <Image
+                            style={this.style.cardBodyItemIcon}
+                            source={require('../../../../assets/image/User/dessertIcon.png')}
+                          />
+                          <Text style={this.style.otherCardBodyItemName}>
+                            {campaign.campaignName}
+                          </Text>
+                          <View style={this.style.cardBodyItemCount}>
+                            <Text
+                              style={[
+                                this.style.cardBodyItemCountText,
+                                this.style.cardItemDessert,
+                              ]}>
+                              5
+                            </Text>
+                          </View>
+                        </View>
+                      </Card>
+                    );
+                  default:
+                    return (
+                      <Card
+                        key={Math.random() * 100}
+                        elevation={6}
+                        opacity={0.15}
+                        style={this.style.card}>
+                        <View style={this.style.otherCardBodyItem}>
+                          <Image
+                            style={this.style.cardBodyItemIcon}
+                            source={require('../../../../assets/image/User/mealIcon.png')}
+                          />
+                          <Text style={this.style.otherCardBodyItemName}>
+                            {campaign.campaignName}
+                          </Text>
+                          <View style={this.style.cardBodyItemCount}>
+                            <Text
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
+                              5
+                            </Text>
+                          </View>
+                        </View>
+                      </Card>
+                    );
+                }
+              })}
             </View>
             <View style={this.style.actionsContainer}>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
@@ -162,6 +224,8 @@ export default class Home extends React.Component<HomeProps, any> {
               </Card>
             </View>
           </ScrollView>
+        ) : (
+          <NoCampaign navigation={navigation} />
         )}
       </View>
     );

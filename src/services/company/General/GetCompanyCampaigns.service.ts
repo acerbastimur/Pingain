@@ -4,6 +4,7 @@ import storage from '@react-native-firebase/storage';
 import Company from '../../../schemes/Company';
 import CompanyStore from '../../../stores/Company.store';
 import {Campaign} from '../../../schemes/CompanyCampaign';
+import GetCompanyInfoService from './GetCompanyInfo.service';
 
 export default class GetCompanyCampaignsService {
   static async getAllCompanyCampaigns(): Promise<Array<Campaign>> {
@@ -15,6 +16,7 @@ export default class GetCompanyCampaignsService {
     const dataSnapshot = (await companyColRef.get()).data();
     console.log(dataSnapshot); */
     const {uid} = auth().currentUser;
+    await GetCompanyInfoService.getCompanyInfo();
     const userCampaignKeys = CompanyStore.companyDetails.campaigns;
     const userCampaigns: Array<Campaign> = [];
     if (userCampaignKeys) {
@@ -29,7 +31,7 @@ export default class GetCompanyCampaignsService {
       );
     }
 
-    console.log(userCampaigns);
+    console.log('campaigns are', userCampaigns);
     CompanyStore.campaigns = userCampaigns; // update Company Store
     return userCampaigns;
   }

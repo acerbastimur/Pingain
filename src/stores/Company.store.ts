@@ -13,6 +13,7 @@ class GeneralStore {
   constructor() {
     console.log('Company Store was initialized!');
   }
+  
 }
 
 export default new GeneralStore();
