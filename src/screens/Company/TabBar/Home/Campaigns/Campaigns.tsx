@@ -174,33 +174,6 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                         </Card>
                       );
                   }
-                  return (
-                    <Card
-                      elevation={6}
-                      opacity={0.15}
-                      key={Math.random() * 100}
-                      style={this.style.card}>
-                      <TouchableOpacity
-                        style={this.style.otherCardBodyItem}
-                        onPress={() => {
-                          navigation.navigate('CampaignCreate', {edit: true, campaign});
-                        }}>
-                        <Image
-                          style={this.style.cardBodyItemIcon}
-                          source={require('../../../../../assets/image/User/mealIcon.png')}
-                        />
-                        <Text style={this.style.otherCardBodyItemName}>
-                          {campaign.campaignName}
-                        </Text>
-                        <View style={this.style.arrowContainer}>
-                          <Image
-                            style={this.style.arrow}
-                            source={require('../../../../../assets/image/Company/statisticsArrow.png')}
-                          />
-                        </View>
-                      </TouchableOpacity>
-                    </Card>
-                  );
                 })
               : null}
           </View>
