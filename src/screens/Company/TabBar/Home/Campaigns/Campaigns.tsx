@@ -9,10 +9,12 @@ import {
   ScrollView,
 } from 'react-navigation';
 import {Card} from 'react-native-shadow-cards';
+import {toJS} from 'mobx';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 import Button from '../../../../../common-components/Button';
 import Colors from '../../../../../styles/Colors';
+import CompanyStore from '../../../../../stores/Company.store';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -28,6 +30,7 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
 
   public render() {
     const {navigation} = this.props;
+    const campaigns = toJS(CompanyStore.campaigns);
 
     return (
       <View style={this.style.container}>
@@ -52,55 +55,127 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
             </Text>
           </View>
           <View style={this.style.campaignCardsContainer}>
-            <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <TouchableOpacity
-                style={this.style.otherCardBodyItem}
-                onPress={() => {
-                  navigation.navigate('CampaignCreate', {edit: true});
-                }}>
-                <Image
-                  style={this.style.cardBodyItemIcon}
-                  source={require('../../../../../assets/image/User/mealIcon.png')}
-                />
-                <Text style={this.style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-                <View style={this.style.arrowContainer}>
-                  <Image
-                    style={this.style.arrow}
-                    source={require('../../../../../assets/image/Company/statisticsArrow.png')}
-                  />
-                </View>
-              </TouchableOpacity>
-            </Card>
-            <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
-                <Image
-                  style={this.style.cardBodyItemIcon}
-                  source={require('../../../../../assets/image/User/coffeeIcon.png')}
-                />
-                <Text style={this.style.otherCardBodyItemName}>Filtre Kahve Kampanyası</Text>
-                <View style={this.style.arrowContainer}>
-                  <Image
-                    style={this.style.arrow}
-                    source={require('../../../../../assets/image/Company/coffeeArrow.png')}
-                  />
-                </View>
-              </View>
-            </Card>
-            <Card elevation={8} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
-                <Image
-                  style={this.style.cardBodyItemIcon}
-                  source={require('../../../../../assets/image/User/dessertIcon.png')}
-                />
-                <Text style={this.style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
-                <View style={this.style.arrowContainer}>
-                  <Image
-                    style={this.style.arrow}
-                    source={require('../../../../../assets/image/Company/dessertArrow.png')}
-                  />
-                </View>
-              </View>
-            </Card>
+            {campaigns
+              ? campaigns.map(campaign => {
+                  switch (campaign.campaignType) {
+                    case 1:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}>
+                          <TouchableOpacity
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', {edit: true, campaign});
+                            }}>
+                            <Image
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/coffeeIcon.png')}
+                            />
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <Image
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/coffeeArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+
+                    case 2:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}>
+                          <TouchableOpacity
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', {edit: true, campaign});
+                            }}>
+                            <Image
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/dessertIcon.png')}
+                            />
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <Image
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/dessertArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+
+                    case 3:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}>
+                          <TouchableOpacity
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', {edit: true, campaign});
+                            }}>
+                            <Image
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/mealIcon.png')}
+                            />
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <Image
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+
+                    default:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}>
+                          <TouchableOpacity
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', {edit: true, campaign});
+                            }}>
+                            <Image
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/mealIcon.png')}
+                            />
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <Image
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+                  }
+                })
+              : null}
           </View>
           <View style={this.style.btnContainer}>
             <Button

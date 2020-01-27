@@ -1,7 +1,8 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable consistent-return */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text, TextInput, Dimensions} from 'react-native';
+import {View, Image, Text, TextInput, Dimensions, ActivityIndicator} from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -11,13 +12,13 @@ import {
 import * as Animatable from 'react-native-animatable';
 import {Card} from 'react-native-shadow-cards';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
 import {Dropdown} from 'react-native-material-dropdown';
+import CreateCampaignService from '../../../../../../services/company/General/CreateCampaign.service';
 import CampaignCreateStyle from './CampaignCreate.style';
 import TabsHeader from '../../../../../../common-components/TabsHeader';
 import Button from '../../../../../../common-components/Button';
 import Colors from '../../../../../../styles/Colors';
+import {Campaign} from '../../../../../../schemes/CompanyCampaign';
 
 export interface CampaignCreateProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -27,12 +28,15 @@ export interface CampaignCreateState {
   actionCount: number;
   prizeCount: number;
   campaignType: number;
+  loading: boolean;
 }
 
 export default class CampaignCreate extends React.Component<
   CampaignCreateProps,
   CampaignCreateState
 > {
+  campaignNameRef = null;
+
   style = CampaignCreateStyle;
 
   references = [];
@@ -44,19 +48,70 @@ export default class CampaignCreate extends React.Component<
       actionCount: 7,
       prizeCount: 1,
       campaignType: 1,
+      loading: false,
     };
   }
 
-  handleSubmit = values => {
-    alert(JSON.stringify(values));
+  componentDidMount() {
+    const {navigation} = this.props;
+    const campaign: Campaign = navigation.getParam('campaign');
+    console.log(campaign);
+
+    if (campaign) {
+      this.setState({
+        campaignName: campaign.campaignName,
+        actionCount: campaign.actionCount,
+        campaignType: campaign.campaignType,
+        prizeCount: campaign.prizeCount,
+      });
+    }
+  }
+
+  handleSubmit = () => {
+    const {campaignName, actionCount, prizeCount, campaignType} = this.state;
+    const {navigation} = this.props;
+    const campaign: Campaign = navigation.getParam('campaign');
+
+    console.log({campaignName, actionCount, prizeCount, campaignType});
+    if (campaignName.length < 4) {
+      return this.campaignNameRef.shake();
+    }
+    this.setState({loading: true});
+
+    if (campaign) {
+      return CreateCampaignService.updateCampaign(
+        campaign.campaignId,
+        actionCount,
+        campaignName,
+        campaignType,
+        prizeCount,
+      ).then(() => {
+        navigation.navigate('Home');
+      });
+    }
+    return CreateCampaignService.newCampaign(
+      actionCount,
+      campaignName,
+      campaignType,
+      prizeCount,
+    ).then(() => {
+      navigation.navigate('Home');
+    });
   };
 
   public render() {
     const {navigation} = this.props;
-    const {campaignName, actionCount, prizeCount, campaignType} = this.state;
+    const {campaignName, actionCount, prizeCount, campaignType, loading} = this.state;
     const isItEditPage = navigation.getParam('edit');
+    const campaign: Campaign = navigation.getParam('campaign');
+    console.log(campaign);
 
-    return (
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
           <TabsHeader
@@ -76,13 +131,16 @@ export default class CampaignCreate extends React.Component<
           <View style={this.style.listHeader}>
             <Text style={this.style.listHeaderTextLight}>Müşterilerinin Müdavimi Olacağı</Text>
             <Text numberOfLines={1} style={this.style.listHeaderTextBold}>
-              Kampanyalar Oluştur
+              {campaign ? 'Kampanyanı Düzenle' : 'Kampanyalar Oluştur'}
             </Text>
           </View>
           <View style={this.style.inputsContainer}>
             <View style={this.style.inputContainer}>
               <Text style={this.style.inputText}>Kampanya Adı</Text>
-              <View>
+              <Animatable.View
+                ref={ref => {
+                  this.campaignNameRef = ref;
+                }}>
                 <TextInput
                   style={this.style.input}
                   placeholder="Örn: Filtre Kahve Kampanyası"
@@ -94,7 +152,7 @@ export default class CampaignCreate extends React.Component<
                   returnKeyType="next"
                   blurOnSubmit={false}
                 />
-              </View>
+              </Animatable.View>
             </View>
             <View style={this.style.inputContainer}>
               <Text style={this.style.inputText}>İşlem Sayısı</Text>
@@ -191,6 +249,9 @@ export default class CampaignCreate extends React.Component<
                   text={isItEditPage ? 'Kampanyayı Güncelle' : 'Kampanya Oluştur'}
                   textColor="#fff"
                   shadow
+                  onPress={() => {
+                    this.handleSubmit();
+                  }}
                 />
               </View>
               <View style={this.style.buttonContainer}>

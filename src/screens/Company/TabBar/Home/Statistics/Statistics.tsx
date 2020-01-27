@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Image, Text, TouchableOpacity, Dimensions, ActivityIndicator} from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -11,23 +11,43 @@ import {
 import {Card} from 'react-native-shadow-cards';
 import StatisticsStyle from './Statistics.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
+import GetCompanyInfoService from '../../../../../services/company/General/GetCompanyInfo.service';
+import CompanyStore from '../../../../../stores/Company.store';
 
 export interface StatisticsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+export interface StatisticsState {
+  loading: boolean;
+}
 
-export default class Statistics extends React.Component<StatisticsProps, any> {
+export default class Statistics extends React.Component<StatisticsProps, StatisticsState> {
   style = StatisticsStyle;
 
   constructor(props: StatisticsProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: false,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({loading: true});
+    GetCompanyInfoService.getCompanyInfo().then(() => {
+      this.setState({loading: false});
+    });
   }
 
   public render() {
     const {navigation} = this.props;
+    const {loading} = this.state;
 
-    return (
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
           <TabsHeader
@@ -52,41 +72,21 @@ export default class Statistics extends React.Component<StatisticsProps, any> {
           <View style={this.style.statisticsCardsContainer}>
             <Card elevation={6} opacity={0.15} style={this.style.card}>
               <View style={this.style.otherCardBodyItem}>
-                <Text style={this.style.otherCardBodyItemName}>Aylık Dağıtılan Pin Sayısı</Text>
+                <Text style={this.style.otherCardBodyItemName}>Toplam Dağıtılan Pin Sayısı</Text>
                 <View style={this.style.cardBodyItemCount}>
-                  <Text style={this.style.cardBodyItemCountText}>5</Text>
+                  <Text style={this.style.cardBodyItemCountText}>
+                    {CompanyStore.companyDetails.statistics.totalPinGiven}
+                  </Text>
                 </View>
               </View>
             </Card>
             <Card elevation={6} opacity={0.15} style={this.style.card}>
               <View style={this.style.otherCardBodyItem}>
-                <Text style={this.style.otherCardBodyItemName}>Aylık Dağıtılan Ödül Sayısı</Text>
+                <Text style={this.style.otherCardBodyItemName}>Toplam Dağıtılan Ödül Sayısı</Text>
                 <View style={this.style.cardBodyItemCount}>
-                  <Text style={this.style.cardBodyItemCountText}>5</Text>
-                </View>
-              </View>
-            </Card>
-            <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
-                <Text style={this.style.otherCardBodyItemName}>Aylık Profil Ziyareti</Text>
-                <View style={this.style.cardBodyItemCount}>
-                  <Text style={this.style.cardBodyItemCountText}>5</Text>
-                </View>
-              </View>
-            </Card>
-            <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
-                <Text style={this.style.otherCardBodyItemName}>Pingain Üzerinden Kazancım</Text>
-                <View style={this.style.cardBodyItemCount}>
-                  <Text style={this.style.cardBodyItemCountText}>5</Text>
-                </View>
-              </View>
-            </Card>
-            <Card elevation={6} opacity={0.15} style={this.style.card}>
-              <View style={this.style.otherCardBodyItem}>
-                <Text style={this.style.otherCardBodyItemName}>Aylık Dağıtılan Pin Sayısı</Text>
-                <View style={this.style.cardBodyItemCount}>
-                  <Text style={this.style.cardBodyItemCountText}>5</Text>
+                  <Text style={this.style.cardBodyItemCountText}>
+                    {CompanyStore.companyDetails.statistics.totalPrizeGiven}
+                  </Text>
                 </View>
               </View>
             </Card>

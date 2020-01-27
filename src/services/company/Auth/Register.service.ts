@@ -1,6 +1,8 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore, {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import {CompanyStatistics} from '../../../schemes/Company';
+import GeneralStore from '../../../stores/General.store';
+import AuthRole from '../../../schemes/AuthRole.enum';
 
 export default class RegisterService {
   static registerCompanyAuth(
@@ -11,6 +13,8 @@ export default class RegisterService {
       auth()
         .createUserWithEmailAndPassword(email, password)
         .then(async result => {
+          GeneralStore.authRole = AuthRole.Company;
+
           const userUid = result.user.uid;
           const date = firestore.FieldValue.serverTimestamp();
           await this.registerCompanyToDB(email, date);
@@ -45,7 +49,7 @@ export default class RegisterService {
         })
         .then(result => {
           console.log('ok');
-
+          console.log(' write db', Date.now());
           resolve();
         })
         .catch(err => {

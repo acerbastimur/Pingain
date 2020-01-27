@@ -7,6 +7,7 @@ export interface Campaign {
   companyId: string;
   currentQrId: string;
   prizeCount: number;
+  campaignId: string;
 }
 
 export interface CampaignTransactions {
