@@ -35,6 +35,7 @@ interface RegisterForm {
   password: string;
   passwordConfirm: string;
 }
+
 export default class CompanyRegister extends React.Component<
   CompanyRegisterProps,
   CompanyRegisterState
