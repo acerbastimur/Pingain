@@ -3,7 +3,7 @@ import AuthRole from '../schemes/AuthRole.enum';
 import Company from '../schemes/Company';
 import {Campaign} from '../schemes/CompanyCampaign';
 
-class GeneralStore {
+class CompanyStore {
   @observable companyDetails: Company = null;
 
   @observable newCompanyLogoUri: string = null;
@@ -15,4 +15,4 @@ class GeneralStore {
   }
 }
 
-export default new GeneralStore();
+export default new CompanyStore();

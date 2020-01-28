@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
@@ -9,7 +10,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -22,35 +23,57 @@ import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
 import CITIES from '../../../assets/constants/Cities';
+import SetUserInfoService from '../../../services/user/Auth/SetUserInfo.service';
 
 interface GetUserInfoProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class GetUserInfo extends React.Component<GetUserInfoProps> {
+
+interface GetUserInfoState {
+  isLoading: boolean;
+}
+
+export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUserInfoState> {
   style = GetUserInfoStyle;
+
+  imageUploadRef = null;
 
   references = [];
 
   constructor(props: GetUserInfoProps) {
     super(props);
-    this.state = {};
+    this.state = {isLoading: false};
   }
 
-  handleSubmit = (values: any) => {
+  handleSubmit = (name: string, surname: string, phoneNumber: string, city: string) => {
     const {navigation} = this.props;
-    navigation.navigate('UserTabNavigation');
+    const logoUri = this.imageUploadRef.state.imageSource;
+    this.setState({isLoading: true});
+    SetUserInfoService.setUserInfo(name, surname, phoneNumber, city, logoUri).then(() => {
+      navigation.navigate('UserTabNavigation');
+    });
   };
 
   public render() {
     const {navigation} = this.props;
-    return (
+    const {isLoading} = this.state;
+    return isLoading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
         scrollEnabled={false}>
         <View style={this.style.container}>
           <View style={this.style.uploadPhotoContainer}>
             <View style={this.style.uploadPhotoItem}>
-              <ImageUpload />
+              <ImageUpload
+                ref={ref => {
+                  this.imageUploadRef = ref;
+                }}
+              />
             </View>
           </View>
           <View style={this.style.inputsContainer}>
@@ -62,7 +85,9 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps> {
                 phoneNumber: '',
                 city: '35',
               }}
-              onSubmit={this.handleSubmit}
+              onSubmit={({name, surname, phoneNumber, city}) =>
+                this.handleSubmit(name, surname, phoneNumber, city)
+              }
               validationSchema={Yup.object().shape({
                 name: Yup.string()
                   .min(2)
