@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -28,6 +28,7 @@ interface CompanyLoginProps {
 
 interface CompanyLoginState {
   isErrorModalActive: boolean;
+  loading: boolean;
 }
 
 interface RegisterForm {
@@ -42,7 +43,7 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
 
   constructor(props: CompanyLoginProps) {
     super(props);
-    this.state = {isErrorModalActive: false};
+    this.state = {isErrorModalActive: false, loading: false};
   }
 
   handleSubmit = ({email, password}: RegisterForm) => {
@@ -53,15 +54,20 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
       })
       .catch(err => {
         console.log('Error on register');
-        this.setState({isErrorModalActive: true});
+        this.setState({isErrorModalActive: true, loading: false});
       });
   };
 
   public render() {
     const {navigation} = this.props;
-    const {isErrorModalActive} = this.state;
+    const {isErrorModalActive, loading} = this.state;
 
-    return (
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
         scrollEnabled={false}>
