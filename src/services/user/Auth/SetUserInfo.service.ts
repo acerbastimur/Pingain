@@ -1,3 +1,4 @@
+import {UserStatistics} from './../../../schemes/User';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -15,6 +16,7 @@ export default class SetUserInfoService {
       const userUid = auth().currentUser.uid;
       const uploadLogo = await this.uploadProfilePhotoToStorage(profilePhotoUri, userUid);
 
+      const statistics: UserStatistics = {totalPinEarned: 0, totalPrizeEarned: 0};
       const currentUserCollection = firestore()
         .collection('users')
         .doc(userUid);
@@ -26,6 +28,7 @@ export default class SetUserInfoService {
           city,
           phoneNumber,
           profilePhoto: uploadLogo.metadata.fullPath,
+          statistics,
         })
         .then(() => {
           resolve(true);
