@@ -1,16 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, TouchableOpacity, Text, Image} from 'react-native';
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationParams,
-  NavigationActions,
-  StackActions,
-} from 'react-navigation';
-import TabsHeaderStyle from './TabsHeader.style';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {NavigationActions, NavigationScreenProp} from 'react-navigation';
 import Logo from '../Logo';
+import TabsHeaderStyle from './TabsHeader.style';
 
 interface TabsHeaderProps {
   navigation: NavigationScreenProp<any, any>;
@@ -20,26 +14,26 @@ interface TabsHeaderProps {
   onRightPress?: () => void;
   onLeftPress?: () => void;
 }
-const TabsHeader = ({
-  navigation,
-  rightButtonText,
-  rightEditIcon,
-  onLeftPress,
-  onRightPress,
-  rightTextColor,
-}: TabsHeaderProps) => {
-  const s = TabsHeaderStyle;
-  const rightComponent = () => {
+class TabsHeader extends React.Component<TabsHeaderProps> {
+  s = TabsHeaderStyle;
+
+  rightComponent = () => {
+    const {rightButtonText, rightTextColor, rightEditIcon} = this.props;
     if (rightButtonText) {
-      return <Text style={[s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
+      return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
     }
     if (rightEditIcon) {
-      return <Image source={require('../../assets/image/editIcon.png')} style={s.image} />;
+      return <Image source={require('../../assets/image/editIcon.png')} style={this.s.image} />;
     }
 
-    return <Image source={require('../../assets/image/User/profileImage.png')} style={s.image} />;
+    return (
+      <Image source={require('../../assets/image/User/profileImage.png')} style={this.s.image} />
+    );
   };
-  const leftComponent = () => {
+
+  leftComponent = () => {
+    const {navigation, onLeftPress} = this.props;
+
     if (
       navigation.state.routeName === 'CampaignsHome' ||
       navigation.state.routeName === 'QrReadHome' ||
@@ -49,36 +43,40 @@ const TabsHeader = ({
     ) {
       return (
         <TouchableOpacity>
-          <Image source={require('../../assets/image/User/searchIcon.png')} style={s.image} />
+          <Image source={require('../../assets/image/User/searchIcon.png')} style={this.s.image} />
         </TouchableOpacity>
       );
     }
 
     return (
       <TouchableOpacity
-        style={s.backButtonContainer}
+        style={this.s.backButtonContainer}
         onPress={() => {
           console.log(navigation);
           onLeftPress();
           navigation.dispatch(NavigationActions.back());
         }}>
-        <Image source={require('../../assets/image/backIcon.png')} style={s.backIcon} />
+        <Image source={require('../../assets/image/backIcon.png')} style={this.s.backIcon} />
       </TouchableOpacity>
     );
   };
 
-  return (
-    <View style={s.container}>
-      {leftComponent()}
-      <View style={s.logoContainer} pointerEvents="box-none">
-        <Logo width={30} />
+  render() {
+    const {navigation, rightButtonText, onRightPress} = this.props;
+
+    return (
+      <View style={this.s.container}>
+        {this.leftComponent()}
+        <View style={this.s.logoContainer} pointerEvents="box-none">
+          <Logo width={30} />
+        </View>
+        <TouchableOpacity
+          style={[rightButtonText ? this.s.rightTextContainer : this.s.imageContainer]}
+          onPress={onRightPress}>
+          {this.rightComponent()}
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={[rightButtonText ? s.rightTextContainer : s.imageContainer]}
-        onPress={onRightPress}>
-        {rightComponent()}
-      </TouchableOpacity>
-    </View>
-  );
-};
+    );
+  }
+}
 export default TabsHeader;

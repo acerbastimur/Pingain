@@ -1,6 +1,6 @@
 export default interface User {
   city: string;
-  mail: string;
+  email: string;
   name: string;
   phoneNumber: string;
   profilePhoto: string;

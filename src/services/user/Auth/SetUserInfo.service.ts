@@ -1,7 +1,8 @@
-import {UserStatistics} from './../../../schemes/User';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {UserStatistics} from '../../../schemes/User';
+import GetUserInfoService from '../General/GetUserInfo.service';
 
 export default class SetUserInfoService {
   static setUserInfo(
@@ -59,50 +60,39 @@ export default class SetUserInfoService {
     return ref.put(blob);
   }
 
-  /*  static updateUserDetails(
-    companyName: string,
-    adminName: string,
+  static updateUserDetails(
+    name: string,
+    surname: string,
     phoneNumber: string,
-    instagramAccount: string,
-    address = '',
-    city = '35',
-    companyFeatures: [],
-    companyImages: any,
-    companyLogo: string,
+    city: string,
+    userLogo: string,
   ): Promise<boolean> {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
-      const companyUid = auth().currentUser.uid;
+      const {uid} = auth().currentUser;
 
-      if (companyLogo) {
-        const uploadCompanyLogo = await this.uploadCompanyLogoToStorage(companyLogo, companyUid);
+      if (userLogo) {
+        const uploadCompanyLogo = await this.uploadProfilePhotoToStorage(userLogo, uid);
       }
-      const uploadedCompanyImages = await this.uploadCompanyPhotosToStorage(
-        companyImages,
-        companyUid,
-      );
-      const companyLogoPath = `companies/${companyUid}/companyLogo.png`;
 
-      const currentCompanyCollection = firestore()
-        .collection('companies')
-        .doc(companyUid);
+      const userLogoPath = `users/${uid}/profilePhoto.png`;
 
-      await currentCompanyCollection
+      const currentUserCollection = firestore()
+        .collection('users')
+        .doc(uid);
+
+      await currentUserCollection
         .update({
-          adminName,
-          companyName,
-          instagramAccount,
+          name,
+          surname,
           phoneNumber,
-          companyFeatures,
-          companyImages: uploadedCompanyImages,
           city,
-          address,
-          companyLogo: companyLogoPath,
+          profilePhoto: userLogoPath,
         })
         .then(() => {
-          GetCompanyInfoService.getCompanyInfo(); // to update store
+          GetUserInfoService.getUserInfo(); // to update store
         });
       resolve(true);
     });
-  } */
+  }
 }

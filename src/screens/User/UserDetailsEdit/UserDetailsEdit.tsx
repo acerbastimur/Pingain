@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {
   NavigationScreenProp,
@@ -28,63 +28,68 @@ import Button from '../../../common-components/Button';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';
 import ImageUpload from '../../../common-components/ImageUpload';
+import UserStore from '../../../stores/User.store';
+import LoginService from '../../../services/user/Auth/Login.service';
+import SetUserInfoService from '../../../services/user/Auth/SetUserInfo.service';
 
 interface UserDetailsEditProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+interface UserDetailsEditState {
+  loading: boolean;
+}
+interface UserDetailsForm {
+  name: string;
+  surname: string;
+  password?: '';
+  phoneNumber: string;
+  city: string;
+}
 
-export default class UserDetailsEdit extends React.Component<UserDetailsEditProps> {
+export default class UserDetailsEdit extends React.Component<
+  UserDetailsEditProps,
+  UserDetailsEditState
+> {
   style = UserDetailsEditStyle;
-
-  values = {name: null, surname: null, email: null, password: null, phoneNumber: null};
-
-  formErrors = null;
-
-  isFormValid = false;
 
   references = [];
 
   constructor(props: UserDetailsEditProps) {
     super(props);
-    this.state = {};
+    this.state = {loading: false};
   }
 
-  handleSubmit = () => {
-    alert(JSON.stringify(this.values));
+  handleSubmit = async ({name, surname, password, phoneNumber, city}: UserDetailsForm) => {
+    if (password) {
+      LoginService.setNewPassword(password);
+    }
+
+    const newUserLogo = UserStore.newCompanyLogoUri;
+    this.setState({loading: true});
+    await SetUserInfoService.updateUserDetails(name, surname, phoneNumber, city, newUserLogo).then(
+      () => {
+        this.setState({
+          loading: false,
+        });
+      },
+    );
   };
 
   public render() {
     const {navigation} = this.props;
-    return (
+    const {loading} = this.state;
+    const {name, surname, email, phoneNumber, city, profilePhoto} = UserStore.userDetails;
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.pageContainer}>
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
-            rightButtonText="Kaydet"
-            onRightPress={() => {
-              /* navigation.navigate('UserDetails'); */
-
-              if (this.isFormValid) {
-                this.handleSubmit();
-                return;
-              }
-
-              if (this.formErrors.name) {
-                this.references.filter(t => t.name === 'name')[0].ref.shake();
-              }
-              if (this.formErrors.surname) {
-                this.references.filter(t => t.name === 'surname')[0].ref.shake();
-              }
-              if (this.formErrors.email) {
-                this.references.filter(t => t.name === 'email')[0].ref.shake();
-              }
-              if (this.formErrors.password) {
-                this.references.filter(t => t.name === 'password')[0].ref.shake();
-              }
-              if (this.formErrors.phoneNumber) {
-                this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
-              }
-            }}
+            rightButtonText="Çıkış yap"
             onLeftPress={() => null}
           />
         </View>
@@ -94,28 +99,24 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
           scrollEnabled={false}>
           <ScrollView style={this.style.container}>
             <View style={this.style.ppContainer}>
-              {/*  <View style={this.style.ppOverflow}>
-               
-                <ImageUpload />
-              </View> */}
               <ImageUpload
                 hideText
                 borderColor={Colors.SECONDARY}
                 borderWidth={1}
-                defaultImage="https://www.gazetemag.com/wp-content/uploads/2018/10/sebnem-ferah.jpg"
+                defaultImage={profilePhoto}
+                userLogo
               />
             </View>
 
             <Formik
-              validateOnMount
               initialValues={{
-                name: '',
-                surname: '',
-                email: '',
+                name,
+                surname,
                 password: '',
-                phoneNumber: '',
-                city: '35',
+                phoneNumber,
+                city,
               }}
+              validateOnMount
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
                 name: Yup.string()
@@ -124,22 +125,23 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                 surname: Yup.string()
                   .min(2)
                   .required(),
-                email: Yup.string()
-                  .email()
-                  .required(),
-                password: Yup.string()
-                  .min(6)
-                  .required(),
+
+                password: Yup.string().min(6),
                 phoneNumber: Yup.string()
                   .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
                   .required(),
                 city: Yup.string().required(),
               })}>
-              {({values, handleChange, errors, touched, setFieldTouched, isValid}) => {
-                this.values = values;
-                this.formErrors = errors;
-                this.isFormValid = isValid;
-
+              {({
+                values,
+                handleChange,
+                errors,
+                touched,
+                setFieldTouched,
+                validateForm,
+                handleSubmit,
+                isValid,
+              }) => {
                 return (
                   <View style={this.style.formContainer}>
                     <View style={this.style.inputContainer}>
@@ -212,60 +214,15 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                             });
                           }}
                           onSubmitEditing={() => {
-                            const emailInput = this.references.filter(
-                              t => t.name === 'emailInput',
+                            const phoneInput = this.references.filter(
+                              t => t.name === 'phoneNumberInput',
                             )[0].ref;
 
-                            emailInput.focus();
+                            phoneInput.focus();
                           }}
                           blurOnSubmit={false}
                         />
                         {!errors.surname && touched.surname ? (
-                          <Image
-                            source={require('../../../assets/image/tick.png')}
-                            style={this.style.image}
-                          />
-                        ) : null}
-                      </Animatable.View>
-                    </View>
-                    <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Email</Text>
-                      <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'email')[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'email',
-                            ref,
-                          });
-                        }}>
-                        <TextInput
-                          style={this.style.input}
-                          placeholder="Email Giriniz"
-                          placeholderTextColor={Colors.SECONDARY}
-                          selectionColor={Colors.PRIMARY}
-                          value={values.email}
-                          onChangeText={handleChange('email')}
-                          onBlur={() => setFieldTouched('email')}
-                          autoCapitalize="none"
-                          returnKeyType="next"
-                          ref={ref => {
-                            const isThere = this.references.filter(t => t.name === 'emailInput')[0];
-                            if (isThere) return;
-                            this.references.push({
-                              name: 'emailInput',
-                              ref,
-                            });
-                          }}
-                          onSubmitEditing={() => {
-                            const passwordInput = this.references.filter(
-                              t => t.name === 'passwordInput',
-                            )[0].ref;
-
-                            passwordInput.focus();
-                          }}
-                        />
-                        {!errors.email && touched.email ? (
                           <Image
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
@@ -286,7 +243,7 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                         }}>
                         <TextInput
                           style={this.style.input}
-                          placeholder="Şifre Giriniz"
+                          placeholder="*******"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.password}
@@ -377,6 +334,35 @@ export default class UserDetailsEdit extends React.Component<UserDetailsEditProp
                           />
                         </View>
                       </Animatable.View>
+                    </View>
+                    <View style={this.style.buttonContainer}>
+                      <Button
+                        text="Devam"
+                        backgroundColor={Colors.COMPANY}
+                        textColor="#fff"
+                        onPress={() => {
+                          validateForm();
+                          if (isValid) {
+                            handleSubmit();
+                            return;
+                          }
+                          console.log(errors);
+
+                          if (errors.name) {
+                            this.references.filter(t => t.name === 'name')[0].ref.shake();
+                          }
+                          if (errors.surname) {
+                            this.references.filter(t => t.name === 'surname')[0].ref.shake();
+                          }
+
+                          if (errors.phoneNumber) {
+                            this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+                          }
+                          if (errors.password) {
+                            this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+                          }
+                        }}
+                      />
                     </View>
                   </View>
                 );
