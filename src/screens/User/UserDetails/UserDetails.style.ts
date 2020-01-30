@@ -11,6 +11,7 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
+  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   container: {height: '100%', paddingBottom: 80},
   headerContainer: {height: 56, paddingHorizontal: '6%'},
 
@@ -22,7 +23,7 @@ export default StyleSheet.create({
     marginRight: '4%',
   },
   scrollContainerStyle: {},
-  profileImage: {resizeMode: 'contain', width: 60, height: 60},
+  profileImage: {width: 60, height: 60},
 
   profileInfoContainer: {
     flexDirection: 'row',

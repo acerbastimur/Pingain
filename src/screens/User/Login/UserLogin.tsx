@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -19,28 +19,55 @@ import UserLoginStyle from './UserLogin.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
+import LoginService from '../../../services/user/Auth/Login.service';
+import ModalContainer from '../../../common-components/ModalContainer';
 
 interface UserLoginProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-export default class UserRegister extends React.Component<UserLoginProps> {
+
+interface UserLoginState {
+  isErrorModalActive: boolean;
+  loading: boolean;
+}
+
+interface RegisterForm {
+  email: string;
+  password: string;
+}
+export default class UserRegister extends React.Component<UserLoginProps, UserLoginState> {
   style = UserLoginStyle;
 
   references = [];
 
   constructor(props: UserLoginProps) {
     super(props);
-    this.state = {};
+    this.state = {isErrorModalActive: false, loading: false};
   }
 
-  handleSubmit = (values: any) => {
-    const {navigation} = this.props;
-    navigation.navigate('UserNavigator');
+  handleSubmit = ({email, password}: RegisterForm) => {
+    this.setState({loading: true});
+    LoginService.loginUserAuth(email, password)
+      .then(user => {
+        console.log('Succesfully');
+        console.log(user);
+      })
+      .catch(err => {
+        console.log('Error on register');
+        this.setState({isErrorModalActive: true, loading: false});
+      });
   };
 
   public render() {
     const {navigation} = this.props;
-    return (
+    const {isErrorModalActive, loading} = this.state;
+
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
         scrollEnabled={false}>
@@ -214,6 +241,14 @@ export default class UserRegister extends React.Component<UserLoginProps> {
             )}
           </Formik>
         </View>
+        <ModalContainer
+          isVisible={isErrorModalActive}
+          modalType={2}
+          errorMessage="Email veya şifre hatalı"
+          backButton={e => {
+            this.setState({isErrorModalActive: false});
+          }}
+        />
       </KeyboardAwareScrollView>
     );
   }

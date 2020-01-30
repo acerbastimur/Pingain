@@ -15,6 +15,7 @@ import storage from '@react-native-firebase/storage';
 
 import ImageUploadStyle from './ImageUpload.style';
 import CompanyStore from '../../stores/Company.store';
+import UserStore from '../../stores/User.store';
 
 export interface ImageUploadProps {
   defaultImage?: any;
@@ -22,6 +23,7 @@ export interface ImageUploadProps {
   borderColor?: string;
   borderWidth?: number;
   companyLogo?: boolean;
+  userLogo?: boolean;
 }
 
 export interface ImageUploadState {
@@ -41,7 +43,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
-      const {companyLogo} = this.props;
+      const {companyLogo, userLogo} = this.props;
 
       // console.log('Response = ', response.uri);
 
@@ -64,6 +66,9 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
         if (companyLogo) {
           CompanyStore.newCompanyLogoUri = source;
           //  console.log(CompanyStore);
+        }
+        if (userLogo) {
+          UserStore.newCompanyLogoUri = source;
         }
       }
     });

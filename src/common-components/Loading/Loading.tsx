@@ -19,6 +19,7 @@ import AuthRole from '../../schemes/AuthRole.enum';
 import GetCompanyInfoService from '../../services/company/General/GetCompanyInfo.service';
 import GetCompanyCampaignsService from '../../services/company/General/GetCompanyCampaigns.service';
 import CompanyStore from '../../stores/Company.store';
+import GetUserInfoService from '../../services/user/General/GetUserInfo.service';
 
 export interface LoadingProps {
   isLoading: boolean;
@@ -89,15 +90,30 @@ export default class Loading extends React.Component<LoadingProps, any> {
     return isCompanyProfileFilled;
   };
 
+  checkIfUserFilledProfile = async (user: FirebaseAuthTypes.User) => {
+    let isUserProfileFilled = false;
+    await GetUserInfoService.getUserInfo().then(userInfo => {
+      console.log('User info is ', userInfo);
+
+      if (userInfo.name) {
+        isUserProfileFilled = true;
+      }
+    });
+
+    return isUserProfileFilled;
+  };
+
   componentDidMount() {
     const {navigation} = this.props;
-   // auth().signOut();
+    // auth().signOut();
     auth().onAuthStateChanged(async user => {
       if (user) {
         await this.checkUserRole(user);
-
+        
         if (GeneralStore.authRole === AuthRole.Company) {
           // check if company fillfulled their information
+          console.log('Logged in as Company');
+
           const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile(user);
           if (isCompanyProfileFilled) {
             GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
@@ -106,7 +122,15 @@ export default class Loading extends React.Component<LoadingProps, any> {
           } else {
             navigation.navigate('GetCompanyInfo');
           }
-        } else {
+        } else if (GeneralStore.authRole === AuthRole.User) {
+          console.log('Logged in as User');
+
+          const isUserProfileFilled = await this.checkIfUserFilledProfile(user);
+          if (isUserProfileFilled) {
+            navigation.navigate('UserTabNavigation');
+          } else {
+            navigation.navigate('GetUserInfo');
+          }
           // check if user fillfulled their information
         }
       } else {

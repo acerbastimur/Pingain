@@ -11,6 +11,7 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
+  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   keyboardScrollContainer: {flex: 1},
   container: {
     flex: 1,
