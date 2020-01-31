@@ -12,9 +12,9 @@ export default class GetCompaniesService {
         .then(response => response.json())
         .then(responseJson => {
           resolve(responseJson);
-         })
+        })
         .catch(error => {
-           reject();
+          reject();
         });
     });
   }

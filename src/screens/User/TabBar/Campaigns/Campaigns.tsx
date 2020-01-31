@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
@@ -17,21 +17,32 @@ import CampaignDetails from '../../CampaignDetails';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
 import GetCompaniesService from '../../../../services/user/General/GetCompanies.service';
+import UserStore from '../../../../stores/User.store';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+export interface CampaignsState {
+  loading: boolean;
+}
 
 @observer
-export default class Campaigns extends React.Component<CampaignsProps, any> {
+export default class Campaigns extends React.Component<CampaignsProps, CampaignsState> {
   style = CampaignsStyle;
 
   constructor(props: CampaignsProps) {
     super(props);
-    this.state = {};
-    GetCompaniesService.getCompanies().then(companies => {
-      console.log(companies);
-    });
+    this.state = {loading: true};
+    GetCompaniesService.getCompanies()
+      .then(companies => {
+        console.log(companies);
+        UserStore.companies = companies.length > 0 ? companies : null;
+        this.setState({loading: false});
+      })
+      .catch(err => {
+        console.log('no company');
+        UserStore.companies = null;
+      });
   }
 
   flatListTextHeader = () => {
@@ -47,8 +58,15 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
 
   public render() {
     const {navigation} = this.props;
+    const {loading} = this.state;
+    const {companies} = UserStore;
 
-    return (
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
           <TabsHeader
@@ -63,10 +81,8 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={[{isCampaign1Done: true}, {isCampaign1Done: true}, {isCampaign1Done: false}]}
-            renderItem={({item}) => (
-              <CompanyCard navigation={navigation} isCampaign1Done={item.isCampaign1Done} />
-            )}
+            data={companies}
+            renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
           />
         </View>
         <RBSheet
