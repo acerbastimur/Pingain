@@ -1,6 +1,6 @@
 import {observable, toJS, computed} from 'mobx';
-import AuthRole from '../schemes/AuthRole.enum';
-import User from '../schemes/User';
+import AuthRole from '../schemes/general/AuthRole.enum';
+import User from '../schemes/user/User';
 
 class UserStore {
   @observable userDetails: User = null;
@@ -9,12 +9,10 @@ class UserStore {
 
   @observable newCompanyLogoUri: string = null;
 
+  @observable companies: string = null;
+
   constructor() {
     console.log('User Store was initialized!');
-  }
-
-  @computed getUserDetails(): User {
-    return this.userDetails;
   }
 }
 

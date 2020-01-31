@@ -16,6 +16,7 @@ import Colors from '../../../../styles/Colors';
 import CampaignDetails from '../../CampaignDetails';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
+import GetCompaniesService from '../../../../services/user/General/GetCompanies.service';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -28,6 +29,9 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
   constructor(props: CampaignsProps) {
     super(props);
     this.state = {};
+    GetCompaniesService.getCompanies().then(companies => {
+      console.log(companies);
+    });
   }
 
   flatListTextHeader = () => {

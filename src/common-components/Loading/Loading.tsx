@@ -15,7 +15,7 @@ import firestore from '@react-native-firebase/firestore';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
-import AuthRole from '../../schemes/AuthRole.enum';
+import AuthRole from '../../schemes/general/AuthRole.enum';
 import GetCompanyInfoService from '../../services/company/General/GetCompanyInfo.service';
 import GetCompanyCampaignsService from '../../services/company/General/GetCompanyCampaigns.service';
 import CompanyStore from '../../stores/Company.store';

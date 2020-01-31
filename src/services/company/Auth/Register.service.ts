@@ -1,8 +1,8 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore, {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
-import {CompanyStatistics} from '../../../schemes/Company';
+import {CompanyStatistics} from '../../../schemes/company/Company';
 import GeneralStore from '../../../stores/General.store';
-import AuthRole from '../../../schemes/AuthRole.enum';
+import AuthRole from '../../../schemes/general/AuthRole.enum';
 
 export default class RegisterService {
   static registerCompanyAuth(
@@ -46,6 +46,7 @@ export default class RegisterService {
           email,
           registerDate,
           statistics,
+          companyId: userUid,
         })
         .then(result => {
           console.log('ok');

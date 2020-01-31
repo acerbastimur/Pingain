@@ -1,6 +1,6 @@
 import {observable, action} from 'mobx';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import AuthRole from '../schemes/AuthRole.enum';
+import AuthRole from '../schemes/general/AuthRole.enum';
 
 class GeneralStore {
   constructor() {

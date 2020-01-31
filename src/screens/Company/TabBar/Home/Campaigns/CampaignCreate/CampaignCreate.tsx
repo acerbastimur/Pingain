@@ -18,7 +18,7 @@ import CampaignCreateStyle from './CampaignCreate.style';
 import TabsHeader from '../../../../../../common-components/TabsHeader';
 import Button from '../../../../../../common-components/Button';
 import Colors from '../../../../../../styles/Colors';
-import {Campaign} from '../../../../../../schemes/CompanyCampaign';
+import {Campaign} from '../../../../../../schemes/company/CompanyCampaign';
 
 export interface CampaignCreateProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;

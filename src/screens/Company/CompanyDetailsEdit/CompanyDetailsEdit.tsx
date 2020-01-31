@@ -32,7 +32,7 @@ import CITIES from '../../../assets/constants/Cities';
 import ImageUpload from '../../../common-components/ImageUpload';
 import CompanyStore from '../../../stores/Company.store';
 import Button from '../../../common-components/Button';
-import Company from '../../../schemes/Company';
+import Company from '../../../schemes/company/Company';
 import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
 import LoginService from '../../../services/company/Auth/Login.service';
 
