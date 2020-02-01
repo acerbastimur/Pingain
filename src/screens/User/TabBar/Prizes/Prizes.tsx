@@ -18,6 +18,7 @@ import CampaignDetails from '../../CampaignDetails';
 import ShareUs from '../../ShareUs/ShareUs';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
+import UserStore from '../../../../stores/User.store';
 
 export interface PrizesProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -45,6 +46,7 @@ export default class Prizes extends React.Component<PrizesProps, any> {
 
   public render() {
     const {navigation} = this.props;
+    const {companies} = UserStore;
 
     return (
       <View style={this.style.container}>
@@ -61,10 +63,8 @@ export default class Prizes extends React.Component<PrizesProps, any> {
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={[{isCampaign1Done: true}, {isCampaign1Done: true}]}
-            renderItem={({item}) => (
-              <CompanyCard navigation={navigation} isCampaign1Done={item.isCampaign1Done} />
-            )}
+            data={companies}
+            renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
           />
         </View>
         <RBSheet

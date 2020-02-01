@@ -64,7 +64,8 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
     }
   };
 
-  campaignCount = ({campaignType, actionCount, prizeCount}: Campaign, isCompleted: boolean) => {
+  // eslint-disable-next-line consistent-return
+  campaignCount = ({campaignType, actionCount}: Campaign, isCompleted: boolean) => {
     switch (campaignType) {
       case CampaignType.Drink:
         if (isCompleted) {
@@ -119,28 +120,21 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
   };
 
   public render() {
-    const {
-      navigation,
-      shouldHeaderHide,
-      company: {companyName, campaigns},
-    } = this.props;
+    const {navigation, shouldHeaderHide, company} = this.props;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
         {!shouldHeaderHide && (
           <View>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('CompanyDetails');
+                navigation.navigate('CompanyDetails', {company});
               }}
               style={this.s.cardHeader}>
               <View style={this.s.cardHeaderImageContainer}>
-                <Image
-                  source={require('../../../assets/image/User/cafeImageExample.png')}
-                  style={this.s.cardHeaderImage}
-                />
+                <Image source={{uri: company.companyLogo}} style={this.s.cardHeaderImage} />
               </View>
 
-              <Text style={this.s.cardHeaderText}>{companyName}</Text>
+              <Text style={this.s.cardHeaderText}>{company.companyName}</Text>
               <Image
                 style={this.s.headerArrow}
                 source={require('../../../assets/image/User/arrow.png')}
@@ -150,7 +144,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           </View>
         )}
         <View style={this.s.cardBody}>
-          {campaigns.map(campaign => {
+          {company.campaigns.map(campaign => {
             return (
               <TouchableOpacity
                 key={Math.random() * 1000}
@@ -164,46 +158,6 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
               </TouchableOpacity>
             );
           })}
-          {/*  <View style={this.s.cardBodyItem}>
-            <Image
-              style={this.s.cardBodyItemIcon}
-              source={require('../../../assets/image/User/mealIcon.png')}
-            />
-            <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
-            <View style={this.s.cardBodyItemCount}>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>5</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>7</Text>
-            </View>
-             <View style={[this.s.cardBodyItemCount, this.s.coffeeDoneBackground]}>
-                  {isCampaign1Done ? (
-                    <Image
-                      style={this.s.tick}
-                      source={require('../../../assets/image/tickWhite.png')}
-                    />
-                  ) : (
-                    <View style={this.s.row}>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
-                    </View>
-                  )}
-                </View>
-          </View>
-
-          <View style={this.s.cardBodyItem}>
-            <Image
-              style={this.s.cardBodyItemIcon}
-              source={require('../../../assets/image/User/dessertIcon.png')}
-            />
-            <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
-            <View style={this.s.cardBodyItemCount}>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>5</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>12</Text>
-            </View>
-          </View>
-     */}
         </View>
       </Card>
     );

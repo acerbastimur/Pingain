@@ -3,10 +3,10 @@ export interface UserCompany {
   companyName: string;
   instagramAccount: string;
   address?: any;
-  companyFeatures?: any;
+  companyFeatures?: Array<number>;
   phoneNumber: string;
-  companyImages?: any;
-  city?: any;
+  companyImages?: Array<string>;
+  city?: string;
   campaigns: Campaign[];
 }
 export interface Campaign {

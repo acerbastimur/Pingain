@@ -49,7 +49,7 @@ export default StyleSheet.create({
   },
   line: {
     width: '90%',
-    height: 0.5,
+    height: 1,
     alignSelf: 'center',
     backgroundColor: '#EDEDED',
     borderRadius: 50,
