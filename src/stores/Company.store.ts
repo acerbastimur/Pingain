@@ -1,7 +1,7 @@
 import {observable, toJS} from 'mobx';
-import AuthRole from '../schemes/AuthRole.enum';
-import Company from '../schemes/Company';
-import {Campaign} from '../schemes/CompanyCampaign';
+import AuthRole from '../schemes/general/AuthRole.enum';
+import Company from '../schemes/company/Company';
+import {Campaign} from '../schemes/company/CompanyCampaign';
 
 class CompanyStore {
   @observable companyDetails: Company = null;

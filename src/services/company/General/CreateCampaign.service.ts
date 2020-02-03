@@ -1,9 +1,9 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import Company from '../../../schemes/Company';
+import Company from '../../../schemes/company/Company';
 import CompanyStore from '../../../stores/Company.store';
-import {Campaign} from '../../../schemes/CompanyCampaign';
+import {Campaign} from '../../../schemes/company/CompanyCampaign';
 import GetCompanyCampaignsService from './GetCompanyCampaigns.service';
 
 export default class CreateCampaignService {

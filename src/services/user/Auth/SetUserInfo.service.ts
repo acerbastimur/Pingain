@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {UserStatistics} from '../../../schemes/User';
+import {UserStatistics} from '../../../schemes/user/User';
 import GetUserInfoService from '../General/GetUserInfo.service';
 
 export default class SetUserInfoService {

@@ -32,4 +32,5 @@ export default interface Company {
   phoneNumber: string;
   registerDate: Date;
   statistics: CompanyStatistics;
+  companyId: string;
 }

@@ -111,4 +111,16 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  mealDoneBackground: {
+    backgroundColor: CampaignColors.MEAL,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dessertDoneBackground: {
+    backgroundColor: CampaignColors.DESSERT,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
