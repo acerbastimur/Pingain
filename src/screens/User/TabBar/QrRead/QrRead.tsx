@@ -6,12 +6,14 @@ import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import auth from '@react-native-firebase/auth';
 import QrReadStyle from './QrRead.style';
 import Colors from '../../../../styles/Colors';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import WinPin from './WinPin';
 import WinModalStore from '../../../../stores/WinModal.store';
 import WinPrize from './WinPrize';
+import ReadCampaignQr from '../../../../services/user/General/ReadCampaignQr.service';
 
 export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -25,6 +27,10 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   scanner: QRCodeScanner = null;
 
+  lastQrValue = null;
+
+  getPinModal: RBSheet = null;
+
   constructor(props: QrReadProps) {
     super(props);
     this.state = {
@@ -34,7 +40,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   componentDidMount() {
     const {navigation} = this.props;
-
     navigation.addListener('willFocus', route => {
       this.setState({shouldQrReaderActive: true});
     });
@@ -43,9 +48,38 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     });
   }
 
-  onSuccess = e => {
-    alert(e.data);
-    this.scanner.reactivate();
+  sendPinRequest = async ({companyId, campaignId, qrCode}) => {
+    const {uid} = auth().currentUser;
+
+    console.log(uid, campaignId, qrCode);
+
+    if (!companyId || !campaignId || !qrCode) return; // error on fields
+
+    ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        this.getPinModal.open();
+        console.warn(error);
+      });
+  };
+
+  onSuccess = ({data}) => {
+    if (data === this.lastQrValue) return; // if still reading the same qr
+    this.lastQrValue = data;
+    let readQr = null;
+    try {
+      readQr = JSON.parse(data);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+    this.sendPinRequest({
+      campaignId: readQr?.campaignId,
+      companyId: readQr?.companyId,
+      qrCode: readQr?.qrCode,
+    });
   };
 
   public render() {
@@ -56,7 +90,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       <View style={this.style.container}>
         <RBSheet
           ref={ref => {
-            WinModalStore.getPinModalRef = ref;
+            this.getPinModal = ref;
           }}
           duration={50}
           closeOnDragDown
@@ -115,6 +149,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
               cameraStyle={this.style.cameraStyle}
               onRead={this.onSuccess}
               fadeIn
+              reactivate
+              vibrate={false}
               bottomContent={
                 <View style={this.style.bottomContentContainer}>
                   <View style={this.style.bottomContentBackground} />

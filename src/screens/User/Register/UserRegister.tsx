@@ -56,7 +56,7 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
         console.log(user);
       })
       .catch(err => {
-        console.log('Error on register');
+        console.log('Error on register', err);
         this.setState({loading: false});
         setTimeout(() => {
           this.setState({isErrorModalActive: true});

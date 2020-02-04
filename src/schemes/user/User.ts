@@ -7,8 +7,13 @@ export default interface User {
   registerDate: Date;
   statistics: UserStatistics;
   surname: string;
+  activeCampaigns?: Array<ActiveCampaign>;
 }
 
+export interface ActiveCampaign {
+  campaignId: string;
+  pinEarned: number;
+}
 export interface UserStatistics {
   totalPinEarned: number;
   totalPrizeEarned: number;
