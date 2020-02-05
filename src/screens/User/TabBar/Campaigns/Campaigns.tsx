@@ -35,7 +35,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     this.state = {loading: true};
     GetCompaniesService.getCompanies()
       .then(companies => {
-        console.log(companies);
         UserStore.companies = companies.length > 0 ? companies : null;
         this.setState({loading: false});
       })

@@ -10,7 +10,6 @@ export interface UserCompany {
   campaigns: Campaign[];
 }
 export interface Campaign {
-  currentQr: string;
   campaignId: string;
   campaignType: number;
   prizeCount: number;
