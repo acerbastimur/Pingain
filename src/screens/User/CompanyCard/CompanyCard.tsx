@@ -12,10 +12,14 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
 import CompanyCardStyle from './CompanyCard.style';
 import CampaignDetailsStore from '../../../stores/CampaignDetailsModal.store';
 import {UserCompany, Campaign} from '../../../schemes/user/UserCompany';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
+import {ActiveCampaign} from '../../../schemes/user/User';
+import UserStore from '../../../stores/User.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -23,7 +27,7 @@ export interface CompanyCardProps {
   company: UserCompany;
 }
 
-export default class CompanyCard extends React.Component<CompanyCardProps, any> {
+export default class CompanyCard extends React.Component<CompanyCardProps> {
   s = CompanyCardStyle;
 
   constructor(props: CompanyCardProps) {
@@ -64,8 +68,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
     }
   };
 
-  // eslint-disable-next-line consistent-return
-  campaignCount = ({campaignType, actionCount}: Campaign, isCompleted: boolean) => {
+  campaignCount = ({campaignType, actionCount}: Campaign, usersPinCount: number) => {
+    const isCompleted = usersPinCount === actionCount;
+
     switch (campaignType) {
       case CampaignType.Drink:
         if (isCompleted) {
@@ -77,7 +82,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>
+              {usersPinCount}
+            </Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>{actionCount}</Text>
           </View>
@@ -92,7 +99,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>{usersPinCount}</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>{actionCount}</Text>
           </View>
@@ -107,7 +114,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>
+              {usersPinCount}
+            </Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>
               {actionCount}
@@ -115,7 +124,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           </View>
         );
       default:
-        break;
+        return null;
     }
   };
 
@@ -145,16 +154,34 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         )}
         <View style={this.s.cardBody}>
           {company.campaigns.map(campaign => {
+            const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
+            let isUserJoinedThisCampaign: ActiveCampaign = null;
+            isUserJoinedThisCampaign =
+              activeCampaigns.length &&
+              activeCampaigns.find(activeCampaign => {
+                console.log(activeCampaign.campaignId, campaign.campaignId);
+
+                return activeCampaign.campaignId === campaign.campaignId;
+              });
+            console.log(isUserJoinedThisCampaign);
             return (
               <TouchableOpacity
                 key={Math.random() * 1000}
                 style={this.s.cardBodyItem}
                 onPress={() => {
+                  CampaignDetailsStore.selectedCampaign = campaign;
+                  CampaignDetailsStore.selectedCompany = company;
+                  CampaignDetailsStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
+                    ? isUserJoinedThisCampaign?.pinEarned
+                    : 0;
                   CampaignDetailsStore.campaignDetailsHalfModalRef.open();
                 }}>
                 {this.campaignIcon(campaign)}
                 <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>
-                {this.campaignCount(campaign, false)}
+                {this.campaignCount(
+                  campaign,
+                  isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,
+                )}
               </TouchableOpacity>
             );
           })}

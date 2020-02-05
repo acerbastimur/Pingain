@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
@@ -12,42 +13,23 @@ import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import {NavigationScreenProp, NavigationState, NavigationParams, FlatList} from 'react-navigation';
 import CampaignDetailsStyle from './CampaignDetails.style';
 import Colors from '../../../styles/Colors';
 import Button from '../../../common-components/Button';
 import CampaignDetailsModalStore from '../../../stores/CampaignDetailsModal.store';
+import {Campaign} from '../../../schemes/user/UserCompany';
+import CampaignType from '../../../schemes/company/CampaignType.enum';
+import UserStore from '../../../stores/User.store';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-
-const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
-  const style = CampaignDetailsStyle;
-  const Pin = ({completed}) => {
-    const itemWidth = Dimensions.get('window').width / 8;
-    if (completed) {
-      return (
-        <View
-          style={{
-            width: itemWidth,
-            height: itemWidth,
-            borderRadius: 12,
-            overflow: 'hidden',
-          }}>
-          <Image
-            style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-            source={require('../../../assets/image/pin_completed.png')}
-          />
-        </View>
-      );
-    }
+const Pin = ({completed, navigation}) => {
+  const itemWidth = Dimensions.get('window').width / 8;
+  if (completed) {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('QrRead');
-          CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
-        }}
+      <View
         style={{
           width: itemWidth,
           height: itemWidth,
@@ -56,11 +38,112 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
         }}>
         <Image
           style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-          source={require('../../../assets/image/pin_uncompleted.png')}
+          source={require('../../../assets/image/pin_completed.png')}
         />
-      </TouchableOpacity>
+      </View>
     );
-  };
+  }
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('QrRead');
+        CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
+      }}
+      style={{
+        width: itemWidth,
+        height: itemWidth,
+        borderRadius: 12,
+        overflow: 'hidden',
+      }}>
+      <Image
+        style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
+        source={require('../../../assets/image/pin_uncompleted.png')}
+      />
+    </TouchableOpacity>
+  );
+};
+
+const campaignCount = ({campaignType, actionCount}, usersPinCount: number) => {
+  const style = CampaignDetailsStyle;
+
+  switch (campaignType) {
+    case CampaignType.Drink:
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{usersPinCount}</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{actionCount}</Text>
+        </View>
+      );
+    case CampaignType.Meal:
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{usersPinCount}</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{actionCount}</Text>
+        </View>
+      );
+    case CampaignType.Dessert:
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{usersPinCount}</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{actionCount}</Text>
+        </View>
+      );
+    default:
+      return null;
+  }
+};
+
+const campaignIcon = ({campaignType}) => {
+  const style = CampaignDetailsStyle;
+
+  switch (campaignType) {
+    case CampaignType.Drink:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../assets/image/User/coffeeIcon.png')}
+        />
+      );
+    case CampaignType.Meal:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../assets/image/User/mealIcon.png')}
+        />
+      );
+    case CampaignType.Dessert:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../assets/image/User/dessertIcon.png')}
+        />
+      );
+    default:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../assets/image/User/coffeeIcon.png')}
+        />
+      );
+  }
+};
+
+const renderPins = (pinCount: number) => {};
+
+const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
+  const style = CampaignDetailsStyle;
+
+  const {
+    actionCount,
+    campaignName,
+    campaignType,
+    campaignId,
+  } = CampaignDetailsModalStore.selectedCampaign;
+  const {companyName, campaigns} = CampaignDetailsModalStore.selectedCompany;
+  const userPinCount = CampaignDetailsModalStore.selectedCampaignPinCount;
   return (
     <View style={style.container}>
       <TouchableOpacity
@@ -76,32 +159,35 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
           />
         </View>
 
-        <Text style={style.cardHeaderText}>Cafe Rien</Text>
+        <Text style={style.cardHeaderText}>{companyName}</Text>
         <Image style={style.headerArrow} source={require('../../../assets/image/User/arrow.png')} />
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
-        <Image
-          style={style.cardBodyItemIcon}
-          source={require('../../../assets/image/User/coffeeIcon.png')}
-        />
-        <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
-        <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>2</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>/</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>6</Text>
-        </View>
+        {campaignIcon({campaignType})}
+        <Text style={style.cardBodyItemName}>{campaignName}</Text>
+
+        {campaignCount({campaignType, actionCount}, userPinCount)}
       </View>
       <View style={style.line} />
       <View style={style.pinsContainer}>
-        <View style={style.pinsLineContainer}>
-          <Pin completed />
-          <Pin completed />
-          <Pin completed />
-          <Pin completed={false} />
+        <View style={style.pinsFullLineContainer}>
+          <FlatList
+            data={Array.from({length: actionCount}, (v, k) => k + 1)}
+            keyExtractor={(item, index) => String(index)}
+            numColumns={5}
+            renderItem={({index}) => {
+              return (
+                <View
+                  style={{marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25}}>
+                  <Pin completed={userPinCount > index} navigation={navigation} />
+                </View>
+              );
+            }}
+          />
         </View>
       </View>
-      {true ? (
+      {campaigns.length > 1 ? (
         <View>
           <Text style={style.otherCampaignsHeaderText}>Bu işletmedeki diğer kampanyalar</Text>
           <View style={style.swiperContainer}>
@@ -112,46 +198,43 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={(
+              nextButton={
                 <Image
                   source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
-              )}
-              prevButton={(
+              }
+              prevButton={
                 <Image
                   source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
-              )}>
-              <Card elevation={6} opacity={0.2} style={style.card}>
-                <View style={style.otherCardBodyItem}>
-                  <Image
-                    style={style.cardBodyItemIcon}
-                    source={require('../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={style.otherCardBodyItemName}>Makarna Kampanyası</Text>
-                  <View style={style.cardBodyItemCount}>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>5</Text>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>7</Text>
-                  </View>
-                </View>
-              </Card>
-              <Card elevation={6} opacity={0.15} style={style.card}>
-                <View style={style.otherCardBodyItem}>
-                  <Image
-                    style={style.cardBodyItemIcon}
-                    source={require('../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={style.otherCardBodyItemName}>Cheesecake Kampanyası</Text>
-                  <View style={style.cardBodyItemCount}>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>5</Text>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
-                    <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>7</Text>
-                  </View>
-                </View>
-              </Card>
+              }>
+              {campaigns.map(campaign => {
+                const userpins = UserStore.userDetails.activeCampaigns.find(
+                  activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+                );
+
+                if (campaign.campaignId === campaignId) return null;
+                return (
+                  <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
+                    <View style={style.otherCardBodyItem}>
+                      {campaignIcon({campaignType: campaign.campaignType})}
+
+                      <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
+                      <View style={style.cardBodyItemCount}>
+                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
+                          {(userpins && userpins.pinEarned) || 0}
+                        </Text>
+                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
+                          {campaign.actionCount}
+                        </Text>
+                      </View>
+                    </View>
+                  </Card>
+                );
+              })}
             </Swiper>
           </View>
         </View>

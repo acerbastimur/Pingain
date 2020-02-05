@@ -12,6 +12,8 @@ export default class GetUserInfoService {
       .doc(uid);
     const dataSnapshot = (await userColRef.get()).data() as User;
     UserStore.userDetails = dataSnapshot;
+    console.log({dataSnapshot});
+
     return dataSnapshot;
   }
 }
