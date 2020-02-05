@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
+import {View, ScrollView, Image, Text, TouchableOpacity, Linking} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
@@ -17,6 +17,7 @@ import CompanyDetailsStyle from './CompanyDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
 import Colors from '../../../styles/Colors';
 import CompanyCard from '../CompanyCard';
+import {UserCompany} from '../../../schemes/user/UserCompany';
 
 export interface CompanyDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -24,6 +25,55 @@ export interface CompanyDetailsProps {
 
 const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
   const style = CompanyDetailsStyle;
+  const company: UserCompany = navigation.getParam('company');
+
+  const companyFeatureCard = (featureNo: number) => {
+    switch (featureNo) {
+      case 1:
+        return (
+          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+            <Image
+              style={style.companyFeatureCardImage}
+              source={require('../../../assets/image/User/wifi-line.png')}
+            />
+            <Text style={style.companyFeatureCardText}>İnternet</Text>
+          </View>
+        );
+      case 2:
+        return (
+          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+            <Image
+              style={style.companyFeatureCardImage}
+              source={require('../../../assets/image/User/plugIcon.png')}
+            />
+            <Text style={style.companyFeatureCardText}>Şarj</Text>
+          </View>
+        );
+      case 3:
+        return (
+          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+            <Image
+              style={style.companyFeatureCardImage}
+              source={require('../../../assets/image/User/animalIcon.png')}
+            />
+            <Text style={style.companyFeatureCardText}>Hayvansever</Text>
+          </View>
+        );
+      case 4:
+        return (
+          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+            <Image
+              style={style.companyFeatureCardImage}
+              source={require('../../../assets/image/User/mute.png')}
+            />
+            <Text style={style.companyFeatureCardText}>Sessiz</Text>
+          </View>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <View style={style.container}>
@@ -42,30 +92,22 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
         <ScrollView>
           <View style={style.swiperContainer}>
             <Swiper dotColor="#D8DFE8" activeDotColor={Colors.PRIMARY} showsButtons={false}>
-              <Image
-                source={require('../../../assets/image/User/CoffeeExample/photo1.jpg')}
-                style={style.swipeImage}
-              />
-              <Image
-                source={require('../../../assets/image/User/CoffeeExample/photo2.jpg')}
-                style={style.swipeImage}
-              />
-              <Image
-                source={require('../../../assets/image/User/CoffeeExample/photo3.jpg')}
-                style={style.swipeImage}
-              />
+              {company.companyImages.map(image => (
+                <Image key={Math.random() * 1000} source={{uri: image}} style={style.swipeImage} />
+              ))}
             </Swiper>
           </View>
           <Card elevation={6} opacity={0.15} style={style.companyInformationContainer}>
             <View style={style.cardHeader}>
               <View style={style.companyImageContainer}>
-                <Image
-                  source={require('../../../assets/image/User/cafeImageExample.png')}
-                  style={style.companyImage}
-                />
+                <Image source={{uri: company.companyLogo}} style={style.companyImage} />
               </View>
-              <Text style={style.cardHeaderText}>Cafe Rien</Text>
-              <TouchableOpacity style={style.followButton}>
+              <Text style={style.cardHeaderText}>{company.companyName}</Text>
+              <TouchableOpacity
+                style={style.followButton}
+                onPress={() => {
+                  Linking.openURL(`instagram://user?username=${company.instagramAccount}`);
+                }}>
                 <Text style={style.followButtonText}>Takip et</Text>
               </TouchableOpacity>
             </View>
@@ -76,34 +118,7 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
                 directionalLockEnabled
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
-                <View style={style.companyFeatureCard}>
-                  <Image
-                    style={style.companyFeatureCardImage}
-                    source={require('../../../assets/image/User/wifi-line.png')}
-                  />
-                  <Text style={style.companyFeatureCardText}>Wifi</Text>
-                </View>
-                <View style={style.companyFeatureCard}>
-                  <Image
-                    style={style.companyFeatureCardImage}
-                    source={require('../../../assets/image/User/plugIcon.png')}
-                  />
-                  <Text style={style.companyFeatureCardText}>Şarj</Text>
-                </View>
-                <View style={style.companyFeatureCard}>
-                  <Image
-                    style={style.companyFeatureCardImage}
-                    source={require('../../../assets/image/User/mute.png')}
-                  />
-                  <Text style={style.companyFeatureCardText}>Sessiz</Text>
-                </View>
-                <View style={style.companyFeatureCard}>
-                  <Image
-                    style={style.companyFeatureCardImage}
-                    source={require('../../../assets/image/User/animalIcon.png')}
-                  />
-                  <Text style={style.companyFeatureCardText}>Hayvansever</Text>
-                </View>
+                {company.companyFeatures.map(featureNo => companyFeatureCard(featureNo))}
               </ScrollView>
             </View>
             <View style={style.phoneArea}>
@@ -111,7 +126,7 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
                 style={style.phoneIcon}
                 source={require('../../../assets/image/User/phoneIcon.png')}
               />
-              <Text style={style.contactText}>0 (232) 290 7481</Text>
+              <Text style={style.contactText}>{company.phoneNumber}</Text>
             </View>
             <View style={style.locationArea}>
               <Image
@@ -119,14 +134,14 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
                 source={require('../../../assets/image/User/locationIcon.png')}
               />
               <Text style={style.contactText} numberOfLines={1}>
-                İYTE, İnovasyon Merkezi A10 BinasI 3554 sokak, numara:12 Urla/İzmir
+                {company.address}
               </Text>
             </View>
           </Card>
 
           <View>
             <Text style={style.campaigns}>Kampanyalarımız</Text>
-            <CompanyCard navigation={navigation} isCampaign1Done shouldHeaderHide />
+            {/*  <CompanyCard navigation={navigation} isCampaign1Done shouldHeaderHide /> */}
           </View>
         </ScrollView>
       </View>

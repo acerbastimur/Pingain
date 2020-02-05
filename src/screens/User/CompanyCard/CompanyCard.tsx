@@ -136,14 +136,11 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
           <View>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('CompanyDetails');
+                navigation.navigate('CompanyDetails', {company});
               }}
               style={this.s.cardHeader}>
               <View style={this.s.cardHeaderImageContainer}>
-                <Image
-                  source={require('../../../assets/image/User/cafeImageExample.png')}
-                  style={this.s.cardHeaderImage}
-                />
+                <Image source={{uri: company.companyLogo}} style={this.s.cardHeaderImage} />
               </View>
 
               <Text style={this.s.cardHeaderText}>{company.companyName}</Text>
