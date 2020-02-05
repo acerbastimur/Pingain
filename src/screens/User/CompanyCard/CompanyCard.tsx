@@ -12,10 +12,14 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
 import CompanyCardStyle from './CompanyCard.style';
 import CampaignDetailsStore from '../../../stores/CampaignDetailsModal.store';
 import {UserCompany, Campaign} from '../../../schemes/user/UserCompany';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
+import {ActiveCampaign} from '../../../schemes/user/User';
+import UserStore from '../../../stores/User.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -23,7 +27,7 @@ export interface CompanyCardProps {
   company: UserCompany;
 }
 
-export default class CompanyCard extends React.Component<CompanyCardProps, any> {
+export default class CompanyCard extends React.Component<CompanyCardProps> {
   s = CompanyCardStyle;
 
   constructor(props: CompanyCardProps) {
@@ -64,7 +68,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
     }
   };
 
-  campaignCount = ({campaignType, actionCount, prizeCount}: Campaign, isCompleted: boolean) => {
+  campaignCount = ({campaignType, actionCount}: Campaign, usersPinCount: number) => {
+    const isCompleted = usersPinCount === actionCount;
+
     switch (campaignType) {
       case CampaignType.Drink:
         if (isCompleted) {
@@ -76,7 +82,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>
+              {usersPinCount}
+            </Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>{actionCount}</Text>
           </View>
@@ -91,7 +99,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>{usersPinCount}</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>{actionCount}</Text>
           </View>
@@ -106,7 +114,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
         }
         return (
           <View style={this.s.cardBodyItemCount}>
-            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>1</Text>
+            <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>
+              {usersPinCount}
+            </Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
             <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>
               {actionCount}
@@ -114,16 +124,12 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           </View>
         );
       default:
-        break;
+        return null;
     }
   };
 
   public render() {
-    const {
-      navigation,
-      shouldHeaderHide,
-      company: {companyName, campaigns},
-    } = this.props;
+    const {navigation, shouldHeaderHide, company} = this.props;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
         {!shouldHeaderHide && (
@@ -140,7 +146,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
                 />
               </View>
 
-              <Text style={this.s.cardHeaderText}>{companyName}</Text>
+              <Text style={this.s.cardHeaderText}>{company.companyName}</Text>
               <Image
                 style={this.s.headerArrow}
                 source={require('../../../assets/image/User/arrow.png')}
@@ -150,60 +156,38 @@ export default class CompanyCard extends React.Component<CompanyCardProps, any> 
           </View>
         )}
         <View style={this.s.cardBody}>
-          {campaigns.map(campaign => {
+          {company.campaigns.map(campaign => {
+            const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
+            let isUserJoinedThisCampaign: ActiveCampaign = null;
+            isUserJoinedThisCampaign =
+              activeCampaigns.length &&
+              activeCampaigns.find(activeCampaign => {
+                console.log(activeCampaign.campaignId, campaign.campaignId);
+
+                return activeCampaign.campaignId === campaign.campaignId;
+              });
+            console.log(isUserJoinedThisCampaign);
             return (
               <TouchableOpacity
                 key={Math.random() * 1000}
                 style={this.s.cardBodyItem}
                 onPress={() => {
+                  CampaignDetailsStore.selectedCampaign = campaign;
+                  CampaignDetailsStore.selectedCompany = company;
+                  CampaignDetailsStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
+                    ? isUserJoinedThisCampaign?.pinEarned
+                    : 0;
                   CampaignDetailsStore.campaignDetailsHalfModalRef.open();
                 }}>
                 {this.campaignIcon(campaign)}
                 <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>
-                {this.campaignCount(campaign, false)}
+                {this.campaignCount(
+                  campaign,
+                  isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,
+                )}
               </TouchableOpacity>
             );
           })}
-          {/*  <View style={this.s.cardBodyItem}>
-            <Image
-              style={this.s.cardBodyItemIcon}
-              source={require('../../../assets/image/User/mealIcon.png')}
-            />
-            <Text style={this.s.cardBodyItemName}>Makarna Kampanyası</Text>
-            <View style={this.s.cardBodyItemCount}>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>5</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>/</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemMeal]}>7</Text>
-            </View>
-             <View style={[this.s.cardBodyItemCount, this.s.coffeeDoneBackground]}>
-                  {isCampaign1Done ? (
-                    <Image
-                      style={this.s.tick}
-                      source={require('../../../assets/image/tickWhite.png')}
-                    />
-                  ) : (
-                    <View style={this.s.row}>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>2</Text>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>/</Text>
-                      <Text style={[this.s.cardBodyItemCountText, this.s.cardItemCoffee]}>6</Text>
-                    </View>
-                  )}
-                </View>
-          </View>
-
-          <View style={this.s.cardBodyItem}>
-            <Image
-              style={this.s.cardBodyItemIcon}
-              source={require('../../../assets/image/User/dessertIcon.png')}
-            />
-            <Text style={this.s.cardBodyItemName}>Cheesecake Kampanyası</Text>
-            <View style={this.s.cardBodyItemCount}>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>5</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>/</Text>
-              <Text style={[this.s.cardBodyItemCountText, this.s.cardItemDessert]}>12</Text>
-            </View>
-          </View>
-     */}
         </View>
       </Card>
     );

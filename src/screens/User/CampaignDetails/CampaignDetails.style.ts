@@ -115,7 +115,16 @@ export default StyleSheet.create({
     color: CampaignColors.DESSERT,
   },
   pinsContainer: {marginBottom: responsiveRate(14)},
+
   pinsLineContainer: {
+    marginTop: 2,
+    padding: '4%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  pinsFullLineContainer: {
     marginTop: 2,
     padding: '4%',
     flexDirection: 'row',
@@ -166,5 +175,28 @@ export default StyleSheet.create({
   },
   textHighlighted: {
     color: Colors.TEXT_HIGHLIGHTED,
+  },
+  tick: {
+    resizeMode: 'contain',
+    width: responsiveRate(18),
+    height: responsiveRate(18),
+  },
+  coffeeDoneBackground: {
+    backgroundColor: CampaignColors.COFFEE,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mealDoneBackground: {
+    backgroundColor: CampaignColors.MEAL,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dessertDoneBackground: {
+    backgroundColor: CampaignColors.DESSERT,
+    width: screenWidth < 350 ? responsiveRate(60) : responsiveRate(50),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
