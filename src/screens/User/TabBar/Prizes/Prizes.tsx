@@ -20,6 +20,7 @@ import ShareUs from '../../ShareUs/ShareUs';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
 import UserStore from '../../../../stores/User.store';
+import NoCampaign from './NoCampaign';
 
 export interface PrizesProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -51,24 +52,37 @@ export default class Prizes extends React.Component<PrizesProps, any> {
     const companies = toJS(UserStore.companies);
     const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
 
-    const companiesWithEarnedCampaigns = companies.map(company => {
-      const newCampaignList = company.campaigns.filter(campaign => {
-        return activeCampaigns.find(
-          activeCampaign => activeCampaign.campaignId === campaign.campaignId,
-        );
+    // get user's active campaigns
+    const companiesWithEarnedCampaigns = companies
+      .map(company => {
+        const newCampaignList = company.campaigns.filter(campaign => {
+          return (
+            activeCampaigns &&
+            activeCampaigns.find(
+              activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+            )
+          );
+        });
+        if (newCampaignList.length === 0) return null; // if there is no campaign on company
+        return {
+          address: company.address,
+          campaigns: newCampaignList,
+          city: company.city,
+          companyFeatures: company.companyFeatures,
+          companyImages: company.companyImages,
+          companyLogo: company.companyLogo,
+          companyName: company.companyName,
+          instagramAccount: company.instagramAccount,
+          phoneNumber: company.phoneNumber,
+        };
+      })
+      .filter(e => e);
+    // count for campaigns
+    let campaignCount = 0;
+    companiesWithEarnedCampaigns.forEach(company => {
+      company.campaigns.forEach(() => {
+        campaignCount += 1;
       });
-
-      return {
-        address: company.address,
-        campaigns: newCampaignList,
-        city: company.city,
-        companyFeatures: company.companyFeatures,
-        companyImages: company.companyImages,
-        companyLogo: company.companyLogo,
-        companyName: company.companyName,
-        instagramAccount: company.instagramAccount,
-        phoneNumber: company.phoneNumber,
-      };
     });
 
     return (
@@ -82,13 +96,17 @@ export default class Prizes extends React.Component<PrizesProps, any> {
           />
         </View>
         <View style={this.style.bottomAreaContainer}>
-          <FlatList
-            keyboardDismissMode="on-drag"
-            ListHeaderComponent={this.flatListTextHeader}
-            keyExtractor={(item, index) => index.toString()}
-            data={companiesWithEarnedCampaigns}
-            renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
-          />
+          {campaignCount === 0 ? (
+            <NoCampaign navigation={navigation} />
+          ) : (
+            <FlatList
+              keyboardDismissMode="on-drag"
+              ListHeaderComponent={this.flatListTextHeader}
+              keyExtractor={(item, index) => index.toString()}
+              data={companiesWithEarnedCampaigns}
+              renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
+            />
+          )}
         </View>
         <RBSheet
           ref={ref => {
