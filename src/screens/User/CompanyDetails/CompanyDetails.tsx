@@ -23,57 +23,125 @@ export interface CompanyDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
+const companyFeatureCard = (featureNo: number) => {
+  const style = CompanyDetailsStyle;
+
+  switch (featureNo) {
+    case 1:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/wifi.png')}
+          />
+          <Text style={style.companyFeatureCardText}>İnternet</Text>
+        </View>
+      );
+    case 2:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/electricity.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Şarj</Text>
+        </View>
+      );
+    case 3:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/animal.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Hayvansever</Text>
+        </View>
+      );
+    case 4:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/matchStream.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Maç Yayını</Text>
+        </View>
+      );
+
+    case 5:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/self-service.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Self Servis</Text>
+        </View>
+      );
+
+    case 6:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/outdoor.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Dış Mekan</Text>
+        </View>
+      );
+
+    case 7:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/liveMusic.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Canlı Müzik</Text>
+        </View>
+      );
+
+    case 8:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/packageService.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Paket Servis</Text>
+        </View>
+      );
+
+    case 9:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/reservation.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Rezervasyon</Text>
+        </View>
+      );
+
+    case 10:
+      return (
+        <View key={Math.random() * 1000} style={style.companyFeatureCard}>
+          <Image
+            style={style.companyFeatureCardImage}
+            source={require('../../../assets/image/User/CompanyFeatures/slience.png')}
+          />
+          <Text style={style.companyFeatureCardText}>Sessiz</Text>
+        </View>
+      );
+
+    default:
+      return null;
+  }
+};
+
 const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
   const style = CompanyDetailsStyle;
   const company: UserCompany = navigation.getParam('company');
-
-  const companyFeatureCard = (featureNo: number) => {
-    switch (featureNo) {
-      case 1:
-        return (
-          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
-            <Image
-              style={style.companyFeatureCardImage}
-              source={require('../../../assets/image/User/wifi-line.png')}
-            />
-            <Text style={style.companyFeatureCardText}>İnternet</Text>
-          </View>
-        );
-      case 2:
-        return (
-          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
-            <Image
-              style={style.companyFeatureCardImage}
-              source={require('../../../assets/image/User/plugIcon.png')}
-            />
-            <Text style={style.companyFeatureCardText}>Şarj</Text>
-          </View>
-        );
-      case 3:
-        return (
-          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
-            <Image
-              style={style.companyFeatureCardImage}
-              source={require('../../../assets/image/User/animalIcon.png')}
-            />
-            <Text style={style.companyFeatureCardText}>Hayvansever</Text>
-          </View>
-        );
-      case 4:
-        return (
-          <View key={Math.random() * 1000} style={style.companyFeatureCard}>
-            <Image
-              style={style.companyFeatureCardImage}
-              source={require('../../../assets/image/User/mute.png')}
-            />
-            <Text style={style.companyFeatureCardText}>Sessiz</Text>
-          </View>
-        );
-
-      default:
-        return null;
-    }
-  };
 
   return (
     <View style={style.container}>
@@ -141,7 +209,17 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
 
           <View>
             <Text style={style.campaigns}>Kampanyalarımız</Text>
-            {/*  <CompanyCard navigation={navigation} isCampaign1Done shouldHeaderHide /> */}
+            {company.campaigns.map(campaign => {
+              return (
+                <CompanyCard
+                  key={Math.random() * 100}
+                  navigation={navigation}
+                  company={company}
+                  shouldHeaderHide
+                />
+              );
+            })}
+            {/*   */}
           </View>
         </ScrollView>
       </View>

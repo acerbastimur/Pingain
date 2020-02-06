@@ -131,8 +131,7 @@ const campaignIcon = ({campaignType}) => {
   }
 };
 
-const renderPins = (pinCount: number) => {};
-
+ 
 const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
   const style = CampaignDetailsStyle;
 
