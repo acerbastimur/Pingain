@@ -209,17 +209,12 @@ const CompanyDetails = ({navigation}: CompanyDetailsProps) => {
 
           <View>
             <Text style={style.campaigns}>Kampanyalarımız</Text>
-            {company.campaigns.map(campaign => {
-              return (
-                <CompanyCard
-                  key={Math.random() * 100}
-                  navigation={navigation}
-                  company={company}
-                  shouldHeaderHide
-                />
-              );
-            })}
-            {/*   */}
+            <CompanyCard
+              key={Math.random() * 100}
+              navigation={navigation}
+              company={company}
+              shouldHeaderHide
+            />
           </View>
         </ScrollView>
       </View>

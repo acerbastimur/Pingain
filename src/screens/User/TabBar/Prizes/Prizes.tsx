@@ -7,6 +7,7 @@ import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-nav
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
 import PrizesStyle from './Prizes.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
@@ -46,7 +47,29 @@ export default class Prizes extends React.Component<PrizesProps, any> {
 
   public render() {
     const {navigation} = this.props;
-    const {companies} = UserStore;
+    // eslint-disable-next-line prefer-destructuring
+    const companies = toJS(UserStore.companies);
+    const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
+
+    const companiesWithEarnedCampaigns = companies.map(company => {
+      const newCampaignList = company.campaigns.filter(campaign => {
+        return activeCampaigns.find(
+          activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+        );
+      });
+
+      return {
+        address: company.address,
+        campaigns: newCampaignList,
+        city: company.city,
+        companyFeatures: company.companyFeatures,
+        companyImages: company.companyImages,
+        companyLogo: company.companyLogo,
+        companyName: company.companyName,
+        instagramAccount: company.instagramAccount,
+        phoneNumber: company.phoneNumber,
+      };
+    });
 
     return (
       <View style={this.style.container}>
@@ -63,7 +86,7 @@ export default class Prizes extends React.Component<PrizesProps, any> {
             keyboardDismissMode="on-drag"
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
-            data={companies}
+            data={companiesWithEarnedCampaigns}
             renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
           />
         </View>

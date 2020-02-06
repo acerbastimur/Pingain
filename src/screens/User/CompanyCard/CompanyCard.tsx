@@ -157,13 +157,13 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
             const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
             let isUserJoinedThisCampaign: ActiveCampaign = null;
             isUserJoinedThisCampaign =
+              activeCampaigns &&
               activeCampaigns.length &&
               activeCampaigns.find(activeCampaign => {
                 console.log(activeCampaign.campaignId, campaign.campaignId);
 
                 return activeCampaign.campaignId === campaign.campaignId;
               });
-            console.log(isUserJoinedThisCampaign);
             return (
               <TouchableOpacity
                 key={Math.random() * 1000}
