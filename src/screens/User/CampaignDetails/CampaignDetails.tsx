@@ -131,7 +131,6 @@ const campaignIcon = ({campaignType}) => {
   }
 };
 
- 
 const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
   const style = CampaignDetailsStyle;
 
@@ -210,9 +209,11 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 />
               }>
               {campaigns.map(campaign => {
-                const userpins = UserStore.userDetails.activeCampaigns.find(
-                  activeCampaign => activeCampaign.campaignId === campaign.campaignId,
-                );
+                const userpins =
+                  UserStore.userDetails.activeCampaigns &&
+                  UserStore.userDetails.activeCampaigns.find(
+                    activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+                  );
 
                 if (campaign.campaignId === campaignId) return null;
                 return (
