@@ -27,6 +27,7 @@ export interface CompanyCardProps {
   company: UserCompany;
 }
 
+@observer
 export default class CompanyCard extends React.Component<CompanyCardProps> {
   s = CompanyCardStyle;
 

@@ -1,4 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable no-bitwise */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
@@ -65,7 +66,7 @@ export default class Home extends React.Component<HomeProps, any> {
                           <View style={this.style.cardBodyItemCount}>
                             <Text
                               style={[this.style.cardBodyItemCountText, this.style.cardItemCoffee]}>
-                              5
+                              {campaign?.statistics?.totalPinGiven | 0}
                             </Text>
                           </View>
                         </View>

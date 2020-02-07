@@ -2,11 +2,12 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import auth from '@react-native-firebase/auth';
+import {toJS} from 'mobx';
 import QrReadStyle from './QrRead.style';
 import Colors from '../../../../styles/Colors';
 import TabsHeader from '../../../../common-components/TabsHeader';
@@ -14,12 +15,15 @@ import WinPin from './WinPin';
 import WinModalStore from '../../../../stores/WinModal.store';
 import WinPrize from './WinPrize';
 import ReadCampaignQr from '../../../../services/user/General/ReadCampaignQr.service';
+import UserStore from '../../../../stores/User.store';
+import GetUserInfoService from '../../../../services/user/General/GetUserInfo.service';
 
 export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 export interface QrReadState {
   shouldQrReaderActive: boolean;
+  loading: boolean;
 }
 
 export default class QrRead extends React.Component<QrReadProps, QrReadState> {
@@ -29,12 +33,11 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   lastQrValue = null;
 
-  getPinModal: RBSheet = null;
-
   constructor(props: QrReadProps) {
     super(props);
     this.state = {
       shouldQrReaderActive: false,
+      loading: false,
     };
   }
 
@@ -49,20 +52,23 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   }
 
   sendPinRequest = async ({companyId, campaignId, qrCode}) => {
-    const {uid} = auth().currentUser;
+    return new Promise((resolve, reject) => {
+      const {uid} = auth().currentUser;
 
-    console.log(uid, campaignId, qrCode);
+      console.log(uid, campaignId, qrCode);
 
-    if (!companyId || !campaignId || !qrCode) return; // error on fields
+      if (!companyId || !campaignId || !qrCode) return; // error on fields
 
-    ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        this.getPinModal.open();
-        console.warn(error);
-      });
+      ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
+        .then(result => {
+          console.log(result);
+          resolve();
+        })
+        .catch(error => {
+          console.warn(error);
+          reject();
+        });
+    });
   };
 
   onSuccess = ({data}) => {
@@ -71,30 +77,64 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     let readQr = null;
     try {
       readQr = JSON.parse(data);
+      console.log(readQr);
     } catch (error) {
       console.log(error);
       return;
     }
+    this.setState({loading: true});
     this.sendPinRequest({
       campaignId: readQr?.campaignId,
       companyId: readQr?.companyId,
-      qrCode: readQr?.qrCode,
-    });
+      qrCode: readQr?.scannedQrId,
+    })
+      .then(async () => {
+        await GetUserInfoService.getUserInfo();
+        console.log(UserStore.userDetails);
+
+        this.setState({loading: false});
+        const scannedCompany = toJS(
+          UserStore.companies.find(company => company.companyId === readQr.companyId),
+        );
+        const scannedCampaign = toJS(
+          scannedCompany.campaigns.find(campaign => campaign.campaignId === readQr.campaignId),
+        );
+        console.log(scannedCompany, scannedCampaign);
+
+        
+        WinModalStore.getPinDetails = {
+          campaignType: scannedCampaign.campaignType,
+          companyLogo: scannedCompany.companyLogo,
+          companyName: scannedCompany.companyName,
+          campaignName: scannedCampaign.campaignName,
+        };
+        WinModalStore.getPinModalRef.open();
+      })
+      .catch(() => {
+        console.log('error');
+
+        this.setState({loading: false});
+      });
   };
 
   public render() {
     const {navigation} = this.props;
-    const {shouldQrReaderActive} = this.state;
+    const {shouldQrReaderActive, loading} = this.state;
 
-    return (
+    return loading ? (
+      <View style={this.style.indicatorContainer}>
+        <Text>Loading</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={this.style.container}>
         <RBSheet
           ref={ref => {
-            this.getPinModal = ref;
+            WinModalStore.getPinModalRef = ref;
           }}
-          duration={50}
+          duration={250}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
@@ -162,7 +202,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
               bottomViewStyle={this.style.bottomViewStyle}
             />
           )}
-          <View style={this.style.cameraCenterArea} />
+          <View style={[this.style.cameraCenterArea]} />
         </View>
       </View>
     );

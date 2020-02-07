@@ -8,6 +8,7 @@ export interface UserCompany {
   companyImages?: Array<string>;
   city?: string;
   campaigns: Campaign[];
+  companyId?: string;
 }
 export interface Campaign {
   campaignId: string;

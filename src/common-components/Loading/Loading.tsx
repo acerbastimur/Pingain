@@ -134,7 +134,7 @@ export default class Loading extends React.Component<LoadingProps, any> {
           // check if user fillfulled their information
         }
       } else {
-        navigation.navigate('Auth');
+        navigation.navigate('Onboarding');
       }
     });
   }

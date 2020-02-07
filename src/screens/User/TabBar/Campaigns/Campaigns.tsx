@@ -81,7 +81,12 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={companies}
-            renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
+            renderItem={({item}) => {
+              console.log('NEW ITEMS');
+              console.log(item);
+
+              return <CompanyCard navigation={navigation} company={item} />;
+            }}
           />
         </View>
         <RBSheet

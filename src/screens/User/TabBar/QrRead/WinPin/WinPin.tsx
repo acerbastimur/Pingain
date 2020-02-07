@@ -17,34 +17,16 @@ import * as Animatable from 'react-native-animatable';
 import WinPinStyle from './WinPin.style';
 import Colors from '../../../../../styles/Colors';
 import Button from '../../../../../common-components/Button';
+import {UserCompany, Campaign} from '../../../../../schemes/user/UserCompany';
+import WinModalStore from '../../../../../stores/WinModal.store';
 
 export interface WinPinProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const WinPin = ({navigation}) => {
+const WinPin = ({navigation}: WinPinProps) => {
   const style = WinPinStyle;
-  const Pin = ({completed}) => {
-    const itemWidth = Dimensions.get('window').width / 8;
-    return (
-      <View
-        style={{
-          width: itemWidth,
-          height: itemWidth,
-          borderRadius: 12,
-          overflow: 'hidden',
-        }}>
-        <Image
-          style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-          source={
-            completed
-              ? require('../../../../../assets/image/pin_completed.png')
-              : require('../../../../../assets/image/pin_uncompleted.png')
-          }
-        />
-      </View>
-    );
-  };
+  const {campaignType, companyLogo, companyName, campaignName} = WinModalStore.getPinDetails;
   return (
     <View style={style.container}>
       <TouchableOpacity
@@ -53,13 +35,10 @@ const WinPin = ({navigation}) => {
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
-          <Image
-            source={require('../../../../../assets/image/User/cafeImageExample.png')}
-            style={style.cardHeaderImage}
-          />
+          <Image source={{uri: companyLogo}} style={style.cardHeaderImage} />
         </View>
 
-        <Text style={style.cardHeaderText}>Cafe Rien</Text>
+        <Text style={style.cardHeaderText}>{companyName}</Text>
         <Image
           style={style.headerArrow}
           source={require('../../../../../assets/image/User/arrow.png')}
@@ -71,7 +50,7 @@ const WinPin = ({navigation}) => {
           style={style.cardBodyItemIcon}
           source={require('../../../../../assets/image/User/coffeeIcon.png')}
         />
-        <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
+        <Text style={style.cardBodyItemName}>{campaignName}</Text>
         <View style={style.cardBodyItemCount}>
           <Text style={[style.cardBodyItemCountText, style.cardItemPlus]}>+ 1</Text>
         </View>
