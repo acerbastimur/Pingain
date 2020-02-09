@@ -11,7 +11,7 @@ export default class ReadCampaignQr {
     companyId: string,
     campaignId: string,
     scannedQrId: string,
-  ): Promise<any> {
+  ): Promise<number> {
     return new Promise((resolve, reject) => {
       const requestOptions = {
         method: 'POST',
@@ -23,7 +23,7 @@ export default class ReadCampaignQr {
         requestOptions,
       )
         .then(response => {
-          if (response.status === 200) return resolve(response.status);
+          if (response.status === 200 || response.status === 302) return resolve(response.status);
           return reject(response.status);
         })
         .catch(error => reject(error));

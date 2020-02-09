@@ -19,11 +19,72 @@ import Colors from '../../../../../styles/Colors';
 import Button from '../../../../../common-components/Button';
 import {UserCompany, Campaign} from '../../../../../schemes/user/UserCompany';
 import WinModalStore from '../../../../../stores/WinModal.store';
+import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 
 export interface WinPinProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
+const campaignLogo = (campaignType: CampaignType) => {
+  const style = WinPinStyle;
+  switch (campaignType) {
+    case CampaignType.Drink:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/coffeeIcon.png')}
+        />
+      );
+
+    case CampaignType.Meal:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/mealIcon.png')}
+        />
+      );
+    case CampaignType.Dessert:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/dessertIcon.png')}
+        />
+      );
+
+    default:
+      return null;
+  }
+};
+
+const campaignCount = (campaignType: CampaignType) => {
+  const style = WinPinStyle;
+
+  switch (campaignType) {
+    case CampaignType.Drink:
+      return (
+        <Text style={[style.cardBodyItemCountText, style.cardItemPlus, style.cardItemPlusDrink]}>
+          + 1
+        </Text>
+      );
+
+    case CampaignType.Meal:
+      return (
+        <Text style={[style.cardBodyItemCountText, style.cardItemPlus, style.cardItemPlusMeal]}>
+          + 1
+        </Text>
+      );
+
+    case CampaignType.Dessert:
+      return (
+        <Text style={[style.cardBodyItemCountText, style.cardItemPlus, style.cardItemPlusDessert]}>
+          + 1
+        </Text>
+      );
+
+    default:
+      return null;
+  }
+};
 const WinPin = ({navigation}: WinPinProps) => {
   const style = WinPinStyle;
   const {campaignType, companyLogo, companyName, campaignName} = WinModalStore.getPinDetails;
@@ -46,14 +107,9 @@ const WinPin = ({navigation}: WinPinProps) => {
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
-        <Image
-          style={style.cardBodyItemIcon}
-          source={require('../../../../../assets/image/User/coffeeIcon.png')}
-        />
+        {campaignLogo(campaignType)}
         <Text style={style.cardBodyItemName}>{campaignName}</Text>
-        <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemPlus]}>+ 1</Text>
-        </View>
+        <View style={style.cardBodyItemCount}>{campaignCount(campaignType)}</View>
       </View>
       <View style={style.line} />
       <View style={style.greetingContainer}>

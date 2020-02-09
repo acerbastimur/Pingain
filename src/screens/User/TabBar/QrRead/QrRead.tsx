@@ -51,7 +51,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     });
   }
 
-  sendPinRequest = async ({companyId, campaignId, qrCode}) => {
+  sendPinRequest = ({companyId, campaignId, qrCode}): Promise<number> => {
     return new Promise((resolve, reject) => {
       const {uid} = auth().currentUser;
 
@@ -62,11 +62,11 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
         .then(result => {
           console.log(result);
-          resolve();
+          resolve(result);
         })
         .catch(error => {
           console.warn(error);
-          reject();
+          reject(error);
         });
     });
   };
@@ -88,20 +88,62 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       companyId: readQr?.companyId,
       qrCode: readQr?.scannedQrId,
     })
-      .then(async () => {
-        await GetUserInfoService.getUserInfo();
-        console.log(UserStore.userDetails);
-
-        this.setState({loading: false});
+      .then(async responseCode => {
+        // find which company's campaign is scanned
         const scannedCompany = toJS(
           UserStore.companies.find(company => company.companyId === readQr.companyId),
         );
         const scannedCampaign = toJS(
           scannedCompany.campaigns.find(campaign => campaign.campaignId === readQr.campaignId),
         );
-        console.log(scannedCompany, scannedCampaign);
 
-        
+        // if user has already won a prize on that campaign
+        if (responseCode === 302) {
+          console.log('302');
+
+          this.setState({loading: false});
+          const campaignGiftCode = UserStore.userDetails.activeCampaigns.find(
+            campaign => campaign.campaignId === scannedCampaign.campaignId,
+          )?.giftCode;
+
+          if (!campaignGiftCode) return; // prevent errors if there is no giftCode
+
+          WinModalStore.winPrizeDetails = {
+            campaignType: scannedCampaign.campaignType,
+            companyLogo: scannedCompany.companyLogo,
+            companyName: scannedCompany.companyName,
+            campaignName: scannedCampaign.campaignName,
+            giftCode: campaignGiftCode,
+          };
+          console.warn(WinModalStore.winPrizeDetails);
+
+          WinModalStore.winPrizeHalfModalRef.open();
+          return;
+        }
+
+        // if user's got a pin
+        await GetUserInfoService.getUserInfo(); // update store
+
+        this.setState({loading: false});
+        // check if user has won a prize at this reading
+        const campaignGiftCode = UserStore.userDetails.activeCampaigns.find(
+          campaign => campaign.campaignId === scannedCampaign.campaignId,
+        )?.giftCode;
+
+        if (campaignGiftCode) {
+          WinModalStore.winPrizeDetails = {
+            campaignType: scannedCampaign.campaignType,
+            companyLogo: scannedCompany.companyLogo,
+            companyName: scannedCompany.companyName,
+            campaignName: scannedCampaign.campaignName,
+            giftCode: campaignGiftCode,
+          };
+          console.warn(WinModalStore.winPrizeDetails);
+
+          WinModalStore.winPrizeHalfModalRef.open();
+          return;
+        }
+
         WinModalStore.getPinDetails = {
           campaignType: scannedCampaign.campaignType,
           companyLogo: scannedCompany.companyLogo,
