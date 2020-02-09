@@ -18,34 +18,54 @@ import QRCode from 'react-native-qrcode-svg';
 import WinPrizeStyle from './WinPrize.style';
 import Colors from '../../../../../styles/Colors';
 import Button from '../../../../../common-components/Button';
+import WinModalStore from '../../../../../stores/WinModal.store';
+import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 
 export interface WinPrizeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
+const campaignLogo = (campaignType: CampaignType) => {
+  const style = WinPrizeStyle;
+  switch (campaignType) {
+    case CampaignType.Drink:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/coffeeIcon.png')}
+        />
+      );
+
+    case CampaignType.Meal:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/mealIcon.png')}
+        />
+      );
+    case CampaignType.Dessert:
+      return (
+        <Image
+          style={style.cardBodyItemIcon}
+          source={require('../../../../../assets/image/User/dessertIcon.png')}
+        />
+      );
+
+    default:
+      return null;
+  }
+};
+
 const WinPrize = ({navigation}) => {
   const style = WinPrizeStyle;
-  const Pin = ({completed}) => {
-    const itemWidth = Dimensions.get('window').width / 8;
-    return (
-      <View
-        style={{
-          width: itemWidth,
-          height: itemWidth,
-          borderRadius: 12,
-          overflow: 'hidden',
-        }}>
-        <Image
-          style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
-          source={
-            completed
-              ? require('../../../../../assets/image/pin_completed.png')
-              : require('../../../../../assets/image/pin_uncompleted.png')
-          }
-        />
-      </View>
-    );
-  };
+  const {
+    campaignType,
+    companyLogo,
+    companyName,
+    campaignName,
+    giftCode,
+  } = WinModalStore.winPrizeDetails;
+
   return (
     <View style={style.container}>
       <TouchableOpacity
@@ -54,13 +74,10 @@ const WinPrize = ({navigation}) => {
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
-          <Image
-            source={require('../../../../../assets/image/User/cafeImageExample.png')}
-            style={style.cardHeaderImage}
-          />
+          <Image source={{uri: companyLogo}} style={style.cardHeaderImage} />
         </View>
 
-        <Text style={style.cardHeaderText}>Cafe Rien</Text>
+        <Text style={style.cardHeaderText}>{companyName}</Text>
         <Image
           style={style.headerArrow}
           source={require('../../../../../assets/image/User/arrow.png')}
@@ -68,11 +85,8 @@ const WinPrize = ({navigation}) => {
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
-        <Image
-          style={style.cardBodyItemIcon}
-          source={require('../../../../../assets/image/User/coffeeIcon.png')}
-        />
-        <Text style={style.cardBodyItemName}>Filtre Kahve Kampanyası</Text>
+        {campaignLogo(campaignType)}
+        <Text style={style.cardBodyItemName}>{campaignName}</Text>
         <View style={style.cardBodyItemCount}>
           <Image
             source={require('../../../../../assets/image/tick.png')}
@@ -103,7 +117,12 @@ const WinPrize = ({navigation}) => {
             style={style.qrImage}
             useNativeDriver
             delay={500}>
-            <QRCode size={Dimensions.get('screen').width > 350 ? 100 : 70} color={Colors.PRIMARY} value="Umut" ecl="H" />
+            <QRCode
+              size={Dimensions.get('screen').width > 350 ? 100 : 70}
+              color={Colors.PRIMARY}
+              value="Umut"
+              ecl="H"
+            />
           </Animatable.View>
         </View>
       </View>

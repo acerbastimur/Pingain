@@ -12,7 +12,7 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (fontSize: number) => {
   return (screenWidth * fontSize) / fontScaleBase;
 };
- 
+
 export default StyleSheet.create({
   container: {
     paddingHorizontal: '6%',
@@ -105,9 +105,12 @@ export default StyleSheet.create({
     fontStyle: 'normal',
   },
   cardItemPlus: {
-    color: CampaignColors.COFFEE,
-    fontWeight: '600',
+     fontWeight: '600',
   },
+  cardItemPlusDrink: {color: CampaignColors.COFFEE},
+  cardItemPlusMeal: {color: CampaignColors.MEAL},
+  cardItemPlusDessert: {color: CampaignColors.DESSERT},
+
   greetingContainer: {
     marginTop: responsiveRate(16),
     paddingTop: responsiveRate(10),

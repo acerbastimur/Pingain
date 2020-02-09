@@ -13,6 +13,7 @@ export default interface User {
 export interface ActiveCampaign {
   campaignId: string;
   pinEarned: number;
+  giftCode?: string;
 }
 export interface UserStatistics {
   totalPinEarned: number;

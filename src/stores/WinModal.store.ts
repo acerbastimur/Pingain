@@ -9,13 +9,21 @@ class WinModalStore {
 
   @observable getPinModalRef: RBSheet = null;
 
-  @observable winPrizeHalfModalRef: RBSheet = null;
-
   @observable getPinDetails: {
     companyLogo: string;
     companyName: string;
     campaignType: CampaignType;
     campaignName: string;
+  } = null;
+
+  @observable winPrizeHalfModalRef: RBSheet = null;
+
+  @observable winPrizeDetails: {
+    companyLogo: string;
+    companyName: string;
+    campaignType: CampaignType;
+    campaignName: string;
+    giftCode: string;
   } = null;
 }
 
