@@ -18,7 +18,6 @@ import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/general/AuthRole.enum';
 import GetCompanyInfoService from '../../services/company/General/GetCompanyInfo.service';
 import GetCompanyCampaignsService from '../../services/company/General/GetCompanyCampaigns.service';
-import CompanyStore from '../../stores/Company.store';
 import GetUserInfoService from '../../services/user/General/GetUserInfo.service';
 
 export interface LoadingProps {
@@ -78,7 +77,7 @@ export default class Loading extends React.Component<LoadingProps, any> {
       });
   };
 
-  checkIfCompanyFilledProfile = async (user: FirebaseAuthTypes.User) => {
+  checkIfCompanyFilledProfile = async () => {
     let isCompanyProfileFilled = false;
     await GetCompanyInfoService.getCompanyInfo().then(companyInfo => {
       console.log('Company info is ', companyInfo);
@@ -90,7 +89,7 @@ export default class Loading extends React.Component<LoadingProps, any> {
     return isCompanyProfileFilled;
   };
 
-  checkIfUserFilledProfile = async (user: FirebaseAuthTypes.User) => {
+  checkIfUserFilledProfile = async () => {
     let isUserProfileFilled = false;
     await GetUserInfoService.getUserInfo().then(userInfo => {
       console.log('User info is ', userInfo);
@@ -105,16 +104,16 @@ export default class Loading extends React.Component<LoadingProps, any> {
 
   componentDidMount() {
     const {navigation} = this.props;
-    // auth().signOut();
+    //  auth().signOut();
     auth().onAuthStateChanged(async user => {
       if (user) {
         await this.checkUserRole(user);
-        
+
         if (GeneralStore.authRole === AuthRole.Company) {
           // check if company fillfulled their information
           console.log('Logged in as Company');
 
-          const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile(user);
+          const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile();
           if (isCompanyProfileFilled) {
             GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
               navigation.navigate('CompanyTabNavigation');
@@ -125,7 +124,7 @@ export default class Loading extends React.Component<LoadingProps, any> {
         } else if (GeneralStore.authRole === AuthRole.User) {
           console.log('Logged in as User');
 
-          const isUserProfileFilled = await this.checkIfUserFilledProfile(user);
+          const isUserProfileFilled = await this.checkIfUserFilledProfile();
           if (isUserProfileFilled) {
             navigation.navigate('UserTabNavigation');
           } else {

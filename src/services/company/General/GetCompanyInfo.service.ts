@@ -12,6 +12,16 @@ export default class GetCompanyInfoService {
       .doc(uid);
     const dataSnapshot = (await companyColRef.get()).data() as Company;
     CompanyStore.companyDetails = dataSnapshot; // update company store
+    CompanyStore.companyLogo = await this.getCompanyPhoto();
     return dataSnapshot;
+  }
+
+  static async getCompanyPhoto(): Promise<string> {
+    const photoPath = CompanyStore.companyDetails.companyLogo;
+    const url = await storage()
+      .ref()
+      .child(photoPath)
+      .getDownloadURL();
+    return url;
   }
 }

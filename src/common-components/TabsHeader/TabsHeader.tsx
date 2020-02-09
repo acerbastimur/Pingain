@@ -6,6 +6,10 @@ import {NavigationActions, NavigationScreenProp} from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import Logo from '../Logo';
 import TabsHeaderStyle from './TabsHeader.style';
+import GeneralStore from '../../stores/General.store';
+import AuthRole from '../../schemes/general/AuthRole.enum';
+import CompanyStore from '../../stores/Company.store';
+import UserStore from '../../stores/User.store';
 
 interface TabsHeaderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,13 +37,19 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         />
       );
     }
+    const {authRole} = GeneralStore;
 
+    if (authRole === AuthRole.Company) {
+      return (
+        <FastImage
+          style={this.s.image}
+          resizeMode="contain"
+          source={{uri: CompanyStore.companyLogo}}
+        />
+      );
+    }
     return (
-      <FastImage
-        style={this.s.image}
-        resizeMode="contain"
-        source={require('../../assets/image/User/profileImage.png')}
-      />
+      <FastImage style={this.s.image} resizeMode="contain" source={{uri: UserStore.profilePhoto}} />
     );
   };
 

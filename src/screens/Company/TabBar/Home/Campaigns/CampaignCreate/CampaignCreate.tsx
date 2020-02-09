@@ -160,8 +160,8 @@ export default class CampaignCreate extends React.Component<
                 <Text style={this.style.dropdownPlaceholder}>Örn: 7 Filtre kahve işleminde</Text>
                 <View style={this.style.dropdownContainer}>
                   <Dropdown
-                    value={prizeCount}
-                    onChangeText={value => this.setState({prizeCount: value})}
+                    value={actionCount}
+                    onChangeText={value => this.setState({actionCount: value})}
                     data={[
                       {value: 1, label: 1},
                       {value: 2, label: 2},
@@ -194,8 +194,8 @@ export default class CampaignCreate extends React.Component<
                 <Text style={this.style.dropdownPlaceholder}>Örn: 1 Filtre Kahve hediye</Text>
                 <View style={this.style.dropdownContainer}>
                   <Dropdown
-                    value={actionCount}
-                    onChangeText={value => this.setState({actionCount: value})}
+                    value={prizeCount}
+                    onChangeText={value => this.setState({prizeCount: value})}
                     data={[
                       {value: 1, label: 1},
                       {value: 2, label: 2},

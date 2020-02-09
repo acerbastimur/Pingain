@@ -10,6 +10,8 @@ class CompanyStore {
 
   @observable campaigns: Array<Campaign>;
 
+  @observable companyLogo: string = null;
+
   constructor() {
     console.log('Company Store was initialized!');
   }
