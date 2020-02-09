@@ -8,8 +8,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {Card} from 'react-native-shadow-cards';
+import FastImage from 'react-native-fast-image';
 
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {observer} from 'mobx-react';
@@ -27,45 +28,49 @@ export interface CompanyCardProps {
   company: UserCompany;
 }
 
+export interface CompanyCardState {
+  companyImageLoading: boolean;
+}
+
 @observer
-export default class CompanyCard extends React.Component<CompanyCardProps> {
+export default class CompanyCard extends React.Component<CompanyCardProps, CompanyCardState> {
   s = CompanyCardStyle;
 
   constructor(props: CompanyCardProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      companyImageLoading: true,
+    };
   }
 
   campaignIcon = ({campaignType}: Campaign) => {
     switch (campaignType) {
       case CampaignType.Drink:
         return (
-          <Image
+          <FastImage
             style={this.s.cardBodyItemIcon}
+            resizeMode="contain"
             source={require('../../../assets/image/User/coffeeIcon.png')}
           />
         );
       case CampaignType.Meal:
         return (
-          <Image
+          <FastImage
             style={this.s.cardBodyItemIcon}
+            resizeMode="contain"
             source={require('../../../assets/image/User/mealIcon.png')}
           />
         );
       case CampaignType.Dessert:
         return (
-          <Image
+          <FastImage
             style={this.s.cardBodyItemIcon}
+            resizeMode="contain"
             source={require('../../../assets/image/User/dessertIcon.png')}
           />
         );
       default:
-        return (
-          <Image
-            style={this.s.cardBodyItemIcon}
-            source={require('../../../assets/image/User/coffeeIcon.png')}
-          />
-        );
+        return null;
     }
   };
 
@@ -77,7 +82,11 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
         if (isCompleted) {
           return (
             <View style={[this.s.cardBodyItemCount, this.s.coffeeDoneBackground]}>
-              <Image style={this.s.tick} source={require('../../../assets/image/tickWhite.png')} />
+              <FastImage
+                style={this.s.tick}
+                resizeMode="contain"
+                source={require('../../../assets/image/tickWhite.png')}
+              />
             </View>
           );
         }
@@ -94,7 +103,11 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
         if (isCompleted) {
           return (
             <View style={[this.s.cardBodyItemCount, this.s.mealDoneBackground]}>
-              <Image style={this.s.tick} source={require('../../../assets/image/tickWhite.png')} />
+              <FastImage
+                style={this.s.tick}
+                resizeMode="contain"
+                source={require('../../../assets/image/tickWhite.png')}
+              />
             </View>
           );
         }
@@ -109,7 +122,11 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
         if (isCompleted) {
           return (
             <View style={[this.s.cardBodyItemCount, this.s.dessertDoneBackground]}>
-              <Image style={this.s.tick} source={require('../../../assets/image/tickWhite.png')} />
+              <FastImage
+                style={this.s.tick}
+                resizeMode="contain"
+                source={require('../../../assets/image/tickWhite.png')}
+              />
             </View>
           );
         }
@@ -131,6 +148,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
 
   public render() {
     const {navigation, shouldHeaderHide, company} = this.props;
+    const {companyImageLoading} = this.state;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
         {!shouldHeaderHide && (
@@ -141,7 +159,24 @@ export default class CompanyCard extends React.Component<CompanyCardProps> {
               }}
               style={this.s.cardHeader}>
               <View style={this.s.cardHeaderImageContainer}>
-                <Image source={{uri: company.companyLogo}} style={this.s.cardHeaderImage} />
+                <FastImage
+                  style={this.s.cardHeaderImage}
+                  resizeMode="center"
+                  source={{
+                    uri: company.companyLogo,
+                    priority: 'high',
+                  }}
+                  onLoadStart={() => {
+                    this.setState({companyImageLoading: true});
+                  }}
+                  onLoadEnd={() => {
+                    this.setState({companyImageLoading: false});
+                  }}>
+                  <ActivityIndicator
+                    style={{alignSelf: 'center'}}
+                    animating={companyImageLoading}
+                  />
+                </FastImage>
               </View>
 
               <Text style={this.s.cardHeaderText}>{company.companyName}</Text>

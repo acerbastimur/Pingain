@@ -21,7 +21,12 @@ export default StyleSheet.create({
     marginHorizontal: 35,
     height: 40,
   },
-  cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
+  cardHeaderImageContainer: {
+    width: 32,
+    height: 32,
+    borderRadius: 32,
+    overflow: 'hidden',
+  },
   cardHeaderImage: {
     width: 32,
     height: 32,
