@@ -1,15 +1,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text} from 'react-native';
-import {
-  NavigationScreenProp,
-  NavigationParams,
-  NavigationState,
-  ScrollView,
-  FlatList,
-} from 'react-navigation';
-import {Card} from 'react-native-shadow-cards';
+import {View, Text} from 'react-native';
+import {NavigationScreenProp, NavigationParams, NavigationState, FlatList} from 'react-navigation';
+import FastImage from 'react-native-fast-image';
 import LastTransactionsStyle from './LastTransactions.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 
@@ -17,7 +11,7 @@ export interface LastTransactionsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class LastTransactions extends React.Component<LastTransactionsProps, any> {
+export default class LastTransactions extends React.Component<LastTransactionsProps> {
   style = LastTransactionsStyle;
 
   constructor(props: LastTransactionsProps) {
@@ -28,7 +22,8 @@ export default class LastTransactions extends React.Component<LastTransactionsPr
   renderUser = () => {
     return (
       <View style={this.style.userContainer}>
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={this.style.profilePhoto}
           source={require('../../../../../assets/image/User/profileImage.png')}
         />

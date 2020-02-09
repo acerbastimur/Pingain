@@ -9,16 +9,16 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams, FlatList} from 'react-navigation';
+import FastImage from 'react-native-fast-image';
 import CampaignDetailsStyle from './CampaignDetails.style';
 import Colors from '../../../styles/Colors';
 import Button from '../../../common-components/Button';
 import CampaignDetailsModalStore from '../../../stores/CampaignDetailsModal.store';
-import {Campaign} from '../../../schemes/user/UserCompany';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
 import UserStore from '../../../stores/User.store';
 
@@ -36,8 +36,9 @@ const Pin = ({completed, navigation}) => {
           borderRadius: 12,
           overflow: 'hidden',
         }}>
-        <Image
-          style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
+        <FastImage
+          resizeMode="contain"
+          style={{width: itemWidth, height: itemWidth}}
           source={require('../../../assets/image/pin_completed.png')}
         />
       </View>
@@ -55,8 +56,9 @@ const Pin = ({completed, navigation}) => {
         borderRadius: 12,
         overflow: 'hidden',
       }}>
-      <Image
-        style={{width: itemWidth, height: itemWidth, resizeMode: 'contain'}}
+      <FastImage
+        resizeMode="contain"
+        style={{width: itemWidth, height: itemWidth}}
         source={require('../../../assets/image/pin_uncompleted.png')}
       />
     </TouchableOpacity>
@@ -102,28 +104,32 @@ const campaignIcon = ({campaignType}) => {
   switch (campaignType) {
     case CampaignType.Drink:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../assets/image/User/coffeeIcon.png')}
         />
       );
     case CampaignType.Meal:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../assets/image/User/mealIcon.png')}
         />
       );
     case CampaignType.Dessert:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../assets/image/User/dessertIcon.png')}
         />
       );
     default:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../assets/image/User/coffeeIcon.png')}
         />
@@ -151,14 +157,19 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
-          <Image
+          <FastImage
+            resizeMode="contain"
             source={require('../../../assets/image/User/cafeImageExample.png')}
             style={style.cardHeaderImage}
           />
         </View>
 
         <Text style={style.cardHeaderText}>{companyName}</Text>
-        <Image style={style.headerArrow} source={require('../../../assets/image/User/arrow.png')} />
+        <FastImage
+          resizeMode="contain"
+          style={style.headerArrow}
+          source={require('../../../assets/image/User/arrow.png')}
+        />
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
@@ -197,13 +208,15 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 alignItems: 'center',
               }}
               nextButton={
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
               }
               prevButton={
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />

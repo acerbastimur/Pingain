@@ -8,16 +8,12 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, ScrollView, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
-import Swiper from 'react-native-swiper';
-import {Card} from 'react-native-shadow-cards';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
+import FastImage from 'react-native-fast-image';
 import WinPinStyle from './WinPin.style';
-import Colors from '../../../../../styles/Colors';
-import Button from '../../../../../common-components/Button';
-import {UserCompany, Campaign} from '../../../../../schemes/user/UserCompany';
 import WinModalStore from '../../../../../stores/WinModal.store';
 import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 
@@ -30,7 +26,8 @@ const campaignLogo = (campaignType: CampaignType) => {
   switch (campaignType) {
     case CampaignType.Drink:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../../../assets/image/User/coffeeIcon.png')}
         />
@@ -38,14 +35,16 @@ const campaignLogo = (campaignType: CampaignType) => {
 
     case CampaignType.Meal:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../../../assets/image/User/mealIcon.png')}
         />
       );
     case CampaignType.Dessert:
       return (
-        <Image
+        <FastImage
+          resizeMode="contain"
           style={style.cardBodyItemIcon}
           source={require('../../../../../assets/image/User/dessertIcon.png')}
         />
@@ -96,11 +95,17 @@ const WinPin = ({navigation}: WinPinProps) => {
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
-          <Image source={{uri: companyLogo}} style={style.cardHeaderImage} />
+          <FastImage
+            resizeMode="contain"
+            source={{uri: companyLogo, priority: 'high'}}
+            style={style.cardHeaderImage}
+          />
         </View>
 
         <Text style={style.cardHeaderText}>{companyName}</Text>
-        <Image
+
+        <FastImage
+          resizeMode="contain"
           style={style.headerArrow}
           source={require('../../../../../assets/image/User/arrow.png')}
         />

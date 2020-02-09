@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {
   NavigationScreenProp,
@@ -21,9 +21,9 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Dropdown} from 'react-native-material-dropdown';
+import FastImage from 'react-native-fast-image';
 import UserDetailsEditStyle from './UserDetailsEdit.style';
 import Colors from '../../../styles/Colors';
-import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';
@@ -78,7 +78,7 @@ export default class UserDetailsEdit extends React.Component<
   public render() {
     const {navigation} = this.props;
     const {loading} = this.state;
-    const {name, surname, email, phoneNumber, city, profilePhoto} = UserStore.userDetails;
+    const {name, surname, phoneNumber, city, profilePhoto} = UserStore.userDetails;
     return loading ? (
       <View style={this.style.indicatorContainer}>
         <Text>Loading</Text>
@@ -175,7 +175,8 @@ export default class UserDetailsEdit extends React.Component<
                           blurOnSubmit={false}
                         />
                         {!errors.name && touched.name ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -223,7 +224,8 @@ export default class UserDetailsEdit extends React.Component<
                           blurOnSubmit={false}
                         />
                         {!errors.surname && touched.surname ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -271,7 +273,8 @@ export default class UserDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.password && touched.password ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -312,7 +315,8 @@ export default class UserDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.phoneNumber && touched.phoneNumber ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -346,7 +350,6 @@ export default class UserDetailsEdit extends React.Component<
                             handleSubmit();
                             return;
                           }
-                          console.log(errors);
 
                           if (errors.name) {
                             this.references.filter(t => t.name === 'name')[0].ref.shake();

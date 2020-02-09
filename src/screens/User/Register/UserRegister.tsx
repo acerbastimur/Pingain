@@ -9,12 +9,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FastImage from 'react-native-fast-image';
 import UserRegisterStyle from './UserRegister.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
@@ -51,12 +52,10 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
       loading: true,
     });
     RegisterService.registerUserAuth(email, password)
-      .then(user => {
-        console.log('Succesfully');
-        console.log(user);
+      .then(() => {
+        return null;
       })
-      .catch(err => {
-        console.log('Error on register', err);
+      .catch(() => {
         this.setState({loading: false});
         setTimeout(() => {
           this.setState({isErrorModalActive: true});
@@ -140,7 +139,8 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
                       blurOnSubmit={false}
                     />
                     {!errors.email && touched.email ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -187,7 +187,8 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
                       blurOnSubmit={false}
                     />
                     {!errors.password && touched.password ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -244,7 +245,8 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
                       }}
                     />
                     {!errors.passwordConfirm && touched.passwordConfirm ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -292,7 +294,7 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
           isVisible={isErrorModalActive}
           modalType={2}
           errorMessage="Bu email kullanılmakta"
-          backButton={e => {
+          backButton={() => {
             this.setState({isErrorModalActive: false});
           }}
         />

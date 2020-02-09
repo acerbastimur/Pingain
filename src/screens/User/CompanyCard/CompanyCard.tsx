@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 
@@ -161,7 +161,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
               <View style={this.s.cardHeaderImageContainer}>
                 <FastImage
                   style={this.s.cardHeaderImage}
-                  resizeMode="center"
+                  resizeMode="contain"
                   source={{
                     uri: company.companyLogo,
                     priority: 'high',
@@ -172,15 +172,16 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                   onLoadEnd={() => {
                     this.setState({companyImageLoading: false});
                   }}>
-                  <ActivityIndicator
-                    style={{alignSelf: 'center'}}
-                    animating={companyImageLoading}
-                  />
+                  <View style={this.s.loadingCenter}>
+                    <ActivityIndicator animating={companyImageLoading} />
+                  </View>
                 </FastImage>
               </View>
 
               <Text style={this.s.cardHeaderText}>{company.companyName}</Text>
-              <Image
+
+              <FastImage
+                resizeMode="contain"
                 style={this.s.headerArrow}
                 source={require('../../../assets/image/User/arrow.png')}
               />
@@ -196,8 +197,6 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
               activeCampaigns &&
               activeCampaigns.length &&
               activeCampaigns.find(activeCampaign => {
-                console.log(activeCampaign.campaignId, campaign.campaignId);
-
                 return activeCampaign.campaignId === campaign.campaignId;
               });
             return (

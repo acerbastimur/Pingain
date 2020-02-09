@@ -1,12 +1,14 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {NavigationActions, NavigationScreenProp} from 'react-navigation';
+import FastImage from 'react-native-fast-image';
 import Logo from '../Logo';
 import TabsHeaderStyle from './TabsHeader.style';
 
 interface TabsHeaderProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: NavigationScreenProp<any, any>;
   rightButtonText?: string;
   rightEditIcon?: boolean;
@@ -23,11 +25,21 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
     }
     if (rightEditIcon) {
-      return <Image source={require('../../assets/image/editIcon.png')} style={this.s.image} />;
+      return (
+        <FastImage
+          style={this.s.image}
+          resizeMode="contain"
+          source={require('../../assets/image/editIcon.png')}
+        />
+      );
     }
 
     return (
-      <Image source={require('../../assets/image/User/profileImage.png')} style={this.s.image} />
+      <FastImage
+        style={this.s.image}
+        resizeMode="contain"
+        source={require('../../assets/image/User/profileImage.png')}
+      />
     );
   };
 
@@ -43,7 +55,11 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
     ) {
       return (
         <TouchableOpacity>
-          <Image source={require('../../assets/image/User/searchIcon.png')} style={this.s.image} />
+          <FastImage
+            style={this.s.image}
+            resizeMode="contain"
+            source={require('../../assets/image/User/searchIcon.png')}
+          />
         </TouchableOpacity>
       );
     }
@@ -52,17 +68,20 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       <TouchableOpacity
         style={this.s.backButtonContainer}
         onPress={() => {
-          console.log(navigation);
           onLeftPress();
           navigation.dispatch(NavigationActions.back());
         }}>
-        <Image source={require('../../assets/image/backIcon.png')} style={this.s.backIcon} />
+        <FastImage
+          style={this.s.backIcon}
+          resizeMode="contain"
+          source={require('../../assets/image/backIcon.png')}
+        />
       </TouchableOpacity>
     );
   };
 
   render() {
-    const {navigation, rightButtonText, onRightPress} = this.props;
+    const {rightButtonText, onRightPress} = this.props;
 
     return (
       <View style={this.s.container}>

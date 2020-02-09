@@ -1,10 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {View, Image, Text} from 'react-native';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import FastImage from 'react-native-fast-image';
 import GetCompanyInfo from '../screens/Company/GetCompanyInfo';
 import Home from '../screens/Company/TabBar/Home';
 import QrGenerate from '../screens/Company/TabBar/QrGenerate';
@@ -70,15 +70,17 @@ const CompanyTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <Image
-                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              <FastImage
+                resizeMode="contain"
+                style={{width: 30, height: 30, alignSelf: 'center'}}
                 source={require('../assets/image/CompanyTab/CampaignsTabIcon.png')}
               />
             );
           }
           return (
-            <Image
-              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            <FastImage
+              resizeMode="contain"
+              style={{width: 30, height: 30, alignSelf: 'center'}}
               source={require('../assets/image/CompanyTab/CampaignsTabIconDisabled.png')}
             />
           );
@@ -89,8 +91,9 @@ const CompanyTabNavigation = createBottomTabNavigator(
       screen: QrGenerateStack,
       navigationOptions: {
         tabBarIcon: (
-          <Image
-            style={{resizeMode: 'contain', width: 50, height: 50, alignSelf: 'center'}}
+          <FastImage
+            resizeMode="contain"
+            style={{width: 50, height: 50, alignSelf: 'center'}}
             source={require('../assets/image/CompanyTab/QrCodeTabIcon.png')}
           />
         ),
@@ -102,15 +105,17 @@ const CompanyTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <Image
-                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              <FastImage
+                resizeMode="contain"
+                style={{width: 30, height: 30, alignSelf: 'center'}}
                 source={require('../assets/image/CompanyTab/ReadQrIcon.png')}
               />
             );
           }
           return (
-            <Image
-              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            <FastImage
+              resizeMode="contain"
+              style={{width: 30, height: 30, alignSelf: 'center'}}
               source={require('../assets/image/CompanyTab/ReadQrIconDisabled.png')}
             />
           );
