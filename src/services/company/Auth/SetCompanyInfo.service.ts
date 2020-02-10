@@ -29,7 +29,8 @@ export default class SetCompanyInfoService {
           phoneNumber,
           companyLogo: uploadLogo.metadata.fullPath,
         })
-        .then(() => {
+        .then(async () => {
+          await GetCompanyInfoService.getCompanyInfo(); // to update store
           resolve(true);
         })
         .catch(err => {

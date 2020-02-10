@@ -1,15 +1,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {NavigationActions, NavigationScreenProp} from 'react-navigation';
 import FastImage from 'react-native-fast-image';
+import {observer} from 'mobx-react';
 import Logo from '../Logo';
 import TabsHeaderStyle from './TabsHeader.style';
-import GeneralStore from '../../stores/General.store';
-import AuthRole from '../../schemes/general/AuthRole.enum';
-import CompanyStore from '../../stores/Company.store';
-import UserStore from '../../stores/User.store';
+import RightIcon from './RightIcon';
 
 interface TabsHeaderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,38 +18,9 @@ interface TabsHeaderProps {
   onRightPress?: () => void;
   onLeftPress?: () => void;
 }
+@observer
 class TabsHeader extends React.Component<TabsHeaderProps> {
   s = TabsHeaderStyle;
-
-  rightComponent = () => {
-    const {rightButtonText, rightTextColor, rightEditIcon} = this.props;
-    if (rightButtonText) {
-      return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
-    }
-    if (rightEditIcon) {
-      return (
-        <FastImage
-          style={this.s.image}
-          resizeMode="contain"
-          source={require('../../assets/image/editIcon.png')}
-        />
-      );
-    }
-    const {authRole} = GeneralStore;
-
-    if (authRole === AuthRole.Company) {
-      return (
-        <FastImage
-          style={this.s.image}
-          resizeMode="contain"
-          source={{uri: CompanyStore.companyLogo}}
-        />
-      );
-    }
-    return (
-      <FastImage style={this.s.image} resizeMode="contain" source={{uri: UserStore.profilePhoto}} />
-    );
-  };
 
   leftComponent = () => {
     const {navigation, onLeftPress} = this.props;
@@ -91,7 +60,7 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
   };
 
   render() {
-    const {rightButtonText, onRightPress} = this.props;
+    const {rightButtonText, onRightPress, rightEditIcon, rightTextColor} = this.props;
 
     return (
       <View style={this.s.container}>
@@ -102,7 +71,11 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         <TouchableOpacity
           style={[rightButtonText ? this.s.rightTextContainer : this.s.imageContainer]}
           onPress={onRightPress}>
-          {this.rightComponent()}
+          <RightIcon
+            rightButtonText={rightButtonText}
+            rightTextColor={rightTextColor}
+            rightEditIcon={rightEditIcon}
+          />
         </TouchableOpacity>
       </View>
     );

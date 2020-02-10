@@ -17,7 +17,10 @@ export default class GetCompanyInfoService {
   }
 
   static async getCompanyPhoto(): Promise<string> {
-    const photoPath = CompanyStore.companyDetails.companyLogo;
+    const photoPath = CompanyStore.companyDetails?.companyLogo;
+    if (!photoPath) {
+      return null;
+    }
     const url = await storage()
       .ref()
       .child(photoPath)

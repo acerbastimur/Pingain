@@ -20,7 +20,10 @@ export default class GetUserInfoService {
   }
 
   static async getUserPhoto(): Promise<string> {
-    const photoPath = UserStore.userDetails.profilePhoto;
+    const photoPath = UserStore.userDetails?.profilePhoto;
+    if (!photoPath) {
+      return null;
+    }
     const url = await storage()
       .ref()
       .child(photoPath)

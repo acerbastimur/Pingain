@@ -12,6 +12,7 @@ import * as React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import ImageResizer from 'react-native-image-resizer';
 
 import FastImage from 'react-native-fast-image';
 import ImageUploadStyle from './ImageUpload.style';
@@ -59,20 +60,32 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
       }
       const source = response.uri;
 
+      ImageResizer.createResizedImage(source, response.width, response.height, 'JPEG', 10)
+        .then(resizedResponse => {
+          // response.uri is the URI of the new image that can now be displayed, uploaded...
+          // response.path is the path of the new image
+          // response.name is the name of the new image with the extension
+          // response.size is the size of the new image
+          this.setState({
+            imageSource: resizedResponse.uri,
+          });
+
+          if (companyLogo) {
+            CompanyStore.newCompanyLogoUri = resizedResponse.uri;
+            //  console.log(CompanyStore);
+          }
+          if (userLogo) {
+            UserStore.newCompanyLogoUri = resizedResponse.uri;
+          }
+        })
+        .catch(err => {
+          // Oops, something went wrong. Check that the filename is correct and
+          // inspect err to get more details.
+        });
+
       // You can also display the image using data:
       // const source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-      this.setState({
-        imageSource: source,
-      });
-
-      if (companyLogo) {
-        CompanyStore.newCompanyLogoUri = source;
-        //  console.log(CompanyStore);
-      }
-      if (userLogo) {
-        UserStore.newCompanyLogoUri = source;
-      }
       return null;
     });
   };
