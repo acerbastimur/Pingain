@@ -5,6 +5,7 @@ import * as React from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import FastImage from 'react-native-fast-image';
 
 import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
@@ -81,9 +82,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={companies}
-            renderItem={({item}) => {
-              console.log('NEW ITEMS');
-              console.log(item);
+            renderItem={({item}) => { 
 
               return <CompanyCard navigation={navigation} company={item} />;
             }}

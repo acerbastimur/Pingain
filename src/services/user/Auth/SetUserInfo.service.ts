@@ -31,7 +31,9 @@ export default class SetUserInfoService {
           profilePhoto: uploadLogo.metadata.fullPath,
           statistics,
         })
-        .then(() => {
+        .then(async () => {
+          await GetUserInfoService.getUserInfo(); // to update store
+
           resolve(true);
         })
         .catch(err => {

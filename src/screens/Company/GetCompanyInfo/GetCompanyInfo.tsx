@@ -10,15 +10,15 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FastImage from 'react-native-fast-image';
 import GetCompanyInfoStyle from './GetCompanyInfo.style';
 import Colors from '../../../styles/Colors';
-import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
 import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
@@ -67,7 +67,6 @@ export default class GetCompanyInfo extends React.Component<
   };
 
   public render() {
-    const {navigation} = this.props;
     const {isLoading} = this.state;
     return (
       <KeyboardAwareScrollView
@@ -121,7 +120,6 @@ export default class GetCompanyInfo extends React.Component<
                   touched,
                   setFieldTouched,
                   isValid,
-                  isSubmitting,
                 }) => (
                   <View style={this.style.formContainer}>
                     <View style={this.style.inputContainer}>
@@ -150,15 +148,15 @@ export default class GetCompanyInfo extends React.Component<
                             const companyNameInput = this.references.filter(
                               t => t.name === 'companyNameInput',
                             )[0].ref;
-                            console.log(companyNameInput);
-
+ 
                             companyNameInput.focus();
                           }}
                           blurOnSubmit={false}
                         />
 
                         {!errors.name && touched.name ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -208,7 +206,8 @@ export default class GetCompanyInfo extends React.Component<
                         />
 
                         {!errors.companyName && touched.companyName ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -259,7 +258,8 @@ export default class GetCompanyInfo extends React.Component<
                         />
 
                         {!errors.phoneNumber && touched.phoneNumber ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -324,7 +324,8 @@ export default class GetCompanyInfo extends React.Component<
                         />
 
                         {!errors.instagramAccount && touched.instagramAccount ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -337,8 +338,7 @@ export default class GetCompanyInfo extends React.Component<
                         backgroundColor={Colors.COMPANY}
                         textColor="#fff"
                         onPress={() => {
-                          console.log(isValid, errors);
-                          const selctedPhoto = this.imageUploadRef.state.imageSource;
+                           const selctedPhoto = this.imageUploadRef.state.imageSource;
                           if (isValid && selctedPhoto) {
                             handleSubmit();
                             return;

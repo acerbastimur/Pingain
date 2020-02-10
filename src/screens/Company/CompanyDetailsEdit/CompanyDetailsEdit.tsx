@@ -10,7 +10,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import CheckBox from 'react-native-check-box';
 import * as Animatable from 'react-native-animatable';
 import {
@@ -24,7 +24,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Dropdown} from 'react-native-material-dropdown';
 import {observer} from 'mobx-react';
-import auth from '@react-native-firebase/auth';
+import FastImage from 'react-native-fast-image';
 import CompanyDetailsEditStyle from './CompanyDetailsEdit.style';
 import Colors from '../../../styles/Colors';
 import TabsHeader from '../../../common-components/TabsHeader';
@@ -32,7 +32,6 @@ import CITIES from '../../../assets/constants/Cities';
 import ImageUpload from '../../../common-components/ImageUpload';
 import CompanyStore from '../../../stores/Company.store';
 import Button from '../../../common-components/Button';
-import Company from '../../../schemes/company/Company';
 import SetCompanyInfoService from '../../../services/company/Auth/SetCompanyInfo.service';
 import LoginService from '../../../services/company/Auth/Login.service';
 
@@ -126,9 +125,6 @@ export default class CompanyDetailsEdit extends React.Component<
       phoneNumber,
     } = CompanyStore.companyDetails;
 
-    const {uid} = auth().currentUser;
-    console.table(companyImages);
-
     return loading ? (
       <View style={this.style.indicatorContainer}>
         <Text>Loading</Text>
@@ -207,7 +203,6 @@ export default class CompanyDetailsEdit extends React.Component<
                 touched,
                 setFieldTouched,
                 isValid,
-                setFieldValue,
                 validateForm,
                 handleSubmit,
               }) => {
@@ -243,9 +238,10 @@ export default class CompanyDetailsEdit extends React.Component<
                           blurOnSubmit={false}
                         />
                         {!errors.cmpName && touched.cmpName ? (
-                          <Image
-                            source={require('../../../assets/image/tick.png')}
+                          <FastImage
                             style={this.style.image}
+                            resizeMode="contain"
+                            source={require('../../../assets/image/tick.png')}
                           />
                         ) : null}
                       </Animatable.View>
@@ -291,7 +287,8 @@ export default class CompanyDetailsEdit extends React.Component<
                           blurOnSubmit={false}
                         />
                         {!errors.managerName && touched.managerName ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -339,7 +336,8 @@ export default class CompanyDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.phoneNumber && touched.phoneNumber ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -386,7 +384,8 @@ export default class CompanyDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.instaAccount && touched.instaAccount ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />
@@ -426,9 +425,10 @@ export default class CompanyDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.address && touched.address ? (
-                          <Image
+                          <FastImage
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
+                            resizeMode="contain"
                           />
                         ) : null}
                       </Animatable.View>
@@ -485,7 +485,8 @@ export default class CompanyDetailsEdit extends React.Component<
                           }}
                         />
                         {!errors.password && touched.password ? (
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             source={require('../../../assets/image/tick.png')}
                             style={this.style.image}
                           />

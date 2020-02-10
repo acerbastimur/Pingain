@@ -12,6 +12,8 @@ class UserStore {
 
   @observable companies: Array<UserCompany> = null;
 
+  @observable profilePhoto: string = null;
+
   constructor() {
     console.log('User Store was initialized!');
   }

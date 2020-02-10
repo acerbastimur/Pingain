@@ -12,8 +12,22 @@ export default class GetUserInfoService {
       .doc(uid);
     const dataSnapshot = (await userColRef.get()).data() as User;
     UserStore.userDetails = dataSnapshot;
+    UserStore.profilePhoto = await this.getUserPhoto();
+
     console.log({dataSnapshot});
 
     return dataSnapshot;
+  }
+
+  static async getUserPhoto(): Promise<string> {
+    const photoPath = UserStore.userDetails?.profilePhoto;
+    if (!photoPath) {
+      return null;
+    }
+    const url = await storage()
+      .ref()
+      .child(photoPath)
+      .getDownloadURL();
+    return url;
   }
 }

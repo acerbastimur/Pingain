@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {observer} from 'mobx-react';
+import FastImage from 'react-native-fast-image';
 import NoCampaignStyle from './NoCampaign.style';
 import Button from '../../../common-components/Button';
 import Colors from '../../../styles/Colors';
@@ -37,7 +37,8 @@ export default class NoCampaign extends React.Component<NoCampaignProps, any> {
           <Text style={this.style.textHighlighted}> bağlılığını arttırmak</Text> için başlayalım!
         </Text>
         <View style={this.style.imageContainer}>
-          <Image
+          <FastImage
+            resizeMode="contain"
             style={this.style.image}
             source={require('../../../assets/image/Company/NoCampaignImage.png')}
           />

@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -10,6 +10,7 @@ import {
 } from 'react-navigation';
 import {Card} from 'react-native-shadow-cards';
 import {toJS} from 'mobx';
+import FastImage from 'react-native-fast-image';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 import Button from '../../../../../common-components/Button';
@@ -20,7 +21,7 @@ export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class Campaigns extends React.Component<CampaignsProps, any> {
+export default class Campaigns extends React.Component<CampaignsProps> {
   style = CampaignsStyle;
 
   constructor(props: CampaignsProps) {
@@ -70,15 +71,18 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                             onPress={() => {
                               navigation.navigate('CampaignCreate', {edit: true, campaign});
                             }}>
-                            <Image
+                            <FastImage
+                              resizeMode="contain"
                               style={this.style.cardBodyItemIcon}
                               source={require('../../../../../assets/image/User/coffeeIcon.png')}
                             />
+
                             <Text style={this.style.otherCardBodyItemName}>
                               {campaign.campaignName}
                             </Text>
                             <View style={this.style.arrowContainer}>
-                              <Image
+                              <FastImage
+                                resizeMode="contain"
                                 style={this.style.arrow}
                                 source={require('../../../../../assets/image/Company/coffeeArrow.png')}
                               />
@@ -99,7 +103,8 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                             onPress={() => {
                               navigation.navigate('CampaignCreate', {edit: true, campaign});
                             }}>
-                            <Image
+                            <FastImage
+                              resizeMode="contain"
                               style={this.style.cardBodyItemIcon}
                               source={require('../../../../../assets/image/User/dessertIcon.png')}
                             />
@@ -107,7 +112,8 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                               {campaign.campaignName}
                             </Text>
                             <View style={this.style.arrowContainer}>
-                              <Image
+                              <FastImage
+                                resizeMode="contain"
                                 style={this.style.arrow}
                                 source={require('../../../../../assets/image/Company/dessertArrow.png')}
                               />
@@ -128,7 +134,8 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                             onPress={() => {
                               navigation.navigate('CampaignCreate', {edit: true, campaign});
                             }}>
-                            <Image
+                            <FastImage
+                              resizeMode="contain"
                               style={this.style.cardBodyItemIcon}
                               source={require('../../../../../assets/image/User/mealIcon.png')}
                             />
@@ -136,7 +143,8 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                               {campaign.campaignName}
                             </Text>
                             <View style={this.style.arrowContainer}>
-                              <Image
+                              <FastImage
+                                resizeMode="contain"
                                 style={this.style.arrow}
                                 source={require('../../../../../assets/image/Company/statisticsArrow.png')}
                               />
@@ -157,15 +165,18 @@ export default class Campaigns extends React.Component<CampaignsProps, any> {
                             onPress={() => {
                               navigation.navigate('CampaignCreate', {edit: true, campaign});
                             }}>
-                            <Image
+                            <FastImage
+                              resizeMode="contain"
                               style={this.style.cardBodyItemIcon}
                               source={require('../../../../../assets/image/User/mealIcon.png')}
                             />
+
                             <Text style={this.style.otherCardBodyItemName}>
                               {campaign.campaignName}
                             </Text>
                             <View style={this.style.arrowContainer}>
-                              <Image
+                              <FastImage
+                                resizeMode="contain"
                                 style={this.style.arrow}
                                 source={require('../../../../../assets/image/Company/statisticsArrow.png')}
                               />

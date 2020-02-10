@@ -10,12 +10,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FastImage from 'react-native-fast-image';
 import ResetPasswordStyle from './ResetPassword.style';
 import Colors from '../../styles/Colors';
 import Logo from '../../common-components/Logo';
@@ -40,7 +41,7 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
     };
   }
 
-  handleSubmit = (values: any) => {
+  handleSubmit = () => {
     this.setState({isModalVisible: true});
   };
 
@@ -107,7 +108,8 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                     />
 
                     {!errors.email && touched.email ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -150,7 +152,7 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
         <ModalContainer
           isVisible={isModalVisible}
           modalType={1}
-          backButton={e => {
+          backButton={() => {
             this.setState({isModalVisible: false});
           }}
         />

@@ -3,12 +3,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {Card} from 'react-native-shadow-cards';
 
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
+import FastImage from 'react-native-fast-image';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
@@ -30,7 +31,6 @@ export default class Home extends React.Component<HomeProps, any> {
   public render() {
     const {navigation} = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
-    console.table(campaigns);
 
     return (
       <View style={this.style.container}>
@@ -56,7 +56,8 @@ export default class Home extends React.Component<HomeProps, any> {
                         opacity={0.15}
                         style={this.style.card}>
                         <View style={this.style.otherCardBodyItem}>
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             style={this.style.cardBodyItemIcon}
                             source={require('../../../../assets/image/User/coffeeIcon.png')}
                           />
@@ -80,10 +81,12 @@ export default class Home extends React.Component<HomeProps, any> {
                         opacity={0.15}
                         style={this.style.card}>
                         <View style={this.style.otherCardBodyItem}>
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             style={this.style.cardBodyItemIcon}
                             source={require('../../../../assets/image/User/mealIcon.png')}
                           />
+
                           <Text style={this.style.otherCardBodyItemName}>
                             {campaign.campaignName}
                           </Text>
@@ -104,10 +107,12 @@ export default class Home extends React.Component<HomeProps, any> {
                         opacity={0.15}
                         style={this.style.card}>
                         <View style={this.style.otherCardBodyItem}>
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             style={this.style.cardBodyItemIcon}
                             source={require('../../../../assets/image/User/dessertIcon.png')}
                           />
+
                           <Text style={this.style.otherCardBodyItemName}>
                             {campaign.campaignName}
                           </Text>
@@ -131,10 +136,12 @@ export default class Home extends React.Component<HomeProps, any> {
                         opacity={0.15}
                         style={this.style.card}>
                         <View style={this.style.otherCardBodyItem}>
-                          <Image
+                          <FastImage
+                            resizeMode="contain"
                             style={this.style.cardBodyItemIcon}
                             source={require('../../../../assets/image/User/mealIcon.png')}
                           />
+
                           <Text style={this.style.otherCardBodyItemName}>
                             {campaign.campaignName}
                           </Text>
@@ -157,13 +164,16 @@ export default class Home extends React.Component<HomeProps, any> {
                     navigation.navigate('CompanyCampaigns');
                   }}
                   style={this.style.otherCardBodyItem}>
-                  <Image
+                  <FastImage
+                    resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/createCampaignIcon.png')}
                   />
+
                   <Text style={this.style.otherCardBodyItemName}>Kampanya Oluştur / Düzenle</Text>
                   <View style={this.style.arrowContainer}>
-                    <Image
+                    <FastImage
+                      resizeMode="contain"
                       style={this.style.arrow}
                       source={require('../../../../assets/image/Company/createCampaignNavigationIcon.png')}
                     />
@@ -176,13 +186,16 @@ export default class Home extends React.Component<HomeProps, any> {
                     navigation.navigate('LastTransaction');
                   }}
                   style={this.style.otherCardBodyItem}>
-                  <Image
+                  <FastImage
+                    resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/lastActions.png')}
                   />
+
                   <Text style={this.style.otherCardBodyItemName}>Son İşlem Yapanlar</Text>
                   <View style={this.style.arrowContainer}>
-                    <Image
+                    <FastImage
+                      resizeMode="contain"
                       style={this.style.arrow}
                       source={require('../../../../assets/image/Company/lastActionNavigationIcon.png')}
                     />
@@ -195,13 +208,16 @@ export default class Home extends React.Component<HomeProps, any> {
                   onPress={() => {
                     navigation.navigate('Statistics');
                   }}>
-                  <Image
+                  <FastImage
+                    resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/statisticsIcon.png')}
                   />
+
                   <Text style={this.style.otherCardBodyItemName}>İstatistikler</Text>
                   <View style={this.style.arrowContainer}>
-                    <Image
+                    <FastImage
+                      resizeMode="contain"
                       style={this.style.arrow}
                       source={require('../../../../assets/image/Company/statisticsArrow.png')}
                     />
@@ -210,13 +226,16 @@ export default class Home extends React.Component<HomeProps, any> {
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity style={this.style.otherCardBodyItem}>
-                  <Image
+                  <FastImage
+                    resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
                     source={require('../../../../assets/image/Company/walletIcon.png')}
                   />
+
                   <Text style={this.style.otherCardBodyItemName}>Ödeme Ekranı</Text>
                   <View style={this.style.arrowContainer}>
-                    <Image
+                    <FastImage
+                      resizeMode="contain"
                       style={this.style.arrow}
                       source={require('../../../../assets/image/Company/payNavigationIcon.png')}
                     />

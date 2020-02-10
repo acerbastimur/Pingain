@@ -10,16 +10,16 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'react-native-material-dropdown';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FastImage from 'react-native-fast-image';
 import GetUserInfoStyle from './GetUserInfo.style';
 import Colors from '../../../styles/Colors';
-import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
 import CITIES from '../../../assets/constants/Cities';
@@ -55,7 +55,6 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
   };
 
   public render() {
-    const {navigation} = this.props;
     const {isLoading} = this.state;
     return isLoading ? (
       <View style={this.style.indicatorContainer}>
@@ -108,7 +107,6 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                 touched,
                 setFieldTouched,
                 isValid,
-                isSubmitting,
               }) => (
                 <View style={this.style.formContainer}>
                   <View style={this.style.inputContainer}>
@@ -137,7 +135,6 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                           const surnameInput = this.references.filter(
                             t => t.name === 'surnameInput',
                           )[0].ref;
-                          console.log(surnameInput);
 
                           surnameInput.focus();
                         }}
@@ -145,7 +142,8 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                       />
 
                       {!errors.name && touched.name ? (
-                        <Image
+                        <FastImage
+                          resizeMode="contain"
                           source={require('../../../assets/image/tick.png')}
                           style={this.style.image}
                         />
@@ -193,7 +191,8 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                       />
 
                       {!errors.surname && touched.surname ? (
-                        <Image
+                        <FastImage
+                          resizeMode="contain"
                           source={require('../../../assets/image/tick.png')}
                           style={this.style.image}
                         />
@@ -237,7 +236,8 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                       />
 
                       {!errors.phoneNumber && touched.phoneNumber ? (
-                        <Image
+                        <FastImage
+                          resizeMode="contain"
                           source={require('../../../assets/image/tick.png')}
                           style={this.style.image}
                         />
@@ -266,8 +266,6 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                       backgroundColor={Colors.INFO}
                       textColor="#fff"
                       onPress={() => {
-                        console.log(isValid, errors);
-
                         if (isValid) {
                           handleSubmit();
                           return;

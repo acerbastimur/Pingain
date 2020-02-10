@@ -20,6 +20,7 @@ export default StyleSheet.create({
   bodyContainer: {
     flex: 0.9,
   },
+  loadingCenter: {height: '100%', justifyContent: 'center', alignItems: 'center'},
 
   swiperContainer: {height: 300},
   companyInformationContainer: {
@@ -97,7 +98,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginRight: 10,
   },
-  companyFeatureCardImage: {width: 14, resizeMode: 'contain', marginRight: 4},
+  companyFeatureCardImage: {width: 14, marginRight: 4, resizeMode: 'contain'},
   companyFeatureCardText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',

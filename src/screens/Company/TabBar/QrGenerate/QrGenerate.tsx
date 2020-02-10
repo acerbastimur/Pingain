@@ -1,11 +1,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import QRCode from 'react-native-qrcode-svg';
+import FastImage from 'react-native-fast-image';
 import QrGenerateStyle from './QrGenerate.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import Colors from '../../../../styles/Colors';
@@ -62,10 +64,12 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.style.campaignCardCoffee,
                   this.style.campaignCardCoffeeSelected,
                 ]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/coffeeIconWhite.png')}
                 />
+
                 <Text style={[this.style.campaignCardText, this.style.selectedText]}>Kahve</Text>
               </View>
             ) : (
@@ -75,10 +79,12 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.setState({activeCampaign: CampaignTypes.Coffee});
                 }}
                 style={[this.style.campaignCard, this.style.campaignCardCoffee]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/coffeeIcon.png')}
                 />
+
                 <Text style={[this.style.campaignCardText, this.style.campaignCardCoffeeText]}>
                   Kahve
                 </Text>
@@ -97,10 +103,12 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.style.campaignCardMeal,
                   this.style.campaignCardMealSelected,
                 ]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/mealIconWhite.png')}
                 />
+
                 <Text style={[this.style.campaignCardText, this.style.selectedText]}>Makarna</Text>
               </View>
             ) : (
@@ -110,7 +118,8 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.setState({activeCampaign: CampaignTypes.Meal});
                 }}
                 style={[this.style.campaignCard, this.style.campaignCardMeal]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/mealIcon.png')}
                 />
@@ -131,7 +140,8 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.style.campaignCardDessert,
                   this.style.campaignCardDessertSelected,
                 ]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/dessertIconWhite.png')}
                 />
@@ -146,7 +156,8 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                   this.setState({activeCampaign: CampaignTypes.Dessert});
                 }}
                 style={[this.style.campaignCard, this.style.campaignCardDessert]}>
-                <Image
+                <FastImage
+                  resizeMode="contain"
                   style={this.style.campaignCardImg}
                   source={require('../../../../assets/image/User/dessertIcon.png')}
                 />

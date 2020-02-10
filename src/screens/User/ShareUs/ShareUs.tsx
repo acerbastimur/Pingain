@@ -1,14 +1,17 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import {View, Image, Text, TouchableOpacity, Linking} from 'react-native';
+import {View, Text, TouchableOpacity, Linking} from 'react-native';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import FastImage from 'react-native-fast-image';
 import ShareUsStyle from './ShareUs.style';
-import TabsHeader from '../../../common-components/TabsHeader';
 
 export interface ShareUsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class ShareUs extends React.Component<ShareUsProps, any> {
+export default class ShareUs extends React.Component<ShareUsProps> {
   style = ShareUsStyle;
 
   constructor(props: ShareUsProps) {
@@ -17,12 +20,13 @@ export default class ShareUs extends React.Component<ShareUsProps, any> {
   }
 
   public render() {
-    const {navigation} = this.props;
     return (
       <View style={this.style.container}>
         <Text style={this.style.topTextLight}>Biz büyüyen bir aileyiz</Text>
         <Text style={this.style.topTextBold}>Bize Destek Ol!</Text>
-        <Image
+
+        <FastImage
+          resizeMode="contain"
           style={this.style.bodyImage}
           source={require('../../../assets/image/shareUsImage.png')}
         />
@@ -39,11 +43,12 @@ export default class ShareUs extends React.Component<ShareUsProps, any> {
         <TouchableOpacity
           style={this.style.followButton}
           onPress={() => {
-            Linking.openURL('instagram://user?username=pingain').catch(err => {
+            Linking.openURL('instagram://user?username=pingain').catch(() => {
               Linking.openURL('https://instagram.com/pingain');
             });
           }}>
-          <Image
+          <FastImage
+            resizeMode="contain"
             style={this.style.instaIcon}
             source={require('../../../assets/image/instaIcon.png')}
           />

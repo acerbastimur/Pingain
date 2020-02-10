@@ -1,10 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image} from 'react-native';
 import {createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import FastImage from 'react-native-fast-image';
 import GetUserInfo from '../screens/User/GetUserInfo';
 import UserDetails from '../screens/User/UserDetails';
 import UserDetailsEdit from '../screens/User/UserDetailsEdit';
@@ -74,15 +74,17 @@ const UserTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <Image
-                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              <FastImage
+                resizeMode="contain"
+                style={{width: 30, height: 30, alignSelf: 'center'}}
                 source={require('../assets/image/UserTab/CampaignsTabIcon.png')}
               />
             );
           }
           return (
-            <Image
-              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            <FastImage
+              resizeMode="contain"
+              style={{width: 30, height: 30, alignSelf: 'center'}}
               source={require('../assets/image/UserTab/CampaignsTabIconDisabled.png')}
             />
           );
@@ -93,8 +95,9 @@ const UserTabNavigation = createBottomTabNavigator(
       screen: QrReadStack,
       navigationOptions: {
         tabBarIcon: (
-          <Image
-            style={{resizeMode: 'contain', width: 50, height: 50, alignSelf: 'center'}}
+          <FastImage
+            resizeMode="contain"
+            style={{width: 50, height: 50, alignSelf: 'center'}}
             source={require('../assets/image/UserTab/QrCodeTabIcon.png')}
           />
         ),
@@ -106,15 +109,17 @@ const UserTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <Image
-                style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+              <FastImage
+                resizeMode="contain"
+                style={{width: 30, height: 30, alignSelf: 'center'}}
                 source={require('../assets/image/UserTab/PrizesIcon.png')}
               />
             );
           }
           return (
-            <Image
-              style={{resizeMode: 'contain', width: 30, height: 30, alignSelf: 'center'}}
+            <FastImage
+              resizeMode="contain"
+              style={{width: 30, height: 30, alignSelf: 'center'}}
               source={require('../assets/image/UserTab/PrizesIconDisabled.png')}
             />
           );

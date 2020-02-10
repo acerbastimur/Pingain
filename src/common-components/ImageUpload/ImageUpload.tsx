@@ -9,16 +9,18 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import ImageResizer from 'react-native-image-resizer';
 
+import FastImage from 'react-native-fast-image';
 import ImageUploadStyle from './ImageUpload.style';
 import CompanyStore from '../../stores/Company.store';
 import UserStore from '../../stores/User.store';
 
 export interface ImageUploadProps {
-  defaultImage?: any;
+  defaultImage?: string;
   hideText?: boolean;
   borderColor?: string;
   borderWidth?: number;
@@ -48,29 +50,43 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
       // console.log('Response = ', response.uri);
 
       if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = response.uri;
+        return null;
+      }
+      if (response.error) {
+        return null;
+      }
+      if (response.customButton) {
+        return null;
+      }
+      const source = response.uri;
 
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+      ImageResizer.createResizedImage(source, response.width, response.height, 'JPEG', 10)
+        .then(resizedResponse => {
+          // response.uri is the URI of the new image that can now be displayed, uploaded...
+          // response.path is the path of the new image
+          // response.name is the name of the new image with the extension
+          // response.size is the size of the new image
+          this.setState({
+            imageSource: resizedResponse.uri,
+          });
 
-        this.setState({
-          imageSource: source,
+          if (companyLogo) {
+            CompanyStore.newCompanyLogoUri = resizedResponse.uri;
+            //  console.log(CompanyStore);
+          }
+          if (userLogo) {
+            UserStore.newCompanyLogoUri = resizedResponse.uri;
+          }
+        })
+        .catch(err => {
+          // Oops, something went wrong. Check that the filename is correct and
+          // inspect err to get more details.
         });
 
-        if (companyLogo) {
-          CompanyStore.newCompanyLogoUri = source;
-          //  console.log(CompanyStore);
-        }
-        if (userLogo) {
-          UserStore.newCompanyLogoUri = source;
-        }
-      }
+      // You can also display the image using data:
+      // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+      return null;
     });
   };
 
@@ -83,7 +99,6 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   componentDidMount() {
     const {defaultImage} = this.props;
-    console.log('image upload mounted', defaultImage);
 
     if (!defaultImage) return;
 
@@ -111,9 +126,17 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
           ]}
           onPress={this.pickImage}>
           {imageSource ? (
-            <Image source={{uri: imageSource}} style={this.s.profilePhoto} />
+            <FastImage
+              style={this.s.profilePhoto}
+              resizeMode="contain"
+              source={{uri: imageSource, priority: 'high'}}
+            />
           ) : (
-            <Image source={require('../../assets/image/plus.png')} style={this.s.plus} />
+            <FastImage
+              style={this.s.plus}
+              resizeMode="contain"
+              source={require('../../assets/image/plus.png')}
+            />
           )}
         </TouchableOpacity>
         {hideText ? null : <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>}

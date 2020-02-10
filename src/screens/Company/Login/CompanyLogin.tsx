@@ -9,12 +9,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FastImage from 'react-native-fast-image';
 import CompanyRegisterStyle from './CompanyLogin.style';
 import Colors from '../../../styles/Colors';
 import Logo from '../../../common-components/Logo';
@@ -48,12 +49,10 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
 
   handleSubmit = ({email, password}: RegisterForm) => {
     LoginService.loginCompanyAuth(email, password)
-      .then(user => {
-        console.log('Succesfully');
-        console.log(user);
+      .then(() => {
+        return null;
       })
-      .catch(err => {
-        console.log('Error on register');
+      .catch(() => {
         this.setState({isErrorModalActive: true, loading: false});
       });
   };
@@ -96,16 +95,7 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                 .min(6)
                 .required(),
             })}>
-            {({
-              values,
-              handleChange,
-              handleSubmit,
-              errors,
-              touched,
-              setFieldTouched,
-              isValid,
-              isSubmitting,
-            }) => (
+            {({values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid}) => (
               <View style={this.style.formContainer}>
                 <View style={this.style.inputContainer}>
                   <Text style={this.style.inputText}>Email</Text>
@@ -139,7 +129,8 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                     />
 
                     {!errors.email && touched.email ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -192,7 +183,8 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                     />
 
                     {!errors.password && touched.password ? (
-                      <Image
+                      <FastImage
+                        resizeMode="contain"
                         source={require('../../../assets/image/tick.png')}
                         style={this.style.image}
                       />
@@ -245,7 +237,7 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
           isVisible={isErrorModalActive}
           modalType={2}
           errorMessage="Email veya şifre hatalı"
-          backButton={e => {
+          backButton={() => {
             this.setState({isErrorModalActive: false});
           }}
         />
