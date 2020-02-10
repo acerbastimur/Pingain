@@ -82,8 +82,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={companies}
-            renderItem={({item}) => { 
-
+            renderItem={({item}) => {
               return <CompanyCard navigation={navigation} company={item} />;
             }}
           />
@@ -92,9 +91,9 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           ref={ref => {
             CampaignDetailsModalStore.campaignDetailsHalfModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
@@ -114,9 +113,9 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
           ref={ref => {
             WinModalStore.winPrizeHalfModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {

@@ -112,9 +112,9 @@ export default class Prizes extends React.Component<PrizesProps, any> {
           ref={ref => {
             GeneralStore.shareUsModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
@@ -134,9 +134,9 @@ export default class Prizes extends React.Component<PrizesProps, any> {
           ref={ref => {
             CampaignDetailsModalStore.campaignDetailsHalfModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
@@ -156,9 +156,9 @@ export default class Prizes extends React.Component<PrizesProps, any> {
           ref={ref => {
             WinModalStore.winPrizeHalfModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {

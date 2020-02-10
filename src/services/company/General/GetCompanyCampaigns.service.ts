@@ -8,13 +8,7 @@ import GetCompanyInfoService from './GetCompanyInfo.service';
 
 export default class GetCompanyCampaignsService {
   static async getAllCompanyCampaigns(): Promise<Array<Campaign>> {
-    /*     
-
-    const companyColRef = firestore()
-      .collection('campaigns')
-      .doc(uid);
-    const dataSnapshot = (await companyColRef.get()).data();
-    console.log(dataSnapshot); */
+   
     const {uid} = auth().currentUser;
     await GetCompanyInfoService.getCompanyInfo();
     const userCampaignKeys = CompanyStore.companyDetails.campaigns;

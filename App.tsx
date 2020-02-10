@@ -5,7 +5,7 @@ import customize from 'react-native-default-props';
 import Navigation from './src/navigations/Navigation';
 
 customize(TouchableOpacity, {
-  activeOpacity: 0.8,
+  activeOpacity: 0.5,
 });
 
 export default class App extends React.Component {

@@ -174,7 +174,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           ref={ref => {
             WinModalStore.getPinModalRef = ref;
           }}
-          duration={250}
+          duration={450}
           closeOnDragDown
           animationType="slide"
           customStyles={{
@@ -196,9 +196,9 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           ref={ref => {
             WinModalStore.winPrizeHalfModalRef = ref;
           }}
-          duration={50}
+          duration={450}
           closeOnDragDown
-          animationType="none"
+          animationType="slide"
           customStyles={{
             wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
             container: {
