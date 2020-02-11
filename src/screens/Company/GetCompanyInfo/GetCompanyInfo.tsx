@@ -148,7 +148,7 @@ export default class GetCompanyInfo extends React.Component<
                             const companyNameInput = this.references.filter(
                               t => t.name === 'companyNameInput',
                             )[0].ref;
- 
+
                             companyNameInput.focus();
                           }}
                           blurOnSubmit={false}
@@ -338,7 +338,7 @@ export default class GetCompanyInfo extends React.Component<
                         backgroundColor={Colors.COMPANY}
                         textColor="#fff"
                         onPress={() => {
-                           const selctedPhoto = this.imageUploadRef.state.imageSource;
+                          const selctedPhoto = this.imageUploadRef.state.imageSource;
                           if (isValid && selctedPhoto) {
                             handleSubmit();
                             return;

@@ -1,12 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import QrReadStyle from './QrRead.style';
-import Colors from '../../../../styles/Colors';
 import TabsHeader from '../../../../common-components/TabsHeader';
 
 export interface QrReadProps {
@@ -17,7 +15,7 @@ export interface QrReadState {
   shouldQrReaderActive: boolean;
 }
 
-export default class QrRead extends React.Component<QrReadProps, any> {
+export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   style = QrReadStyle;
 
   scanner: QRCodeScanner = null;
@@ -30,16 +28,16 @@ export default class QrRead extends React.Component<QrReadProps, any> {
   componentDidMount() {
     const {navigation} = this.props;
 
-    navigation.addListener('willFocus', route => {
+    navigation.addListener('willFocus', () => {
       this.setState({shouldQrReaderActive: true});
     });
-    navigation.addListener('willBlur', route => {
+    navigation.addListener('willBlur', () => {
       this.setState({shouldQrReaderActive: false});
     });
   }
 
-  onSuccess = e => {
-    alert(e.data);
+  onSuccess = () => {
+    // alert(e.data);
     this.scanner.reactivate();
   };
 

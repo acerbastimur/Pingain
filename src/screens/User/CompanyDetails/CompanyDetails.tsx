@@ -228,7 +228,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 <ScrollView
                   horizontal
                   directionalLockEnabled
-                  showsHorizontalScrollIndicator={false} 
+                  showsHorizontalScrollIndicator={false}
                   showsVerticalScrollIndicator={false}>
                   {company.companyFeatures.map(featureNo => this.companyFeatureCard(featureNo))}
                 </ScrollView>

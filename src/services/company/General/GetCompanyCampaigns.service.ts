@@ -8,7 +8,6 @@ import GetCompanyInfoService from './GetCompanyInfo.service';
 
 export default class GetCompanyCampaignsService {
   static async getAllCompanyCampaigns(): Promise<Array<Campaign>> {
-   
     const {uid} = auth().currentUser;
     await GetCompanyInfoService.getCompanyInfo();
     const userCampaignKeys = CompanyStore.companyDetails.campaigns;

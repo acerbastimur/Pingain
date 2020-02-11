@@ -3,7 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import {View, Text, Image} from 'react-native';
+import {Text} from 'react-native';
 import {observer} from 'mobx-react';
 import RightIconStyle from './RightIcon.style';
 import GeneralStore from '../../../stores/General.store';

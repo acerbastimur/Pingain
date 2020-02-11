@@ -36,7 +36,7 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-   },
+  },
   text: {
     color: Colors.SECONDARY,
     fontSize: responsiveFont(14),

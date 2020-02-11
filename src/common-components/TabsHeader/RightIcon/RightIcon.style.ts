@@ -3,7 +3,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import Colors from '../../../styles/Colors';
 
-const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
