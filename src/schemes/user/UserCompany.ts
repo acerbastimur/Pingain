@@ -2,7 +2,7 @@ export interface UserCompany {
   companyLogo: string;
   companyName: string;
   instagramAccount: string;
-  address?: any;
+  address?: string;
   companyFeatures?: Array<number>;
   phoneNumber: string;
   companyImages?: Array<string>;

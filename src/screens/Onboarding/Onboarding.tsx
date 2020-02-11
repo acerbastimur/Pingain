@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-swiper';
 import * as Animatable from 'react-native-animatable';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';

@@ -45,10 +45,10 @@ export default class SetUserInfoService {
   static async uploadProfilePhotoToStorage(photoUri: string, userUid: string) {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function() {
+      xhr.onload = () => {
         resolve(xhr.response);
       };
-      xhr.onerror = function() {
+      xhr.onerror = () => {
         reject(new TypeError('Network request failed'));
       };
       xhr.responseType = 'blob';
@@ -70,11 +70,11 @@ export default class SetUserInfoService {
     userLogo: string,
   ): Promise<boolean> {
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       const {uid} = auth().currentUser;
 
       if (userLogo) {
-        const uploadCompanyLogo = await this.uploadProfilePhotoToStorage(userLogo, uid);
+        await this.uploadProfilePhotoToStorage(userLogo, uid);
       }
 
       const userLogoPath = `users/${uid}/profilePhoto.png`;

@@ -6,8 +6,6 @@ export default class LoginService {
       auth()
         .signInWithEmailAndPassword(email, password)
         .then(async result => {
-          const userUid = result.user.uid;
-
           resolve(result);
         })
         .catch(err => {
@@ -20,14 +18,10 @@ export default class LoginService {
     return new Promise((resolve, reject) => {
       auth()
         .currentUser.updatePassword(newPassword)
-        .then(e => {
-          console.log(e);
-
-          resolve();
+        .then(() => {
+          resolve(true);
         })
-        .catch(err => {
-          console.log(err);
-
+        .catch(() => {
           reject();
         });
     });

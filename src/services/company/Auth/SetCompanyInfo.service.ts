@@ -1,8 +1,9 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import GetCompanyInfoService from '../General/GetCompanyInfo.service';
-import CompanyStore from '../../../stores/Company.store';
 
 export default class SetCompanyInfoService {
   static setCompanyInfo(
@@ -42,10 +43,10 @@ export default class SetCompanyInfoService {
   static async uploadCompanyLogoToStorage(photoUri: string, companyUid: string) {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function() {
+      xhr.onload = () => {
         resolve(xhr.response);
       };
-      xhr.onerror = function() {
+      xhr.onerror = () => {
         reject(new TypeError('Network request failed'));
       };
       xhr.responseType = 'blob';
@@ -60,20 +61,18 @@ export default class SetCompanyInfoService {
   }
 
   static async uploadCompanyPhotosToStorage(
-    companyImages: Array<any>,
+    companyImages: Array<string>,
     companyUid: string,
   ): Promise<Array<string>> {
-    console.log('upload');
-
     const urls = await Promise.all(
       companyImages.map(async (image, index) => {
         if (image !== null) {
           const blob = await new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.onload = function() {
+            xhr.onload = () => {
               resolve(xhr.response);
             };
-            xhr.onerror = function() {
+            xhr.onerror = () => {
               reject(new TypeError('Network request failed'));
             };
             xhr.responseType = 'blob';
@@ -106,11 +105,11 @@ export default class SetCompanyInfoService {
     companyLogo: string,
   ): Promise<boolean> {
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       const companyUid = auth().currentUser.uid;
 
       if (companyLogo) {
-        const uploadCompanyLogo = await this.uploadCompanyLogoToStorage(companyLogo, companyUid);
+        await this.uploadCompanyLogoToStorage(companyLogo, companyUid);
       }
       const uploadedCompanyImages = await this.uploadCompanyPhotosToStorage(
         companyImages,

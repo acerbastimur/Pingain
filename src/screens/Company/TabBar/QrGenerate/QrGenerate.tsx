@@ -87,7 +87,6 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
         loading: false,
       });
     });
-    console.log('Created New Qr for ', campaign.campaignName);
   };
 
   campaignButton = (campaign: Campaign, key: string) => {

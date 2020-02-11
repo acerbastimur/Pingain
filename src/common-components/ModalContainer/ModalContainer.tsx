@@ -6,7 +6,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import Modal from 'react-native-modal';
 
 import ModalContainerStyle from './ModalContainer.style';
@@ -22,7 +22,7 @@ interface ModalContainerProps {
   isVisible: boolean;
   modalType: ModalType;
   errorMessage?: string;
-  backButton: (e: any) => void;
+  backButton: (e) => void;
 }
 
 const ModalContainer = ({
@@ -63,7 +63,9 @@ const ModalContainer = ({
                   text="Şifremi Sıfırla"
                   backgroundColor={Colors.SECONDARY}
                   textColor="#fff"
-                  onPress={() => {}}
+                  onPress={() => {
+                    return null;
+                  }}
                 />
               </View>
             ) : null}
@@ -79,8 +81,9 @@ const ModalContainer = ({
                   try {
                     backButton(true);
                   } catch (err) {
-                    console.log('Something went wrong on ModalContainer.tsx');
+                    return null;
                   }
+                  return null;
                 }}
               />
             </View>

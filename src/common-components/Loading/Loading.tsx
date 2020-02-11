@@ -25,7 +25,7 @@ export interface LoadingProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class Loading extends React.Component<LoadingProps, any> {
+export default class Loading extends React.Component<LoadingProps> {
   s = LoadingStyle;
 
   constructor(props: LoadingProps) {
@@ -38,50 +38,26 @@ export default class Loading extends React.Component<LoadingProps, any> {
       .collection('companies')
       .doc(user.uid);
 
-    await companyCheckRef
-      .get()
-      .then(doc => {
-        console.log(' check is', Date.now());
-
-        if (doc.exists) {
-          console.log('This is a company account');
-          GeneralStore.authRole = AuthRole.Company;
-        } else {
-          // doc.data() will be undefined in this case
-
-          console.log('No such document!');
-        }
-      })
-      .catch(function(error) {
-        console.log('Error getting document:', error);
-      });
+    await companyCheckRef.get().then(doc => {
+      if (doc.exists) {
+        GeneralStore.authRole = AuthRole.Company;
+      }
+    });
 
     const userCheckRef = firestore()
       .collection('users')
       .doc(user.uid);
 
-    await userCheckRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          console.log('This is a user account');
-
-          GeneralStore.authRole = AuthRole.User;
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-        }
-      })
-      .catch(error => {
-        console.log('Error getting document:', error);
-      });
+    await userCheckRef.get().then(doc => {
+      if (doc.exists) {
+        GeneralStore.authRole = AuthRole.User;
+      }
+    });
   };
 
   checkIfCompanyFilledProfile = async () => {
     let isCompanyProfileFilled = false;
     await GetCompanyInfoService.getCompanyInfo().then(companyInfo => {
-      console.log('Company info is ', companyInfo);
-
       if (companyInfo.companyName) {
         isCompanyProfileFilled = true;
       }
@@ -92,8 +68,6 @@ export default class Loading extends React.Component<LoadingProps, any> {
   checkIfUserFilledProfile = async () => {
     let isUserProfileFilled = false;
     await GetUserInfoService.getUserInfo().then(userInfo => {
-      console.log('User info is ', userInfo);
-
       if (userInfo.name) {
         isUserProfileFilled = true;
       }
@@ -111,7 +85,6 @@ export default class Loading extends React.Component<LoadingProps, any> {
 
         if (GeneralStore.authRole === AuthRole.Company) {
           // check if company fillfulled their information
-          console.log('Logged in as Company');
 
           const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile();
           if (isCompanyProfileFilled) {
@@ -122,8 +95,6 @@ export default class Loading extends React.Component<LoadingProps, any> {
             navigation.navigate('GetCompanyInfo');
           }
         } else if (GeneralStore.authRole === AuthRole.User) {
-          console.log('Logged in as User');
-
           const isUserProfileFilled = await this.checkIfUserFilledProfile();
           if (isUserProfileFilled) {
             navigation.navigate('UserTabNavigation');

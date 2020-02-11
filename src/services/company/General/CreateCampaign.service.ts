@@ -1,17 +1,12 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage';
-import Company from '../../../schemes/company/Company';
-import CompanyStore from '../../../stores/Company.store';
-import {Campaign} from '../../../schemes/company/CompanyCampaign';
 import GetCompanyCampaignsService from './GetCompanyCampaigns.service';
 
 export default class CreateCampaignService {
-  static addCampaignToCompany(campaignId: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  static addCampaignToCompany(campaignId: string): Promise<boolean> {
+    return new Promise(resolve => {
       const {uid} = auth().currentUser;
 
-      console.log('adding campaign to company');
       firestore()
         .collection('companies')
         .doc(uid)
@@ -19,7 +14,7 @@ export default class CreateCampaignService {
           campaigns: firestore.FieldValue.arrayUnion(campaignId),
         })
         .then(() => {
-          resolve();
+          resolve(true);
         });
     });
   }
@@ -29,8 +24,8 @@ export default class CreateCampaignService {
     campaignName: string,
     campaignType: number,
     prizeCount: number,
-  ): Promise<any> {
-    return new Promise((resolve, reject) => {
+  ): Promise<boolean> {
+    return new Promise(resolve => {
       const {uid} = auth().currentUser;
 
       const campaignColRef = firestore()
@@ -47,16 +42,12 @@ export default class CreateCampaignService {
           companyId: uid,
           campaignId: campaignColRef.id,
         })
-        .then(result => {
-          console.log('girdi', result);
+        .then(() => {
           this.addCampaignToCompany(campaignColRef.id).then(() => {
             GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
-              resolve();
+              resolve(true);
             });
           });
-        })
-        .catch(err => {
-          console.log(err);
         });
     });
   }
@@ -67,10 +58,8 @@ export default class CreateCampaignService {
     campaignName: string,
     campaignType: number,
     prizeCount: number,
-  ): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const {uid} = auth().currentUser;
-
+  ): Promise<boolean> {
+    return new Promise(resolve => {
       const campaignColRef = firestore()
         .collection('campaigns')
         .doc(campaignId);
@@ -82,14 +71,10 @@ export default class CreateCampaignService {
           campaignType,
           prizeCount,
         })
-        .then(result => {
-          console.log('girdi', result);
+        .then(() => {
           GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
-            resolve();
+            resolve(true);
           });
-        })
-        .catch(err => {
-          console.log(err);
         });
     });
   }

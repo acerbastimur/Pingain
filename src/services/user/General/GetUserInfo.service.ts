@@ -14,8 +14,6 @@ export default class GetUserInfoService {
     UserStore.userDetails = dataSnapshot;
     UserStore.profilePhoto = await this.getUserPhoto();
 
-    console.log({dataSnapshot});
-
     return dataSnapshot;
   }
 

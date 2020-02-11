@@ -1,8 +1,3 @@
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import functions from '@react-native-firebase/functions';
-import User from '../../../schemes/user/User';
-import UserStore from '../../../stores/User.store';
 import {UserCompany} from '../../../schemes/user/UserCompany';
 
 export default class GetCompaniesService {
@@ -13,7 +8,7 @@ export default class GetCompaniesService {
         .then(responseJson => {
           resolve(responseJson);
         })
-        .catch(error => {
+        .catch(() => {
           reject();
         });
     });

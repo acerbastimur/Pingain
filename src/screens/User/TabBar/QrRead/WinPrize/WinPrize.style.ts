@@ -19,6 +19,7 @@ export default StyleSheet.create({
     borderRadius: 6,
   },
   container: {
+    width: '100%',
     paddingHorizontal: '6%',
     position: 'absolute',
     bottom: 0,

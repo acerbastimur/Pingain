@@ -1,5 +1,4 @@
-import {observable, toJS} from 'mobx';
-import AuthRole from '../schemes/general/AuthRole.enum';
+import {observable} from 'mobx';
 import Company from '../schemes/company/Company';
 import {Campaign} from '../schemes/company/CompanyCampaign';
 
@@ -11,10 +10,6 @@ class CompanyStore {
   @observable campaigns: Array<Campaign>;
 
   @observable companyLogo: string = null;
-
-  constructor() {
-    console.log('Company Store was initialized!');
-  }
 }
 
 export default new CompanyStore();

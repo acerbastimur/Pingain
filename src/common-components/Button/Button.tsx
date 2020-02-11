@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, TextStyle} from 'react-native';
 
 import ButtonStyle from './Button.style';
 
@@ -20,7 +20,7 @@ interface ButtonProps {
   borderWidth?: number;
   borderColor?: string;
   shadow?: boolean;
-  fontWeight?: any;
+  fontWeight?: TextStyle['fontWeight'];
 }
 
 const Button = ({

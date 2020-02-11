@@ -1,6 +1,5 @@
-import {observable, toJS, computed} from 'mobx';
+import {observable} from 'mobx';
 import {UserCompany} from '../schemes/user/UserCompany';
-import AuthRole from '../schemes/general/AuthRole.enum';
 import User from '../schemes/user/User';
 
 class UserStore {
@@ -13,10 +12,6 @@ class UserStore {
   @observable companies: Array<UserCompany> = null;
 
   @observable profilePhoto: string = null;
-
-  constructor() {
-    console.log('User Store was initialized!');
-  }
 }
 
 export default new UserStore();

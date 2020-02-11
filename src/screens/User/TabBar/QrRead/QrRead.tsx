@@ -8,6 +8,7 @@ import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-nav
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import {toJS} from 'mobx';
+import {observer} from 'mobx-react';
 import QrReadStyle from './QrRead.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import WinPin from './WinPin';
@@ -25,6 +26,7 @@ export interface QrReadState {
   loading: boolean;
 }
 
+@observer
 export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   style = QrReadStyle;
 
@@ -180,7 +182,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           }}>
           <WinPin navigation={navigation} />
         </Modal>
-        <Modal
+        {/*   <Modal
           isVisible={WinModalStore.isWinPrizeModalOpened}
           swipeDirection={['down']}
           hardwareAccelerated
@@ -188,6 +190,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           hasBackdrop
           propagateSwipe
           backdropOpacity={0.1}
+          animationIn="slideInUp"
+          animationInTiming={450}
           animationOut="slideOutDown"
           animationOutTiming={350}
           onBackdropPress={() => {
@@ -201,7 +205,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             WinModalStore.isWinPrizeModalOpened = false;
           }}>
           <WinPrize navigation={navigation} />
-        </Modal>
+        </Modal> */}
 
         <View style={this.style.headerContainer}>
           <TabsHeader

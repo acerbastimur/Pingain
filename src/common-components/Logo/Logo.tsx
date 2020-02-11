@@ -3,7 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import {View, Text, Image} from 'react-native';
+import {View} from 'react-native';
 import LogoStyle from './Logo.style';
 
 interface LogoProps {
