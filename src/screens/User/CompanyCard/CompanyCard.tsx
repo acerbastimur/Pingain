@@ -209,7 +209,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                   CampaignDetailsStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
                     ? isUserJoinedThisCampaign?.pinEarned
                     : 0;
-                  CampaignDetailsStore.campaignDetailsHalfModalRef.open();
+                  CampaignDetailsStore.isCampaignDetailsModalOpen = true;
                 }}>
                 {this.campaignIcon(campaign)}
                 <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>

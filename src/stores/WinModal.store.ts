@@ -7,7 +7,7 @@ class WinModalStore {
     console.log('Win Modal Store was initialized!');
   }
 
-  @observable getPinModalRef: RBSheet = null;
+  @observable isGetPinModalOpened = false;
 
   @observable getPinDetails: {
     companyLogo: string;
@@ -16,7 +16,7 @@ class WinModalStore {
     campaignName: string;
   } = null;
 
-  @observable winPrizeHalfModalRef: RBSheet = null;
+  @observable isWinPrizeHalfModalOpened = false;
 
   @observable winPrizeDetails: {
     companyLogo: string;

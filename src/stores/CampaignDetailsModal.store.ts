@@ -1,4 +1,4 @@
-import RBSheet from 'react-native-raw-bottom-sheet';
+import Modal from 'react-native-modal';
 import {observable, action} from 'mobx';
 import {UserCompany, Campaign} from '../schemes/user/UserCompany';
 
@@ -7,7 +7,7 @@ class CampaignDetailsStore {
     console.log('Campaign Detail store was initialized!');
   }
 
-  @observable campaignDetailsHalfModalRef: RBSheet = null;
+  @observable isCampaignDetailsModalOpen = false;
 
   @observable selectedCompany: UserCompany = null;
 
