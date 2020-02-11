@@ -78,7 +78,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
             UserStore.newCompanyLogoUri = resizedResponse.uri;
           }
         })
-        .catch(err => {
+        .catch(() => {
           // Oops, something went wrong. Check that the filename is correct and
           // inspect err to get more details.
         });

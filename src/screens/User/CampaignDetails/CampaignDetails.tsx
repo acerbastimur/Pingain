@@ -48,7 +48,7 @@ const Pin = ({completed, navigation}) => {
     <TouchableOpacity
       onPress={() => {
         navigation.navigate('QrRead');
-        CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
+        CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
       }}
       style={{
         width: itemWidth,
@@ -150,10 +150,12 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
   const userPinCount = CampaignDetailsModalStore.selectedCampaignPinCount;
   return (
     <View style={style.container}>
+      <View style={style.swipeArea} />
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('CompanyDetails');
-          CampaignDetailsModalStore.campaignDetailsHalfModalRef.close();
+          CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>

@@ -63,6 +63,8 @@ const WinPrize = ({navigation}) => {
 
   return (
     <View style={style.container}>
+      <View style={style.swipeArea} />
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('CompanyDetails');

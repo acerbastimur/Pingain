@@ -1,4 +1,3 @@
-import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {v4 as uuid} from 'uuid';
 import GetCompanyCampaignsService from './GetCompanyCampaigns.service';

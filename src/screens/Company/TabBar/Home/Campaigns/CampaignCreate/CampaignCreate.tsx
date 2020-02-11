@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Image, Text, TextInput, Dimensions, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -10,8 +10,6 @@ import {
   ScrollView,
 } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
-import {Card} from 'react-native-shadow-cards';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'react-native-material-dropdown';
 import CreateCampaignService from '../../../../../../services/company/General/CreateCampaign.service';
 import CampaignCreateStyle from './CampaignCreate.style';
@@ -55,7 +53,6 @@ export default class CampaignCreate extends React.Component<
   componentDidMount() {
     const {navigation} = this.props;
     const campaign: Campaign = navigation.getParam('campaign');
-    console.log(campaign);
 
     if (campaign) {
       this.setState({
@@ -72,7 +69,6 @@ export default class CampaignCreate extends React.Component<
     const {navigation} = this.props;
     const campaign: Campaign = navigation.getParam('campaign');
 
-    console.log({campaignName, actionCount, prizeCount, campaignType});
     if (campaignName.length < 4) {
       return this.campaignNameRef.shake();
     }
@@ -104,7 +100,6 @@ export default class CampaignCreate extends React.Component<
     const {campaignName, actionCount, prizeCount, campaignType, loading} = this.state;
     const isItEditPage = navigation.getParam('edit');
     const campaign: Campaign = navigation.getParam('campaign');
-    console.log(campaign);
 
     return loading ? (
       <View style={this.style.indicatorContainer}>

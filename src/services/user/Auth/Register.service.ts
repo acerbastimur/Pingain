@@ -14,7 +14,6 @@ export default class RegisterService {
         .then(async result => {
           GeneralStore.authRole = AuthRole.User;
 
-          const userUid = result.user.uid;
           const date = firestore.FieldValue.serverTimestamp();
           await this.registerUserToDB(email, date);
           resolve(result);
@@ -39,14 +38,10 @@ export default class RegisterService {
           email,
           registerDate,
         })
-        .then(result => {
-          console.log('ok');
-          console.log(' write db', Date.now());
+        .then(() => {
           resolve();
         })
         .catch(err => {
-          console.log('no');
-
           reject(err);
         });
     });

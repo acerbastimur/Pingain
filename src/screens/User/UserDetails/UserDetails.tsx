@@ -20,7 +20,6 @@ import storage from '@react-native-firebase/storage';
 import {Card} from 'react-native-shadow-cards';
 import UserDetailsStyle from './UserDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
-import CompanyCard from '../CompanyCard';
 import GetUserInfoService from '../../../services/user/General/GetUserInfo.service';
 import UserStore from '../../../stores/User.store';
 

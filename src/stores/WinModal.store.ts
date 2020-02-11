@@ -1,13 +1,8 @@
-import {observable, action} from 'mobx';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import {observable} from 'mobx';
 import CampaignType from '../schemes/company/CampaignType.enum';
 
 class WinModalStore {
-  constructor() {
-    console.log('Win Modal Store was initialized!');
-  }
-
-  @observable getPinModalRef: RBSheet = null;
+  @observable isGetPinModalOpened = false;
 
   @observable getPinDetails: {
     companyLogo: string;
@@ -16,7 +11,7 @@ class WinModalStore {
     campaignName: string;
   } = null;
 
-  @observable winPrizeHalfModalRef: RBSheet = null;
+  @observable isWinPrizeModalOpened = false;
 
   @observable winPrizeDetails: {
     companyLogo: string;

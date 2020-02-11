@@ -5,8 +5,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import {View, Text} from 'react-native';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import Button from '../../common-components/Button';
 import AuthTypeSelectStyle from './AuthTypeSelect.style';
@@ -42,7 +41,6 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
             backgroundColor={Colors.INFO}
             textColor="#fff"
             onPress={() => {
-              console.log('Pingainer register');
               navigation.navigate('UserLogin');
             }}
           />

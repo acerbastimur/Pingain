@@ -4,8 +4,7 @@
 import * as React from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import FastImage from 'react-native-fast-image';
+import Modal from 'react-native-modal';
 
 import {observer} from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
@@ -13,7 +12,6 @@ import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 
-import Colors from '../../../../styles/Colors';
 import CampaignDetails from '../../CampaignDetails';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
@@ -39,8 +37,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         UserStore.companies = companies.length > 0 ? companies : null;
         this.setState({loading: false});
       })
-      .catch(err => {
-        console.log('no company');
+      .catch(() => {
         UserStore.companies = null;
       });
   }
@@ -87,50 +84,51 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             }}
           />
         </View>
-        <RBSheet
-          ref={ref => {
-            CampaignDetailsModalStore.campaignDetailsHalfModalRef = ref;
+
+        <Modal
+          isVisible={WinModalStore.isWinPrizeModalOpened}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
-          }}>
-          <CampaignDetails navigation={navigation} />
-        </RBSheet>
-        <RBSheet
-          ref={ref => {
-            WinModalStore.winPrizeHalfModalRef = ref;
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          onSwipeComplete={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}>
           <WinPrize navigation={navigation} />
-        </RBSheet>
+        </Modal>
+        <Modal
+          isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+          }}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+          }}>
+          <CampaignDetails navigation={navigation} />
+        </Modal>
       </View>
     );
   }

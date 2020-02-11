@@ -93,7 +93,7 @@ export default class Home extends React.Component<HomeProps, any> {
                           <View style={this.style.cardBodyItemCount}>
                             <Text
                               style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
-                              5
+                              {campaign?.statistics?.totalPinGiven | 0}
                             </Text>
                           </View>
                         </View>
@@ -122,7 +122,7 @@ export default class Home extends React.Component<HomeProps, any> {
                                 this.style.cardBodyItemCountText,
                                 this.style.cardItemDessert,
                               ]}>
-                              5
+                              {campaign?.statistics?.totalPinGiven | 0}
                             </Text>
                           </View>
                         </View>

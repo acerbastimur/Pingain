@@ -1,11 +1,9 @@
-import {Dimensions} from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import Colors from '../../../../../styles/Colors';
 import CampaignColors from '../../../../../styles/CampaignColors';
 
-const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
@@ -14,8 +12,25 @@ const responsiveRate = (fontSize: number) => {
 };
 
 export default StyleSheet.create({
+  swipeArea: {
+    backgroundColor: 'gray',
+    height: 4,
+    marginTop: 8,
+    marginHorizontal: '24%',
+    borderRadius: 6,
+  },
   container: {
+    width: '100%',
     paddingHorizontal: '6%',
+    position: 'absolute',
+    bottom: 0,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    paddingTop: 2,
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    backgroundColor: 'white',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -105,7 +120,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
   },
   cardItemPlus: {
-     fontWeight: '600',
+    fontWeight: '600',
   },
   cardItemPlusDrink: {color: CampaignColors.COFFEE},
   cardItemPlusMeal: {color: CampaignColors.MEAL},

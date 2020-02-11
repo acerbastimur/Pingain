@@ -4,7 +4,7 @@
 import * as React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import Modal from 'react-native-modal';
 
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
@@ -12,11 +12,8 @@ import PrizesStyle from './Prizes.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
-import GeneralStore from '../../../../stores/General.store';
 
-import Colors from '../../../../styles/Colors';
 import CampaignDetails from '../../CampaignDetails';
-import ShareUs from '../../ShareUs/ShareUs';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
 import UserStore from '../../../../stores/User.store';
@@ -27,7 +24,7 @@ export interface PrizesProps {
 }
 
 @observer
-export default class Prizes extends React.Component<PrizesProps, any> {
+export default class Prizes extends React.Component<PrizesProps> {
   style = PrizesStyle;
 
   constructor(props: PrizesProps) {
@@ -108,72 +105,52 @@ export default class Prizes extends React.Component<PrizesProps, any> {
             />
           )}
         </View>
-        <RBSheet
-          ref={ref => {
-            GeneralStore.shareUsModalRef = ref;
+
+        <Modal
+          isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
-          }}>
-          <ShareUs navigation={navigation} />
-        </RBSheet>
-        <RBSheet
-          ref={ref => {
-            CampaignDetailsModalStore.campaignDetailsHalfModalRef = ref;
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          onSwipeComplete={() => {
+            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
           }}>
           <CampaignDetails navigation={navigation} />
-        </RBSheet>
-        <RBSheet
-          ref={ref => {
-            WinModalStore.winPrizeHalfModalRef = ref;
+        </Modal>
+
+        <Modal
+          isVisible={WinModalStore.isWinPrizeModalOpened}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}>
           <WinPrize navigation={navigation} />
-        </RBSheet>
+        </Modal>
       </View>
     );
   }

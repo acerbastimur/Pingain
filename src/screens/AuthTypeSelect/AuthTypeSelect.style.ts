@@ -1,7 +1,6 @@
-import {Dimensions, PixelRatio} from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import Colors from '../../styles/Colors';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
