@@ -82,6 +82,8 @@ export default class Prizes extends React.Component<PrizesProps> {
       });
     });
 
+    console.log(companiesWithEarnedCampaigns);
+
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>

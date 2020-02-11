@@ -14,7 +14,8 @@ export default StyleSheet.create({
   swipeArea: {
     backgroundColor: 'gray',
     height: 4,
-    marginTop: 8,
+    marginTop: 10,
+    marginBottom: 8,
     marginHorizontal: '24%',
     borderRadius: 6,
   },

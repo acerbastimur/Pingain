@@ -21,6 +21,7 @@ import {UserCompany, Campaign} from '../../../schemes/user/UserCompany';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
 import {ActiveCampaign} from '../../../schemes/user/User';
 import UserStore from '../../../stores/User.store';
+import WinModalStore from '../../../stores/WinModal.store';
 
 export interface CompanyCardProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -190,36 +191,57 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           </View>
         )}
         <View style={this.s.cardBody}>
-          {company.campaigns.map(campaign => {
-            const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
-            let isUserJoinedThisCampaign: ActiveCampaign = null;
-            isUserJoinedThisCampaign =
-              activeCampaigns &&
-              activeCampaigns.length &&
-              activeCampaigns.find(activeCampaign => {
-                return activeCampaign.campaignId === campaign.campaignId;
-              });
-            return (
-              <TouchableOpacity
-                key={Math.random() * 1000}
-                style={this.s.cardBodyItem}
-                onPress={() => {
-                  CampaignDetailsStore.selectedCampaign = campaign;
-                  CampaignDetailsStore.selectedCompany = company;
-                  CampaignDetailsStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
-                    ? isUserJoinedThisCampaign?.pinEarned
-                    : 0;
-                  CampaignDetailsStore.isCampaignDetailsModalOpen = true;
-                }}>
-                {this.campaignIcon(campaign)}
-                <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>
-                {this.campaignCount(
-                  campaign,
-                  isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,
-                )}
-              </TouchableOpacity>
-            );
-          })}
+          {company.campaigns &&
+            company.campaigns.map(campaign => {
+              const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
+              let isUserJoinedThisCampaign: ActiveCampaign = null;
+              isUserJoinedThisCampaign =
+                activeCampaigns &&
+                activeCampaigns.length &&
+                activeCampaigns.find(activeCampaign => {
+                  return activeCampaign.campaignId === campaign.campaignId;
+                });
+              return (
+                <TouchableOpacity
+                  key={Math.random() * 1000}
+                  style={this.s.cardBodyItem}
+                  onPress={() => {
+                    const usersPinCount = isUserJoinedThisCampaign
+                      ? isUserJoinedThisCampaign.pinEarned
+                      : 0;
+                    const isCompleted = usersPinCount === campaign.actionCount;
+
+                    if (isCompleted) {
+                      const {giftCode} = UserStore.userDetails.activeCampaigns.find(
+                        activeCampaign => campaign.campaignId === activeCampaign.campaignId,
+                      );
+                      WinModalStore.winPrizeDetails = {
+                        campaignType: campaign.campaignType,
+                        companyLogo: company.companyLogo,
+                        companyName: company.companyName,
+                        campaignName: campaign.campaignName,
+                        giftCode,
+                      };
+
+                      WinModalStore.isWinPrizeModalOpened = true;
+                      return;
+                    }
+                    CampaignDetailsStore.selectedCampaign = campaign;
+                    CampaignDetailsStore.selectedCompany = company;
+                    CampaignDetailsStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
+                      ? isUserJoinedThisCampaign?.pinEarned
+                      : 0;
+                    CampaignDetailsStore.isCampaignDetailsModalOpen = true;
+                  }}>
+                  {this.campaignIcon(campaign)}
+                  <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>
+                  {this.campaignCount(
+                    campaign,
+                    isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,
+                  )}
+                </TouchableOpacity>
+              );
+            })}
         </View>
       </Card>
     );
