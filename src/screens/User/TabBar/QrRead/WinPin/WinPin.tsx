@@ -89,6 +89,8 @@ const WinPin = ({navigation}: WinPinProps) => {
   const {campaignType, companyLogo, companyName, campaignName} = WinModalStore.getPinDetails;
   return (
     <View style={style.container}>
+      <View style={style.swipeArea} />
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('CompanyDetails');

@@ -86,26 +86,34 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         </View>
 
         <Modal
-          isVisible={WinModalStore.isWinPrizeHalfModalOpened}
+          isVisible={WinModalStore.isWinPrizeModalOpened}
           swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
           backdropOpacity={0.1}
           animationOut="slideOutDown"
           animationOutTiming={350}
           onBackdropPress={() => {
-            WinModalStore.isWinPrizeHalfModalOpened = false;
+            WinModalStore.isWinPrizeModalOpened = false;
           }}
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
             margin: 0,
           }}
           onSwipeComplete={() => {
-            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+            WinModalStore.isWinPrizeModalOpened = false;
           }}>
           <WinPrize navigation={navigation} />
         </Modal>
         <Modal
           isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
           swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
           backdropOpacity={0.1}
           animationOut="slideOutDown"
           animationOutTiming={350}

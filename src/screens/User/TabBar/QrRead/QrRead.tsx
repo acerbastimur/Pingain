@@ -2,14 +2,13 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import {toJS} from 'mobx';
 import QrReadStyle from './QrRead.style';
-import Colors from '../../../../styles/Colors';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import WinPin from './WinPin';
 import WinModalStore from '../../../../stores/WinModal.store';
@@ -43,10 +42,10 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   componentDidMount() {
     const {navigation} = this.props;
-    navigation.addListener('willFocus', route => {
+    navigation.addListener('willFocus', () => {
       this.setState({shouldQrReaderActive: true});
     });
-    navigation.addListener('willBlur', route => {
+    navigation.addListener('willBlur', () => {
       this.setState({shouldQrReaderActive: false});
     });
   }
@@ -55,17 +54,13 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     return new Promise((resolve, reject) => {
       const {uid} = auth().currentUser;
 
-      console.log(uid, campaignId, qrCode);
-
       if (!companyId || !campaignId || !qrCode) return; // error on fields
 
       ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
         .then(result => {
-          console.log(result);
           resolve(result);
         })
         .catch(error => {
-          console.warn(error);
           reject(error);
         });
     });
@@ -77,9 +72,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     let readQr = null;
     try {
       readQr = JSON.parse(data);
-      console.log(readQr);
     } catch (error) {
-      console.log(error);
       return;
     }
     this.setState({loading: true});
@@ -99,8 +92,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
         // if user has already won a prize on that campaign
         if (responseCode === 302) {
-          console.log('302');
-
           this.setState({loading: false});
           const campaignGiftCode = UserStore.userDetails.activeCampaigns.find(
             campaign => campaign.campaignId === scannedCampaign.campaignId,
@@ -115,9 +106,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             campaignName: scannedCampaign.campaignName,
             giftCode: campaignGiftCode,
           };
-          console.warn(WinModalStore.winPrizeDetails);
 
-          WinModalStore.winPrizeHalfModalRef.open();
+          WinModalStore.isWinPrizeModalOpened = true;
           return;
         }
 
@@ -138,9 +128,9 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             campaignName: scannedCampaign.campaignName,
             giftCode: campaignGiftCode,
           };
-          console.warn(WinModalStore.winPrizeDetails);
 
-          WinModalStore.winPrizeHalfModalRef.open();
+          WinModalStore.isWinPrizeModalOpened = true;
+
           return;
         }
 
@@ -150,11 +140,9 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           companyName: scannedCompany.companyName,
           campaignName: scannedCampaign.campaignName,
         };
-        WinModalStore.getPinModalRef.open();
+        WinModalStore.isGetPinModalOpened = true;
       })
       .catch(() => {
-        console.log('error');
-
         this.setState({loading: false});
       });
   };
@@ -170,50 +158,51 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       </View>
     ) : (
       <View style={this.style.container}>
-        <RBSheet
-          ref={ref => {
-            WinModalStore.getPinModalRef = ref;
+        <Modal
+          isVisible={WinModalStore.isGetPinModalOpened}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            WinModalStore.isGetPinModalOpened = false;
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            WinModalStore.isGetPinModalOpened = false;
           }}>
           <WinPin navigation={navigation} />
-        </RBSheet>
-        <RBSheet
-          ref={ref => {
-            WinModalStore.winPrizeHalfModalRef = ref;
+        </Modal>
+        <Modal
+          isVisible={WinModalStore.isWinPrizeModalOpened}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          propagateSwipe
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}
-          duration={450}
-          closeOnDragDown
-          animationType="slide"
-          customStyles={{
-            wrapper: {backgroundColor: 'rgba(0,0,0,0.3)'},
-            container: {
-              borderTopRightRadius: 40,
-              borderTopLeftRadius: 40,
-              paddingTop: 2,
-              height: 'auto',
-              shadowOffset: {width: 0, height: 2},
-              shadowColor: '#000',
-              shadowOpacity: 0.2,
-            },
-            draggableIcon: {width: 100, height: 4, backgroundColor: Colors.SECONDARY},
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            WinModalStore.isWinPrizeModalOpened = false;
           }}>
           <WinPrize navigation={navigation} />
-        </RBSheet>
+        </Modal>
+
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}

@@ -16,7 +16,7 @@ class WinModalStore {
     campaignName: string;
   } = null;
 
-  @observable isWinPrizeHalfModalOpened = false;
+  @observable isWinPrizeModalOpened = false;
 
   @observable winPrizeDetails: {
     companyLogo: string;

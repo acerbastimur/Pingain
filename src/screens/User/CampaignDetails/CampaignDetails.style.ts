@@ -12,8 +12,24 @@ const responsiveRate = (fontSize: number) => {
 };
 
 export default StyleSheet.create({
+  swipeArea: {
+    backgroundColor: 'gray',
+    height: 4,
+    marginTop: 8,
+    marginHorizontal: '24%',
+    borderRadius: 6,
+  },
   container: {
     paddingHorizontal: '6%',
+    position: 'absolute',
+    bottom: 0,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    paddingTop: 2,
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    backgroundColor: 'white',
   },
   cardHeader: {
     flexDirection: 'row',
