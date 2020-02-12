@@ -4,18 +4,13 @@
 import * as React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import Modal from 'react-native-modal';
 
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import PrizesStyle from './Prizes.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
-import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
 
-import CampaignDetails from '../../CampaignDetails';
-import WinPrize from '../QrRead/WinPrize';
-import WinModalStore from '../../../../stores/WinModal.store';
 import UserStore from '../../../../stores/User.store';
 import NoCampaign from './NoCampaign';
 
@@ -35,9 +30,9 @@ export default class Prizes extends React.Component<PrizesProps> {
   flatListTextHeader = () => {
     return (
       <View style={this.style.flatListHeader}>
-        <Text style={this.style.flatListHeaderTextLight}>Pinlerin topladıkça gelen,</Text>
+        <Text style={this.style.flatListHeaderTextLight}>Daha hızlı ulaşman için,</Text>
         <Text numberOfLines={1} style={this.style.flatListHeaderTextBold}>
-          Ödüller ve İkramlar 🎁
+          Katıldığın Kampanyalar
         </Text>
       </View>
     );
@@ -82,8 +77,6 @@ export default class Prizes extends React.Component<PrizesProps> {
       });
     });
 
-    console.log(companiesWithEarnedCampaigns);
-
     return (
       <View style={this.style.container}>
         <View style={this.style.headerContainer}>
@@ -107,52 +100,6 @@ export default class Prizes extends React.Component<PrizesProps> {
             />
           )}
         </View>
-
-        <Modal
-          isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
-          }}>
-          <CampaignDetails navigation={navigation} />
-        </Modal>
-
-        <Modal
-          isVisible={WinModalStore.isWinPrizeModalOpened}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}>
-          <WinPrize navigation={navigation} />
-        </Modal>
       </View>
     );
   }

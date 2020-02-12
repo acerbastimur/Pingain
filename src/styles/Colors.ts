@@ -18,4 +18,6 @@ export default class Colors {
   static SECONDARY_VERY_LIGHT = '#E1E9F2';
 
   static TEXT_HIGHLIGHTED = '#3C45F5';
+
+  static Background = '#F7FAFF';
 }

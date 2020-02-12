@@ -12,6 +12,7 @@ import Campaigns from '../screens/User/TabBar/Campaigns';
 import QrRead from '../screens/User/TabBar/QrRead';
 import CompanyDetails from '../screens/User/CompanyDetails';
 import Prizes from '../screens/User/TabBar/Prizes';
+import Colors from '../styles/Colors';
 
 const UserDetailsStack = createStackNavigator(
   {
@@ -25,6 +26,7 @@ const UserDetailsStack = createStackNavigator(
   {
     initialRouteName: 'UserDetails',
     headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
   },
 );
 const CampaignsStack = createStackNavigator(
@@ -39,7 +41,11 @@ const CampaignsStack = createStackNavigator(
       screen: UserDetailsStack,
     },
   },
-  {initialRouteName: 'CampaignsHome', headerMode: 'none'},
+  {
+    initialRouteName: 'CampaignsHome',
+    headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
+  },
 );
 
 const QrReadStack = createStackNavigator(
@@ -51,7 +57,11 @@ const QrReadStack = createStackNavigator(
       screen: UserDetailsStack,
     },
   },
-  {initialRouteName: 'QrReadHome', headerMode: 'none'},
+  {
+    initialRouteName: 'QrReadHome',
+    headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
+  },
 );
 
 const PrizesStack = createStackNavigator(
@@ -63,7 +73,11 @@ const PrizesStack = createStackNavigator(
       screen: UserDetailsStack,
     },
   },
-  {initialRouteName: 'PrizesHome', headerMode: 'none'},
+  {
+    initialRouteName: 'PrizesHome',
+    headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
+  },
 );
 
 const UserTabNavigation = createBottomTabNavigator(

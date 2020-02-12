@@ -14,6 +14,7 @@ import LastTransactions from '../screens/Company/TabBar/Home/LastTransactions';
 import Campaigns from '../screens/Company/TabBar/Home/Campaigns';
 import CampaignCreate from '../screens/Company/TabBar/Home/Campaigns/CampaignCreate';
 import CompanyDetailsEdit from '../screens/Company/CompanyDetailsEdit';
+import Colors from '../styles/Colors';
 
 const HomeStack = createStackNavigator(
   {
@@ -36,7 +37,7 @@ const HomeStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  {initialRouteName: 'Home', headerMode: 'none'},
+  {initialRouteName: 'Home', headerMode: 'none', cardStyle: {backgroundColor: Colors.Background}},
 );
 
 const QrGenerateStack = createStackNavigator(
@@ -48,7 +49,11 @@ const QrGenerateStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  {initialRouteName: 'QrGenerateHome', headerMode: 'none'},
+  {
+    initialRouteName: 'QrGenerateHome',
+    headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
+  },
 );
 
 const QrReadStack = createStackNavigator(
@@ -60,7 +65,11 @@ const QrReadStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  {initialRouteName: 'QrReadHome', headerMode: 'none'},
+  {
+    initialRouteName: 'QrReadHome',
+    headerMode: 'none',
+    cardStyle: {backgroundColor: Colors.Background},
+  },
 );
 const CompanyTabNavigation = createBottomTabNavigator(
   {
