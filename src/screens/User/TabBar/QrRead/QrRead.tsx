@@ -13,7 +13,6 @@ import QrReadStyle from './QrRead.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import WinPin from './WinPin';
 import WinModalStore from '../../../../stores/WinModal.store';
-import WinPrize from './WinPrize';
 import ReadCampaignQr from '../../../../services/user/General/ReadCampaignQr.service';
 import UserStore from '../../../../stores/User.store';
 import GetUserInfoService from '../../../../services/user/General/GetUserInfo.service';
@@ -182,31 +181,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           }}>
           <WinPin navigation={navigation} />
         </Modal>
-        {/*   <Modal
-          isVisible={WinModalStore.isWinPrizeModalOpened}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationIn="slideInUp"
-          animationInTiming={450}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}>
-          <WinPrize navigation={navigation} />
-        </Modal> */}
-
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
