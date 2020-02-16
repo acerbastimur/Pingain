@@ -10,6 +10,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import {View, Image, Text, ActivityIndicator} from 'react-native';
+import auth from '@react-native-firebase/auth';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -22,6 +23,8 @@ import UserDetailsStyle from './UserDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
 import GetUserInfoService from '../../../services/user/General/GetUserInfo.service';
 import UserStore from '../../../stores/User.store';
+import Button from '../../../common-components/Button';
+import Colors from '../../../styles/Colors';
 
 interface UserDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -103,10 +106,19 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
               </View>
             </Card>
           </View>
-          {/*  <Text style={this.style.activeCampText}>Aktif Kampanyaların</Text>
-          <View>
-            <CompanyCard navigation={navigation} isCampaign1Done />
-          </View> */}
+          <View style={this.style.logoutButtonContainer}>
+            <Button
+              text="Çıkış yap"
+              backgroundColor="transparent"
+              borderColor={Colors.WARN}
+              borderWidth={0.2}
+              textColor={Colors.WARN}
+              fontWeight="200"
+              onPress={() => {
+                auth().signOut();
+              }}
+            />
+          </View>
         </ScrollView>
       </View>
     );

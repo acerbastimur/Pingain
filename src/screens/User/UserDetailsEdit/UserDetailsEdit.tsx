@@ -87,11 +87,7 @@ export default class UserDetailsEdit extends React.Component<
     ) : (
       <View style={this.style.pageContainer}>
         <View style={this.style.headerContainer}>
-          <TabsHeader
-            navigation={navigation}
-            rightButtonText="Çıkış yap"
-            onLeftPress={() => null}
-          />
+          <TabsHeader navigation={navigation} rightButtonText=" " onLeftPress={() => null} />
         </View>
         <KeyboardAwareScrollView
           contentContainerStyle={this.style.keyboardScrollContainer}

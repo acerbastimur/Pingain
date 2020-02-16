@@ -78,4 +78,9 @@ export default StyleSheet.create({
     marginTop: responsiveRate(30),
     paddingHorizontal: '11.5%',
   },
+  logoutButtonContainer: {
+    height: 48,
+    paddingHorizontal: '6%',
+    marginTop: 20,
+  },
 });

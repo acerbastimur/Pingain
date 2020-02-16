@@ -25,7 +25,7 @@ export default class RightIcon extends React.Component<RightIconProps> {
   render() {
     const {rightButtonText, rightTextColor, rightEditIcon} = this.props;
     if (rightButtonText) {
-      return <Text style={[this.s.buttonText, {color: rightTextColor}]}> </Text>;
+      return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
     }
     if (rightEditIcon) {
       return (

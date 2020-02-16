@@ -13,6 +13,7 @@ import * as React from 'react';
 import {View, Text, TextInput, ActivityIndicator} from 'react-native';
 import CheckBox from 'react-native-check-box';
 import * as Animatable from 'react-native-animatable';
+import auth from '@react-native-firebase/auth';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -135,8 +136,9 @@ export default class CompanyDetailsEdit extends React.Component<
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
-            rightButtonText="Kaydet"
+            rightButtonText="Çıkış"
             rightTextColor={Colors.COMPANY}
+            onRightPress={() => auth().signOut()}
             onLeftPress={() => {
               return null;
             }}

@@ -60,7 +60,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
       }
       const source = response.uri;
 
-      ImageResizer.createResizedImage(source, response.width, response.height, 'JPEG', 10)
+      ImageResizer.createResizedImage(source, response.width, response.height, 'JPEG', 20)
         .then(resizedResponse => {
           // response.uri is the URI of the new image that can now be displayed, uploaded...
           // response.path is the path of the new image
