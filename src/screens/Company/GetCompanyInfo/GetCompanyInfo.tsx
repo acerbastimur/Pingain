@@ -338,8 +338,8 @@ export default class GetCompanyInfo extends React.Component<
                         backgroundColor={Colors.COMPANY}
                         textColor="#fff"
                         onPress={() => {
-                          const selctedPhoto = this.imageUploadRef.state.imageSource;
-                          if (isValid && selctedPhoto) {
+                          const selectedPhoto = this.imageUploadRef.state.imageSource;
+                          if (isValid && selectedPhoto) {
                             handleSubmit();
                             return;
                           }

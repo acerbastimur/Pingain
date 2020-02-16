@@ -48,6 +48,9 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
   }
 
   handleSubmit = ({email, password}: RegisterForm) => {
+    this.setState({
+      loading: true,
+    });
     LoginService.loginCompanyAuth(email, password)
       .then(() => {
         return null;
