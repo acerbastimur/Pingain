@@ -6,7 +6,7 @@
 /* eslint-disable eslint-comments/no-duplicate-disable */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable eslint-commen ts/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import {View, Text, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
@@ -97,7 +97,6 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
             validationSchema={Yup.object().shape({
               email: Yup.string()
                 .email()
-
                 .required(),
               password: Yup.string()
                 .min(6)
