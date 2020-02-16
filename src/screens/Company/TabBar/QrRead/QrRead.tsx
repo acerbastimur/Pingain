@@ -1,18 +1,19 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable react/jsx-wrap-multilines */
 import * as React from 'react';
-import {View, Text, ActivityIndicator, Animated} from 'react-native';
+import {
+  View, Text, ActivityIndicator, Animated,
+} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Modal from 'react-native-modal';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
-import {observer} from 'mobx-react';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import QrReadStyle from './QrRead.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import ReadUserQr from '../../../../services/company/General/ReadUserQr.service';
 import GivePrize from './WinPin';
 import CompanyStore from '../../../../stores/Company.store';
-import {Campaign} from '../../../../schemes/company/CompanyCampaign';
+import { Campaign } from '../../../../schemes/company/CompanyCampaign';
+import NoCampaign from '../../NoCampaign';
 
 export interface QrReadProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -45,56 +46,50 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   }
 
   componentDidMount() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     navigation.addListener('willFocus', () => {
-      this.setState({shouldQrReaderActive: true});
+      this.setState({ shouldQrReaderActive: true });
     });
     navigation.addListener('willBlur', () => {
-      this.setState({shouldQrReaderActive: false});
+      this.setState({ shouldQrReaderActive: false });
     });
   }
 
-  errorAnimation = (): Animated.CompositeAnimation => {
-    return Animated.sequence([
-      Animated.timing(
-        // Uses easing functions
-        this.errorAnimationValue, // The value to drive
-        {toValue: 1}, // Configuration
-      ),
-      Animated.timing(
-        // Uses easing functions
-        this.errorAnimationValue, // The value to drive
-        {toValue: 0}, // Configuration
-      ),
-    ]);
-  };
+  errorAnimation = (): Animated.CompositeAnimation => Animated.sequence([
+    Animated.timing(
+      // Uses easing functions
+      this.errorAnimationValue, // The value to drive
+      { toValue: 1 }, // Configuration
+    ),
+    Animated.timing(
+      // Uses easing functions
+      this.errorAnimationValue, // The value to drive
+      { toValue: 0 }, // Configuration
+    ),
+  ]);
 
-  sendPinRequest = ({userId, campaignId, qrCode}): Promise<number> => {
-    return new Promise((resolve, reject) => {
-      if (!userId || !campaignId || !qrCode) {
-        // error on fields
-        this.setState({loading: false});
-        return this.errorAnimation().start();
-      }
-      // no error on fields
-      ReadUserQr.readUserQrService(userId, campaignId, qrCode)
-        .then(result => {
-          const currentCampaign = CompanyStore.campaigns.find(
-            campaign => campaign.campaignId === campaignId,
-          );
+  sendPinRequest = ({ userId, campaignId, qrCode }): Promise<number> => new Promise((resolve, reject) => {
+    if (!userId || !campaignId || !qrCode) {
+      // error on fields
+      this.setState({ loading: false });
+      return this.errorAnimation().start();
+    }
+    // no error on fields
+    ReadUserQr.readUserQrService(userId, campaignId, qrCode)
+      .then((result) => {
+        const currentCampaign = CompanyStore.campaigns.find(
+          (campaign) => campaign.campaignId === campaignId,
+        );
 
-          this.setState({currentCampaign});
-          return resolve(result);
-        })
-        .catch(error => {
-          return reject(error);
-        });
-      return null;
-    });
-  };
+        this.setState({ currentCampaign });
+        return resolve(result);
+      })
+      .catch((error) => reject(error));
+    return null;
+  });
 
-  onSuccess = ({data}) => {
-    const {isGivePrizeModalOpen} = this.state;
+  onSuccess = ({ data }) => {
+    const { isGivePrizeModalOpen } = this.state;
     if (isGivePrizeModalOpen) return null;
     if (data === this.lastQrValue) return this.errorAnimation().start(); // if still reading the same qr
     this.lastQrValue = data;
@@ -104,32 +99,37 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     } catch (error) {
       return this.errorAnimation().start();
     }
-    this.setState({loading: true});
+    this.setState({ loading: true });
     return this.sendPinRequest({
       userId: readQr?.userId,
       campaignId: readQr?.campaignId,
       qrCode: readQr?.scannedQrId,
     })
-      .then(async responseCode => {
+      .then(async (responseCode) => {
         if (responseCode === 400 || responseCode === 404) {
-          this.setState({loading: false});
+          this.setState({ loading: false });
           return this.errorAnimation().start();
         }
-        return this.setState({loading: false, isGivePrizeModalOpen: true});
+        return this.setState({ loading: false, isGivePrizeModalOpen: true });
       })
       .catch(() => {
-        this.setState({loading: false});
+        this.setState({ loading: false });
       });
   };
 
   public render() {
-    const {navigation} = this.props;
-    const {shouldQrReaderActive, loading, isGivePrizeModalOpen, currentCampaign} = this.state;
+    const { navigation } = this.props;
+    const campaigns = toJS(CompanyStore.campaigns);
+
+    const {
+      shouldQrReaderActive, loading, isGivePrizeModalOpen, currentCampaign,
+    } = this.state;
 
     const interpolateColor = this.errorAnimationValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['rgb(204,204,204)', 'rgb(255, 87, 87)'],
     });
+
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
@@ -150,15 +150,16 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           animationOutTiming={350}
           animationInTiming={450}
           onBackdropPress={() => {
-            this.setState({isGivePrizeModalOpen: false});
+            this.setState({ isGivePrizeModalOpen: false });
           }}
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
             margin: 0,
           }}
           onSwipeComplete={() => {
-            this.setState({isGivePrizeModalOpen: false});
-          }}>
+            this.setState({ isGivePrizeModalOpen: false });
+          }}
+        >
           {currentCampaign ? (
             <GivePrize
               companyLogo={CompanyStore.companyLogo}
@@ -178,30 +179,36 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             }}
           />
         </View>
-        <View style={this.style.cameraContainer}>
-          {shouldQrReaderActive && (
-            <QRCodeScanner
-              ref={node => {
-                this.scanner = node;
-              }}
-              cameraStyle={this.style.cameraStyle}
-              onRead={this.onSuccess}
-              fadeIn
-              reactivate
-              vibrate={false}
-              bottomContent={
-                <View style={this.style.bottomContentContainer}>
-                  <View style={this.style.bottomContentBackground} />
-                  <Text style={this.style.bottomContentText}>
-                    Qr kodu okutarak ödülü verebilirsiniz
-                  </Text>
-                </View>
-              }
-              bottomViewStyle={this.style.bottomViewStyle}
-            />
-          )}
-          <Animated.View style={[this.style.cameraCenterArea, {borderColor: interpolateColor}]} />
-        </View>
+        {
+        campaigns.length === 0
+          ? <NoCampaign navigation={navigation} />
+          : (
+            <View style={this.style.cameraContainer}>
+              {shouldQrReaderActive && (
+              <QRCodeScanner
+                ref={(node) => {
+                  this.scanner = node;
+                }}
+                cameraStyle={this.style.cameraStyle}
+                onRead={this.onSuccess}
+                fadeIn
+                reactivate
+                vibrate={false}
+                bottomContent={(
+                  <View style={this.style.bottomContentContainer}>
+                    <View style={this.style.bottomContentBackground} />
+                    <Text style={this.style.bottomContentText}>
+                      Qr kodu okutarak ödülü verebilirsiniz
+                    </Text>
+                  </View>
+              )}
+                bottomViewStyle={this.style.bottomViewStyle}
+              />
+              )}
+              <Animated.View style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]} />
+            </View>
+          )
+}
       </View>
     );
   }

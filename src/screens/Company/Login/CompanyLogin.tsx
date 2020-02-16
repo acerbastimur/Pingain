@@ -9,11 +9,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
+import {
+  View, Text, TouchableOpacity, TextInput, ActivityIndicator,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Formik} from 'formik';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import CompanyRegisterStyle from './CompanyLogin.style';
@@ -44,25 +46,23 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
 
   constructor(props: CompanyLoginProps) {
     super(props);
-    this.state = {isErrorModalActive: false, loading: false};
+    this.state = { isErrorModalActive: false, loading: false };
   }
 
-  handleSubmit = ({email, password}: RegisterForm) => {
+  handleSubmit = ({ email, password }: RegisterForm) => {
     this.setState({
       loading: true,
     });
     LoginService.loginCompanyAuth(email, password)
-      .then(() => {
-        return null;
-      })
+      .then(() => null)
       .catch(() => {
-        this.setState({isErrorModalActive: true, loading: false});
+        this.setState({ isErrorModalActive: true, loading: false });
       });
   };
 
   public render() {
-    const {navigation} = this.props;
-    const {isErrorModalActive, loading} = this.state;
+    const { navigation } = this.props;
+    const { isErrorModalActive, loading } = this.state;
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
@@ -98,13 +98,15 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                 .min(6)
                 .required(),
             })}>
-            {({values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid}) => (
+            {({
+              values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid,
+            }) => (
               <View style={this.style.formContainer}>
                 <View style={this.style.inputContainer}>
                   <Text style={this.style.inputText}>Email</Text>
                   <Animatable.View
-                    ref={ref => {
-                      const isThere = this.references.filter(t => t.name === 'email')[0];
+                    ref={(ref) => {
+                      const isThere = this.references.filter((t) => t.name === 'email')[0];
                       if (isThere) return;
                       this.references.push({
                         name: 'email',
@@ -123,7 +125,7 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                       returnKeyType="next"
                       onSubmitEditing={() => {
                         const passwordInput = this.references.filter(
-                          t => t.name === 'passwordInput',
+                          (t) => t.name === 'passwordInput',
                         )[0].ref;
 
                         passwordInput.focus();
@@ -143,8 +145,8 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                 <View style={this.style.inputContainer}>
                   <Text style={this.style.inputText}>Şifre</Text>
                   <Animatable.View
-                    ref={ref => {
-                      const isThere = this.references.filter(t => t.name === 'password')[0];
+                    ref={(ref) => {
+                      const isThere = this.references.filter((t) => t.name === 'password')[0];
                       if (isThere) return;
                       this.references.push({
                         name: 'password',
@@ -162,8 +164,8 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                       autoCapitalize="none"
                       secureTextEntry
                       returnKeyType="done"
-                      ref={ref => {
-                        const isThere = this.references.filter(t => t.name === 'passwordInput')[0];
+                      ref={(ref) => {
+                        const isThere = this.references.filter((t) => t.name === 'passwordInput')[0];
                         if (isThere) return;
                         this.references.push({
                           name: 'passwordInput',
@@ -177,10 +179,10 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                         }
 
                         if (errors.email) {
-                          this.references.filter(t => t.name === 'email')[0].ref.shake();
+                          this.references.filter((t) => t.name === 'email')[0].ref.shake();
                         }
                         if (errors.password) {
-                          this.references.filter(t => t.name === 'password')[0].ref.shake();
+                          this.references.filter((t) => t.name === 'password')[0].ref.shake();
                         }
                       }}
                     />
@@ -206,10 +208,10 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
                       }
 
                       if (errors.email) {
-                        this.references.filter(t => t.name === 'email')[0].ref.shake();
+                        this.references.filter((t) => t.name === 'email')[0].ref.shake();
                       }
                       if (errors.password) {
-                        this.references.filter(t => t.name === 'password')[0].ref.shake();
+                        this.references.filter((t) => t.name === 'password')[0].ref.shake();
                       }
                     }}
                   />
@@ -241,7 +243,7 @@ export default class CompanyLogin extends React.Component<CompanyLoginProps, Com
           modalType={2}
           errorMessage="Email veya şifre hatalı"
           backButton={() => {
-            this.setState({isErrorModalActive: false});
+            this.setState({ isErrorModalActive: false });
           }}
         />
       </KeyboardAwareScrollView>

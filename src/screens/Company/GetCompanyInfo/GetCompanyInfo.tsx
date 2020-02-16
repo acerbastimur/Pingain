@@ -1,20 +1,11 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, TextInput, ActivityIndicator} from 'react-native';
+import {
+  View, Text, TextInput, ActivityIndicator,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Formik} from 'formik';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import GetCompanyInfoStyle from './GetCompanyInfo.style';
@@ -43,7 +34,7 @@ export default class GetCompanyInfo extends React.Component<
 
   constructor(props: GetCompanyInfoProps) {
     super(props);
-    this.state = {isLoading: false};
+    this.state = { isLoading: false };
   }
 
   handleSubmit = (
@@ -52,9 +43,9 @@ export default class GetCompanyInfo extends React.Component<
     phoneNumber: string,
     instagramAccount: string,
   ) => {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     const logoUri = this.imageUploadRef.state.imageSource;
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     SetCompanyInfoService.setCompanyInfo(
       name,
       companyName,
@@ -67,11 +58,12 @@ export default class GetCompanyInfo extends React.Component<
   };
 
   public render() {
-    const {isLoading} = this.state;
+    const { isLoading } = this.state;
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
-        scrollEnabled={false}>
+        scrollEnabled={false}
+      >
         {isLoading ? (
           <View style={this.style.indicatorContainer}>
             <Text>Loading</Text>
@@ -82,7 +74,7 @@ export default class GetCompanyInfo extends React.Component<
             <View style={this.style.uploadPhotoContainer}>
               <View style={this.style.uploadPhotoItem}>
                 <ImageUpload
-                  ref={ref => {
+                  ref={(ref) => {
                     this.imageUploadRef = ref;
                   }}
                 />
@@ -97,9 +89,9 @@ export default class GetCompanyInfo extends React.Component<
                   phoneNumber: '',
                   instagramAccount: '',
                 }}
-                onSubmit={({name, companyName, phoneNumber, instagramAccount}) =>
-                  this.handleSubmit(name, companyName, phoneNumber, instagramAccount)
-                }
+                onSubmit={({
+                  name, companyName, phoneNumber, instagramAccount,
+                }) => this.handleSubmit(name, companyName, phoneNumber, instagramAccount)}
                 validationSchema={Yup.object().shape({
                   name: Yup.string()
                     .min(2)
@@ -111,7 +103,8 @@ export default class GetCompanyInfo extends React.Component<
                     .matches(/0[2-5](0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
                     .required(),
                   instagramAccount: Yup.string().min(2),
-                })}>
+                })}
+              >
                 {({
                   values,
                   handleChange,
@@ -125,14 +118,15 @@ export default class GetCompanyInfo extends React.Component<
                     <View style={this.style.inputContainer}>
                       <Text style={this.style.inputText}>İşletme Yetkilisi</Text>
                       <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'name')[0];
+                        ref={(ref) => {
+                          const isThere = this.references.filter((t) => t.name === 'name')[0];
                           if (isThere) return;
                           this.references.push({
                             name: 'name',
                             ref,
                           });
-                        }}>
+                        }}
+                      >
                         <TextInput
                           style={this.style.input}
                           placeholder="İsim Soyisim"
@@ -146,7 +140,7 @@ export default class GetCompanyInfo extends React.Component<
                           returnKeyType="next"
                           onSubmitEditing={() => {
                             const companyNameInput = this.references.filter(
-                              t => t.name === 'companyNameInput',
+                              (t) => t.name === 'companyNameInput',
                             )[0].ref;
 
                             companyNameInput.focus();
@@ -166,14 +160,15 @@ export default class GetCompanyInfo extends React.Component<
                     <View style={this.style.inputContainer}>
                       <Text style={this.style.inputText}>İşletme Adı</Text>
                       <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'companyName')[0];
+                        ref={(ref) => {
+                          const isThere = this.references.filter((t) => t.name === 'companyName')[0];
                           if (isThere) return;
                           this.references.push({
                             name: 'companyName',
                             ref,
                           });
-                        }}>
+                        }}
+                      >
                         <TextInput
                           style={this.style.input}
                           placeholder="İşletme adını giriniz"
@@ -185,9 +180,9 @@ export default class GetCompanyInfo extends React.Component<
                           onBlur={() => setFieldTouched('companyName')}
                           autoCapitalize="words"
                           returnKeyType="next"
-                          ref={ref => {
+                          ref={(ref) => {
                             const isThere = this.references.filter(
-                              t => t.name === 'companyNameInput',
+                              (t) => t.name === 'companyNameInput',
                             )[0];
                             if (isThere) return;
                             this.references.push({
@@ -197,7 +192,7 @@ export default class GetCompanyInfo extends React.Component<
                           }}
                           onSubmitEditing={() => {
                             const phoneNumberInput = this.references.filter(
-                              t => t.name === 'phoneNumberInput',
+                              (t) => t.name === 'phoneNumberInput',
                             )[0].ref;
 
                             phoneNumberInput.focus();
@@ -217,14 +212,15 @@ export default class GetCompanyInfo extends React.Component<
                     <View style={this.style.inputContainer}>
                       <Text style={this.style.inputText}>Telefon Numarası</Text>
                       <Animatable.View
-                        ref={ref => {
-                          const isThere = this.references.filter(t => t.name === 'phoneNumber')[0];
+                        ref={(ref) => {
+                          const isThere = this.references.filter((t) => t.name === 'phoneNumber')[0];
                           if (isThere) return;
                           this.references.push({
                             name: 'phoneNumber',
                             ref,
                           });
-                        }}>
+                        }}
+                      >
                         <TextInput
                           style={this.style.input}
                           placeholder="İşletmenin telefon numarasını giriniz"
@@ -237,9 +233,9 @@ export default class GetCompanyInfo extends React.Component<
                           autoCapitalize="none"
                           keyboardType="number-pad"
                           returnKeyType="next"
-                          ref={ref => {
+                          ref={(ref) => {
                             const isThere = this.references.filter(
-                              t => t.name === 'phoneNumberInput',
+                              (t) => t.name === 'phoneNumberInput',
                             )[0];
                             if (isThere) return;
                             this.references.push({
@@ -249,7 +245,7 @@ export default class GetCompanyInfo extends React.Component<
                           }}
                           onSubmitEditing={() => {
                             const instagramAccountInput = this.references.filter(
-                              t => t.name === 'instagramAccountInput',
+                              (t) => t.name === 'instagramAccountInput',
                             )[0].ref;
 
                             instagramAccountInput.focus();
@@ -269,16 +265,17 @@ export default class GetCompanyInfo extends React.Component<
                     <View style={this.style.inputContainer}>
                       <Text style={this.style.inputText}>Instagram Hesabı</Text>
                       <Animatable.View
-                        ref={ref => {
+                        ref={(ref) => {
                           const isThere = this.references.filter(
-                            t => t.name === 'instagramAccount',
+                            (t) => t.name === 'instagramAccount',
                           )[0];
                           if (isThere) return;
                           this.references.push({
                             name: 'instagramAccount',
                             ref,
                           });
-                        }}>
+                        }}
+                      >
                         <TextInput
                           style={this.style.input}
                           placeholder="Instagram hesabınızın linkini giriniz"
@@ -290,9 +287,9 @@ export default class GetCompanyInfo extends React.Component<
                           onBlur={() => setFieldTouched('instagramAccount')}
                           autoCapitalize="none"
                           returnKeyType="done"
-                          ref={ref => {
+                          ref={(ref) => {
                             const isThere = this.references.filter(
-                              t => t.name === 'instagramAccountInput',
+                              (t) => t.name === 'instagramAccountInput',
                             )[0];
                             if (isThere) return;
                             this.references.push({
@@ -307,17 +304,17 @@ export default class GetCompanyInfo extends React.Component<
                             }
 
                             if (errors.name) {
-                              this.references.filter(t => t.name === 'name')[0].ref.shake();
+                              this.references.filter((t) => t.name === 'name')[0].ref.shake();
                             }
                             if (errors.companyName) {
-                              this.references.filter(t => t.name === 'companyName')[0].ref.shake();
+                              this.references.filter((t) => t.name === 'companyName')[0].ref.shake();
                             }
                             if (errors.phoneNumber) {
-                              this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+                              this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
                             }
                             if (errors.instagramAccount) {
                               this.references
-                                .filter(t => t.name === 'instagramAccount')[0]
+                                .filter((t) => t.name === 'instagramAccount')[0]
                                 .ref.shake();
                             }
                           }}
@@ -345,13 +342,13 @@ export default class GetCompanyInfo extends React.Component<
                           }
 
                           if (errors.name) {
-                            this.references.filter(t => t.name === 'name')[0].ref.shake();
+                            this.references.filter((t) => t.name === 'name')[0].ref.shake();
                           }
                           if (errors.companyName) {
-                            this.references.filter(t => t.name === 'companyName')[0].ref.shake();
+                            this.references.filter((t) => t.name === 'companyName')[0].ref.shake();
                           }
                           if (errors.phoneNumber) {
-                            this.references.filter(t => t.name === 'phoneNumber')[0].ref.shake();
+                            this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
                           }
                         }}
                       />
