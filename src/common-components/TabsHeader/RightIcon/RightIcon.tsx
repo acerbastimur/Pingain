@@ -3,7 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {observer} from 'mobx-react';
 import RightIconStyle from './RightIcon.style';
 import GeneralStore from '../../../stores/General.store';
@@ -25,13 +25,13 @@ export default class RightIcon extends React.Component<RightIconProps> {
   render() {
     const {rightButtonText, rightTextColor, rightEditIcon} = this.props;
     if (rightButtonText) {
-      return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
+      return <Text style={[this.s.buttonText, {color: rightTextColor}]}> </Text>;
     }
     if (rightEditIcon) {
       return (
         <FastImage
           style={this.s.image}
-          resizeMode="contain"
+          resizeMode={FastImage.resizeMode.contain}
           source={require('../../../assets/image/editIcon.png')}
         />
       );
@@ -42,13 +42,17 @@ export default class RightIcon extends React.Component<RightIconProps> {
       return CompanyStore?.companyLogo ? (
         <FastImage
           style={this.s.image}
-          resizeMode="contain"
+          resizeMode={FastImage.resizeMode.cover}
           source={{uri: CompanyStore.companyLogo}}
         />
       ) : null;
     }
     return UserStore?.profilePhoto ? (
-      <FastImage style={this.s.image} resizeMode="contain" source={{uri: UserStore.profilePhoto}} />
+      <FastImage
+        style={this.s.image}
+        resizeMode={FastImage.resizeMode.cover}
+        source={{uri: UserStore.profilePhoto}}
+      />
     ) : null;
   }
 }

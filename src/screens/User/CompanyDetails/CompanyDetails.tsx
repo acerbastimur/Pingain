@@ -193,6 +193,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   return (
                     <FastImage
                       key={Math.random() * 1000}
+                      resizeMode={FastImage.resizeMode.cover}
                       source={{uri: image}}
                       style={this.style.swipeImage}>
                       <View style={this.style.loadingCenter}>
@@ -208,6 +209,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 <View style={this.style.companyImageContainer}>
                   <FastImage
                     source={{uri: company.companyLogo, priority: 'high'}}
+                    resizeMode={FastImage.resizeMode.cover}
                     style={this.style.companyImage}>
                     <View style={this.style.loadingCenter}>
                       <ActivityIndicator animating={loading} />
@@ -236,6 +238,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
               <View style={this.style.phoneArea}>
                 <FastImage
                   style={this.style.phoneIcon}
+                  resizeMode={FastImage.resizeMode.contain}
                   source={require('../../../assets/image/User/phoneIcon.png')}
                 />
                 <Text style={this.style.contactText}>{company.phoneNumber}</Text>
@@ -243,6 +246,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
               <View style={this.style.locationArea}>
                 <FastImage
                   style={this.style.locationIcon}
+                  resizeMode={FastImage.resizeMode.contain}
                   source={require('../../../assets/image/User/locationIcon.png')}
                 />
                 <Text style={this.style.contactText} numberOfLines={1}>

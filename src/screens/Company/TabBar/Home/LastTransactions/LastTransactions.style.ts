@@ -50,7 +50,7 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   headerUserName: {
-    marginLeft: '19.8%',
+    marginLeft: '18%',
   },
   headerDate: {
     marginLeft: '14.5%',
@@ -63,18 +63,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: responsiveRate(20),
-    marginLeft: '19.8%',
-  },
-  profilePhoto: {
-    resizeMode: 'contain',
-    width: responsiveRate(25),
-    height: responsiveRate(25),
-    borderRadius: 100,
-    marginLeft: '10%',
-    marginRight: '3.5%',
+    marginLeft: '18%',
   },
   userName: {
-    width: '38%',
+    width: '30%',
     fontFamily: 'Helvetica Neue',
     fontSize: responsiveRate(14),
     color: Colors.SECONDARY,

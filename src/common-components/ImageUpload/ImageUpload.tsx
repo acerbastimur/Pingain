@@ -128,13 +128,13 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
           {imageSource ? (
             <FastImage
               style={this.s.profilePhoto}
-              resizeMode="contain"
+              resizeMode={FastImage.resizeMode.cover}
               source={{uri: imageSource, priority: 'high'}}
             />
           ) : (
             <FastImage
               style={this.s.plus}
-              resizeMode="contain"
+              resizeMode={FastImage.resizeMode.cover}
               source={require('../../assets/image/plus.png')}
             />
           )}

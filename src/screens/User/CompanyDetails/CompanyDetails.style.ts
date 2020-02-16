@@ -121,14 +121,13 @@ export default StyleSheet.create({
   },
   locationArea: {
     marginTop: 2,
-    height: 40,
+    height: 36,
     alignItems: 'center',
     flexDirection: 'row',
   },
   locationIcon: {
     width: 26,
     height: 36,
-    resizeMode: 'contain',
   },
   contactText: {
     width: '90%',

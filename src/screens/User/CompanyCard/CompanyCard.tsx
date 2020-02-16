@@ -162,7 +162,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
               <View style={this.s.cardHeaderImageContainer}>
                 <FastImage
                   style={this.s.cardHeaderImage}
-                  resizeMode="contain"
+                  resizeMode={FastImage.resizeMode.cover}
                   source={{
                     uri: company.companyLogo,
                     priority: 'high',

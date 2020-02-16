@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import {View, Text, ActivityIndicator} from 'react-native';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/general/AuthRole.enum';
@@ -21,6 +21,39 @@ export default class Loading extends React.Component<LoadingProps> {
   constructor(props: LoadingProps) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    const {navigation} = this.props;
+    //  auth().signOut();
+    auth().onAuthStateChanged(async user => {
+      if (user) {
+        await this.checkUserRole(user);
+
+        if (GeneralStore.authRole === AuthRole.Company) {
+          // check if company fillfulled their information
+
+          const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile();
+          if (isCompanyProfileFilled) {
+            GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
+              navigation.navigate('CompanyTabNavigation');
+            });
+          } else {
+            navigation.navigate('GetCompanyInfo');
+          }
+        } else if (GeneralStore.authRole === AuthRole.User) {
+          const isUserProfileFilled = await this.checkIfUserFilledProfile();
+          if (isUserProfileFilled) {
+            navigation.navigate('UserTabNavigation');
+          } else {
+            navigation.navigate('GetUserInfo');
+          }
+          // check if user fillfulled their information
+        }
+      } else {
+        navigation.navigate('Onboarding');
+      }
+    });
   }
 
   checkUserRole = async (user: FirebaseAuthTypes.User) => {
@@ -65,39 +98,6 @@ export default class Loading extends React.Component<LoadingProps> {
 
     return isUserProfileFilled;
   };
-
-  componentDidMount() {
-    const { navigation } = this.props;
-    //  auth().signOut();
-    auth().onAuthStateChanged(async user => {
-      if (user) {
-        await this.checkUserRole(user);
-
-        if (GeneralStore.authRole === AuthRole.Company) {
-          // check if company fillfulled their information
-
-          const isCompanyProfileFilled = await this.checkIfCompanyFilledProfile();
-          if (isCompanyProfileFilled) {
-            GetCompanyCampaignsService.getAllCompanyCampaigns().then(() => {
-              navigation.navigate('CompanyTabNavigation');
-            });
-          } else {
-            navigation.navigate('GetCompanyInfo');
-          }
-        } else if (GeneralStore.authRole === AuthRole.User) {
-          const isUserProfileFilled = await this.checkIfUserFilledProfile();
-          if (isUserProfileFilled) {
-            navigation.navigate('UserTabNavigation');
-          } else {
-            navigation.navigate('GetUserInfo');
-          }
-          // check if user fillfulled their information
-        }
-      } else {
-        navigation.navigate('Onboarding');
-      }
-    });
-  }
 
   public render() {
     return (
