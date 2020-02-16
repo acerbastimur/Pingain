@@ -106,6 +106,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             companyName: scannedCompany.companyName,
             campaignName: scannedCampaign.campaignName,
             giftCode: campaignGiftCode,
+            campaignId: scannedCampaign.campaignId,
+            company: scannedCompany,
           };
 
           WinModalStore.isWinPrizeModalOpened = true;
@@ -128,6 +130,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             companyName: scannedCompany.companyName,
             campaignName: scannedCampaign.campaignName,
             giftCode: campaignGiftCode,
+            campaignId: scannedCampaign.campaignId,
+            company: scannedCompany,
           };
 
           WinModalStore.isWinPrizeModalOpened = true;

@@ -249,14 +249,14 @@ export default class CampaignCreate extends React.Component<
                   }}
                 />
               </View>
-              <View style={this.style.buttonContainer}>
+              {/*   <View style={this.style.buttonContainer}>
                 <Button
                   backgroundColor="transparent"
                   text="Kampanyayı durdur"
                   textColor={Colors.WARN}
                   shadow={false}
                 />
-              </View>
+              </View> */}
             </View>
           </View>
         </ScrollView>

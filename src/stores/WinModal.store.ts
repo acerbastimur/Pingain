@@ -1,3 +1,4 @@
+import {UserCompany} from './../schemes/user/UserCompany';
 import {observable} from 'mobx';
 import CampaignType from '../schemes/company/CampaignType.enum';
 
@@ -19,6 +20,8 @@ class WinModalStore {
     campaignType: CampaignType;
     campaignName: string;
     giftCode: string;
+    campaignId: string;
+    company: UserCompany;
   } = null;
 }
 
