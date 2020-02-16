@@ -59,7 +59,12 @@ export default StyleSheet.create({
     marginLeft: '0%',
   },
   usersContainer: {marginTop: responsiveRate(30), marginBottom: 80},
-  userContainer: {flexDirection: 'row', alignItems: 'center', marginBottom: responsiveRate(20)},
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: responsiveRate(20),
+    marginLeft: '19.8%',
+  },
   profilePhoto: {
     resizeMode: 'contain',
     width: responsiveRate(25),
@@ -97,5 +102,6 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.5,
     textAlign: 'left',
+    marginLeft: '12%',
   },
 });

@@ -4,7 +4,6 @@
 import * as React from 'react';
 import {View, Text} from 'react-native';
 import {NavigationScreenProp, NavigationParams, NavigationState, FlatList} from 'react-navigation';
-import firestore from '@react-native-firebase/firestore';
 import FastImage from 'react-native-fast-image';
 import LastTransactionsStyle from './LastTransactions.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
@@ -29,24 +28,39 @@ export default class LastTransactions extends React.Component<
     super(props);
     this.state = {transactions: null};
     GetLastTransactionsService.getLastTransactions().then(transactions => {
-      console.log(transactions);
       this.setState({transactions});
     });
   }
 
   renderUser = (name: string, surname: string, transactionDate: Date) => {
-    const {getDay, getMonth, getTime} = new Date(transactionDate);
-    // console.log(getDay(), getMonth(), getTime());
+    const getDay =
+      new Date(transactionDate).getDay().toString().length === 1
+        ? `0${new Date(transactionDate).getDay().toString()}`
+        : new Date(transactionDate).getDay().toString();
+    const getMonth =
+      new Date(transactionDate).getMonth().toString().length === 1
+        ? `0${new Date(transactionDate).getMonth().toString()}`
+        : new Date(transactionDate).getMonth().toString();
+
+    const getYear = new Date(transactionDate)
+      .getFullYear()
+      .toString()
+      .slice(-2);
+    const getHours =
+      new Date(transactionDate).getHours().toString().length === 1
+        ? `0${new Date(transactionDate).getHours().toString()}`
+        : new Date(transactionDate).getHours().toString();
+
+    const getMinutes =
+      new Date(transactionDate).getMinutes().toString().length === 1
+        ? `0${new Date(transactionDate).getMinutes().toString()}`
+        : new Date(transactionDate).getMinutes().toString();
+
     return (
       <View style={this.style.userContainer}>
-        <FastImage
-          resizeMode="contain"
-          style={this.style.profilePhoto}
-          source={require('../../../../../assets/image/User/profileImage.png')}
-        />
-        <Text style={this.style.userName}>{name + surname}</Text>
-        <Text style={this.style.date}>07.09.19</Text>
-        <Text style={this.style.time}>09.03</Text>
+        <Text style={this.style.userName}>{`${name} ${surname}`}</Text>
+        <Text style={this.style.date}>{`${getDay}.${getMonth}.${getYear}`}</Text>
+        <Text style={this.style.time}>{`${getHours}.${getMinutes}`}</Text>
       </View>
     );
   };
@@ -87,7 +101,11 @@ export default class LastTransactions extends React.Component<
           {transactions ? (
             <FlatList
               style={this.style.usersContainer}
-              data={transactions}
+              data={transactions.sort(
+                (transactionFirst, transactionLast) =>
+                  new Date(transactionLast.transactionDate).getTime() -
+                  new Date(transactionFirst.transactionDate).getTime(),
+              )}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item: {name, surname, transactionDate}}) =>
                 this.renderUser(name, surname, transactionDate)
