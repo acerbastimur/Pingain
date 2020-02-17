@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../styles/Colors';
 import CampaignColors from '../../../../styles/CampaignColors';
 
@@ -14,7 +14,7 @@ export default StyleSheet.create({
     height: '100%',
   },
   scrollViewStyle: {},
-  headerContainer: {height: '8%', paddingHorizontal: '6%'},
+  headerContainer: { height: '8%', paddingHorizontal: '6%' },
   headerText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '700',
@@ -66,6 +66,13 @@ export default StyleSheet.create({
   },
   otherCardBodyItemName: {
     paddingLeft: '6%',
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '400',
+    fontSize: responsiveRate(16),
+    color: Colors.PRIMARY_LIGHT,
+  },
+  companyStatus: {
+    paddingLeft: '2%',
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     fontSize: responsiveRate(16),
