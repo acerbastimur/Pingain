@@ -3,12 +3,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import {Card} from 'react-native-shadow-cards';
+import {
+  View, Text, ScrollView, TouchableOpacity,
+} from 'react-native';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import { Card } from 'react-native-shadow-cards';
 
-import {observer} from 'mobx-react';
-import {toJS} from 'mobx';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import FastImage from 'react-native-fast-image';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
@@ -29,7 +31,7 @@ export default class Home extends React.Component<HomeProps, any> {
   }
 
   public render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
 
     return (
@@ -46,7 +48,7 @@ export default class Home extends React.Component<HomeProps, any> {
           <ScrollView style={this.style.scrollViewStyle}>
             <Text style={this.style.headerText}>Anasayfa</Text>
             <View style={this.style.campaignsContainer}>
-              {campaigns.map(campaign => {
+              {campaigns.map((campaign) => {
                 switch (campaign.campaignType) {
                   case 1:
                     return (

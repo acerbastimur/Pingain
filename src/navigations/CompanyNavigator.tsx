@@ -1,9 +1,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FastImage from 'react-native-fast-image';
 import GetCompanyInfo from '../screens/Company/GetCompanyInfo';
 import Home from '../screens/Company/TabBar/Home';
@@ -37,7 +37,7 @@ const HomeStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  {initialRouteName: 'Home', headerMode: 'none', cardStyle: {backgroundColor: Colors.Background}},
+  { initialRouteName: 'Home', headerMode: 'none', cardStyle: { backgroundColor: Colors.Background } },
 );
 
 const QrGenerateStack = createStackNavigator(
@@ -52,7 +52,7 @@ const QrGenerateStack = createStackNavigator(
   {
     initialRouteName: 'QrGenerateHome',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 
@@ -68,7 +68,7 @@ const QrReadStack = createStackNavigator(
   {
     initialRouteName: 'QrReadHome',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 const CompanyTabNavigation = createBottomTabNavigator(
@@ -76,12 +76,12 @@ const CompanyTabNavigation = createBottomTabNavigator(
     Home: {
       screen: HomeStack,
       navigationOptions: {
-        tabBarIcon: e => {
+        tabBarIcon: (e) => {
           if (e.focused) {
             return (
               <FastImage
                 resizeMode="contain"
-                style={{width: 30, height: 30, alignSelf: 'center'}}
+                style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/CompanyTab/CampaignsTabIcon.png')}
               />
             );
@@ -89,7 +89,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
           return (
             <FastImage
               resizeMode="contain"
-              style={{width: 30, height: 30, alignSelf: 'center'}}
+              style={{ width: 30, height: 30, alignSelf: 'center' }}
               source={require('../assets/image/CompanyTab/CampaignsTabIconDisabled.png')}
             />
           );
@@ -102,7 +102,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
         tabBarIcon: (
           <FastImage
             resizeMode="contain"
-            style={{width: 50, height: 50, alignSelf: 'center'}}
+            style={{ width: 50, height: 50, alignSelf: 'center' }}
             source={require('../assets/image/CompanyTab/QrCodeTabIcon.png')}
           />
         ),
@@ -111,12 +111,12 @@ const CompanyTabNavigation = createBottomTabNavigator(
     QrRead: {
       screen: QrReadStack,
       navigationOptions: {
-        tabBarIcon: e => {
+        tabBarIcon: (e) => {
           if (e.focused) {
             return (
               <FastImage
                 resizeMode="contain"
-                style={{width: 30, height: 30, alignSelf: 'center'}}
+                style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/CompanyTab/ReadQrIcon.png')}
               />
             );
@@ -124,7 +124,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
           return (
             <FastImage
               resizeMode="contain"
-              style={{width: 30, height: 30, alignSelf: 'center'}}
+              style={{ width: 30, height: 30, alignSelf: 'center' }}
               source={require('../assets/image/CompanyTab/ReadQrIconDisabled.png')}
             />
           );
@@ -159,7 +159,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
         borderTopRightRadius: 40,
       },
 
-      safeAreaInset: {bottom: 'never', top: 'never'}, // <-- this is the solution
+      safeAreaInset: { bottom: 'never', top: 'never' }, // <-- this is the solution
     },
   },
 );
@@ -173,7 +173,7 @@ const CompanyNavigator = createSwitchNavigator(
       screen: CompanyTabNavigation,
     },
   },
-  {initialRouteName: 'GetCompanyInfo'},
+  { initialRouteName: 'GetCompanyInfo' },
 );
 
 export default CompanyNavigator;

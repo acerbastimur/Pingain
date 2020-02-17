@@ -1,13 +1,16 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import { NavigationActions, NavigationScreenProp } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import { observer } from 'mobx-react';
 import Logo from '../Logo';
 import TabsHeaderStyle from './TabsHeader.style';
 import RightIcon from './RightIcon';
+import GeneralStore from '../../stores/General.store';
+import AuthRole from '../../schemes/general/AuthRole.enum';
+import CompanyStore from '../../stores/Company.store';
 
 interface TabsHeaderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,10 +30,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
 
     if (
       navigation.state.routeName === 'CampaignsHome'
-      || navigation.state.routeName === 'QrReadHome'
+      || (navigation.state.routeName === 'QrReadHome' && GeneralStore.authRole === AuthRole.User)
       || navigation.state.routeName === 'PrizesHome'
-      || navigation.state.routeName === 'QrGenerateHome'
-      || navigation.state.routeName === 'Home'
+
     ) {
       return (
         <TouchableOpacity>
@@ -39,6 +41,32 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
             resizeMode="contain"
             source={require('../../assets/image/User/searchIcon.png')}
           />
+        </TouchableOpacity>
+      );
+    }
+
+    if (navigation.state.routeName === 'QrReadHome'
+      || navigation.state.routeName === 'QrGenerateHome'
+      || navigation.state.routeName === 'Home'
+    ) {
+      const {
+        address, companyFeatures, city, companyImages, phoneNumber, companyLogo,
+      } = CompanyStore.companyDetails;
+      const profileState = address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
+
+      if (profileState) {
+        return (
+          <View style={this.s.stateWrapper}>
+            <View style={this.s.activeDot} />
+            <Text style={this.s.stateText}>Aktif</Text>
+          </View>
+        );
+      }
+
+      return (
+        <TouchableOpacity style={this.s.stateWrapper} onPress={() => navigation.navigate('CompanyDetailsEdit')}>
+          <View style={this.s.passiveDot} />
+          <Text style={this.s.stateText}>Pasif</Text>
         </TouchableOpacity>
       );
     }

@@ -2,11 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import {
+  View, Text, FlatList, ActivityIndicator,
+} from 'react-native';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import Modal from 'react-native-modal';
 
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
@@ -31,32 +33,30 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
   constructor(props: CampaignsProps) {
     super(props);
-    this.state = {loading: true};
+    this.state = { loading: true };
     GetCompaniesService.getCompanies()
-      .then(companies => {
+      .then((companies) => {
         UserStore.companies = companies.length > 0 ? companies : null;
-        this.setState({loading: false});
+        this.setState({ loading: false });
       })
       .catch(() => {
         UserStore.companies = null;
       });
   }
 
-  flatListTextHeader = () => {
-    return (
-      <View style={this.style.flatListHeader}>
-        <Text style={this.style.flatListHeaderTextLight}>Hoşgeldin Pingainer</Text>
-        <Text numberOfLines={1} style={this.style.flatListHeaderTextBold}>
+  flatListTextHeader = () => (
+    <View style={this.style.flatListHeader}>
+      <Text style={this.style.flatListHeaderTextLight}>Hoşgeldin Pingainer</Text>
+      <Text numberOfLines={1} style={this.style.flatListHeaderTextBold}>
           Öne Çıkan Kampanyalar
-        </Text>
-      </View>
-    );
-  };
+      </Text>
+    </View>
+  );
 
   public render() {
-    const {navigation} = this.props;
-    const {loading} = this.state;
-    const {companies} = UserStore;
+    const { navigation } = this.props;
+    const { loading } = this.state;
+    const { companies } = UserStore;
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
@@ -79,9 +79,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             ListHeaderComponent={this.flatListTextHeader}
             keyExtractor={(item, index) => index.toString()}
             data={companies}
-            renderItem={({item}) => {
-              return <CompanyCard navigation={navigation} company={item} />;
-            }}
+            renderItem={({ item }) => <CompanyCard navigation={navigation} company={item} />}
           />
         </View>
 

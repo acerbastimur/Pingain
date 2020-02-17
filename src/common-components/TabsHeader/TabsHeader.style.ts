@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -23,7 +23,9 @@ export default StyleSheet.create({
     width: 'auto',
     height: 25,
   },
-  imageContainer: {width: 25, height: 25, borderRadius: 25, overflow: 'hidden'},
+  imageContainer: {
+    width: 25, height: 25, borderRadius: 25, overflow: 'hidden',
+  },
   image: {
     width: 25,
     height: 25,
@@ -39,7 +41,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  backIcon: {width: 18, height: 18, resizeMode: 'contain'},
+  backIcon: { width: 18, height: 18, resizeMode: 'contain' },
   buttonText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
@@ -48,5 +50,27 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'right',
+  },
+  stateWrapper: {
+    flexDirection: 'row',
+  },
+  activeDot: {
+    width: 15,
+    height: 15,
+    borderRadius: 30,
+    backgroundColor: 'rgb(138,237,57)',
+  },
+  passiveDot: {
+    width: 15,
+    height: 15,
+    borderRadius: 30,
+    backgroundColor: 'rgb(224,102,102)',
+  },
+  stateText: {
+    marginLeft: 8,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '500',
+    fontSize: 14,
+    color: Colors.SECONDARY_DARK,
   },
 });
