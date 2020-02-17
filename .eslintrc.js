@@ -5,7 +5,6 @@ module.exports = {
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -23,7 +22,6 @@ module.exports = {
     '@typescript-eslint',
     'jsx-a11y',
     'import',
-    'prettier',
     'jest',
     'eslint-comments',
   ],
@@ -31,11 +29,16 @@ module.exports = {
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
-    'react/jsx-filename-extension': [1, {extensions: ['.js', '.jsx', '.ts', '.tsx']}],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/prop-types': 'off',
     'react/button-has-type': 'off',
     'no-use-before-define': 'off',
     'global-require': 0,
+    "max-len": ["error", 120, 4, {
+      "ignoreComments": true,
+      "ignoreUrls": true,
+      "ignorePattern": "^\\s*var\\s.+=\\s*(require\\s*\\()|(/)"
+    }],
     'import/no-extraneous-dependencies': [
       'error',
       {
@@ -62,7 +65,6 @@ module.exports = {
     'react-native/no-color-literals': 'error',
     'react/jsx-one-expression-per-line': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
-    'prettier/prettier': ['error'],
   },
   overrides: [
     {

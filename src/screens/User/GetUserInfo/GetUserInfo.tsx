@@ -266,7 +266,9 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                       backgroundColor={Colors.INFO}
                       textColor="#fff"
                       onPress={() => {
-                        if (isValid) {
+                        const selectedPhoto = this.imageUploadRef.state.imageSource;
+
+                        if (isValid && selectedPhoto) {
                           handleSubmit();
                           return;
                         }

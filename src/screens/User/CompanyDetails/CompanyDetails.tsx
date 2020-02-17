@@ -217,13 +217,15 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   </FastImage>
                 </View>
                 <Text style={this.style.cardHeaderText}>{company.companyName}</Text>
-                <TouchableOpacity
-                  style={this.style.followButton}
-                  onPress={() => {
-                    Linking.openURL(`instagram://user?username=${company.instagramAccount}`);
-                  }}>
-                  <Text style={this.style.followButtonText}>Takip et</Text>
-                </TouchableOpacity>
+                {company.instagramAccount ? (
+                  <TouchableOpacity
+                    style={this.style.followButton}
+                    onPress={() => {
+                      Linking.openURL(`https://www.instagram.com/${company.instagramAccount}`);
+                    }}>
+                    <Text style={this.style.followButtonText}>Takip et</Text>
+                  </TouchableOpacity>
+                ) : null}
               </View>
               <View style={this.style.line} />
               <View style={this.style.companyFeaturesContainer}>

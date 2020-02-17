@@ -3,8 +3,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import {Text, View} from 'react-native';
-import {observer} from 'mobx-react';
+import { Text, View } from 'react-native';
+import { observer } from 'mobx-react';
 import RightIconStyle from './RightIcon.style';
 import GeneralStore from '../../../stores/General.store';
 import AuthRole from '../../../schemes/general/AuthRole.enum';
@@ -23,9 +23,9 @@ export default class RightIcon extends React.Component<RightIconProps> {
   s = RightIconStyle;
 
   render() {
-    const {rightButtonText, rightTextColor, rightEditIcon} = this.props;
+    const { rightButtonText, rightTextColor, rightEditIcon } = this.props;
     if (rightButtonText) {
-      return <Text style={[this.s.buttonText, {color: rightTextColor}]}>{rightButtonText}</Text>;
+      return <Text style={[this.s.buttonText, { color: rightTextColor }]}>{rightButtonText}</Text>;
     }
     if (rightEditIcon) {
       return (
@@ -36,14 +36,14 @@ export default class RightIcon extends React.Component<RightIconProps> {
         />
       );
     }
-    const {authRole} = GeneralStore;
+    const { authRole } = GeneralStore;
 
     if (authRole === AuthRole.Company) {
       return CompanyStore?.companyLogo ? (
         <FastImage
           style={this.s.image}
           resizeMode={FastImage.resizeMode.cover}
-          source={{uri: CompanyStore.companyLogo}}
+          source={{ uri: CompanyStore.companyLogo }}
         />
       ) : null;
     }
@@ -51,7 +51,7 @@ export default class RightIcon extends React.Component<RightIconProps> {
       <FastImage
         style={this.s.image}
         resizeMode={FastImage.resizeMode.cover}
-        source={{uri: UserStore.profilePhoto}}
+        source={{ uri: UserStore.profilePhoto }}
       />
     ) : null;
   }

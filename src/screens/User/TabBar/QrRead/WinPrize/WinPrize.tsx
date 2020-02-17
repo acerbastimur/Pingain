@@ -9,7 +9,7 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
-
+import auth from '@react-native-firebase/auth';
 import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import QRCode from 'react-native-qrcode-svg';
@@ -59,7 +59,18 @@ const campaignLogo = (campaignType: CampaignType) => {
 
 const WinPrize = ({navigation}) => {
   const style = WinPrizeStyle;
-  const {campaignType, companyLogo, companyName, campaignName} = WinModalStore.winPrizeDetails;
+  const {
+    campaignType,
+    companyLogo,
+    companyName,
+    campaignName,
+    giftCode,
+    campaignId,
+    company,
+  } = WinModalStore.winPrizeDetails;
+  const {uid} = auth().currentUser;
+
+  const qrJson = {userId: uid, campaignId, scannedQrId: giftCode};
 
   return (
     <View style={style.container}>
@@ -67,7 +78,10 @@ const WinPrize = ({navigation}) => {
 
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('CompanyDetails');
+          WinModalStore.isWinPrizeModalOpened = false;
+          setTimeout(() => {
+            navigation.navigate('CompanyDetails', {company});
+          }, 200);
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
@@ -122,9 +136,9 @@ const WinPrize = ({navigation}) => {
             useNativeDriver
             delay={500}>
             <QRCode
-              size={Dimensions.get('screen').width > 350 ? 100 : 70}
+              size={Dimensions.get('screen').width > 350 ? 140 : 110}
               color={Colors.PRIMARY}
-              value="Umut"
+              value={JSON.stringify(qrJson)}
               ecl="H"
             />
           </Animatable.View>

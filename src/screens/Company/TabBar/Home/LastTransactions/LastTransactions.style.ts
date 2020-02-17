@@ -50,23 +50,23 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   headerUserName: {
-    marginLeft: '18%',
+    marginLeft: '16%',
   },
   headerDate: {
     marginLeft: '14.5%',
   },
   headerTime: {
-    marginLeft: '0%',
+    marginLeft: '2%',
   },
   usersContainer: {marginTop: responsiveRate(30), marginBottom: 80},
   userContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: responsiveRate(20),
-    marginLeft: '18%',
+    marginLeft: '16%',
   },
   userName: {
-    width: '30%',
+    width: '40%',
     fontFamily: 'Helvetica Neue',
     fontSize: responsiveRate(14),
     color: Colors.SECONDARY,
@@ -76,6 +76,7 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   date: {
+    marginLeft: '2%',
     width: '20.4%',
     fontFamily: 'Helvetica Neue',
     fontSize: responsiveRate(14),
@@ -94,6 +95,6 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.5,
     textAlign: 'left',
-    marginLeft: '12%',
+    marginLeft: '5%',
   },
 });

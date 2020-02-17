@@ -1,10 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {NavigationActions, NavigationScreenProp} from 'react-navigation';
+import { TouchableOpacity, View } from 'react-native';
+import { NavigationActions, NavigationScreenProp } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import Logo from '../Logo';
 import TabsHeaderStyle from './TabsHeader.style';
 import RightIcon from './RightIcon';
@@ -23,14 +23,14 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
   s = TabsHeaderStyle;
 
   leftComponent = () => {
-    const {navigation, onLeftPress} = this.props;
+    const { navigation, onLeftPress } = this.props;
 
     if (
-      navigation.state.routeName === 'CampaignsHome' ||
-      navigation.state.routeName === 'QrReadHome' ||
-      navigation.state.routeName === 'PrizesHome' ||
-      navigation.state.routeName === 'QrGenerateHome' ||
-      navigation.state.routeName === 'Home'
+      navigation.state.routeName === 'CampaignsHome'
+      || navigation.state.routeName === 'QrReadHome'
+      || navigation.state.routeName === 'PrizesHome'
+      || navigation.state.routeName === 'QrGenerateHome'
+      || navigation.state.routeName === 'Home'
     ) {
       return (
         <TouchableOpacity>
@@ -60,7 +60,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
   };
 
   render() {
-    const {rightButtonText, onRightPress, rightEditIcon, rightTextColor} = this.props;
+    const {
+      rightButtonText, onRightPress, rightEditIcon, rightTextColor,
+    } = this.props;
 
     return (
       <View style={this.s.container}>

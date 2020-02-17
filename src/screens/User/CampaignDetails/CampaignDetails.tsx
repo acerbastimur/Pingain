@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Dimensions} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import {Card} from 'react-native-shadow-cards';
@@ -145,23 +145,59 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
     campaignName,
     campaignType,
     campaignId,
+    companyId,
   } = CampaignDetailsModalStore.selectedCampaign;
-  const {companyName, campaigns} = CampaignDetailsModalStore.selectedCompany;
+  const {companyName, campaigns, companyLogo} = CampaignDetailsModalStore.selectedCompany;
   const userPinCount = CampaignDetailsModalStore.selectedCampaignPinCount;
+
+  const currentCompany = UserStore.companies.find(company => company.companyId === companyId);
+
+  const otherCampaigns = campaigns
+    .map(campaign => {
+      const userpins =
+        UserStore.userDetails.activeCampaigns &&
+        UserStore.userDetails.activeCampaigns.find(
+          activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+        );
+
+      if (campaign.campaignId === campaignId) return null;
+      return (
+        <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
+          <View style={style.otherCardBodyItem}>
+            {campaignIcon({campaignType: campaign.campaignType})}
+
+            <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
+            <View style={style.cardBodyItemCount}>
+              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
+                {(userpins && userpins.pinEarned) || 0}
+              </Text>
+              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
+                {campaign.actionCount}
+              </Text>
+            </View>
+          </View>
+        </Card>
+      );
+    })
+    .filter(e => e);
+
   return (
     <View style={style.container}>
       <View style={style.swipeArea} />
 
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('CompanyDetails');
           CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+          setTimeout(() => {
+            navigation.navigate('CompanyDetails', {company: currentCompany});
+          }, 200);
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
           <FastImage
-            resizeMode="contain"
-            source={require('../../../assets/image/User/cafeImageExample.png')}
+            resizeMode={FastImage.resizeMode.cover}
+            source={{uri: companyLogo}}
             style={style.cardHeaderImage}
           />
         </View>
@@ -210,46 +246,18 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                 alignItems: 'center',
               }}
               nextButton={
-                <FastImage
-                  resizeMode="contain"
+                <Image
                   source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
               }
               prevButton={
-                <FastImage
-                  resizeMode="contain"
+                <Image
                   source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
               }>
-              {campaigns.map(campaign => {
-                const userpins =
-                  UserStore.userDetails.activeCampaigns &&
-                  UserStore.userDetails.activeCampaigns.find(
-                    activeCampaign => activeCampaign.campaignId === campaign.campaignId,
-                  );
-
-                if (campaign.campaignId === campaignId) return null;
-                return (
-                  <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
-                    <View style={style.otherCardBodyItem}>
-                      {campaignIcon({campaignType: campaign.campaignType})}
-
-                      <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
-                      <View style={style.cardBodyItemCount}>
-                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
-                          {(userpins && userpins.pinEarned) || 0}
-                        </Text>
-                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
-                        <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
-                          {campaign.actionCount}
-                        </Text>
-                      </View>
-                    </View>
-                  </Card>
-                );
-              })}
+              {otherCampaigns}
             </Swiper>
           </View>
         </View>

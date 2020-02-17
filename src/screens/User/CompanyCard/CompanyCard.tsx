@@ -221,6 +221,8 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                         companyName: company.companyName,
                         campaignName: campaign.campaignName,
                         giftCode,
+                        campaignId: campaign.campaignId,
+                        company,
                       };
 
                       WinModalStore.isWinPrizeModalOpened = true;
