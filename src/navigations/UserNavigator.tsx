@@ -1,9 +1,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FastImage from 'react-native-fast-image';
 import GetUserInfo from '../screens/User/GetUserInfo';
 import UserDetails from '../screens/User/UserDetails';
@@ -26,7 +26,7 @@ const UserDetailsStack = createStackNavigator(
   {
     initialRouteName: 'UserDetails',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 const CampaignsStack = createStackNavigator(
@@ -44,7 +44,7 @@ const CampaignsStack = createStackNavigator(
   {
     initialRouteName: 'CampaignsHome',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 
@@ -60,7 +60,7 @@ const QrReadStack = createStackNavigator(
   {
     initialRouteName: 'QrReadHome',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 
@@ -76,7 +76,7 @@ const PrizesStack = createStackNavigator(
   {
     initialRouteName: 'PrizesHome',
     headerMode: 'none',
-    cardStyle: {backgroundColor: Colors.Background},
+    cardStyle: { backgroundColor: Colors.Background },
   },
 );
 
@@ -85,12 +85,12 @@ const UserTabNavigation = createBottomTabNavigator(
     Campaigns: {
       screen: CampaignsStack,
       navigationOptions: {
-        tabBarIcon: e => {
+        tabBarIcon: (e) => {
           if (e.focused) {
             return (
               <FastImage
                 resizeMode="contain"
-                style={{width: 30, height: 30, alignSelf: 'center'}}
+                style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/UserTab/CampaignsTabIcon.png')}
               />
             );
@@ -98,7 +98,7 @@ const UserTabNavigation = createBottomTabNavigator(
           return (
             <FastImage
               resizeMode="contain"
-              style={{width: 30, height: 30, alignSelf: 'center'}}
+              style={{ width: 30, height: 30, alignSelf: 'center' }}
               source={require('../assets/image/UserTab/CampaignsTabIconDisabled.png')}
             />
           );
@@ -111,7 +111,7 @@ const UserTabNavigation = createBottomTabNavigator(
         tabBarIcon: (
           <FastImage
             resizeMode="contain"
-            style={{width: 50, height: 50, alignSelf: 'center'}}
+            style={{ width: 50, height: 50, alignSelf: 'center' }}
             source={require('../assets/image/UserTab/QrCodeTabIcon.png')}
           />
         ),
@@ -120,12 +120,12 @@ const UserTabNavigation = createBottomTabNavigator(
     Prizes: {
       screen: PrizesStack,
       navigationOptions: {
-        tabBarIcon: e => {
+        tabBarIcon: (e) => {
           if (e.focused) {
             return (
               <FastImage
                 resizeMode="contain"
-                style={{width: 30, height: 30, alignSelf: 'center'}}
+                style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/UserTab/PrizesIcon.png')}
               />
             );
@@ -133,7 +133,7 @@ const UserTabNavigation = createBottomTabNavigator(
           return (
             <FastImage
               resizeMode="contain"
-              style={{width: 30, height: 30, alignSelf: 'center'}}
+              style={{ width: 30, height: 30, alignSelf: 'center' }}
               source={require('../assets/image/UserTab/PrizesIconDisabled.png')}
             />
           );
@@ -168,7 +168,7 @@ const UserTabNavigation = createBottomTabNavigator(
         borderTopRightRadius: 40,
       },
 
-      safeAreaInset: {bottom: 'never', top: 'never'}, // <-- this is the solution
+      safeAreaInset: { bottom: 'never', top: 'never' }, // <-- this is the solution
     },
   },
 );
@@ -182,7 +182,7 @@ const UserNavigator = createSwitchNavigator(
       screen: UserTabNavigation,
     },
   },
-  {initialRouteName: 'UserTabNavigation'},
+  { initialRouteName: 'UserTabNavigation' },
 );
 
 export default UserNavigator;

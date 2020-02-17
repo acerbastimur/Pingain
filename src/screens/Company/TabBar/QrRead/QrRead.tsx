@@ -90,6 +90,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
   onSuccess = ({ data }) => {
     const { isGivePrizeModalOpen } = this.state;
+    const { navigation } = this.props;
+
     if (isGivePrizeModalOpen) return null;
     if (data === this.lastQrValue) return this.errorAnimation().start(); // if still reading the same qr
     this.lastQrValue = data;
@@ -110,7 +112,10 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           this.setState({ loading: false });
           return this.errorAnimation().start();
         }
-        return this.setState({ loading: false, isGivePrizeModalOpen: true });
+        navigation.navigate('Home');
+        return setTimeout(() => {
+          this.setState({ loading: false, isGivePrizeModalOpen: true });
+        }, 200);
       })
       .catch(() => {
         this.setState({ loading: false });
