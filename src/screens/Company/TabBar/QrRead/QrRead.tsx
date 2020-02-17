@@ -180,7 +180,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           />
         </View>
         {
-        campaigns.length === 0
+        !campaigns
           ? <NoCampaign navigation={navigation} />
           : (
             <View style={this.style.cameraContainer}>

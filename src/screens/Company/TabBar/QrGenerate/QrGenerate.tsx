@@ -44,31 +44,32 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
         companyId: null,
       },
     };
-    const campaigns = toJS(CompanyStore.campaigns);
-
-    if (!campaigns) return;
-    campaigns.map((campaign) => firestore()
-      .collection('campaigns')
-      .doc(campaign.campaignId)
-      .onSnapshot((data) => {
-        this.setState({
-          activeQrJson: {
-            campaignId: campaign.campaignId,
-            companyId: campaign.companyId,
-            scannedQrId: data.data().currentQr,
-          },
-        });
-      }));
   }
 
   componentDidMount() {
-    const campaigns = toJS(CompanyStore.campaigns);
+    const { navigation } = this.props;
 
-    // eslint-disable-next-line no-useless-return
-    if (campaigns.length === 0) return;
+    navigation.addListener('willFocus', () => { // if page is opened
+      const campaigns = toJS(CompanyStore.campaigns);
 
-    this.setState({ activeCampaign: campaigns[0] });
-    this.generateNewCampaignQr(campaigns[0]);
+      if (!campaigns) return;
+      campaigns.map((campaign) => firestore()
+        .collection('campaigns')
+        .doc(campaign.campaignId)
+        .onSnapshot((data) => {
+          this.setState({
+            activeQrJson: {
+              campaignId: campaign.campaignId,
+              companyId: campaign.companyId,
+              scannedQrId: data.data().currentQr,
+            },
+          });
+        }));
+
+
+      this.setState({ activeCampaign: campaigns[0] });
+      this.generateNewCampaignQr(campaigns[0]);
+    });
   }
 
   generateNewCampaignQr = (campaign: Campaign) => {
@@ -235,7 +236,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
             }}
           />
         </View>
-        {campaigns.length === 0 ? (
+        {!campaigns ? (
           <NoCampaign navigation={navigation} />
         ) : (
           <View>
