@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../styles/Colors';
 import CampaignColors from '../../../../styles/CampaignColors';
 
@@ -13,7 +13,7 @@ export default StyleSheet.create({
   container: {
     height: '100%',
   },
-  headerContainer: {height: '8%', paddingHorizontal: '6%'},
+  headerContainer: { height: '8%', paddingHorizontal: '6%' },
   qrContainer: {
     height: (Dimensions.get('window').width * 70) / 100,
     justifyContent: 'center',
@@ -67,7 +67,7 @@ export default StyleSheet.create({
   campaignCardDessertSelected: {
     backgroundColor: CampaignColors.DESSERT,
   },
-  selectedText: {color: 'white'},
+  selectedText: { color: 'white' },
   bottomText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
@@ -84,7 +84,7 @@ export default StyleSheet.create({
   campaignCardText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
-    fontSize: responsiveRate(18),
+    fontSize: responsiveRate(14),
     textAlign: 'center',
     color: CampaignColors.COFFEE,
     marginTop: 8,
