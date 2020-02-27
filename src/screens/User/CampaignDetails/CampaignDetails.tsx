@@ -318,6 +318,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             data={Array.from({ length: actionCount }, (v, k) => k + 1)}
             keyExtractor={(item, index) => String(index)}
             numColumns={5}
+            scrollEnabled={false}
             renderItem={({ index }) => (
               <View
                 style={{ marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25 }}>

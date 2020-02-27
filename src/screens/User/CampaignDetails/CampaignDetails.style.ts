@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
 import Colors from '../../../styles/Colors';
@@ -7,9 +7,7 @@ import CampaignColors from '../../../styles/CampaignColors';
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
-const responsiveRate = (fontSize: number) => {
-  return (screenWidth * fontSize) / fontScaleBase;
-};
+const responsiveRate = (fontSize: number) => (screenWidth * fontSize) / fontScaleBase;
 
 export default StyleSheet.create({
   swipeArea: {
@@ -17,7 +15,7 @@ export default StyleSheet.create({
     height: 4,
     marginTop: 10,
     marginBottom: 8,
-    marginHorizontal: '24%',
+    marginHorizontal: '30%',
     borderRadius: 6,
   },
   container: {
@@ -27,7 +25,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     paddingTop: 2,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowColor: '#000',
     shadowOpacity: 0.2,
     backgroundColor: 'white',
@@ -39,7 +37,9 @@ export default StyleSheet.create({
     marginHorizontal: 30,
     height: 40,
   },
-  cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
+  cardHeaderImageContainer: {
+    width: 32, height: 32, borderRadius: 32, overflow: 'hidden',
+  },
   cardHeaderImage: {
     width: 32,
     height: 32,
@@ -87,8 +87,8 @@ export default StyleSheet.create({
     height: 60,
   },
   cardBodyItemIcon: {
-    width: 28,
-    height: 28,
+    width: 22,
+    height: 22,
     resizeMode: 'contain',
   },
   cardBodyItemName: {
@@ -131,7 +131,7 @@ export default StyleSheet.create({
   cardItemDessert: {
     color: CampaignColors.DESSERT,
   },
-  pinsContainer: {marginBottom: responsiveRate(14)},
+  pinsContainer: { marginBottom: responsiveRate(14) },
 
   pinsLineContainer: {
     marginTop: 2,
@@ -163,7 +163,7 @@ export default StyleSheet.create({
     width: '100%',
     marginBottom: responsiveRate(10),
   },
-  swipperButton: {width: 20, resizeMode: 'contain', alignSelf: 'center'},
+  swipperButton: { width: 20, resizeMode: 'contain', alignSelf: 'center' },
 
   card: {
     marginTop: 30,
@@ -173,7 +173,7 @@ export default StyleSheet.create({
     height: 60,
     alignSelf: 'center',
   },
-  noOtherCampaignsContainer: {marginBottom: responsiveRate(30)},
+  noOtherCampaignsContainer: { marginBottom: responsiveRate(30) },
   shareUsText: {
     marginHorizontal: '5%',
     fontFamily: 'Helvetica Neue',
