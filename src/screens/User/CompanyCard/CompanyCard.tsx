@@ -6,20 +6,21 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import {Card} from 'react-native-shadow-cards';
+import {
+  View, Text, TouchableOpacity, ActivityIndicator,
+} from 'react-native';
+import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import {observer} from 'mobx-react';
-import {toJS} from 'mobx';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import CompanyCardStyle from './CompanyCard.style';
 import CampaignDetailsStore from '../../../stores/CampaignDetailsModal.store';
-import {UserCompany, Campaign} from '../../../schemes/user/UserCompany';
+import { UserCompany, Campaign } from '../../../schemes/user/UserCompany';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
-import {ActiveCampaign} from '../../../schemes/user/User';
+import { ActiveCampaign } from '../../../schemes/user/User';
 import UserStore from '../../../stores/User.store';
 import WinModalStore from '../../../stores/WinModal.store';
 
@@ -44,7 +45,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
     };
   }
 
-  campaignIcon = ({campaignType}: Campaign) => {
+  campaignIcon = ({ campaignType }: Campaign) => {
     switch (campaignType) {
       case CampaignType.Drink:
         return (
@@ -75,7 +76,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
     }
   };
 
-  campaignCount = ({campaignType, actionCount}: Campaign, usersPinCount: number) => {
+  campaignCount = ({ campaignType, actionCount }: Campaign, usersPinCount: number) => {
     const isCompleted = usersPinCount === actionCount;
 
     switch (campaignType) {
@@ -148,15 +149,15 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
   };
 
   public render() {
-    const {navigation, shouldHeaderHide, company} = this.props;
-    const {companyImageLoading} = this.state;
+    const { navigation, shouldHeaderHide, company } = this.props;
+    const { companyImageLoading } = this.state;
     return (
       <Card elevation={6} opacity={0.15} style={this.s.card}>
         {!shouldHeaderHide && (
           <View>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('CompanyDetails', {company});
+                navigation.navigate('CompanyDetails', { company });
               }}
               style={this.s.cardHeader}>
               <View style={this.s.cardHeaderImageContainer}>
@@ -168,10 +169,10 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                     priority: 'high',
                   }}
                   onLoadStart={() => {
-                    this.setState({companyImageLoading: true});
+                    this.setState({ companyImageLoading: true });
                   }}
                   onLoadEnd={() => {
-                    this.setState({companyImageLoading: false});
+                    this.setState({ companyImageLoading: false });
                   }}>
                   <View style={this.s.loadingCenter}>
                     <ActivityIndicator animating={companyImageLoading} />
@@ -191,16 +192,13 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           </View>
         )}
         <View style={this.s.cardBody}>
-          {company.campaigns &&
-            company.campaigns.map(campaign => {
+          {company.campaigns
+            && company.campaigns.map((campaign) => {
               const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
               let isUserJoinedThisCampaign: ActiveCampaign = null;
-              isUserJoinedThisCampaign =
-                activeCampaigns &&
-                activeCampaigns.length &&
-                activeCampaigns.find(activeCampaign => {
-                  return activeCampaign.campaignId === campaign.campaignId;
-                });
+              isUserJoinedThisCampaign = activeCampaigns
+                && activeCampaigns.length
+                && activeCampaigns.find((activeCampaign) => activeCampaign.campaignId === campaign.campaignId);
               return (
                 <TouchableOpacity
                   key={Math.random() * 1000}
@@ -212,8 +210,8 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                     const isCompleted = usersPinCount === campaign.actionCount;
 
                     if (isCompleted) {
-                      const {giftCode} = UserStore.userDetails.activeCampaigns.find(
-                        activeCampaign => campaign.campaignId === activeCampaign.campaignId,
+                      const { giftCode } = UserStore.userDetails.activeCampaigns.find(
+                        (activeCampaign) => campaign.campaignId === activeCampaign.campaignId,
                       );
                       WinModalStore.winPrizeDetails = {
                         campaignType: campaign.campaignType,
