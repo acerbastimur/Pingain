@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -9,9 +9,9 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
-  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  container: {height: '100%', paddingBottom: 80},
-  headerContainer: {height: 56, paddingHorizontal: '6%'},
+  indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: { height: '100%', paddingBottom: 80 },
+  headerContainer: { height: 56, paddingHorizontal: '6%' },
 
   ppOverflow: {
     width: 60,
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginRight: '4%',
   },
   scrollContainerStyle: {},
-  profileImage: {width: 60, height: 60},
+  profileImage: { width: 60, height: 60 },
 
   profileInfoContainer: {
     flexDirection: 'row',
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     textAlign: 'left',
     alignSelf: 'center',
   },
-  cardsContainer: {paddingHorizontal: '6%'},
+  cardsContainer: { paddingHorizontal: '6%' },
   card: {
     height: responsiveRate(75),
     flexDirection: 'row',
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     fontSize: responsiveRate(22),
     color: Colors.INFO,
   },
-  winCard: {marginTop: responsiveRate(30), marginBottom: responsiveRate(20)},
+  winCard: { marginTop: responsiveRate(30), marginBottom: responsiveRate(20) },
   activeCampText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -82,5 +82,6 @@ export default StyleSheet.create({
     height: 48,
     paddingHorizontal: '6%',
     marginTop: 20,
+    marginBottom: 20
   },
 });

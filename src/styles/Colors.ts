@@ -19,5 +19,5 @@ export default class Colors {
 
   static TEXT_HIGHLIGHTED = '#3C45F5';
 
-  static Background = '#F7FAFF';
+  static Background = '#f7fafc';
 }

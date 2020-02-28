@@ -16,6 +16,7 @@ import TabsHeader from '../../../../../common-components/TabsHeader';
 import Button from '../../../../../common-components/Button';
 import Colors from '../../../../../styles/Colors';
 import CompanyStore from '../../../../../stores/Company.store';
+import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 
 export interface CampaignsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -59,7 +60,7 @@ export default class Campaigns extends React.Component<CampaignsProps> {
             {campaigns
               ? campaigns.map(campaign => {
                 switch (campaign.campaignType) {
-                  case 1:
+                  case CampaignType.Drink:
                     return (
                       <Card
                         elevation={6}
@@ -92,39 +93,7 @@ export default class Campaigns extends React.Component<CampaignsProps> {
                       </Card>
                     );
 
-                  case 2:
-                    return (
-                      <Card
-                        elevation={6}
-                        opacity={0.15}
-                        key={Math.random() * 100}
-                        style={this.style.card}>
-                        <TouchableOpacity
-                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                          style={this.style.otherCardBodyItem}
-                          onPress={() => {
-                            navigation.navigate('CampaignCreate', { edit: true, campaign });
-                          }}>
-                          <FastImage
-                            resizeMode="contain"
-                            style={this.style.cardBodyItemIcon}
-                            source={require('../../../../../assets/image/User/dessertIcon.png')}
-                          />
-                          <Text style={this.style.otherCardBodyItemName}>
-                            {campaign.campaignName}
-                          </Text>
-                          <View style={this.style.arrowContainer}>
-                            <FastImage
-                              resizeMode="contain"
-                              style={this.style.arrow}
-                              source={require('../../../../../assets/image/Company/dessertArrow.png')}
-                            />
-                          </View>
-                        </TouchableOpacity>
-                      </Card>
-                    );
-
-                  case 3:
+                  case CampaignType.Meal:
                     return (
                       <Card
                         elevation={6}
@@ -150,6 +119,38 @@ export default class Campaigns extends React.Component<CampaignsProps> {
                               resizeMode="contain"
                               style={this.style.arrow}
                               source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                      </Card>
+                    );
+
+                  case CampaignType.Dessert:
+                    return (
+                      <Card
+                        elevation={6}
+                        opacity={0.15}
+                        key={Math.random() * 100}
+                        style={this.style.card}>
+                        <TouchableOpacity
+                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                          style={this.style.otherCardBodyItem}
+                          onPress={() => {
+                            navigation.navigate('CampaignCreate', { edit: true, campaign });
+                          }}>
+                          <FastImage
+                            resizeMode="contain"
+                            style={this.style.cardBodyItemIcon}
+                            source={require('../../../../../assets/image/User/dessertIcon.png')}
+                          />
+                          <Text style={this.style.otherCardBodyItemName}>
+                            {campaign.campaignName}
+                          </Text>
+                          <View style={this.style.arrowContainer}>
+                            <FastImage
+                              resizeMode="contain"
+                              style={this.style.arrow}
+                              source={require('../../../../../assets/image/Company/dessertArrow.png')}
                             />
                           </View>
                         </TouchableOpacity>
@@ -199,6 +200,7 @@ export default class Campaigns extends React.Component<CampaignsProps> {
               textColor="#fff"
               shadow
               onPress={() => {
+                if()
                 navigation.navigate('CampaignCreate', { edit: false });
               }}
             />

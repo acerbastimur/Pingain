@@ -76,7 +76,7 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
     return (
       <TouchableOpacity
         style={this.s.backButtonContainer}
-        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
 
         onPress={() => {
           onLeftPress();
@@ -103,7 +103,7 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
           <Logo width={30} />
         </View>
         <TouchableOpacity
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
 
           style={[rightButtonText ? this.s.rightTextContainer : this.s.imageContainer]}
           onPress={onRightPress}>
