@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pingain</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">8xKF7HapNd9E_nesdAS2WQu-p2W2Kq-E2z75i</string>
 </resources>

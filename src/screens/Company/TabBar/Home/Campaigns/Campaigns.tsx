@@ -200,7 +200,6 @@ export default class Campaigns extends React.Component<CampaignsProps> {
               textColor="#fff"
               shadow
               onPress={() => {
-                if()
                 navigation.navigate('CampaignCreate', { edit: false });
               }}
             />
