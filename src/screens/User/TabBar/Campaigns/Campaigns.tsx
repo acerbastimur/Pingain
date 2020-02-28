@@ -48,7 +48,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
     <View style={this.style.flatListHeader}>
       <Text style={this.style.flatListHeaderTextLight}>Hoşgeldin Pingainer</Text>
       <Text numberOfLines={1} style={this.style.flatListHeaderTextBold}>
-          Öne Çıkan Kampanyalar
+        Öne Çıkan Kampanyalar
       </Text>
     </View>
   );
@@ -64,70 +64,70 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
         <ActivityIndicator size="large" />
       </View>
     ) : (
-      <View style={this.style.container}>
-        <View style={this.style.headerContainer}>
-          <TabsHeader
-            navigation={navigation}
-            onRightPress={() => {
-              navigation.navigate('UserDetails');
-            }}
-          />
-        </View>
-        <View style={this.style.bottomAreaContainer}>
-          <FlatList
-            keyboardDismissMode="on-drag"
-            ListHeaderComponent={this.flatListTextHeader}
-            keyExtractor={(item, index) => index.toString()}
-            data={companies}
-            renderItem={({ item }) => <CompanyCard navigation={navigation} company={item} />}
-          />
-        </View>
+        <View style={this.style.container}>
+          <View style={this.style.headerContainer}>
+            <TabsHeader
+              navigation={navigation}
+              onRightPress={() => {
+                navigation.navigate('UserDetails');
+              }}
+            />
+          </View>
+          <View style={this.style.bottomAreaContainer}>
+            <FlatList
+              keyboardDismissMode="on-drag"
+              ListHeaderComponent={this.flatListTextHeader}
+              keyExtractor={(item, index) => index.toString()}
+              data={companies}
+              renderItem={({ item }) => <CompanyCard navigation={navigation} company={item} />}
+            />
+          </View>
 
-        <Modal
-          isVisible={WinModalStore.isWinPrizeModalOpened}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            WinModalStore.isWinPrizeModalOpened = false;
-          }}>
-          <WinPrize navigation={navigation} />
-        </Modal>
-        <Modal
-          isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
-          }}>
-          <CampaignDetails navigation={navigation} />
-        </Modal>
-      </View>
-    );
+          <Modal
+            isVisible={WinModalStore.isWinPrizeModalOpened}
+            swipeDirection={['down']}
+            hardwareAccelerated
+            swipeThreshold={200}
+            hasBackdrop
+            propagateSwipe
+            backdropOpacity={0.1}
+            animationOut="slideOutDown"
+            animationOutTiming={350}
+            onBackdropPress={() => {
+              WinModalStore.isWinPrizeModalOpened = false;
+            }}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              margin: 0,
+            }}
+            onSwipeComplete={() => {
+              WinModalStore.isWinPrizeModalOpened = false;
+            }}>
+            <WinPrize navigation={navigation} />
+          </Modal>
+          <Modal
+            isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
+            swipeDirection={['down']}
+            hardwareAccelerated
+            swipeThreshold={200}
+            hasBackdrop
+            propagateSwipe
+            backdropOpacity={0.1}
+            animationOut="slideOutDown"
+            animationOutTiming={350}
+            onBackdropPress={() => {
+              CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+            }}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              margin: 0,
+            }}
+            onSwipeComplete={() => {
+              CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+            }}>
+            <CampaignDetails navigation={navigation} />
+          </Modal>
+        </View>
+      );
   }
 }

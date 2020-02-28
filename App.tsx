@@ -19,6 +19,9 @@ class App extends React.Component {
       installMode: CodePush.InstallMode.IMMEDIATE
     }).then(() => {
       SplashScreen.hide();
+    }).catch(() => {
+      SplashScreen.hide();
+
     })
   }
 

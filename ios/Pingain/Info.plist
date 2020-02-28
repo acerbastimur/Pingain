@@ -57,5 +57,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	  <key>CodePushDeploymentKey</key>
+    <string>8xKF7HapNd9E_nesdAS2WQu-p2W2Kq-E2z75i</string>
 </dict>
 </plist>

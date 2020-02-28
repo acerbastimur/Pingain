@@ -42,7 +42,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
                 pageImageRefs[0] = ref;
               }}
               animation="bounceIn" // for starting animation
-              source={require('./images/page.png')}
+              source={require('./images/page1.png')}
               style={s.image}
             />
             <Text style={s.title}>Oğuzhan kafede günde 2 bardak kahve içiyor</Text>
