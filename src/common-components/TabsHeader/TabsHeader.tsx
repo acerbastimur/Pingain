@@ -64,7 +64,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       }
 
       return (
-        <TouchableOpacity style={this.s.stateWrapper} onPress={() => navigation.navigate('CompanyDetailsEdit')}>
+        <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          style={this.s.stateWrapper} onPress={() => navigation.navigate('CompanyDetailsEdit')}>
           <View style={this.s.passiveDot} />
           <Text style={this.s.stateText}>Pasif</Text>
         </TouchableOpacity>
@@ -74,6 +76,8 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
     return (
       <TouchableOpacity
         style={this.s.backButtonContainer}
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+
         onPress={() => {
           onLeftPress();
           navigation.dispatch(NavigationActions.back());
@@ -99,6 +103,8 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
           <Logo width={30} />
         </View>
         <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+
           style={[rightButtonText ? this.s.rightTextContainer : this.s.imageContainer]}
           onPress={onRightPress}>
           <RightIcon

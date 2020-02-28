@@ -51,7 +51,7 @@ interface UserDetailsForm {
 export default class UserDetailsEdit extends React.Component<
   UserDetailsEditProps,
   UserDetailsEditState
-> {
+  > {
   style = UserDetailsEditStyle;
 
   references = [];
@@ -91,289 +91,293 @@ export default class UserDetailsEdit extends React.Component<
         <ActivityIndicator size="large" />
       </View>
     ) : (
-      <View style={this.style.pageContainer}>
-        <View style={this.style.headerContainer}>
-          <TabsHeader navigation={navigation} rightButtonText=" " onLeftPress={() => null} />
-        </View>
-        <KeyboardAwareScrollView
-          contentContainerStyle={this.style.keyboardScrollContainer}
-          disableScrollViewPanResponder={false}
-          scrollEnabled={false}>
-          <ScrollView style={this.style.container}>
-            <View style={this.style.ppContainer}>
-              <ImageUpload
-                hideText
-                borderColor={Colors.SECONDARY}
-                borderWidth={1}
-                defaultImage={profilePhoto}
-                userLogo
-              />
-            </View>
+        <View style={this.style.pageContainer}>
+          <View style={this.style.headerContainer}>
+            <TabsHeader navigation={navigation} rightButtonText=" " onLeftPress={() => null} />
+          </View>
+          <KeyboardAwareScrollView
+            contentContainerStyle={this.style.keyboardScrollContainer}
+            disableScrollViewPanResponder={false}
+            scrollEnabled={false}>
+            <ScrollView style={this.style.container}>
+              <View style={this.style.ppContainer}>
+                <ImageUpload
+                  hideText
+                  borderColor={Colors.SECONDARY}
+                  borderWidth={1}
+                  defaultImage={profilePhoto}
+                  userLogo
+                />
+              </View>
 
-            <Formik
-              initialValues={{
-                name,
-                surname,
-                password: '',
-                phoneNumber,
-                city,
-              }}
-              validateOnMount
-              onSubmit={this.handleSubmit}
-              validationSchema={Yup.object().shape({
-                name: Yup.string()
-                  .min(2)
-                  .required(),
-                surname: Yup.string()
-                  .min(2)
-                  .required(),
+              <Formik
+                initialValues={{
+                  name,
+                  surname,
+                  password: '',
+                  phoneNumber,
+                  city,
+                }}
+                validateOnMount
+                onSubmit={this.handleSubmit}
+                validationSchema={Yup.object().shape({
+                  name: Yup.string()
+                    .min(2)
+                    .required(),
+                  surname: Yup.string()
+                    .min(2)
+                    .required(),
 
-                password: Yup.string().min(6),
-                phoneNumber: Yup.string()
-                  .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
-                  .required(),
-                city: Yup.string().required(),
-              })}>
-              {({
-                values,
-                handleChange,
-                errors,
-                touched,
-                setFieldTouched,
-                validateForm,
-                handleSubmit,
-                isValid,
-              }) => (
-                <View style={this.style.formContainer}>
-                  <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>İsim</Text>
-                    <Animatable.View
-                      ref={(ref) => {
-                        const isThere = this.references.filter((t) => t.name === 'name')[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'name',
-                          ref,
-                        });
-                      }}>
-                      <TextInput
-                        style={this.style.input}
-                        placeholder="İsminizi giriniz"
-                        placeholderTextColor={Colors.SECONDARY}
-                        selectionColor={Colors.PRIMARY}
-                        value={values.name}
-                        onChangeText={handleChange('name')}
-                        onBlur={() => setFieldTouched('name')}
-                        autoCapitalize="none"
-                        returnKeyType="next"
-                        onSubmitEditing={() => {
-                          const surnameInput = this.references.filter(
-                            (t) => t.name === 'surnameInput',
-                          )[0].ref;
+                  password: Yup.string().min(6),
+                  phoneNumber: Yup.string()
+                    .matches(/05(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$/g)
+                    .required(),
+                  city: Yup.string().required(),
+                })}>
+                {({
+                  values,
+                  handleChange,
+                  errors,
+                  touched,
+                  setFieldTouched,
+                  validateForm,
+                  handleSubmit,
+                  isValid,
+                }) => (
+                    <View style={this.style.formContainer}>
+                      <View style={this.style.inputContainer}>
+                        <Text style={this.style.inputText}>İsim</Text>
+                        <Animatable.View
+                          ref={(ref) => {
+                            const isThere = this.references.filter((t) => t.name === 'name')[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'name',
+                              ref,
+                            });
+                          }}>
+                          <TextInput
+                            style={this.style.input}
+                            placeholder="İsminizi giriniz"
+                            placeholderTextColor={Colors.SECONDARY}
+                            selectionColor={Colors.PRIMARY}
+                            value={values.name}
+                            onChangeText={handleChange('name')}
+                            onBlur={() => setFieldTouched('name')}
+                            autoCapitalize="none"
+                            returnKeyType="next"
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            onSubmitEditing={() => {
+                              const surnameInput = this.references.filter(
+                                (t) => t.name === 'surnameInput',
+                              )[0].ref;
 
-                          surnameInput.focus();
-                        }}
-                        blurOnSubmit={false}
-                        />
-                      {!errors.name && touched.name ? (
-                        <FastImage
-                          resizeMode="contain"
-                          source={require('../../../assets/image/tick.png')}
-                          style={this.style.image}
+                              surnameInput.focus();
+                            }}
+                            blurOnSubmit={false}
                           />
-                      ) : null}
-                    </Animatable.View>
-                  </View>
-                  <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Soyisim</Text>
-                    <Animatable.View
-                      ref={(ref) => {
-                        const isThere = this.references.filter((t) => t.name === 'surname')[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'surname',
-                          ref,
-                        });
-                      }}>
-                      <TextInput
-                        style={this.style.input}
-                        placeholder="Soyisminizi Giriniz"
-                        placeholderTextColor={Colors.SECONDARY}
-                        selectionColor={Colors.PRIMARY}
-                        value={values.surname}
-                        onChangeText={handleChange('surname')}
-                        onBlur={() => setFieldTouched('surname')}
-                        autoCapitalize="none"
-                        returnKeyType="next"
-                        ref={(ref) => {
-                          const isThere = this.references.filter(
-                            (t) => t.name === 'surnameInput',
-                          )[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'surnameInput',
-                            ref,
-                          });
-                        }}
-                        onSubmitEditing={() => {
-                          const phoneInput = this.references.filter(
-                            (t) => t.name === 'phoneNumberInput',
-                          )[0].ref;
-
-                          phoneInput.focus();
-                        }}
-                        blurOnSubmit={false}
-                        />
-                      {!errors.surname && touched.surname ? (
-                        <FastImage
-                          resizeMode="contain"
-                          source={require('../../../assets/image/tick.png')}
-                          style={this.style.image}
-                          />
-                      ) : null}
-                    </Animatable.View>
-                  </View>
-                  <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Şifre</Text>
-                    <Animatable.View
-                      ref={(ref) => {
-                        const isThere = this.references.filter((t) => t.name === 'password')[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'password',
-                          ref,
-                        });
-                      }}>
-                      <TextInput
-                        style={this.style.input}
-                        placeholder="*******"
-                        placeholderTextColor={Colors.SECONDARY}
-                        selectionColor={Colors.PRIMARY}
-                        value={values.password}
-                        onChangeText={handleChange('password')}
-                        onBlur={() => setFieldTouched('password')}
-                        autoCapitalize="none"
-                        returnKeyType="next"
-                        secureTextEntry
-                        ref={(ref) => {
-                          const isThere = this.references.filter(
-                            (t) => t.name === 'passwordInput',
-                          )[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'passwordInput',
-                            ref,
-                          });
-                        }}
-                        onSubmitEditing={() => {
-                          const phoneNumberInput = this.references.filter(
-                            (t) => t.name === 'phoneNumberInput',
-                          )[0].ref;
-
-                          phoneNumberInput.focus();
-                        }}
-                        />
-                      {!errors.password && touched.password ? (
-                        <FastImage
-                          resizeMode="contain"
-                          source={require('../../../assets/image/tick.png')}
-                          style={this.style.image}
-                          />
-                      ) : null}
-                    </Animatable.View>
-                  </View>
-                  <View style={this.style.inputContainer}>
-                    <Text style={this.style.inputText}>Telefon Numarası</Text>
-                    <Animatable.View
-                      ref={(ref) => {
-                        const isThere = this.references.filter((t) => t.name === 'phoneNumber')[0];
-                        if (isThere) return;
-                        this.references.push({
-                          name: 'phoneNumber',
-                          ref,
-                        });
-                      }}>
-                      <TextInput
-                        style={this.style.input}
-                        placeholder="Telefon Numarası Giriniz"
-                        placeholderTextColor={Colors.SECONDARY}
-                        selectionColor={Colors.PRIMARY}
-                        value={values.phoneNumber}
-                        onChangeText={handleChange('phoneNumber')}
-                        onBlur={() => setFieldTouched('phoneNumber')}
-                        autoCapitalize="none"
-                        keyboardType="decimal-pad"
-                        returnKeyType="done"
-                        ref={(ref) => {
-                          const isThere = this.references.filter(
-                            (t) => t.name === 'phoneNumberInput',
-                          )[0];
-                          if (isThere) return;
-                          this.references.push({
-                            name: 'phoneNumberInput',
-                            ref,
-                          });
-                        }}
-                        />
-                      {!errors.phoneNumber && touched.phoneNumber ? (
-                        <FastImage
-                          resizeMode="contain"
-                          source={require('../../../assets/image/tick.png')}
-                          style={this.style.image}
-                          />
-                      ) : null}
-                    </Animatable.View>
-                  </View>
-                  <View style={[this.style.inputContainer, this.style.dropDownContainer]}>
-                    <Text style={this.style.inputText}>İkamet Edilen İl</Text>
-                    <Animatable.View>
-                      <View style={this.style.dropdownComponentContainer}>
-                        <Dropdown
-                          value={values.city}
-                          onChangeText={handleChange('city')}
-                          data={CITIES}
-                          containerStyle={this.style.dropdownContainer}
-                          itemTextStyle={this.style.dropdownText}
-                          textColor={Colors.SECONDARY}
-                          fontSize={14}
-                          />
+                          {!errors.name && touched.name ? (
+                            <FastImage
+                              resizeMode="contain"
+                              source={require('../../../assets/image/tick.png')}
+                              style={this.style.image}
+                            />
+                          ) : null}
+                        </Animatable.View>
                       </View>
-                    </Animatable.View>
-                  </View>
-                  <View style={this.style.buttonContainer}>
-                    <Button
-                      text="Kaydet"
-                      backgroundColor={Colors.COMPANY}
-                      textColor="#fff"
-                      onPress={() => {
-                        validateForm();
-                        if (isValid) {
-                          handleSubmit();
-                          return;
-                        }
+                      <View style={this.style.inputContainer}>
+                        <Text style={this.style.inputText}>Soyisim</Text>
+                        <Animatable.View
+                          ref={(ref) => {
+                            const isThere = this.references.filter((t) => t.name === 'surname')[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'surname',
+                              ref,
+                            });
+                          }}>
+                          <TextInput
+                            style={this.style.input}
+                            placeholder="Soyisminizi Giriniz"
+                            placeholderTextColor={Colors.SECONDARY}
+                            selectionColor={Colors.PRIMARY}
+                            value={values.surname}
+                            onChangeText={handleChange('surname')}
+                            onBlur={() => setFieldTouched('surname')}
+                            autoCapitalize="none"
+                            returnKeyType="next"
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            ref={(ref) => {
+                              const isThere = this.references.filter(
+                                (t) => t.name === 'surnameInput',
+                              )[0];
+                              if (isThere) return;
+                              this.references.push({
+                                name: 'surnameInput',
+                                ref,
+                              });
+                            }}
+                            onSubmitEditing={() => {
+                              const phoneInput = this.references.filter(
+                                (t) => t.name === 'phoneNumberInput',
+                              )[0].ref;
 
-                        if (errors.name) {
-                          this.references.filter((t) => t.name === 'name')[0].ref.shake();
-                        }
-                        if (errors.surname) {
-                          this.references.filter((t) => t.name === 'surname')[0].ref.shake();
-                        }
+                              phoneInput.focus();
+                            }}
+                            blurOnSubmit={false}
+                          />
+                          {!errors.surname && touched.surname ? (
+                            <FastImage
+                              resizeMode="contain"
+                              source={require('../../../assets/image/tick.png')}
+                              style={this.style.image}
+                            />
+                          ) : null}
+                        </Animatable.View>
+                      </View>
+                      <View style={this.style.inputContainer}>
+                        <Text style={this.style.inputText}>Şifre</Text>
+                        <Animatable.View
+                          ref={(ref) => {
+                            const isThere = this.references.filter((t) => t.name === 'password')[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'password',
+                              ref,
+                            });
+                          }}>
+                          <TextInput
+                            style={this.style.input}
+                            placeholder="*******"
+                            placeholderTextColor={Colors.SECONDARY}
+                            selectionColor={Colors.PRIMARY}
+                            value={values.password}
+                            onChangeText={handleChange('password')}
+                            onBlur={() => setFieldTouched('password')}
+                            autoCapitalize="none"
+                            returnKeyType="next"
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            secureTextEntry
+                            ref={(ref) => {
+                              const isThere = this.references.filter(
+                                (t) => t.name === 'passwordInput',
+                              )[0];
+                              if (isThere) return;
+                              this.references.push({
+                                name: 'passwordInput',
+                                ref,
+                              });
+                            }}
+                            onSubmitEditing={() => {
+                              const phoneNumberInput = this.references.filter(
+                                (t) => t.name === 'phoneNumberInput',
+                              )[0].ref;
 
-                        if (errors.phoneNumber) {
-                          this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
-                        }
-                        if (errors.password) {
-                          this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
-                        }
-                      }}
-                      />
-                  </View>
-                </View>
-              )}
-            </Formik>
-          </ScrollView>
-        </KeyboardAwareScrollView>
-      </View>
-    );
+                              phoneNumberInput.focus();
+                            }}
+                          />
+                          {!errors.password && touched.password ? (
+                            <FastImage
+                              resizeMode="contain"
+                              source={require('../../../assets/image/tick.png')}
+                              style={this.style.image}
+                            />
+                          ) : null}
+                        </Animatable.View>
+                      </View>
+                      <View style={this.style.inputContainer}>
+                        <Text style={this.style.inputText}>Telefon Numarası</Text>
+                        <Animatable.View
+                          ref={(ref) => {
+                            const isThere = this.references.filter((t) => t.name === 'phoneNumber')[0];
+                            if (isThere) return;
+                            this.references.push({
+                              name: 'phoneNumber',
+                              ref,
+                            });
+                          }}>
+                          <TextInput
+                            style={this.style.input}
+                            placeholder="Telefon Numarası Giriniz"
+                            placeholderTextColor={Colors.SECONDARY}
+                            selectionColor={Colors.PRIMARY}
+                            value={values.phoneNumber}
+                            onChangeText={handleChange('phoneNumber')}
+                            onBlur={() => setFieldTouched('phoneNumber')}
+                            autoCapitalize="none"
+                            keyboardType="decimal-pad"
+                            returnKeyType="done"
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            ref={(ref) => {
+                              const isThere = this.references.filter(
+                                (t) => t.name === 'phoneNumberInput',
+                              )[0];
+                              if (isThere) return;
+                              this.references.push({
+                                name: 'phoneNumberInput',
+                                ref,
+                              });
+                            }}
+                          />
+                          {!errors.phoneNumber && touched.phoneNumber ? (
+                            <FastImage
+                              resizeMode="contain"
+                              source={require('../../../assets/image/tick.png')}
+                              style={this.style.image}
+                            />
+                          ) : null}
+                        </Animatable.View>
+                      </View>
+                      <View style={[this.style.inputContainer, this.style.dropDownContainer]}>
+                        <Text style={this.style.inputText}>İkamet Edilen İl</Text>
+                        <Animatable.View>
+                          <View style={this.style.dropdownComponentContainer}>
+                            <Dropdown
+                              value={values.city}
+                              onChangeText={handleChange('city')}
+                              data={CITIES}
+                              containerStyle={this.style.dropdownContainer}
+                              itemTextStyle={this.style.dropdownText}
+                              textColor={Colors.SECONDARY}
+                              fontSize={14}
+                            />
+                          </View>
+                        </Animatable.View>
+                      </View>
+                      <View style={this.style.buttonContainer}>
+                        <Button
+                          text="Kaydet"
+                          backgroundColor={Colors.COMPANY}
+                          textColor="#fff"
+                          onPress={() => {
+                            validateForm();
+                            if (isValid) {
+                              handleSubmit();
+                              return;
+                            }
+
+                            if (errors.name) {
+                              this.references.filter((t) => t.name === 'name')[0].ref.shake();
+                            }
+                            if (errors.surname) {
+                              this.references.filter((t) => t.name === 'surname')[0].ref.shake();
+                            }
+
+                            if (errors.phoneNumber) {
+                              this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
+                            }
+                            if (errors.password) {
+                              this.references.filter((t) => t.name === 'phoneNumber')[0].ref.shake();
+                            }
+                          }}
+                        />
+                      </View>
+                    </View>
+                  )}
+              </Formik>
+            </ScrollView>
+          </KeyboardAwareScrollView>
+        </View>
+      );
   }
 }

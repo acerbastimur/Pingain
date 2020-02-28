@@ -2,8 +2,8 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, Linking} from 'react-native';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import ShareUsStyle from './ShareUs.style';
 
@@ -41,6 +41,7 @@ export default class ShareUs extends React.Component<ShareUsProps> {
           Yapacağımız <Text style={this.style.textHighlighted}>çekilişleri</Text> sakın kaçırma!
         </Text>
         <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           style={this.style.followButton}
           onPress={() => {
             Linking.openURL('instagram://user?username=pingain').catch(() => {

@@ -97,6 +97,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
           <View key={key} style={this.style.campaignCardContainer}>
             {activeCampaign.campaignId === campaign.campaignId ? (
               <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 onPress={() => this.generateNewCampaignQr(campaign)}
                 style={[
                   this.style.campaignCard,
@@ -115,22 +116,23 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                key={key}
-                onPress={() => this.generateNewCampaignQr(campaign)}
-                style={[this.style.campaignCard, this.style.campaignCardCoffee]}
-              >
-                <FastImage
-                  resizeMode="contain"
-                  style={this.style.campaignCardImg}
-                  source={require('../../../../assets/image/User/coffeeIcon.png')}
-                />
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  key={key}
+                  onPress={() => this.generateNewCampaignQr(campaign)}
+                  style={[this.style.campaignCard, this.style.campaignCardCoffee]}
+                >
+                  <FastImage
+                    resizeMode="contain"
+                    style={this.style.campaignCardImg}
+                    source={require('../../../../assets/image/User/coffeeIcon.png')}
+                  />
 
-                <Text style={[this.style.campaignCardText, this.style.campaignCardCoffeeText]}>
-                  {campaign.campaignName}
-                </Text>
-              </TouchableOpacity>
-            )}
+                  <Text style={[this.style.campaignCardText, this.style.campaignCardCoffeeText]}>
+                    {campaign.campaignName}
+                  </Text>
+                </TouchableOpacity>
+              )}
           </View>
         );
 
@@ -139,6 +141,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
           <View style={this.style.campaignCardContainer} key={key}>
             {activeCampaign.campaignId === campaign.campaignId ? (
               <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 onPress={() => this.generateNewCampaignQr(campaign)}
                 style={[
                   this.style.campaignCard,
@@ -157,21 +160,22 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                key={key}
-                onPress={() => this.generateNewCampaignQr(campaign)}
-                style={[this.style.campaignCard, this.style.campaignCardMeal]}
-              >
-                <FastImage
-                  resizeMode="contain"
-                  style={this.style.campaignCardImg}
-                  source={require('../../../../assets/image/User/mealIcon.png')}
-                />
-                <Text style={[this.style.campaignCardText, this.style.campaignCardMealText]}>
-                  {campaign.campaignName}
-                </Text>
-              </TouchableOpacity>
-            )}
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  key={key}
+                  onPress={() => this.generateNewCampaignQr(campaign)}
+                  style={[this.style.campaignCard, this.style.campaignCardMeal]}
+                >
+                  <FastImage
+                    resizeMode="contain"
+                    style={this.style.campaignCardImg}
+                    source={require('../../../../assets/image/User/mealIcon.png')}
+                  />
+                  <Text style={[this.style.campaignCardText, this.style.campaignCardMealText]}>
+                    {campaign.campaignName}
+                  </Text>
+                </TouchableOpacity>
+              )}
           </View>
         );
       case 3:
@@ -179,6 +183,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
           <View style={this.style.campaignCardContainer} key={key}>
             {activeCampaign.campaignId === campaign.campaignId ? (
               <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 onPress={() => this.generateNewCampaignQr(campaign)}
                 style={[
                   this.style.campaignCard,
@@ -196,21 +201,22 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                key={key}
-                onPress={() => this.generateNewCampaignQr(campaign)}
-                style={[this.style.campaignCard, this.style.campaignCardDessert]}
-              >
-                <FastImage
-                  resizeMode="contain"
-                  style={this.style.campaignCardImg}
-                  source={require('../../../../assets/image/User/dessertIcon.png')}
-                />
-                <Text style={[this.style.campaignCardText, this.style.campaignCardDessertText]}>
-                  {campaign.campaignName}
-                </Text>
-              </TouchableOpacity>
-            )}
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  key={key}
+                  onPress={() => this.generateNewCampaignQr(campaign)}
+                  style={[this.style.campaignCard, this.style.campaignCardDessert]}
+                >
+                  <FastImage
+                    resizeMode="contain"
+                    style={this.style.campaignCardImg}
+                    source={require('../../../../assets/image/User/dessertIcon.png')}
+                  />
+                  <Text style={[this.style.campaignCardText, this.style.campaignCardDessertText]}>
+                    {campaign.campaignName}
+                  </Text>
+                </TouchableOpacity>
+              )}
           </View>
         );
       default:
@@ -239,28 +245,28 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
         {!campaigns ? (
           <NoCampaign navigation={navigation} />
         ) : (
-          <View>
-            <View style={this.style.qrContainer}>
-              {loading ? (
-                <ActivityIndicator />
-              ) : (
-                <QRCode
-                  size={(Dimensions.get('window').width * 60) / 100}
-                  color={Colors.TEXT_HIGHLIGHTED}
-                  value={JSON.stringify(activeQrJson)}
-                  ecl="L"
-                />
-              )}
-            </View>
-            <View style={this.style.campaignsContainer}>
-              {campaigns
-                   && campaigns.map((campaign, index) => this.campaignButton(campaign, index.toString()))}
-            </View>
-            <Text style={this.style.bottomText}>
+            <View>
+              <View style={this.style.qrContainer}>
+                {loading ? (
+                  <ActivityIndicator />
+                ) : (
+                    <QRCode
+                      size={(Dimensions.get('window').width * 60) / 100}
+                      color={Colors.TEXT_HIGHLIGHTED}
+                      value={JSON.stringify(activeQrJson)}
+                      ecl="L"
+                    />
+                  )}
+              </View>
+              <View style={this.style.campaignsContainer}>
+                {campaigns
+                  && campaigns.map((campaign, index) => this.campaignButton(campaign, index.toString()))}
+              </View>
+              <Text style={this.style.bottomText}>
                 Kampanya seçimi yaparak QR kodu uzatabilirsiniz.
             </Text>
-          </View>
-        )}
+            </View>
+          )}
       </View>
     );
   }

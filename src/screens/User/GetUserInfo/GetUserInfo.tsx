@@ -131,6 +131,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                         onBlur={() => setFieldTouched('name')}
                         autoCapitalize="words"
                         returnKeyType="next"
+                        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                         onSubmitEditing={() => {
                           const surnameInput = this.references.filter(
                             t => t.name === 'surnameInput',
@@ -172,6 +173,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                         onBlur={() => setFieldTouched('surname')}
                         autoCapitalize="words"
                         returnKeyType="next"
+                        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                         ref={ref => {
                           const isThere = this.references.filter(t => t.name === 'surnameInput')[0];
                           if (isThere) return;
@@ -222,6 +224,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                         autoCapitalize="none"
                         keyboardType="number-pad"
                         returnKeyType="next"
+                        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                         ref={ref => {
                           const isThere = this.references.filter(
                             t => t.name === 'phoneNumberInput',

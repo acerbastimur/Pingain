@@ -53,6 +53,8 @@ const Pin = ({ completed, navigation }) => {
   }
   return (
     <TouchableOpacity
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+
       onPress={() => {
         navigation.navigate('QrRead');
         CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
@@ -233,9 +235,9 @@ const otherCampaigns = (campaigns: Campaign[], campaignId: string) => campaigns
     const style = CampaignDetailsStyle;
 
     const userpins = UserStore.userDetails.activeCampaigns
-    && UserStore.userDetails.activeCampaigns.find(
-      (activeCampaign) => activeCampaign.campaignId === campaign.campaignId,
-    );
+      && UserStore.userDetails.activeCampaigns.find(
+        (activeCampaign) => activeCampaign.campaignId === campaign.campaignId,
+      );
     const isCompleted = userpins?.pinEarned === campaign.actionCount;
 
     if (campaign.campaignId === campaignId) return null;
@@ -243,6 +245,7 @@ const otherCampaigns = (campaigns: Campaign[], campaignId: string) => campaigns
     return (
       <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
         <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           style={style.otherCardBodyItem}
           onPress={() => onOtherCampaignCardPress(campaign)}>
           {campaignIcon({ campaignType: campaign.campaignType })}
@@ -281,6 +284,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
       <View style={style.swipeArea} />
 
       <TouchableOpacity
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
           setTimeout(() => {
@@ -358,24 +362,24 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
           </View>
         </View>
       ) : (
-        <View style={style.noOtherCampaignsContainer}>
-          <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
-          <Text style={style.shareUsText}>
-            Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
+          <View style={style.noOtherCampaignsContainer}>
+            <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
+            <Text style={style.shareUsText}>
+              Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
-            destek vermek için arkadaşlarını
+                      destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
-          </Text>
-          <View style={style.shareButtonContainer}>
-            <Button
-              text="Bağlantıyı kopyala"
-              backgroundColor={Colors.INFO}
-              textColor="#fff"
-              shadow
-            />
+            </Text>
+            <View style={style.shareButtonContainer}>
+              <Button
+                text="Bağlantıyı kopyala"
+                backgroundColor={Colors.INFO}
+                textColor="#fff"
+                shadow
+              />
+            </View>
           </View>
-        </View>
-      )}
+        )}
     </View>
   );
 };

@@ -19,14 +19,14 @@ import {
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
-import {Card} from 'react-native-shadow-cards';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 import CompanyDetailsStyle from './CompanyDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
 import Colors from '../../../styles/Colors';
 import CompanyCard from '../CompanyCard';
-import {UserCompany} from '../../../schemes/user/UserCompany';
+import { UserCompany } from '../../../schemes/user/UserCompany';
 
 export interface CompanyDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -48,7 +48,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({loading: false});
+      this.setState({ loading: false });
     }, 1500);
   }
 
@@ -168,8 +168,8 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
   };
 
   render() {
-    const {navigation} = this.props;
-    const {loading} = this.state;
+    const { navigation } = this.props;
+    const { loading } = this.state;
     const company: UserCompany = navigation.getParam('company');
 
     return (
@@ -194,7 +194,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                     <FastImage
                       key={Math.random() * 1000}
                       resizeMode={FastImage.resizeMode.cover}
-                      source={{uri: image}}
+                      source={{ uri: image }}
                       style={this.style.swipeImage}>
                       <View style={this.style.loadingCenter}>
                         <ActivityIndicator animating={loading} />
@@ -208,7 +208,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
               <View style={this.style.cardHeader}>
                 <View style={this.style.companyImageContainer}>
                   <FastImage
-                    source={{uri: company.companyLogo, priority: 'high'}}
+                    source={{ uri: company.companyLogo, priority: 'high' }}
                     resizeMode={FastImage.resizeMode.cover}
                     style={this.style.companyImage}>
                     <View style={this.style.loadingCenter}>
@@ -220,6 +220,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 {company.instagramAccount ? (
                   <TouchableOpacity
                     style={this.style.followButton}
+                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                     onPress={() => {
                       Linking.openURL(`https://www.instagram.com/${company.instagramAccount}`);
                     }}>

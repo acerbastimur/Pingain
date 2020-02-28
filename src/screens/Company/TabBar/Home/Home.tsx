@@ -162,6 +162,7 @@ export default class Home extends React.Component<HomeProps, any> {
             <View style={this.style.actionsContainer}>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   onPress={() => {
                     navigation.navigate('CompanyCampaigns');
                   }}
@@ -184,6 +185,7 @@ export default class Home extends React.Component<HomeProps, any> {
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   onPress={() => {
                     navigation.navigate('LastTransaction');
                   }}
@@ -206,6 +208,7 @@ export default class Home extends React.Component<HomeProps, any> {
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   style={this.style.otherCardBodyItem}
                   onPress={() => {
                     navigation.navigate('Statistics');
@@ -227,7 +230,9 @@ export default class Home extends React.Component<HomeProps, any> {
                 </TouchableOpacity>
               </Card>
               <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <TouchableOpacity style={this.style.otherCardBodyItem}>
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  style={this.style.otherCardBodyItem}>
                   <FastImage
                     resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
@@ -247,8 +252,8 @@ export default class Home extends React.Component<HomeProps, any> {
             </View>
           </ScrollView>
         ) : (
-          <NoCampaign navigation={navigation} />
-        )}
+            <NoCampaign navigation={navigation} />
+          )}
       </View>
     );
   }

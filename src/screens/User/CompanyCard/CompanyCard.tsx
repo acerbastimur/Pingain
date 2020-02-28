@@ -156,6 +156,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
         {!shouldHeaderHide && (
           <View>
             <TouchableOpacity
+              hitSlop={{ top: 10, bottom: 20, left: 20, right: 20 }}
               onPress={() => {
                 navigation.navigate('CompanyDetails', { company });
               }}
@@ -203,6 +204,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                 <TouchableOpacity
                   key={Math.random() * 1000}
                   style={this.s.cardBodyItem}
+                  hitSlop={{ top: 10, bottom: 20, left: 20, right: 20 }}
                   onPress={() => {
                     const usersPinCount = isUserJoinedThisCampaign
                       ? isUserJoinedThisCampaign.pinEarned

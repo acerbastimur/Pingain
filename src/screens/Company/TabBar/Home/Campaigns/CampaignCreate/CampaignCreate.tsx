@@ -145,6 +145,7 @@ export default class CampaignCreate extends React.Component<
                   onChangeText={text => this.setState({campaignName: text})}
                   autoCapitalize="none"
                   returnKeyType="next"
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   blurOnSubmit={false}
                 />
               </Animatable.View>
