@@ -138,6 +138,7 @@ export default class GetCompanyInfo extends React.Component<
                           onBlur={() => setFieldTouched('name')}
                           autoCapitalize="words"
                           returnKeyType="next"
+                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                           onSubmitEditing={() => {
                             const companyNameInput = this.references.filter(
                               (t) => t.name === 'companyNameInput',
@@ -180,6 +181,7 @@ export default class GetCompanyInfo extends React.Component<
                           onBlur={() => setFieldTouched('companyName')}
                           autoCapitalize="words"
                           returnKeyType="next"
+                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                           ref={(ref) => {
                             const isThere = this.references.filter(
                               (t) => t.name === 'companyNameInput',
@@ -233,6 +235,7 @@ export default class GetCompanyInfo extends React.Component<
                           autoCapitalize="none"
                           keyboardType="number-pad"
                           returnKeyType="next"
+                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                           ref={(ref) => {
                             const isThere = this.references.filter(
                               (t) => t.name === 'phoneNumberInput',
@@ -287,6 +290,7 @@ export default class GetCompanyInfo extends React.Component<
                           onBlur={() => setFieldTouched('instagramAccount')}
                           autoCapitalize="none"
                           returnKeyType="done"
+                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                           ref={(ref) => {
                             const isThere = this.references.filter(
                               (t) => t.name === 'instagramAccountInput',

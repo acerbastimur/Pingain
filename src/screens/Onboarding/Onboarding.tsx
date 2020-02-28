@@ -1,10 +1,10 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import * as Animatable from 'react-native-animatable';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import OnboardingStyle from './Onboarding.style';
 import Colors from '../../styles/Colors';
 
@@ -14,7 +14,7 @@ interface OnboardingProps {
 const OnboardingComponent = (props: OnboardingProps) => {
   const s = OnboardingStyle;
   const pageImageRefs = [];
-  const {navigation} = props;
+  const { navigation } = props;
   return (
     <View style={s.container}>
       <View style={s.swiperContainer}>
@@ -88,6 +88,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
       <View style={s.bottomLine}>
         <TouchableOpacity
           style={s.startButton}
+          hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
           onPress={() => {
             navigation.navigate('Auth');
           }}>

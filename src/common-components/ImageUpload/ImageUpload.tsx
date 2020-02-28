@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import ImageResizer from 'react-native-image-resizer';
@@ -45,7 +45,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
-      const {companyLogo, userLogo} = this.props;
+      const { companyLogo, userLogo } = this.props;
 
       // console.log('Response = ', response.uri);
 
@@ -98,7 +98,7 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
   }
 
   componentDidMount() {
-    const {defaultImage} = this.props;
+    const { defaultImage } = this.props;
 
     if (!defaultImage) return;
 
@@ -107,37 +107,38 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
       .child(defaultImage)
       .getDownloadURL()
       .then(url => {
-        this.setState({imageSource: url});
+        this.setState({ imageSource: url });
       });
   }
 
   public render() {
-    const {imageSource} = this.state;
-    const {hideText, defaultImage, borderWidth, borderColor} = this.props;
+    const { imageSource } = this.state;
+    const { hideText, defaultImage, borderWidth, borderColor } = this.props;
 
     return (
       <View style={this.s.container}>
         <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           style={[
             this.s.box,
-            {borderWidth: defaultImage ? 1 : 4},
-            {borderWidth: borderWidth || 4},
-            {borderColor},
+            { borderWidth: defaultImage ? 1 : 4 },
+            { borderWidth: borderWidth || 4 },
+            { borderColor },
           ]}
           onPress={this.pickImage}>
           {imageSource ? (
             <FastImage
               style={this.s.profilePhoto}
               resizeMode={FastImage.resizeMode.cover}
-              source={{uri: imageSource, priority: 'high'}}
+              source={{ uri: imageSource, priority: 'high' }}
             />
           ) : (
-            <FastImage
-              style={this.s.plus}
-              resizeMode={FastImage.resizeMode.cover}
-              source={require('../../assets/image/plus.png')}
-            />
-          )}
+              <FastImage
+                style={this.s.plus}
+                resizeMode={FastImage.resizeMode.cover}
+                source={require('../../assets/image/plus.png')}
+              />
+            )}
         </TouchableOpacity>
         {hideText ? null : <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>}
       </View>

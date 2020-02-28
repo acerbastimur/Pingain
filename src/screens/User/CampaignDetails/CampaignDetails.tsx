@@ -7,25 +7,32 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, Image, Dimensions} from 'react-native';
+import {
+  View, Text, TouchableOpacity, Image, Dimensions,
+} from 'react-native';
 
 import Swiper from 'react-native-swiper';
-import {Card} from 'react-native-shadow-cards';
-import {NavigationScreenProp, NavigationState, NavigationParams, FlatList} from 'react-navigation';
+import { Card } from 'react-native-shadow-cards';
+import {
+  NavigationScreenProp, NavigationState, NavigationParams, FlatList,
+} from 'react-navigation';
 import FastImage from 'react-native-fast-image';
+import { toJS } from 'mobx';
 import CampaignDetailsStyle from './CampaignDetails.style';
 import Colors from '../../../styles/Colors';
 import Button from '../../../common-components/Button';
 import CampaignDetailsModalStore from '../../../stores/CampaignDetailsModal.store';
 import CampaignType from '../../../schemes/company/CampaignType.enum';
 import UserStore from '../../../stores/User.store';
+import { ActiveCampaign } from '../../../schemes/user/User';
+import WinModalStore from '../../../stores/WinModal.store';
+import { Campaign } from '../../../schemes/user/UserCompany';
 
 export interface CampaignDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-const Pin = ({completed, navigation}) => {
+const Pin = ({ completed, navigation }) => {
   const itemWidth = Dimensions.get('window').width / 8;
   if (completed) {
     return (
@@ -38,7 +45,7 @@ const Pin = ({completed, navigation}) => {
         }}>
         <FastImage
           resizeMode="contain"
-          style={{width: itemWidth, height: itemWidth}}
+          style={{ width: itemWidth, height: itemWidth }}
           source={require('../../../assets/image/pin_completed.png')}
         />
       </View>
@@ -46,6 +53,8 @@ const Pin = ({completed, navigation}) => {
   }
   return (
     <TouchableOpacity
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+
       onPress={() => {
         navigation.navigate('QrRead');
         CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
@@ -58,47 +67,15 @@ const Pin = ({completed, navigation}) => {
       }}>
       <FastImage
         resizeMode="contain"
-        style={{width: itemWidth, height: itemWidth}}
+        style={{ width: itemWidth, height: itemWidth }}
         source={require('../../../assets/image/pin_uncompleted.png')}
       />
     </TouchableOpacity>
   );
 };
 
-const campaignCount = ({campaignType, actionCount}, usersPinCount: number) => {
-  const style = CampaignDetailsStyle;
 
-  switch (campaignType) {
-    case CampaignType.Drink:
-      return (
-        <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{usersPinCount}</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>/</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{actionCount}</Text>
-        </View>
-      );
-    case CampaignType.Meal:
-      return (
-        <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{usersPinCount}</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{actionCount}</Text>
-        </View>
-      );
-    case CampaignType.Dessert:
-      return (
-        <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{usersPinCount}</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{actionCount}</Text>
-        </View>
-      );
-    default:
-      return null;
-  }
-};
-
-const campaignIcon = ({campaignType}) => {
+const campaignIcon = ({ campaignType }) => {
   const style = CampaignDetailsStyle;
 
   switch (campaignType) {
@@ -136,8 +113,157 @@ const campaignIcon = ({campaignType}) => {
       );
   }
 };
+const campaignCount = ({ campaignType, actionCount }: Campaign, usersPinCount: number) => {
+  const style = CampaignDetailsStyle;
 
-const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
+  const isCompleted = usersPinCount === actionCount;
+
+  switch (campaignType) {
+    case CampaignType.Drink:
+      if (isCompleted) {
+        return (
+          <View style={[style.cardBodyItemCount, style.coffeeDoneBackground]}>
+            <FastImage
+              style={style.tick}
+              resizeMode="contain"
+              source={require('../../../assets/image/tickWhite.png')}
+            />
+          </View>
+        );
+      }
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>
+            {usersPinCount}
+          </Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{actionCount}</Text>
+        </View>
+      );
+    case CampaignType.Meal:
+      if (isCompleted) {
+        return (
+          <View style={[style.cardBodyItemCount, style.mealDoneBackground]}>
+            <FastImage
+              style={style.tick}
+              resizeMode="contain"
+              source={require('../../../assets/image/tickWhite.png')}
+            />
+          </View>
+        );
+      }
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{usersPinCount}</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>{actionCount}</Text>
+        </View>
+      );
+    case CampaignType.Dessert:
+      if (isCompleted) {
+        return (
+          <View style={[style.cardBodyItemCount, style.dessertDoneBackground]}>
+            <FastImage
+              style={style.tick}
+              resizeMode="contain"
+              source={require('../../../assets/image/tickWhite.png')}
+            />
+          </View>
+        );
+      }
+      return (
+        <View style={style.cardBodyItemCount}>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>
+            {usersPinCount}
+          </Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>
+            {actionCount}
+          </Text>
+        </View>
+      );
+    default:
+      return null;
+  }
+};
+const onOtherCampaignCardPress = (campaign: Campaign) => {
+  CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+  const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
+  let isUserJoinedThisCampaign: ActiveCampaign = null;
+
+  isUserJoinedThisCampaign = activeCampaigns
+    && activeCampaigns.length
+    && activeCampaigns.find((activeCampaign) => activeCampaign.campaignId === campaign.campaignId);
+
+  setTimeout(() => {
+    const usersPinCount = isUserJoinedThisCampaign
+      ? isUserJoinedThisCampaign.pinEarned
+      : 0;
+    const isCompleted = usersPinCount === campaign.actionCount;
+
+    if (isCompleted) {
+      const { giftCode } = UserStore.userDetails.activeCampaigns.find(
+        (activeCampaign) => campaign.campaignId === activeCampaign.campaignId,
+      );
+      const company = toJS(UserStore.companies.find((cmp) => cmp.companyId === campaign.companyId));
+
+      WinModalStore.winPrizeDetails = {
+        campaignType: campaign.campaignType,
+        companyLogo: company.companyLogo,
+        companyName: company.companyName,
+        campaignName: campaign.campaignName,
+        giftCode,
+        campaignId: campaign.campaignId,
+        company,
+      };
+
+      return setTimeout(() => {
+        WinModalStore.isWinPrizeModalOpened = true;
+      }, 200);
+    }
+
+    CampaignDetailsModalStore.selectedCampaign = campaign;
+    CampaignDetailsModalStore.selectedCampaignPinCount = isUserJoinedThisCampaign?.pinEarned
+      ? isUserJoinedThisCampaign?.pinEarned
+      : 0;
+    CampaignDetailsModalStore.isCampaignDetailsModalOpen = true;
+    return null;
+  }, 200);
+};
+const otherCampaigns = (campaigns: Campaign[], campaignId: string) => campaigns
+  .map((campaign) => {
+    const style = CampaignDetailsStyle;
+
+    const userpins = UserStore.userDetails.activeCampaigns
+      && UserStore.userDetails.activeCampaigns.find(
+        (activeCampaign) => activeCampaign.campaignId === campaign.campaignId,
+      );
+    const isCompleted = userpins?.pinEarned === campaign.actionCount;
+
+    if (campaign.campaignId === campaignId) return null;
+
+    return (
+      <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
+        <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          style={style.otherCardBodyItem}
+          onPress={() => onOtherCampaignCardPress(campaign)}>
+          {campaignIcon({ campaignType: campaign.campaignType })}
+
+          <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
+          {campaignCount(
+            campaign,
+            userpins ? userpins.pinEarned : 0,
+
+          )}
+        </TouchableOpacity>
+      </Card>
+    );
+  })
+  .filter((e) => e);
+
+
+const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
   const style = CampaignDetailsStyle;
 
   const {
@@ -147,57 +273,29 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
     campaignId,
     companyId,
   } = CampaignDetailsModalStore.selectedCampaign;
-  const {companyName, campaigns, companyLogo} = CampaignDetailsModalStore.selectedCompany;
+  const { selectedCampaign } = CampaignDetailsModalStore;
+  const { companyName, campaigns, companyLogo } = CampaignDetailsModalStore.selectedCompany;
   const userPinCount = CampaignDetailsModalStore.selectedCampaignPinCount;
+  const currentCompany = UserStore.companies.find((company) => company.companyId === companyId);
 
-  const currentCompany = UserStore.companies.find(company => company.companyId === companyId);
-
-  const otherCampaigns = campaigns
-    .map(campaign => {
-      const userpins =
-        UserStore.userDetails.activeCampaigns &&
-        UserStore.userDetails.activeCampaigns.find(
-          activeCampaign => activeCampaign.campaignId === campaign.campaignId,
-        );
-
-      if (campaign.campaignId === campaignId) return null;
-      return (
-        <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
-          <View style={style.otherCardBodyItem}>
-            {campaignIcon({campaignType: campaign.campaignType})}
-
-            <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
-            <View style={style.cardBodyItemCount}>
-              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
-                {(userpins && userpins.pinEarned) || 0}
-              </Text>
-              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>/</Text>
-              <Text style={[style.cardBodyItemCountText, style.cardItemMeal]}>
-                {campaign.actionCount}
-              </Text>
-            </View>
-          </View>
-        </Card>
-      );
-    })
-    .filter(e => e);
 
   return (
     <View style={style.container}>
       <View style={style.swipeArea} />
 
       <TouchableOpacity
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
           setTimeout(() => {
-            navigation.navigate('CompanyDetails', {company: currentCompany});
+            navigation.navigate('CompanyDetails', { company: currentCompany });
           }, 200);
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode={FastImage.resizeMode.cover}
-            source={{uri: companyLogo}}
+            source={{ uri: companyLogo }}
             style={style.cardHeaderImage}
           />
         </View>
@@ -211,26 +309,26 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
       </TouchableOpacity>
       <View style={style.line} />
       <View style={style.cardBodyItem}>
-        {campaignIcon({campaignType})}
+        {campaignIcon({ campaignType })}
         <Text style={style.cardBodyItemName}>{campaignName}</Text>
 
-        {campaignCount({campaignType, actionCount}, userPinCount)}
+        {campaignCount(selectedCampaign,
+          userPinCount > 0 ? userPinCount : 0)}
       </View>
       <View style={style.line} />
       <View style={style.pinsContainer}>
         <View style={style.pinsFullLineContainer}>
           <FlatList
-            data={Array.from({length: actionCount}, (v, k) => k + 1)}
+            data={Array.from({ length: actionCount }, (v, k) => k + 1)}
             keyExtractor={(item, index) => String(index)}
             numColumns={5}
-            renderItem={({index}) => {
-              return (
-                <View
-                  style={{marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25}}>
-                  <Pin completed={userPinCount > index} navigation={navigation} />
-                </View>
-              );
-            }}
+            scrollEnabled={false}
+            renderItem={({ index }) => (
+              <View
+                style={{ marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25 }}>
+                <Pin completed={userPinCount > index} navigation={navigation} />
+              </View>
+            )}
           />
         </View>
       </View>
@@ -241,6 +339,8 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
             <Swiper
               showsPagination={false}
               showsButtons
+              autoplay
+              autoplayTimeout={2}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -257,29 +357,29 @@ const CampaignDetails = ({navigation}: CampaignDetailsProps) => {
                   style={style.swipperButton}
                 />
               }>
-              {otherCampaigns}
+              {otherCampaigns(campaigns, campaignId)}
             </Swiper>
           </View>
         </View>
       ) : (
-        <View style={style.noOtherCampaignsContainer}>
-          <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
-          <Text style={style.shareUsText}>
-            Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
+          <View style={style.noOtherCampaignsContainer}>
+            <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
+            <Text style={style.shareUsText}>
+              Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
-            destek vermek için arkadaşlarını
+                      destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
-          </Text>
-          <View style={style.shareButtonContainer}>
-            <Button
-              text="Bağlantıyı kopyala"
-              backgroundColor={Colors.INFO}
-              textColor="#fff"
-              shadow
-            />
+            </Text>
+            <View style={style.shareButtonContainer}>
+              <Button
+                text="Bağlantıyı kopyala"
+                backgroundColor={Colors.INFO}
+                textColor="#fff"
+                shadow
+              />
+            </View>
           </View>
-        </View>
-      )}
+        )}
     </View>
   );
 };

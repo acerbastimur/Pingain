@@ -8,9 +8,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import FastImage from 'react-native-fast-image';
 import WinPinStyle from './WinPin.style';
@@ -84,14 +84,15 @@ const campaignCount = (campaignType: CampaignType) => {
       return null;
   }
 };
-const WinPin = ({navigation}: WinPinProps) => {
+const WinPin = ({ navigation }: WinPinProps) => {
   const style = WinPinStyle;
-  const {campaignType, companyLogo, companyName, campaignName} = WinModalStore.getPinDetails;
+  const { campaignType, companyLogo, companyName, campaignName } = WinModalStore.getPinDetails;
   return (
     <View style={style.container}>
       <View style={style.swipeArea} />
 
       <TouchableOpacity
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           navigation.navigate('CompanyDetails');
         }}
@@ -99,7 +100,7 @@ const WinPin = ({navigation}: WinPinProps) => {
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode="contain"
-            source={{uri: companyLogo, priority: 'high'}}
+            source={{ uri: companyLogo, priority: 'high' }}
             style={style.cardHeaderImage}
           />
         </View>

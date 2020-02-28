@@ -8,9 +8,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import QRCode from 'react-native-qrcode-svg';
 import FastImage from 'react-native-fast-image';
@@ -57,7 +57,7 @@ const campaignLogo = (campaignType: CampaignType) => {
   }
 };
 
-const WinPrize = ({navigation}) => {
+const WinPrize = ({ navigation }) => {
   const style = WinPrizeStyle;
   const {
     campaignType,
@@ -68,26 +68,27 @@ const WinPrize = ({navigation}) => {
     campaignId,
     company,
   } = WinModalStore.winPrizeDetails;
-  const {uid} = auth().currentUser;
+  const { uid } = auth().currentUser;
 
-  const qrJson = {userId: uid, campaignId, scannedQrId: giftCode};
+  const qrJson = { userId: uid, campaignId, scannedQrId: giftCode };
 
   return (
     <View style={style.container}>
       <View style={style.swipeArea} />
 
       <TouchableOpacity
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           WinModalStore.isWinPrizeModalOpened = false;
           setTimeout(() => {
-            navigation.navigate('CompanyDetails', {company});
+            navigation.navigate('CompanyDetails', { company });
           }, 200);
         }}
         style={style.cardHeader}>
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode="contain"
-            source={{uri: companyLogo, priority: 'high'}}
+            source={{ uri: companyLogo, priority: 'high' }}
             style={style.cardHeaderImage}
           />
         </View>

@@ -41,7 +41,7 @@ export default class RightIcon extends React.Component<RightIconProps> {
     if (authRole === AuthRole.Company) {
       return CompanyStore?.companyLogo ? (
         <FastImage
-          style={this.s.image}
+          style={[this.s.image, this.s.companyLogo]}
           resizeMode={FastImage.resizeMode.cover}
           source={{ uri: CompanyStore.companyLogo }}
         />
@@ -49,7 +49,7 @@ export default class RightIcon extends React.Component<RightIconProps> {
     }
     return UserStore?.profilePhoto ? (
       <FastImage
-        style={this.s.image}
+        style={[this.s.image, this.s.profileImage]}
         resizeMode={FastImage.resizeMode.cover}
         source={{ uri: UserStore.profilePhoto }}
       />

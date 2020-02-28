@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -45,7 +45,6 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     height: '8.5%',
-    borderTopStartRadius: 100,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: Colors.INFO,

@@ -27,6 +27,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'left',
+    marginTop: 4,
   },
   flatListHeaderTextLight: {
     fontFamily: 'Helvetica Neue',

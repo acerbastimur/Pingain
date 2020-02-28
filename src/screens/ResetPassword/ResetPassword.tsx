@@ -91,6 +91,7 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                       placeholder="Email giriniz"
                       placeholderTextColor={Colors.SECONDARY}
                       selectionColor={Colors.PRIMARY}
+                      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                       value={values.email}
                       onChangeText={handleChange('email')}
                       onBlur={() => setFieldTouched('email')}

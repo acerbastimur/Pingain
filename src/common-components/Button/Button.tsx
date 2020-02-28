@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {Text, TouchableOpacity, TextStyle} from 'react-native';
+import { Text, TouchableOpacity, TextStyle } from 'react-native';
 
 import ButtonStyle from './Button.style';
 
@@ -38,6 +38,7 @@ const Button = ({
   return (
     <TouchableOpacity
       onPress={onPress}
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       style={{
         ...s.touchable,
         borderWidth,
@@ -47,7 +48,7 @@ const Button = ({
         elevation: shadow ? 10 : 0,
         shadowOpacity: shadow ? 0.27 : 0,
       }}>
-      <Text style={{...s.text, color: textColor, fontWeight}}>{text}</Text>
+      <Text style={{ ...s.text, color: textColor, fontWeight }}>{text}</Text>
     </TouchableOpacity>
   );
 };
