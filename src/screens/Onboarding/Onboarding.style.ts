@@ -94,7 +94,7 @@ export default StyleSheet.create({
   },
 
   subtitle: {
-    flex: 0.5,
+    flex: 0.6,
     width: '100%',
     fontFamily: 'Helvetica Neue',
     fontWeight: 'normal',
