@@ -189,7 +189,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
           <ScrollView>
             <View style={this.style.swiperContainer}>
               <Swiper dotColor="#D8DFE8" activeDotColor={Colors.PRIMARY} showsButtons={false}>
-                {company.companyImages.map(image => {
+                {company.companyImages && company.companyImages.map(image => {
                   return (
                     <FastImage
                       key={Math.random() * 1000}

@@ -170,7 +170,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             hardwareAccelerated
             swipeThreshold={200}
             hasBackdrop
-            propagateSwipe
             backdropOpacity={0.1}
             animationOut="slideOutDown"
             animationOutTiming={350}

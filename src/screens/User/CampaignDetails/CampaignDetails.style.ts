@@ -57,6 +57,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'left',
+    width: responsiveRate(220),
   },
   headerArrow: {
     width: 14,
@@ -104,6 +105,7 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: responsiveRate(14),
     color: Colors.SECONDARY,
+    width: responsiveRate(170),
   },
   cardBodyItemCount: {
     flexDirection: 'row',

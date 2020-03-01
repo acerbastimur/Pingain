@@ -142,79 +142,78 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         <ActivityIndicator size="large" />
       </View>
     ) : (
-      <View style={this.style.container}>
-        <Modal
-          isVisible={isGivePrizeModalOpen}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          animationInTiming={450}
-          onBackdropPress={() => {
-            this.setState({ isGivePrizeModalOpen: false });
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            this.setState({ isGivePrizeModalOpen: false });
-          }}
-        >
-          {currentCampaign ? (
-            <GivePrize
-              companyLogo={CompanyStore.companyLogo}
-              companyName={CompanyStore.companyDetails.companyName}
-              campaignName={currentCampaign.campaignName}
-              campaignType={currentCampaign.campaignType}
-            />
-          ) : (
-            <Text>Error</Text>
-          )}
-        </Modal>
-        <View style={this.style.headerContainer}>
-          <TabsHeader
-            navigation={navigation}
-            onRightPress={() => {
-              navigation.navigate('CompanyDetailsEdit');
+        <View style={this.style.container}>
+          <Modal
+            isVisible={isGivePrizeModalOpen}
+            swipeDirection={['down']}
+            hardwareAccelerated
+            swipeThreshold={200}
+            hasBackdrop
+            backdropOpacity={0.1}
+            animationOut="slideOutDown"
+            animationOutTiming={350}
+            animationInTiming={450}
+            onBackdropPress={() => {
+              this.setState({ isGivePrizeModalOpen: false });
             }}
-          />
-        </View>
-        {
-        !campaigns
-          ? <NoCampaign navigation={navigation} />
-          : (
-            <View style={this.style.cameraContainer}>
-              {shouldQrReaderActive && (
-              <QRCodeScanner
-                ref={(node) => {
-                  this.scanner = node;
-                }}
-                cameraStyle={this.style.cameraStyle}
-                onRead={this.onSuccess}
-                fadeIn
-                reactivate
-                vibrate={false}
-                bottomContent={(
-                  <View style={this.style.bottomContentContainer}>
-                    <View style={this.style.bottomContentBackground} />
-                    <Text style={this.style.bottomContentText}>
-                      Qr kodu okutarak ödülü verebilirsiniz
-                    </Text>
-                  </View>
-              )}
-                bottomViewStyle={this.style.bottomViewStyle}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              margin: 0,
+            }}
+            onSwipeComplete={() => {
+              this.setState({ isGivePrizeModalOpen: false });
+            }}
+          >
+            {currentCampaign ? (
+              <GivePrize
+                companyLogo={CompanyStore.companyLogo}
+                companyName={CompanyStore.companyDetails.companyName}
+                campaignName={currentCampaign.campaignName}
+                campaignType={currentCampaign.campaignType}
               />
+            ) : (
+                <Text>Error</Text>
               )}
-              <Animated.View style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]} />
-            </View>
-          )
-}
-      </View>
-    );
+          </Modal>
+          <View style={this.style.headerContainer}>
+            <TabsHeader
+              navigation={navigation}
+              onRightPress={() => {
+                navigation.navigate('CompanyDetailsEdit');
+              }}
+            />
+          </View>
+          {
+            !campaigns
+              ? <NoCampaign navigation={navigation} />
+              : (
+                <View style={this.style.cameraContainer}>
+                  {shouldQrReaderActive && (
+                    <QRCodeScanner
+                      ref={(node) => {
+                        this.scanner = node;
+                      }}
+                      cameraStyle={this.style.cameraStyle}
+                      onRead={this.onSuccess}
+                      fadeIn
+                      reactivate
+                      vibrate={false}
+                      bottomContent={(
+                        <View style={this.style.bottomContentContainer}>
+                          <View style={this.style.bottomContentBackground} />
+                          <Text style={this.style.bottomContentText}>
+                            Qr kodu okutarak ödülü verebilirsiniz
+                    </Text>
+                        </View>
+                      )}
+                      bottomViewStyle={this.style.bottomViewStyle}
+                    />
+                  )}
+                  <Animated.View style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]} />
+                </View>
+              )
+          }
+        </View>
+      );
   }
 }
