@@ -135,6 +135,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             company: scannedCompany,
           };
 
+          navigation.navigate('PrizesHome');
           WinModalStore.isWinPrizeModalOpened = true;
 
           return;
@@ -146,6 +147,8 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           companyName: scannedCompany.companyName,
           campaignName: scannedCampaign.campaignName,
         };
+        navigation.navigate('CampaignsHome');
+
         WinModalStore.isGetPinModalOpened = true;
       })
       .catch(() => {
@@ -170,7 +173,6 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             hardwareAccelerated
             swipeThreshold={200}
             hasBackdrop
-            propagateSwipe
             backdropOpacity={0.1}
             animationOut="slideOutDown"
             animationOutTiming={350}

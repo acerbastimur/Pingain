@@ -250,7 +250,7 @@ const otherCampaigns = (campaigns: Campaign[], campaignId: string) => campaigns
           onPress={() => onOtherCampaignCardPress(campaign)}>
           {campaignIcon({ campaignType: campaign.campaignType })}
 
-          <Text style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
           {campaignCount(
             campaign,
             userpins ? userpins.pinEarned : 0,
@@ -300,7 +300,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
           />
         </View>
 
-        <Text style={style.cardHeaderText}>{companyName}</Text>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={style.cardHeaderText}>{companyName}</Text>
         <FastImage
           resizeMode="contain"
           style={style.headerArrow}
@@ -367,7 +367,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             <Text style={style.shareUsText}>
               Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
-                                                  destek vermek için arkadaşlarını
+                                                          destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
             </Text>
             <View style={style.shareButtonContainer}>

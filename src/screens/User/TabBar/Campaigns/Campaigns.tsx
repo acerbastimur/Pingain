@@ -89,7 +89,6 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             hardwareAccelerated
             swipeThreshold={200}
             hasBackdrop
-            propagateSwipe
             backdropOpacity={0.1}
             animationOut="slideOutDown"
             animationOutTiming={350}
@@ -110,8 +109,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             swipeDirection={['down']}
             hardwareAccelerated
             swipeThreshold={200}
-            hasBackdrop
-            propagateSwipe
+            hasBackdrop coverScreen
             backdropOpacity={0.1}
             animationOut="slideOutDown"
             animationOutTiming={350}
