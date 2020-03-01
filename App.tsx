@@ -16,7 +16,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     CodePush.sync({
-      installMode: CodePush.InstallMode.IMMEDIATE
+      installMode: CodePush.InstallMode.ON_NEXT_RESTART,
     }).then(() => {
       SplashScreen.hide();
     }).catch(() => {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 });
 
 let codePushOptions: CodePushOptions = {
-  checkFrequency: CodePush.CheckFrequency.ON_APP_START,
-  installMode: CodePush.InstallMode.IMMEDIATE,
+  checkFrequency: CodePush.CheckFrequency.MANUAL,
+  installMode: CodePush.InstallMode.ON_NEXT_RESTART,
 }
 export default CodePush(codePushOptions)(App)

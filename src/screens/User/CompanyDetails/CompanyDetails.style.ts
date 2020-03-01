@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
 import Colors from '../../../styles/Colors';
@@ -16,13 +16,13 @@ export default StyleSheet.create({
     height: '100%',
     paddingBottom: 70,
   },
-  headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
+  headerContainer: { flex: 0.1, paddingHorizontal: '6%' },
   bodyContainer: {
     flex: 0.9,
   },
-  loadingCenter: {height: '100%', justifyContent: 'center', alignItems: 'center'},
+  loadingCenter: { height: '100%', justifyContent: 'center', alignItems: 'center' },
 
-  swiperContainer: {height: 300},
+  swiperContainer: { height: 300 },
   companyInformationContainer: {
     paddingVertical: '5%',
     paddingHorizontal: '11.5%',
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  companyImageContainer: {width: 65, height: 65, borderRadius: 15, overflow: 'hidden'},
+  companyImageContainer: { width: 65, height: 65, borderRadius: 15, overflow: 'hidden' },
   companyImage: {
     width: 65,
     height: 65,
@@ -45,7 +45,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.SECONDARY_LIGHT,
   },
-  cardHeader: {flexDirection: 'row', alignItems: 'center'},
+  cardHeader: { flexDirection: 'row', alignItems: 'center' },
   cardHeaderText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -55,10 +55,11 @@ export default StyleSheet.create({
     letterSpacing: 0.2,
     textAlign: 'left',
     marginLeft: '4%',
+    width: responsiveRate(170),
   },
   followButton: {
-    width: screenWidth > 350 ? 65 : 60,
-    height: screenWidth > 350 ? 33 : 28,
+    width: screenWidth > 350 ? 50 : 40,
+    height: screenWidth > 350 ? 30 : 25,
     borderColor: Colors.INFO,
     borderWidth: 1,
     borderRadius: 6,
@@ -70,7 +71,7 @@ export default StyleSheet.create({
   followButtonText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
-    fontSize: responsiveRate(12),
+    fontSize: responsiveRate(10),
     color: Colors.INFO,
     fontStyle: 'normal',
     letterSpacing: 0.2,
@@ -98,7 +99,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginRight: 10,
   },
-  companyFeatureCardImage: {width: 14, marginRight: 4, resizeMode: 'contain'},
+  companyFeatureCardImage: { width: 14, marginRight: 4, resizeMode: 'contain' },
   companyFeatureCardText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',

@@ -8,7 +8,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import FastImage from 'react-native-fast-image';
@@ -85,7 +85,7 @@ const campaignCount = (campaignType: CampaignType) => {
       return null;
   }
 };
-const GivePrize = ({campaignType, companyLogo, companyName, campaignName}: GivePrizeProps) => {
+const GivePrize = ({ campaignType, companyLogo, companyName, campaignName }: GivePrizeProps) => {
   const style = GivePrizeStyle;
   return (
     <View style={style.container}>
@@ -95,7 +95,7 @@ const GivePrize = ({campaignType, companyLogo, companyName, campaignName}: GiveP
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode="contain"
-            source={{uri: companyLogo, priority: 'high'}}
+            source={{ uri: companyLogo, priority: 'high' }}
             style={style.cardHeaderImage}
           />
         </View>
@@ -110,11 +110,11 @@ const GivePrize = ({campaignType, companyLogo, companyName, campaignName}: GiveP
       </View>
       <View style={style.line} />
       <View style={style.greetingContainer}>
-        <Text style={style.greetingHeaderText}>Tebrikler Pingainer!</Text>
+        <Text style={style.greetingHeaderText}>Ve bir Ödül Daha !</Text>
         <Text style={style.greetingText}>
-          Yepyeni bir <Text style={style.textHighlight}>Pin</Text> kazandın!
+          Müşterine yepyeni bir  <Text style={style.textHighlight}>Ödül </Text> verdin!
         </Text>
-        <Text style={style.greetingText}>Kampanyayı tamamla, Ödülü kazan!</Text>
+        <Text style={style.greetingText}> Ve müşteri bağlılığını daha da arttırdın!</Text>
         <Animatable.Image
           animation="bounceIn"
           duration={2000}

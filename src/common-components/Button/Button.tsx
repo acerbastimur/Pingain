@@ -38,7 +38,7 @@ const Button = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+      hitSlop={{ top: 10, bottom: 20, left: 20, right: 20 }}
       style={{
         ...s.touchable,
         borderWidth,

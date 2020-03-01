@@ -115,7 +115,7 @@ const WinPrize = ({ navigation }) => {
       </View>
       <View style={style.line} />
       <View style={style.greetingContainer}>
-        <Text style={style.greetingHeaderText}>Afiyet Olsun pingainer!</Text>
+        <Text style={style.greetingHeaderText}>Afiyet Olsun Pingainer!</Text>
         <Text style={style.greetingText}>
           Yepyeni bir <Text style={style.textHighlight}>Ödül</Text> kazandın!
         </Text>

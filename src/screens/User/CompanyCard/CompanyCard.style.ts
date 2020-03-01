@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-color-literals */
 import Colors from '../../../styles/Colors';
@@ -13,7 +13,7 @@ const responsiveRate = (fontSize: number) => {
 };
 
 export default StyleSheet.create({
-  card: {margin: 20, borderRadius: 15},
+  card: { margin: 20, borderRadius: 15 },
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     borderRadius: 32,
     overflow: 'hidden',
   },
-  loadingCenter: {height: '100%', justifyContent: 'center', alignItems: 'center'},
+  loadingCenter: { height: '100%', justifyContent: 'center', alignItems: 'center' },
   cardHeaderImage: {
     width: 32,
     height: 32,
@@ -40,11 +40,12 @@ export default StyleSheet.create({
     paddingLeft: '6%',
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
-    fontSize: responsiveRate(20),
+    fontSize: responsiveRate(19),
     color: Colors.PRIMARY,
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'left',
+    width: responsiveRate(230)
   },
   headerArrow: {
     width: 14,
@@ -60,7 +61,7 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     borderRadius: 50,
   },
-  cardBody: {marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: 30},
+  cardBody: { marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: 30 },
   cardBodyItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -72,13 +73,14 @@ export default StyleSheet.create({
     height: responsiveRate(28),
     resizeMode: 'contain',
   },
-  row: {flexDirection: 'row'},
+  row: { flexDirection: 'row' },
   cardBodyItemName: {
     paddingLeft: '6%',
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
     fontSize: responsiveRate(14),
     color: Colors.PRIMARY_LIGHT,
+    width: responsiveRate(180)
   },
   cardBodyItemCount: {
     flexDirection: 'row',

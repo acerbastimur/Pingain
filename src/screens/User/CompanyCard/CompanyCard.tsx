@@ -181,7 +181,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                 </FastImage>
               </View>
 
-              <Text style={this.s.cardHeaderText}>{company.companyName}</Text>
+              <Text style={this.s.cardHeaderText} numberOfLines={1} ellipsizeMode="tail" >{company.companyName}</Text>
 
               <FastImage
                 resizeMode="contain"
@@ -236,7 +236,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                     CampaignDetailsStore.isCampaignDetailsModalOpen = true;
                   }}>
                   {this.campaignIcon(campaign)}
-                  <Text style={this.s.cardBodyItemName}>{campaign.campaignName}</Text>
+                  <Text style={this.s.cardBodyItemName} numberOfLines={1} ellipsizeMode="tail">{campaign.campaignName}</Text>
                   {this.campaignCount(
                     campaign,
                     isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,
