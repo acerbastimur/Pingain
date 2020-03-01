@@ -50,7 +50,7 @@ const ModalContainer = ({
           <Text numberOfLines={2} style={s.headerText}>
             {modalType === ModalType.ResetPassword
               ? 'Şifreni sıfırlamak istediğine emin misin?'
-              : 'Kayıt yapılamadı'}
+              : 'Hata'}
           </Text>
           <Text numberOfLines={1} style={s.subText}>
             {modalType === ModalType.ResetPassword ? 'Bu işlem geri alınamaz.' : errorMessage}

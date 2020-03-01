@@ -216,7 +216,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                     </View>
                   </FastImage>
                 </View>
-                <Text style={this.style.cardHeaderText}>{company.companyName}</Text>
+                <Text style={this.style.cardHeaderText} numberOfLines={2} ellipsizeMode="tail">{company.companyName}</Text>
                 {company.instagramAccount ? (
                   <TouchableOpacity
                     style={this.style.followButton}
@@ -238,15 +238,26 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   {company.companyFeatures.map(featureNo => this.companyFeatureCard(featureNo))}
                 </ScrollView>
               </View>
-              <View style={this.style.phoneArea}>
+              <TouchableOpacity style={this.style.phoneArea} onPress={() => {
+                const { phoneNumber } = company;
+                Linking.openURL(`tel:${phoneNumber}`)
+              }}>
                 <FastImage
                   style={this.style.phoneIcon}
                   resizeMode={FastImage.resizeMode.contain}
                   source={require('../../../assets/image/User/phoneIcon.png')}
                 />
                 <Text style={this.style.contactText}>{company.phoneNumber}</Text>
-              </View>
-              <View style={this.style.locationArea}>
+              </TouchableOpacity>
+              <TouchableOpacity style={this.style.locationArea}
+                onPress={() => {
+                  let urlParams = '';
+                  const { address } = company;
+                  address.split(' ').forEach(word => {
+                    urlParams += word + '+'
+                  });
+                  Linking.openURL(`https://www.google.com/maps/place/${urlParams}`);
+                }}>
                 <FastImage
                   style={this.style.locationIcon}
                   resizeMode={FastImage.resizeMode.contain}
@@ -255,7 +266,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 <Text style={this.style.contactText} numberOfLines={1}>
                   {company.address}
                 </Text>
-              </View>
+              </TouchableOpacity>
             </Card>
 
             <View>

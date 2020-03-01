@@ -78,6 +78,8 @@ CompanyDetailsEditState
     password,
     phoneNumber,
   }: CompanyDetailsForm) => {
+    const { navigation } = this.props;
+
     if (password) {
       LoginService.setNewPassword(password);
     }
@@ -98,9 +100,7 @@ CompanyDetailsEditState
       this.setState({
         loading: false,
       });
-      setTimeout(() => {
-        this.setState({ imageKeys: new Array(4).fill(Math.random() * 100) });
-      }, 1000);
+      navigation.navigate('Home')
     });
   };
 
@@ -224,6 +224,7 @@ CompanyDetailsEditState
                             onBlur={() => setFieldTouched('cmpName')}
                             autoCapitalize="words"
                             returnKeyType="next"
+                            maxLength={22}
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                             onSubmitEditing={() => {
                               const nextInput = this.references.filter(
@@ -263,6 +264,7 @@ CompanyDetailsEditState
                             onChangeText={handleChange('managerName')}
                             onBlur={() => setFieldTouched('managerName')}
                             autoCapitalize="words"
+                            maxLength={30}
                             returnKeyType="next"
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                             ref={(ref) => {
@@ -314,6 +316,7 @@ CompanyDetailsEditState
                             onChangeText={handleChange('phoneNumber')}
                             onBlur={() => setFieldTouched('phoneNumber')}
                             autoCapitalize="none"
+                            maxLength={11}
                             keyboardType="number-pad"
                             returnKeyType="next"
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
@@ -366,6 +369,7 @@ CompanyDetailsEditState
                             onBlur={() => setFieldTouched('instaAccount')}
                             autoCapitalize="none"
                             returnKeyType="done"
+                            maxLength={30}
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                             ref={(ref) => {
                               const isThere = this.references.filter(

@@ -9,7 +9,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 import * as React from 'react';
 import {
-  View, Text, TouchableOpacity, Image, Dimensions,
+  View, Text, TouchableOpacity, Image, Dimensions, Linking, Platform,
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
@@ -367,15 +367,22 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             <Text style={style.shareUsText}>
               Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
-                      destek vermek için arkadaşlarını
+                                                  destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
             </Text>
             <View style={style.shareButtonContainer}>
               <Button
-                text="Bağlantıyı kopyala"
+                text="Davet Et"
                 backgroundColor={Colors.INFO}
                 textColor="#fff"
                 shadow
+                onPress={() => {
+                  const whatsappText = Platform.select({
+                    android: "Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim: \n https://",
+                    ios: "Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim:  \n https://"
+                  });
+                  Linking.openURL(`whatsapp://send?text=${whatsappText}`);
+                }}
               />
             </View>
           </View>

@@ -108,7 +108,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             company: scannedCompany,
           };
 
-          navigation.navigate('CampaignsHome');
+          navigation.navigate('PrizesHome');
           setTimeout(() => {
             WinModalStore.isWinPrizeModalOpened = true;
           }, 200);
@@ -163,63 +163,63 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         <ActivityIndicator size="large" />
       </View>
     ) : (
-      <View style={this.style.container}>
-        <Modal
-          isVisible={WinModalStore.isGetPinModalOpened}
-          swipeDirection={['down']}
-          hardwareAccelerated
-          swipeThreshold={200}
-          hasBackdrop
-          propagateSwipe
-          backdropOpacity={0.1}
-          animationOut="slideOutDown"
-          animationOutTiming={350}
-          onBackdropPress={() => {
-            WinModalStore.isGetPinModalOpened = false;
-          }}
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            margin: 0,
-          }}
-          onSwipeComplete={() => {
-            WinModalStore.isGetPinModalOpened = false;
-          }}
-        >
-          <WinPin navigation={navigation} />
-        </Modal>
-        <View style={this.style.headerContainer}>
-          <TabsHeader
-            navigation={navigation}
-            onRightPress={() => {
-              navigation.navigate('UserDetails');
+        <View style={this.style.container}>
+          <Modal
+            isVisible={WinModalStore.isGetPinModalOpened}
+            swipeDirection={['down']}
+            hardwareAccelerated
+            swipeThreshold={200}
+            hasBackdrop
+            propagateSwipe
+            backdropOpacity={0.1}
+            animationOut="slideOutDown"
+            animationOutTiming={350}
+            onBackdropPress={() => {
+              WinModalStore.isGetPinModalOpened = false;
             }}
-          />
-        </View>
-        <View style={this.style.cameraContainer}>
-          {shouldQrReaderActive && (
-            <QRCodeScanner
-              ref={(node) => {
-                this.scanner = node;
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              margin: 0,
+            }}
+            onSwipeComplete={() => {
+              WinModalStore.isGetPinModalOpened = false;
+            }}
+          >
+            <WinPin navigation={navigation} />
+          </Modal>
+          <View style={this.style.headerContainer}>
+            <TabsHeader
+              navigation={navigation}
+              onRightPress={() => {
+                navigation.navigate('UserDetails');
               }}
-              cameraStyle={this.style.cameraStyle}
-              onRead={this.onSuccess}
-              fadeIn
-              reactivate
-              vibrate={false}
-              bottomContent={(
-                <View style={this.style.bottomContentContainer}>
-                  <View style={this.style.bottomContentBackground} />
-                  <Text style={this.style.bottomContentText}>
-                    QR kodu okutarak pini kazanabilirsin.
-                  </Text>
-                </View>
-              )}
-              bottomViewStyle={this.style.bottomViewStyle}
             />
-          )}
-          <View style={[this.style.cameraCenterArea]} />
+          </View>
+          <View style={this.style.cameraContainer}>
+            {shouldQrReaderActive && (
+              <QRCodeScanner
+                ref={(node) => {
+                  this.scanner = node;
+                }}
+                cameraStyle={this.style.cameraStyle}
+                onRead={this.onSuccess}
+                fadeIn
+                reactivate
+                vibrate={false}
+                bottomContent={(
+                  <View style={this.style.bottomContentContainer}>
+                    <View style={this.style.bottomContentBackground} />
+                    <Text style={this.style.bottomContentText}>
+                      QR kodu okutarak pini kazanabilirsin.
+                  </Text>
+                  </View>
+                )}
+                bottomViewStyle={this.style.bottomViewStyle}
+              />
+            )}
+            <View style={[this.style.cameraCenterArea]} />
+          </View>
         </View>
-      </View>
-    );
+      );
   }
 }

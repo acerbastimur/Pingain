@@ -64,6 +64,8 @@ export default class UserDetailsEdit extends React.Component<
   handleSubmit = async ({
     name, surname, password, phoneNumber, city,
   }: UserDetailsForm) => {
+    const { navigation } = this.props;
+
     if (password) {
       LoginService.setNewPassword(password);
     }
@@ -75,6 +77,7 @@ export default class UserDetailsEdit extends React.Component<
         this.setState({
           loading: false,
         });
+        navigation.navigate('CampaignsHome')
       },
     );
   };
@@ -165,6 +168,7 @@ export default class UserDetailsEdit extends React.Component<
                             onChangeText={handleChange('name')}
                             onBlur={() => setFieldTouched('name')}
                             autoCapitalize="none"
+                            maxLength={12}
                             returnKeyType="next"
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                             onSubmitEditing={() => {
@@ -205,6 +209,7 @@ export default class UserDetailsEdit extends React.Component<
                             onChangeText={handleChange('surname')}
                             onBlur={() => setFieldTouched('surname')}
                             autoCapitalize="none"
+                            maxLength={15}
                             returnKeyType="next"
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                             ref={(ref) => {
@@ -305,6 +310,7 @@ export default class UserDetailsEdit extends React.Component<
                             onChangeText={handleChange('phoneNumber')}
                             onBlur={() => setFieldTouched('phoneNumber')}
                             autoCapitalize="none"
+                            maxLength={11}
                             keyboardType="decimal-pad"
                             returnKeyType="done"
                             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}

@@ -10,7 +10,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import {
-  View, Text, TouchableOpacity, TextInput, ActivityIndicator,
+  View, Text, TouchableOpacity, TextInput, ActivityIndicator, Linking,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
@@ -263,6 +263,10 @@ export default class CompanyRegister extends React.Component<
                         ) : null}
                       </Animatable.View>
                     </View>
+                    <Text style={this.style.termsText}>Pingain’e kayıt olarak geçerli <Text onPress={() => {
+                      Linking.openURL('https://sites.google.com/view/pingain-privacy-policy/ana-sayfa')
+                    }} style={this.style.underline}>sözleşmeleri</Text> kabul etmiş sayılırsınız.</Text>
+
                     <View style={this.style.buttonContainer}>
                       <Button
                         text="Kayıt Ol"

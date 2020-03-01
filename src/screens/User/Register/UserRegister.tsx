@@ -9,7 +9,7 @@
 /* eslint-disable eslint-commen ts/disable-enable-pair */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import { View, Text, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, Linking } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -254,8 +254,14 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
                         />
                       ) : null}
                     </Animatable.View>
+
                   </View>
+                  <Text style={this.style.termsText}>Pingain’e kayıt olarak geçerli <Text onPress={() => {
+                    Linking.openURL('https://sites.google.com/view/pingain-privacy-policy/ana-sayfa')
+                  }} style={this.style.underline}>sözleşmeleri</Text> kabul etmiş sayılırsınız.</Text>
+
                   <View style={this.style.buttonContainer}>
+
                     <Button
                       text="Kayıt Ol"
                       backgroundColor={Colors.INFO}

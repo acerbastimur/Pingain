@@ -10,7 +10,7 @@ import { toJS } from 'mobx';
 import QrReadStyle from './QrRead.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import ReadUserQr from '../../../../services/company/General/ReadUserQr.service';
-import GivePrize from './WinPin';
+import GivePrize from './GivePrize';
 import CompanyStore from '../../../../stores/Company.store';
 import { Campaign } from '../../../../schemes/company/CompanyCampaign';
 import NoCampaign from '../../NoCampaign';

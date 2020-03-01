@@ -194,15 +194,16 @@ export default class Campaigns extends React.Component<CampaignsProps> {
               : null}
           </View>
           <View style={this.style.btnContainer}>
-            <Button
+            {campaigns.length < 3 ? <Button
               backgroundColor={Colors.COMPANY}
               text="Yeni Kampanya Oluştur"
               textColor="#fff"
+
               shadow
               onPress={() => {
                 navigation.navigate('CampaignCreate', { edit: false });
               }}
-            />
+            /> : null}
           </View>
         </ScrollView>
       </View>
