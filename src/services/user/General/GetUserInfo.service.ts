@@ -6,7 +6,8 @@ import UserStore from '../../../stores/User.store';
 
 export default class GetUserInfoService {
   static async getUserInfo(): Promise<User> {
-    const {uid} = auth().currentUser;
+
+    const { uid } = auth().currentUser;
     const userColRef = firestore()
       .collection('users')
       .doc(uid);
@@ -14,14 +15,14 @@ export default class GetUserInfoService {
     UserStore.userDetails = dataSnapshot;
     UserStore.profilePhoto = await this.getUserPhoto();
 
-    return dataSnapshot;
+    return dataSnapshot as User;
+
   }
 
   static async getUserPhoto(): Promise<string> {
     const photoPath = UserStore.userDetails?.profilePhoto;
-    if (!photoPath) {
-      return null;
-    }
+    if (!photoPath) return null;
+
     const url = await storage()
       .ref()
       .child(photoPath)

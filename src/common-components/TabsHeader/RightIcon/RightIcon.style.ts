@@ -20,6 +20,7 @@ export default StyleSheet.create({
     letterSpacing: 0.2,
     textAlign: 'right',
   },
+  loadingCenter: { height: '100%', justifyContent: 'center', alignItems: 'center' },
   image: {
     width: 25,
     height: 25,

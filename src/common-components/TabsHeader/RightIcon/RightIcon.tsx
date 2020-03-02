@@ -3,13 +3,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import { observer } from 'mobx-react';
 import RightIconStyle from './RightIcon.style';
 import GeneralStore from '../../../stores/General.store';
 import AuthRole from '../../../schemes/general/AuthRole.enum';
 import CompanyStore from '../../../stores/Company.store';
 import UserStore from '../../../stores/User.store';
+import { toJS } from 'mobx';
 
 interface RightIconProps {
   width?: number;
@@ -18,12 +19,26 @@ interface RightIconProps {
   rightEditIcon: boolean;
 }
 
+interface RightIconState {
+  isLoadingImage: boolean
+}
+
 @observer
-export default class RightIcon extends React.Component<RightIconProps> {
+export default class RightIcon extends React.Component<RightIconProps, RightIconState> {
   s = RightIconStyle;
+
+  constructor(props: RightIconProps) {
+    super(props);
+    this.state = {
+      isLoadingImage: true
+    }
+  }
 
   render() {
     const { rightButtonText, rightTextColor, rightEditIcon } = this.props;
+    const { profilePhoto } = UserStore;
+    const { isLoadingImage } = this.state;
+
     if (rightButtonText) {
       return <Text style={[this.s.buttonText, { color: rightTextColor }]}>{rightButtonText}</Text>;
     }
@@ -44,15 +59,37 @@ export default class RightIcon extends React.Component<RightIconProps> {
           style={[this.s.image, this.s.companyLogo]}
           resizeMode={FastImage.resizeMode.cover}
           source={{ uri: CompanyStore.companyLogo }}
-        />
+          onLoadEnd={() => {
+            this.setState({
+              isLoadingImage: false
+            });
+          }}
+        >
+          <View style={this.s.loadingCenter}>
+            <ActivityIndicator animating={isLoadingImage} />
+          </View>
+
+        </FastImage>
       ) : null;
     }
-    return UserStore?.profilePhoto ? (
+    console.log(toJS(UserStore));
+
+    return profilePhoto ? (
       <FastImage
         style={[this.s.image, this.s.profileImage]}
         resizeMode={FastImage.resizeMode.cover}
-        source={{ uri: UserStore.profilePhoto }}
-      />
+        source={{ uri: profilePhoto }}
+        onLoadEnd={() => {
+          this.setState({
+            isLoadingImage: false
+          });
+        }}
+      >
+        <View style={this.s.loadingCenter}>
+          <ActivityIndicator animating={isLoadingImage} />
+        </View>
+
+      </FastImage>
     ) : null;
   }
 }
