@@ -37,7 +37,7 @@ const AuthTypeSelect = (props: AuthTypeSelectProps) => {
         <Text style={s.typeTextLight}>Aramıza hoşgeldin!</Text>
         <View style={s.buttonContainer}>
           <Button
-            text="Pingainer Kayıt"
+            text="Pingainer Kayıt Ol"
             backgroundColor={Colors.INFO}
             textColor="#fff"
             onPress={() => {
