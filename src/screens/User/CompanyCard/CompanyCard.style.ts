@@ -17,8 +17,9 @@ export default StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
-    marginHorizontal: 35,
+    marginTop: responsiveRate(20),
+    marginBottom: responsiveRate(15),
+    marginHorizontal: 25,
     height: 40,
   },
   cardHeaderImageContainer: {
@@ -45,7 +46,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'left',
-    width: responsiveRate(230)
+    width: responsiveRate(250)
   },
   headerArrow: {
     width: 14,
@@ -61,12 +62,12 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     borderRadius: 50,
   },
-  cardBody: { marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: 30 },
+  cardBody: { marginTop: responsiveRate(10), marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: responsiveRate(35) },
   cardBodyItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: responsiveRate(20),
   },
   cardBodyItemIcon: {
     width: responsiveRate(28),

@@ -13,7 +13,7 @@ export default class ReadUserQr {
       };
 
       fetch(
-        `https://us-central1-pingain-app.cloudfunctions.net/readUserQr?userId=${userId}&campaignId=${campaignId}&scannedQrId=${scannedQrId}`,
+        `https://us-central1-pingain-app.cloudfunctions.net/readPrizeQr?userId=${userId}&campaignId=${campaignId}&scannedQrId=${scannedQrId}`,
         requestOptions,
       )
         .then(response => {
