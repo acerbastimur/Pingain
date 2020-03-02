@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import { View, Text, ActivityIndicator } from 'react-native';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {NavigationScreenProp, NavigationState, NavigationParams} from 'react-navigation';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/general/AuthRole.enum';
@@ -24,7 +24,7 @@ export default class Loading extends React.Component<LoadingProps> {
   }
 
   componentDidMount() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     //  auth().signOut();
     auth().onAuthStateChanged(async user => {
       if (user) {

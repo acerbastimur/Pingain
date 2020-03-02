@@ -33,6 +33,7 @@ export default class Home extends React.Component<HomeProps, any> {
   public render() {
     const { navigation } = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
+    const { companyName } = CompanyStore.companyDetails ;
 
     return (
       <View style={this.style.container}>
@@ -46,7 +47,7 @@ export default class Home extends React.Component<HomeProps, any> {
         </View>
         {campaigns && campaigns.length > 0 ? (
           <ScrollView style={this.style.scrollViewStyle}>
-            <Text style={this.style.headerText}>Anasayfa</Text>
+            <Text style={this.style.headerText}>{companyName}</Text>
             <View style={this.style.campaignsContainer}>
               {campaigns.map((campaign) => {
                 switch (campaign.campaignType) {

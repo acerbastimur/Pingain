@@ -108,7 +108,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
             isVisible={CampaignDetailsModalStore.isCampaignDetailsModalOpen}
             swipeDirection={['down']}
             hardwareAccelerated
-            swipeThreshold={200}
+            swipeThreshold={50}
             hasBackdrop coverScreen
             backdropOpacity={0.1}
             animationOut="slideOutDown"

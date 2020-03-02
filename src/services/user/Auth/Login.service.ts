@@ -5,7 +5,7 @@ export default class LoginService {
     return new Promise((resolve, reject) => {
       auth()
         .signInWithEmailAndPassword(email, password)
-        .then(async result => {
+        .then(result => {
           resolve(result);
         })
         .catch(err => {
