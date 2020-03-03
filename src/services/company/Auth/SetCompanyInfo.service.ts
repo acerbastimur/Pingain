@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -101,7 +99,7 @@ export default class SetCompanyInfoService {
     address = '',
     city = '35',
     companyFeatures: [],
-    companyImages: any,
+    companyImages: Array<string>,
     companyLogo: string,
   ): Promise<boolean> {
     // eslint-disable-next-line no-async-promise-executor

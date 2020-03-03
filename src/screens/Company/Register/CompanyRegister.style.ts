@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
 import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
@@ -84,8 +82,8 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: responsiveRate(10),
     color: Colors.SECONDARY_DARK,
-    textAlign: "center",
-    paddingTop: 10
+    textAlign: 'center',
+    paddingTop: 10,
   },
   loginTextContainer: {
     height: 50,

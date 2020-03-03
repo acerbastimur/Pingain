@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -9,10 +7,10 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
-  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  pageContainer: {height: '100%', paddingBottom: 80},
-  headerContainer: {height: 56, paddingHorizontal: '6%'},
-  listHeader: {paddingTop: 30},
+  indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  pageContainer: { height: '100%', paddingBottom: 80 },
+  headerContainer: { height: 56, paddingHorizontal: '6%' },
+  listHeader: { paddingTop: 30 },
   listHeaderTextBold: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -38,7 +36,7 @@ export default StyleSheet.create({
     padding: 32,
     color: '#777',
   },
-  keyboardScrollContainer: {flex: 1},
+  keyboardScrollContainer: { flex: 1 },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -54,14 +52,14 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: responsiveRate(10),
   },
-  dropdownComponentContainer: {overflow: 'hidden', height: 50},
-  dropdownContainer: {top: -26},
+  dropdownComponentContainer: { overflow: 'hidden', height: 50 },
+  dropdownContainer: { top: -26 },
   dropdownText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
     color: Colors.PRIMARY,
   },
-  profileImage: {resizeMode: 'contain', width: 70, height: 70},
+  profileImage: { resizeMode: 'contain', width: 70, height: 70 },
   inputContainer: {
     height: 75,
     marginTop: 20,
@@ -102,7 +100,7 @@ export default StyleSheet.create({
   dropDownContainer: {
     marginBottom: responsiveRate(10),
   },
-  featuresContainer: {height: 'auto', marginTop: responsiveRate(20)},
+  featuresContainer: { height: 'auto', marginTop: responsiveRate(20) },
   cmpImagesUploadContainer: {
     height: 'auto',
     marginBottom: responsiveRate(25),
@@ -114,7 +112,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: responsiveRate(10),
   },
-  checkboxStyle: {width: 130},
+  checkboxStyle: { width: 130 },
   checkboxText: {
     color: Colors.SECONDARY,
     fontSize: responsiveRate(16),

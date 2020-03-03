@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  View, Text, TouchableOpacity, Dimensions, ActivityIndicator,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import QRCode from 'react-native-qrcode-svg';
 import FastImage from 'react-native-fast-image';
@@ -49,23 +47,25 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
   componentDidMount() {
     const { navigation } = this.props;
 
-    navigation.addListener('willFocus', () => { // if page is opened
+    navigation.addListener('willFocus', () => {
+      // if page is opened
       const campaigns = toJS(CompanyStore.campaigns);
 
       if (!campaigns) return;
-      campaigns.map((campaign) => firestore()
-        .collection('campaigns')
-        .doc(campaign.campaignId)
-        .onSnapshot((data) => {
-          this.setState({
-            activeQrJson: {
-              campaignId: campaign.campaignId,
-              companyId: campaign.companyId,
-              scannedQrId: data.data().currentQr,
-            },
-          });
-        }));
-
+      campaigns.map(campaign =>
+        firestore()
+          .collection('campaigns')
+          .doc(campaign.campaignId)
+          .onSnapshot(data => {
+            this.setState({
+              activeQrJson: {
+                campaignId: campaign.campaignId,
+                companyId: campaign.companyId,
+                scannedQrId: data.data().currentQr,
+              },
+            });
+          }),
+      );
 
       this.setState({ activeCampaign: campaigns[0] });
       this.generateNewCampaignQr(campaigns[0]);
@@ -74,7 +74,7 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
 
   generateNewCampaignQr = (campaign: Campaign) => {
     this.setState({ activeCampaign: campaign, loading: true });
-    ChangeCampaignQrService.createNewQrCode(campaign.campaignId).then((newQrCode) => {
+    ChangeCampaignQrService.createNewQrCode(campaign.campaignId).then(newQrCode => {
       this.setState({
         activeQrJson: {
           campaignId: campaign.campaignId,
@@ -116,23 +116,23 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-                <TouchableOpacity
-                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  key={key}
-                  onPress={() => this.generateNewCampaignQr(campaign)}
-                  style={[this.style.campaignCard, this.style.campaignCardCoffee]}
-                >
-                  <FastImage
-                    resizeMode="contain"
-                    style={this.style.campaignCardImg}
-                    source={require('../../../../assets/image/User/coffeeIcon.png')}
-                  />
+              <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                key={key}
+                onPress={() => this.generateNewCampaignQr(campaign)}
+                style={[this.style.campaignCard, this.style.campaignCardCoffee]}
+              >
+                <FastImage
+                  resizeMode="contain"
+                  style={this.style.campaignCardImg}
+                  source={require('../../../../assets/image/User/coffeeIcon.png')}
+                />
 
-                  <Text style={[this.style.campaignCardText, this.style.campaignCardCoffeeText]}>
-                    {campaign.campaignName}
-                  </Text>
-                </TouchableOpacity>
-              )}
+                <Text style={[this.style.campaignCardText, this.style.campaignCardCoffeeText]}>
+                  {campaign.campaignName}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
 
@@ -160,22 +160,22 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-                <TouchableOpacity
-                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  key={key}
-                  onPress={() => this.generateNewCampaignQr(campaign)}
-                  style={[this.style.campaignCard, this.style.campaignCardMeal]}
-                >
-                  <FastImage
-                    resizeMode="contain"
-                    style={this.style.campaignCardImg}
-                    source={require('../../../../assets/image/User/mealIcon.png')}
-                  />
-                  <Text style={[this.style.campaignCardText, this.style.campaignCardMealText]}>
-                    {campaign.campaignName}
-                  </Text>
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                key={key}
+                onPress={() => this.generateNewCampaignQr(campaign)}
+                style={[this.style.campaignCard, this.style.campaignCardMeal]}
+              >
+                <FastImage
+                  resizeMode="contain"
+                  style={this.style.campaignCardImg}
+                  source={require('../../../../assets/image/User/mealIcon.png')}
+                />
+                <Text style={[this.style.campaignCardText, this.style.campaignCardMealText]}>
+                  {campaign.campaignName}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
       case 3:
@@ -201,22 +201,22 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
                 </Text>
               </TouchableOpacity>
             ) : (
-                <TouchableOpacity
-                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  key={key}
-                  onPress={() => this.generateNewCampaignQr(campaign)}
-                  style={[this.style.campaignCard, this.style.campaignCardDessert]}
-                >
-                  <FastImage
-                    resizeMode="contain"
-                    style={this.style.campaignCardImg}
-                    source={require('../../../../assets/image/User/dessertIcon.png')}
-                  />
-                  <Text style={[this.style.campaignCardText, this.style.campaignCardDessertText]}>
-                    {campaign.campaignName}
-                  </Text>
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                key={key}
+                onPress={() => this.generateNewCampaignQr(campaign)}
+                style={[this.style.campaignCard, this.style.campaignCardDessert]}
+              >
+                <FastImage
+                  resizeMode="contain"
+                  style={this.style.campaignCardImg}
+                  source={require('../../../../assets/image/User/dessertIcon.png')}
+                />
+                <Text style={[this.style.campaignCardText, this.style.campaignCardDessertText]}>
+                  {campaign.campaignName}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
       default:
@@ -245,28 +245,28 @@ export default class QrGenerate extends React.Component<QrGenerateProps, QrGener
         {!campaigns ? (
           <NoCampaign navigation={navigation} />
         ) : (
-            <View>
-              <View style={this.style.qrContainer}>
-                {loading ? (
-                  <ActivityIndicator />
-                ) : (
-                    <QRCode
-                      size={(Dimensions.get('window').width * 60) / 100}
-                      color={Colors.TEXT_HIGHLIGHTED}
-                      value={JSON.stringify(activeQrJson)}
-                      ecl="L"
-                    />
-                  )}
-              </View>
-              <View style={this.style.campaignsContainer}>
-                {campaigns
-                  && campaigns.map((campaign, index) => this.campaignButton(campaign, index.toString()))}
-              </View>
-              <Text style={this.style.bottomText}>
-                Kampanya seçimi yaparak QR kodu uzatabilirsiniz.
-            </Text>
+          <View>
+            <View style={this.style.qrContainer}>
+              {loading ? (
+                <ActivityIndicator />
+              ) : (
+                <QRCode
+                  size={(Dimensions.get('window').width * 60) / 100}
+                  color={Colors.TEXT_HIGHLIGHTED}
+                  value={JSON.stringify(activeQrJson)}
+                  ecl="L"
+                />
+              )}
             </View>
-          )}
+            <View style={this.style.campaignsContainer}>
+              {campaigns &&
+                campaigns.map((campaign, index) => this.campaignButton(campaign, index.toString()))}
+            </View>
+            <Text style={this.style.bottomText}>
+              Kampanya seçimi yaparak QR kodu uzatabilirsiniz.
+            </Text>
+          </View>
+        )}
       </View>
     );
   }

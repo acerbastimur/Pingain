@@ -1,5 +1,5 @@
-import {observable} from 'mobx';
-import {UserCompany, Campaign} from '../schemes/user/UserCompany';
+import { observable } from 'mobx';
+import { UserCompany, Campaign } from '../schemes/user/UserCompany';
 
 class CampaignDetailsStore {
   @observable isCampaignDetailsModalOpen = false;

@@ -1,4 +1,4 @@
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 export default class LoginService {
   static loginUserAuth(email: string, password: string): Promise<FirebaseAuthTypes.UserCredential> {

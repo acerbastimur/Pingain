@@ -1,12 +1,9 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable jsx-a11y/accessible-emoji */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, FlatList} from 'react-native';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import { View, Text, FlatList } from 'react-native';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
-import {observer} from 'mobx-react';
-import {toJS} from 'mobx';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import PrizesStyle from './Prizes.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
@@ -39,7 +36,7 @@ export default class Prizes extends React.Component<PrizesProps> {
   };
 
   public render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     // eslint-disable-next-line prefer-destructuring
     const companies = toJS(UserStore.companies);
     const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
@@ -96,7 +93,7 @@ export default class Prizes extends React.Component<PrizesProps> {
               ListHeaderComponent={this.flatListTextHeader}
               keyExtractor={(item, index) => index.toString()}
               data={companiesWithEarnedCampaigns}
-              renderItem={({item}) => <CompanyCard navigation={navigation} company={item} />}
+              renderItem={({ item }) => <CompanyCard navigation={navigation} company={item} />}
             />
           )}
         </View>

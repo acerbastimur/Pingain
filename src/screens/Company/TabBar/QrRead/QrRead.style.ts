@@ -1,18 +1,16 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 export default StyleSheet.create({
-  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   container: {
     height: '100%',
     paddingBottom: 80,
   },
-  headerContainer: {height: '9%', paddingHorizontal: '6%'},
+  headerContainer: { height: '9%', paddingHorizontal: '6%' },
   centerText: {
     flex: 1,
     fontSize: 18,
@@ -35,7 +33,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  cameraStyle: {flex: 1},
+  cameraStyle: { flex: 1 },
   cameraCenterArea: {
     position: 'absolute',
     width: responsiveRate(200),
@@ -45,7 +43,7 @@ export default StyleSheet.create({
     borderRadius: 6,
     opacity: 0.4,
   },
-  bottomViewStyle: {position: 'absolute', bottom: '10%'},
+  bottomViewStyle: { position: 'absolute', bottom: '10%' },
   bottomContentContainer: {
     height: 28,
     width: '65%',

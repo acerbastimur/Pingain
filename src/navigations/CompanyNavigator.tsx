@@ -1,4 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
@@ -37,7 +36,11 @@ const HomeStack = createStackNavigator(
       screen: CompanyDetailsEdit,
     },
   },
-  { initialRouteName: 'Home', headerMode: 'none', cardStyle: { backgroundColor: Colors.Background } },
+  {
+    initialRouteName: 'Home',
+    headerMode: 'none',
+    cardStyle: { backgroundColor: Colors.Background },
+  },
 );
 
 const QrGenerateStack = createStackNavigator(
@@ -76,7 +79,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     Home: {
       screen: HomeStack,
       navigationOptions: {
-        tabBarIcon: (e) => {
+        tabBarIcon: e => {
           if (e.focused) {
             return (
               <FastImage
@@ -111,7 +114,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
     QrRead: {
       screen: QrReadStack,
       navigationOptions: {
-        tabBarIcon: (e) => {
+        tabBarIcon: e => {
           if (e.focused) {
             return (
               <FastImage

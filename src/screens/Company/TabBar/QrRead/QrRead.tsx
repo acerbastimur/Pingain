@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  View, Text, ActivityIndicator, Animated,
-} from 'react-native';
+import { View, Text, ActivityIndicator, Animated } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Modal from 'react-native-modal';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
@@ -55,38 +53,40 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     });
   }
 
-  errorAnimation = (): Animated.CompositeAnimation => Animated.sequence([
-    Animated.timing(
-      // Uses easing functions
-      this.errorAnimationValue, // The value to drive
-      { toValue: 1 }, // Configuration
-    ),
-    Animated.timing(
-      // Uses easing functions
-      this.errorAnimationValue, // The value to drive
-      { toValue: 0 }, // Configuration
-    ),
-  ]);
+  errorAnimation = (): Animated.CompositeAnimation =>
+    Animated.sequence([
+      Animated.timing(
+        // Uses easing functions
+        this.errorAnimationValue, // The value to drive
+        { toValue: 1 }, // Configuration
+      ),
+      Animated.timing(
+        // Uses easing functions
+        this.errorAnimationValue, // The value to drive
+        { toValue: 0 }, // Configuration
+      ),
+    ]);
 
-  sendPinRequest = ({ userId, campaignId, qrCode }): Promise<number> => new Promise((resolve, reject) => {
-    if (!userId || !campaignId || !qrCode) {
-      // error on fields
-      this.setState({ loading: false });
-      return this.errorAnimation().start();
-    }
-    // no error on fields
-    ReadUserQr.readUserQrService(userId, campaignId, qrCode)
-      .then((result) => {
-        const currentCampaign = CompanyStore.campaigns.find(
-          (campaign) => campaign.campaignId === campaignId,
-        );
+  sendPinRequest = ({ userId, campaignId, qrCode }): Promise<number> =>
+    new Promise((resolve, reject) => {
+      if (!userId || !campaignId || !qrCode) {
+        // error on fields
+        this.setState({ loading: false });
+        return this.errorAnimation().start();
+      }
+      // no error on fields
+      ReadUserQr.readUserQrService(userId, campaignId, qrCode)
+        .then(result => {
+          const currentCampaign = CompanyStore.campaigns.find(
+            campaign => campaign.campaignId === campaignId,
+          );
 
-        this.setState({ currentCampaign });
-        return resolve(result);
-      })
-      .catch((error) => reject(error));
-    return null;
-  });
+          this.setState({ currentCampaign });
+          return resolve(result);
+        })
+        .catch(error => reject(error));
+      return null;
+    });
 
   onSuccess = ({ data }) => {
     const { isGivePrizeModalOpen } = this.state;
@@ -107,7 +107,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       campaignId: readQr?.campaignId,
       qrCode: readQr?.scannedQrId,
     })
-      .then(async (responseCode) => {
+      .then(async responseCode => {
         if (responseCode === 400 || responseCode === 404) {
           this.setState({ loading: false });
           return this.errorAnimation().start();
@@ -126,15 +126,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     const { navigation } = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
 
-    const {
-      shouldQrReaderActive, loading, isGivePrizeModalOpen, currentCampaign,
-    } = this.state;
+    const { shouldQrReaderActive, loading, isGivePrizeModalOpen, currentCampaign } = this.state;
 
     const interpolateColor = this.errorAnimationValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['rgb(204,204,204)', 'rgb(255, 87, 87)'],
     });
-
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
@@ -142,78 +139,78 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         <ActivityIndicator size="large" />
       </View>
     ) : (
-        <View style={this.style.container}>
-          <Modal
-            isVisible={isGivePrizeModalOpen}
-            swipeDirection={['down']}
-            hardwareAccelerated
-            swipeThreshold={200}
-            hasBackdrop
-            backdropOpacity={0.1}
-            animationOut="slideOutDown"
-            animationOutTiming={350}
-            animationInTiming={450}
-            onBackdropPress={() => {
-              this.setState({ isGivePrizeModalOpen: false });
+      <View style={this.style.container}>
+        <Modal
+          isVisible={isGivePrizeModalOpen}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          animationInTiming={450}
+          onBackdropPress={() => {
+            this.setState({ isGivePrizeModalOpen: false });
+          }}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            this.setState({ isGivePrizeModalOpen: false });
+          }}
+        >
+          {currentCampaign ? (
+            <GivePrize
+              companyLogo={CompanyStore.companyLogo}
+              companyName={CompanyStore.companyDetails.companyName}
+              campaignName={currentCampaign.campaignName}
+              campaignType={currentCampaign.campaignType}
+            />
+          ) : (
+            <Text>Error</Text>
+          )}
+        </Modal>
+        <View style={this.style.headerContainer}>
+          <TabsHeader
+            navigation={navigation}
+            onRightPress={() => {
+              navigation.navigate('CompanyDetailsEdit');
             }}
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              margin: 0,
-            }}
-            onSwipeComplete={() => {
-              this.setState({ isGivePrizeModalOpen: false });
-            }}
-          >
-            {currentCampaign ? (
-              <GivePrize
-                companyLogo={CompanyStore.companyLogo}
-                companyName={CompanyStore.companyDetails.companyName}
-                campaignName={currentCampaign.campaignName}
-                campaignType={currentCampaign.campaignType}
+          />
+        </View>
+        {!campaigns ? (
+          <NoCampaign navigation={navigation} />
+        ) : (
+          <View style={this.style.cameraContainer}>
+            {shouldQrReaderActive && (
+              <QRCodeScanner
+                ref={node => {
+                  this.scanner = node;
+                }}
+                cameraStyle={this.style.cameraStyle}
+                onRead={this.onSuccess}
+                fadeIn
+                reactivate
+                vibrate={false}
+                bottomContent={
+                  <View style={this.style.bottomContentContainer}>
+                    <View style={this.style.bottomContentBackground} />
+                    <Text style={this.style.bottomContentText}>
+                      Qr kodu okutarak ödülü verebilirsiniz
+                    </Text>
+                  </View>
+                }
+                bottomViewStyle={this.style.bottomViewStyle}
               />
-            ) : (
-                <Text>Error</Text>
-              )}
-          </Modal>
-          <View style={this.style.headerContainer}>
-            <TabsHeader
-              navigation={navigation}
-              onRightPress={() => {
-                navigation.navigate('CompanyDetailsEdit');
-              }}
+            )}
+            <Animated.View
+              style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]}
             />
           </View>
-          {
-            !campaigns
-              ? <NoCampaign navigation={navigation} />
-              : (
-                <View style={this.style.cameraContainer}>
-                  {shouldQrReaderActive && (
-                    <QRCodeScanner
-                      ref={(node) => {
-                        this.scanner = node;
-                      }}
-                      cameraStyle={this.style.cameraStyle}
-                      onRead={this.onSuccess}
-                      fadeIn
-                      reactivate
-                      vibrate={false}
-                      bottomContent={(
-                        <View style={this.style.bottomContentContainer}>
-                          <View style={this.style.bottomContentBackground} />
-                          <Text style={this.style.bottomContentText}>
-                            Qr kodu okutarak ödülü verebilirsiniz
-                    </Text>
-                        </View>
-                      )}
-                      bottomViewStyle={this.style.bottomViewStyle}
-                    />
-                  )}
-                  <Animated.View style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]} />
-                </View>
-              )
-          }
-        </View>
-      );
+        )}
+      </View>
+    );
   }
 }

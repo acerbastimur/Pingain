@@ -1,4 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
@@ -85,7 +84,7 @@ const UserTabNavigation = createBottomTabNavigator(
     Campaigns: {
       screen: CampaignsStack,
       navigationOptions: {
-        tabBarIcon: (e) => {
+        tabBarIcon: e => {
           if (e.focused) {
             return (
               <FastImage
@@ -120,7 +119,7 @@ const UserTabNavigation = createBottomTabNavigator(
     Prizes: {
       screen: PrizesStack,
       navigationOptions: {
-        tabBarIcon: (e) => {
+        tabBarIcon: e => {
           if (e.focused) {
             return (
               <FastImage

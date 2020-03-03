@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import {
@@ -49,7 +47,8 @@ export default class Campaigns extends React.Component<CampaignsProps> {
         </View>
         <ScrollView
           style={this.style.scrollView}
-          contentContainerStyle={this.style.scrollViewContainer}>
+          contentContainerStyle={this.style.scrollViewContainer}
+        >
           <View style={this.style.listHeader}>
             <Text style={this.style.listHeaderTextLight}>Müşterilerinin Çok Sevdiği</Text>
             <Text numberOfLines={1} style={this.style.listHeaderTextBold}>
@@ -59,151 +58,160 @@ export default class Campaigns extends React.Component<CampaignsProps> {
           <View style={this.style.campaignCardsContainer}>
             {campaigns
               ? campaigns.map(campaign => {
-                switch (campaign.campaignType) {
-                  case CampaignType.Drink:
-                    return (
-                      <Card
-                        elevation={6}
-                        opacity={0.15}
-                        key={Math.random() * 100}
-                        style={this.style.card}>
-                        <TouchableOpacity
-                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                          style={this.style.otherCardBodyItem}
-                          onPress={() => {
-                            navigation.navigate('CampaignCreate', { edit: true, campaign });
-                          }}>
-                          <FastImage
-                            resizeMode="contain"
-                            style={this.style.cardBodyItemIcon}
-                            source={require('../../../../../assets/image/User/coffeeIcon.png')}
-                          />
-
-                          <Text style={this.style.otherCardBodyItemName}>
-                            {campaign.campaignName}
-                          </Text>
-                          <View style={this.style.arrowContainer}>
+                  switch (campaign.campaignType) {
+                    case CampaignType.Drink:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}
+                        >
+                          <TouchableOpacity
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', { edit: true, campaign });
+                            }}
+                          >
                             <FastImage
                               resizeMode="contain"
-                              style={this.style.arrow}
-                              source={require('../../../../../assets/image/Company/coffeeArrow.png')}
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/coffeeIcon.png')}
                             />
-                          </View>
-                        </TouchableOpacity>
-                      </Card>
-                    );
 
-                  case CampaignType.Meal:
-                    return (
-                      <Card
-                        elevation={6}
-                        opacity={0.15}
-                        key={Math.random() * 100}
-                        style={this.style.card}>
-                        <TouchableOpacity
-                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                          style={this.style.otherCardBodyItem}
-                          onPress={() => {
-                            navigation.navigate('CampaignCreate', { edit: true, campaign });
-                          }}>
-                          <FastImage
-                            resizeMode="contain"
-                            style={this.style.cardBodyItemIcon}
-                            source={require('../../../../../assets/image/User/mealIcon.png')}
-                          />
-                          <Text style={this.style.otherCardBodyItemName}>
-                            {campaign.campaignName}
-                          </Text>
-                          <View style={this.style.arrowContainer}>
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <FastImage
+                                resizeMode="contain"
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/coffeeArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+
+                    case CampaignType.Meal:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}
+                        >
+                          <TouchableOpacity
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', { edit: true, campaign });
+                            }}
+                          >
                             <FastImage
                               resizeMode="contain"
-                              style={this.style.arrow}
-                              source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/mealIcon.png')}
                             />
-                          </View>
-                        </TouchableOpacity>
-                      </Card>
-                    );
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <FastImage
+                                resizeMode="contain"
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
 
-                  case CampaignType.Dessert:
-                    return (
-                      <Card
-                        elevation={6}
-                        opacity={0.15}
-                        key={Math.random() * 100}
-                        style={this.style.card}>
-                        <TouchableOpacity
-                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                          style={this.style.otherCardBodyItem}
-                          onPress={() => {
-                            navigation.navigate('CampaignCreate', { edit: true, campaign });
-                          }}>
-                          <FastImage
-                            resizeMode="contain"
-                            style={this.style.cardBodyItemIcon}
-                            source={require('../../../../../assets/image/User/dessertIcon.png')}
-                          />
-                          <Text style={this.style.otherCardBodyItemName}>
-                            {campaign.campaignName}
-                          </Text>
-                          <View style={this.style.arrowContainer}>
+                    case CampaignType.Dessert:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}
+                        >
+                          <TouchableOpacity
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', { edit: true, campaign });
+                            }}
+                          >
                             <FastImage
                               resizeMode="contain"
-                              style={this.style.arrow}
-                              source={require('../../../../../assets/image/Company/dessertArrow.png')}
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/dessertIcon.png')}
                             />
-                          </View>
-                        </TouchableOpacity>
-                      </Card>
-                    );
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <FastImage
+                                resizeMode="contain"
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/dessertArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
 
-                  default:
-                    return (
-                      <Card
-                        elevation={6}
-                        opacity={0.15}
-                        key={Math.random() * 100}
-                        style={this.style.card}>
-                        <TouchableOpacity
-                          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                          style={this.style.otherCardBodyItem}
-                          onPress={() => {
-                            navigation.navigate('CampaignCreate', { edit: true, campaign });
-                          }}>
-                          <FastImage
-                            resizeMode="contain"
-                            style={this.style.cardBodyItemIcon}
-                            source={require('../../../../../assets/image/User/mealIcon.png')}
-                          />
-
-                          <Text style={this.style.otherCardBodyItemName}>
-                            {campaign.campaignName}
-                          </Text>
-                          <View style={this.style.arrowContainer}>
+                    default:
+                      return (
+                        <Card
+                          elevation={6}
+                          opacity={0.15}
+                          key={Math.random() * 100}
+                          style={this.style.card}
+                        >
+                          <TouchableOpacity
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            style={this.style.otherCardBodyItem}
+                            onPress={() => {
+                              navigation.navigate('CampaignCreate', { edit: true, campaign });
+                            }}
+                          >
                             <FastImage
                               resizeMode="contain"
-                              style={this.style.arrow}
-                              source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              style={this.style.cardBodyItemIcon}
+                              source={require('../../../../../assets/image/User/mealIcon.png')}
                             />
-                          </View>
-                        </TouchableOpacity>
-                      </Card>
-                    );
-                }
-              })
+
+                            <Text style={this.style.otherCardBodyItemName}>
+                              {campaign.campaignName}
+                            </Text>
+                            <View style={this.style.arrowContainer}>
+                              <FastImage
+                                resizeMode="contain"
+                                style={this.style.arrow}
+                                source={require('../../../../../assets/image/Company/statisticsArrow.png')}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                        </Card>
+                      );
+                  }
+                })
               : null}
           </View>
           <View style={this.style.btnContainer}>
-            {campaigns.length < 3 ? <Button
-              backgroundColor={Colors.COMPANY}
-              text="Yeni Kampanya Oluştur"
-              textColor="#fff"
-
-              shadow
-              onPress={() => {
-                navigation.navigate('CampaignCreate', { edit: false });
-              }}
-            /> : null}
+            {campaigns.length < 3 ? (
+              <Button
+                backgroundColor={Colors.COMPANY}
+                text="Yeni Kampanya Oluştur"
+                textColor="#fff"
+                shadow
+                onPress={() => {
+                  navigation.navigate('CampaignCreate', { edit: false });
+                }}
+              />
+            ) : null}
           </View>
         </ScrollView>
       </View>

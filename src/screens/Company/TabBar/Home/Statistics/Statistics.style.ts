@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../../styles/Colors';
 import CampaignColors from '../../../../../styles/CampaignColors';
 
@@ -18,10 +16,10 @@ export default StyleSheet.create({
   container: {
     height: '100%',
   },
-  headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
-  scrollView: {flex: 0.9},
-  scrollViewContainer: {paddingBottom: 100},
-  listHeader: {paddingHorizontal: '11.5%', paddingTop: 30},
+  headerContainer: { flex: 0.1, paddingHorizontal: '6%' },
+  scrollView: { flex: 0.9 },
+  scrollViewContainer: { paddingBottom: 100 },
+  listHeader: { paddingHorizontal: '11.5%', paddingTop: 30 },
   listHeaderTextBold: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -41,7 +39,7 @@ export default StyleSheet.create({
     textAlign: 'left',
     marginBottom: responsiveRate(4),
   },
-  statisticsCardsContainer: {marginTop: responsiveRate(20)},
+  statisticsCardsContainer: { marginTop: responsiveRate(20) },
   card: {
     marginTop: responsiveRate(15),
     borderRadius: 15,

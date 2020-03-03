@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -9,16 +7,16 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
-  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  pageContainer: {height: '100%', paddingBottom: 80},
-  headerContainer: {height: 56, paddingHorizontal: '6%'},
+  indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  pageContainer: { height: '100%', paddingBottom: 80 },
+  headerContainer: { height: 56, paddingHorizontal: '6%' },
   centerText: {
     flex: 1,
     fontSize: 18,
     padding: 32,
     color: '#777',
   },
-  keyboardScrollContainer: {flex: 1},
+  keyboardScrollContainer: { flex: 1 },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -39,19 +37,19 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: responsiveRate(10),
   },
-  dropdownComponentContainer: {overflow: 'hidden', height: 50},
-  dropdownContainer: {top: -26},
+  dropdownComponentContainer: { overflow: 'hidden', height: 50 },
+  dropdownContainer: { top: -26 },
   dropdownText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '500',
     color: Colors.PRIMARY,
   },
-  profileImage: {resizeMode: 'contain', width: 70, height: 70},
+  profileImage: { resizeMode: 'contain', width: 70, height: 70 },
   inputContainer: {
     height: 75,
     marginTop: 20,
   },
-  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: { height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1 },
   image: {
     width: '6%',
     height: 36,

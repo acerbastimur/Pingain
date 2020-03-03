@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -10,8 +8,8 @@ const fontScaleBase = 414; // iPhone 11 Pro
 const responsiveRate = (rateNumber: number) => (screenWidth * rateNumber) / fontScaleBase;
 
 export default StyleSheet.create({
-  indicatorContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  keyboardScrollContainer: {flex: 1},
+  indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  keyboardScrollContainer: { flex: 1 },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -50,12 +48,12 @@ export default StyleSheet.create({
     color: Colors.SECONDARY,
     paddingTop: 15,
   },
-  underline: {textDecorationLine: 'underline'},
+  underline: { textDecorationLine: 'underline' },
   inputContainer: {
     flex: 0.2,
     paddingTop: screenHeight > 700 ? 20 : 30,
   },
-  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: { height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1 },
   image: {
     width: '6%',
     height: 36,

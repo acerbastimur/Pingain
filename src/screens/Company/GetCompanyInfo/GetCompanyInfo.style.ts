@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
 import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
@@ -43,7 +41,10 @@ export default StyleSheet.create({
     flex: 1,
   },
   input: {
-    height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1,
+    height: 40,
+    borderColor: '#D8DFE8',
+    color: Colors.SECONDARY,
+    borderBottomWidth: 1,
   },
   inputContainer: {
     flex: 0.2,

@@ -1,12 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {
   View,
@@ -189,19 +180,21 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
           <ScrollView>
             <View style={this.style.swiperContainer}>
               <Swiper dotColor="#D8DFE8" activeDotColor={Colors.PRIMARY} showsButtons={false}>
-                {company.companyImages && company.companyImages.map(image => {
-                  return (
-                    <FastImage
-                      key={Math.random() * 1000}
-                      resizeMode={FastImage.resizeMode.cover}
-                      source={{ uri: image }}
-                      style={this.style.swipeImage}>
-                      <View style={this.style.loadingCenter}>
-                        <ActivityIndicator animating={loading} />
-                      </View>
-                    </FastImage>
-                  );
-                })}
+                {company.companyImages &&
+                  company.companyImages.map(image => {
+                    return (
+                      <FastImage
+                        key={Math.random() * 1000}
+                        resizeMode={FastImage.resizeMode.cover}
+                        source={{ uri: image }}
+                        style={this.style.swipeImage}
+                      >
+                        <View style={this.style.loadingCenter}>
+                          <ActivityIndicator animating={loading} />
+                        </View>
+                      </FastImage>
+                    );
+                  })}
               </Swiper>
             </View>
             <Card elevation={6} opacity={0.15} style={this.style.companyInformationContainer}>
@@ -210,20 +203,24 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   <FastImage
                     source={{ uri: company.companyLogo, priority: 'high' }}
                     resizeMode={FastImage.resizeMode.cover}
-                    style={this.style.companyImage}>
+                    style={this.style.companyImage}
+                  >
                     <View style={this.style.loadingCenter}>
                       <ActivityIndicator animating={loading} />
                     </View>
                   </FastImage>
                 </View>
-                <Text style={this.style.cardHeaderText} numberOfLines={2} ellipsizeMode="tail">{company.companyName}</Text>
+                <Text style={this.style.cardHeaderText} numberOfLines={2} ellipsizeMode="tail">
+                  {company.companyName}
+                </Text>
                 {company.instagramAccount ? (
                   <TouchableOpacity
                     style={this.style.followButton}
                     hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                     onPress={() => {
                       Linking.openURL(`https://www.instagram.com/${company.instagramAccount}`);
-                    }}>
+                    }}
+                  >
                     <Text style={this.style.followButtonText}>Takip et</Text>
                   </TouchableOpacity>
                 ) : null}
@@ -234,14 +231,18 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   horizontal
                   directionalLockEnabled
                   showsHorizontalScrollIndicator={false}
-                  showsVerticalScrollIndicator={false}>
+                  showsVerticalScrollIndicator={false}
+                >
                   {company.companyFeatures.map(featureNo => this.companyFeatureCard(featureNo))}
                 </ScrollView>
               </View>
-              <TouchableOpacity style={this.style.phoneArea} onPress={() => {
-                const { phoneNumber } = company;
-                Linking.openURL(`tel:${phoneNumber}`)
-              }}>
+              <TouchableOpacity
+                style={this.style.phoneArea}
+                onPress={() => {
+                  const { phoneNumber } = company;
+                  Linking.openURL(`tel:${phoneNumber}`);
+                }}
+              >
                 <FastImage
                   style={this.style.phoneIcon}
                   resizeMode={FastImage.resizeMode.contain}
@@ -249,15 +250,17 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 />
                 <Text style={this.style.contactText}>{company.phoneNumber}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={this.style.locationArea}
+              <TouchableOpacity
+                style={this.style.locationArea}
                 onPress={() => {
                   let urlParams = '';
                   const { address } = company;
                   address.split(' ').forEach(word => {
-                    urlParams += word + '+'
+                    urlParams += `${word}+`;
                   });
                   Linking.openURL(`https://www.google.com/maps/place/${urlParams}`);
-                }}>
+                }}
+              >
                 <FastImage
                   style={this.style.locationIcon}
                   resizeMode={FastImage.resizeMode.contain}

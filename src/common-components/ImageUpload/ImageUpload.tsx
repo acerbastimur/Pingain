@@ -1,13 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/sort-comp */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
@@ -43,11 +34,30 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
     },
   };
 
+  constructor(props: ImageUploadProps) {
+    super(props);
+    this.state = {
+      imageSource: null,
+    };
+  }
+
+  componentDidMount() {
+    const { defaultImage } = this.props;
+
+    if (!defaultImage) return;
+
+    storage()
+      .ref()
+      .child(defaultImage)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({ imageSource: url });
+      });
+  }
+
   pickImage = () => {
     ImagePicker.showImagePicker(this.options, response => {
       const { companyLogo, userLogo } = this.props;
-
-      // console.log('Response = ', response.uri);
 
       if (response.didCancel) {
         return null;
@@ -72,7 +82,6 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
 
           if (companyLogo) {
             CompanyStore.newCompanyLogoUri = resizedResponse.uri;
-            //  console.log(CompanyStore);
           }
           if (userLogo) {
             UserStore.newCompanyLogoUri = resizedResponse.uri;
@@ -90,27 +99,6 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
     });
   };
 
-  constructor(props: ImageUploadProps) {
-    super(props);
-    this.state = {
-      imageSource: null,
-    };
-  }
-
-  componentDidMount() {
-    const { defaultImage } = this.props;
-
-    if (!defaultImage) return;
-
-    storage()
-      .ref()
-      .child(defaultImage)
-      .getDownloadURL()
-      .then(url => {
-        this.setState({ imageSource: url });
-      });
-  }
-
   public render() {
     const { imageSource } = this.state;
     const { hideText, defaultImage, borderWidth, borderColor } = this.props;
@@ -125,7 +113,8 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
             { borderWidth: borderWidth || 4 },
             { borderColor },
           ]}
-          onPress={this.pickImage}>
+          onPress={this.pickImage}
+        >
           {imageSource ? (
             <FastImage
               style={this.s.profilePhoto}
@@ -133,12 +122,12 @@ export default class ImageUpload extends React.Component<ImageUploadProps, Image
               source={{ uri: imageSource, priority: 'high' }}
             />
           ) : (
-              <FastImage
-                style={this.s.plus}
-                resizeMode={FastImage.resizeMode.cover}
-                source={require('../../assets/image/plus.png')}
-              />
-            )}
+            <FastImage
+              style={this.s.plus}
+              resizeMode={FastImage.resizeMode.cover}
+              source={require('../../assets/image/plus.png')}
+            />
+          )}
         </TouchableOpacity>
         {hideText ? null : <Text style={this.s.text}>Profil fotoğrafınızı yükleyin</Text>}
       </View>

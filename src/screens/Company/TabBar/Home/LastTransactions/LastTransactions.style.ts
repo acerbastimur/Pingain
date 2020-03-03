@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -12,8 +10,8 @@ export default StyleSheet.create({
   container: {
     height: '100%',
   },
-  headerContainer: {flex: 0.1, paddingHorizontal: '6%'},
-  pageHeader: {paddingHorizontal: '11.5%', paddingTop: 20, flex: 0.1},
+  headerContainer: { flex: 0.1, paddingHorizontal: '6%' },
+  pageHeader: { paddingHorizontal: '11.5%', paddingTop: 20, flex: 0.1 },
   pageHeaderTextBold: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -33,7 +31,7 @@ export default StyleSheet.create({
     textAlign: 'left',
     marginBottom: responsiveRate(4),
   },
-  bottomArea: {flex: 0.8},
+  bottomArea: { flex: 0.8 },
   listHeader: {
     marginTop: responsiveRate(20),
     flexDirection: 'row',
@@ -58,7 +56,7 @@ export default StyleSheet.create({
   headerTime: {
     marginLeft: '2%',
   },
-  usersContainer: {marginTop: responsiveRate(30), marginBottom: 80},
+  usersContainer: { marginTop: responsiveRate(30), marginBottom: 80 },
   userContainer: {
     flexDirection: 'row',
     alignItems: 'center',

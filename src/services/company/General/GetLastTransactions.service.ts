@@ -4,7 +4,7 @@ import LastTransaction from '../../../schemes/company/LastTransactions';
 
 export default class GetLastTransactionsService {
   static async getLastTransactions(): Promise<Array<LastTransaction>> {
-    const {uid} = auth().currentUser;
+    const { uid } = auth().currentUser;
     const lastTransactionsRef = firestore()
       .collection('lastTransactions')
       .where('companyId', '==', uid)

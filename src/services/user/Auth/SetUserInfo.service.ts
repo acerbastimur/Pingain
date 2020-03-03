@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {UserStatistics} from '../../../schemes/user/User';
+import { UserStatistics } from '../../../schemes/user/User';
 import GetUserInfoService from '../General/GetUserInfo.service';
 
 export default class SetUserInfoService {
@@ -17,7 +17,7 @@ export default class SetUserInfoService {
       const userUid = auth().currentUser.uid;
       const uploadLogo = await this.uploadProfilePhotoToStorage(profilePhotoUri, userUid);
 
-      const statistics: UserStatistics = {totalPinEarned: 0, totalPrizeEarned: 0};
+      const statistics: UserStatistics = { totalPinEarned: 0, totalPrizeEarned: 0 };
       const currentUserCollection = firestore()
         .collection('users')
         .doc(userUid);
@@ -71,7 +71,7 @@ export default class SetUserInfoService {
   ): Promise<boolean> {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async resolve => {
-      const {uid} = auth().currentUser;
+      const { uid } = auth().currentUser;
 
       if (userLogo) {
         await this.uploadProfilePhotoToStorage(userLogo, uid);

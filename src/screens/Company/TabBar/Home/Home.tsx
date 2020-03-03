@@ -1,11 +1,5 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable no-bitwise */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {
-  View, Text, ScrollView, TouchableOpacity,
-} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { Card } from 'react-native-shadow-cards';
 
@@ -22,7 +16,7 @@ export interface HomeProps {
 }
 
 @observer
-export default class Home extends React.Component<HomeProps, any> {
+export default class Home extends React.Component<HomeProps> {
   style = HomeStyle;
 
   constructor(props: HomeProps) {
@@ -33,7 +27,7 @@ export default class Home extends React.Component<HomeProps, any> {
   public render() {
     const { navigation } = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
-    const { companyName } = CompanyStore.companyDetails ;
+    const { companyName } = CompanyStore.companyDetails;
 
     return (
       <View style={this.style.container}>
@@ -49,7 +43,7 @@ export default class Home extends React.Component<HomeProps, any> {
           <ScrollView style={this.style.scrollViewStyle}>
             <Text style={this.style.headerText}>{companyName}</Text>
             <View style={this.style.campaignsContainer}>
-              {campaigns.map((campaign) => {
+              {campaigns.map(campaign => {
                 switch (campaign.campaignType) {
                   case 1:
                     return (
@@ -57,7 +51,8 @@ export default class Home extends React.Component<HomeProps, any> {
                         key={Math.random() * 100}
                         elevation={6}
                         opacity={0.15}
-                        style={this.style.card}>
+                        style={this.style.card}
+                      >
                         <View style={this.style.otherCardBodyItem}>
                           <FastImage
                             resizeMode="contain"
@@ -69,8 +64,9 @@ export default class Home extends React.Component<HomeProps, any> {
                           </Text>
                           <View style={this.style.cardBodyItemCount}>
                             <Text
-                              style={[this.style.cardBodyItemCountText, this.style.cardItemCoffee]}>
-                              {campaign?.statistics?.totalPinGiven | 0}
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemCoffee]}
+                            >
+                              {campaign?.statistics?.totalPinGiven || 0}
                             </Text>
                           </View>
                         </View>
@@ -82,7 +78,8 @@ export default class Home extends React.Component<HomeProps, any> {
                         key={Math.random() * 100}
                         elevation={6}
                         opacity={0.15}
-                        style={this.style.card}>
+                        style={this.style.card}
+                      >
                         <View style={this.style.otherCardBodyItem}>
                           <FastImage
                             resizeMode="contain"
@@ -95,8 +92,9 @@ export default class Home extends React.Component<HomeProps, any> {
                           </Text>
                           <View style={this.style.cardBodyItemCount}>
                             <Text
-                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
-                              {campaign?.statistics?.totalPinGiven | 0}
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}
+                            >
+                              {campaign?.statistics?.totalPinGiven || 0}
                             </Text>
                           </View>
                         </View>
@@ -108,7 +106,8 @@ export default class Home extends React.Component<HomeProps, any> {
                         key={Math.random() * 100}
                         elevation={6}
                         opacity={0.15}
-                        style={this.style.card}>
+                        style={this.style.card}
+                      >
                         <View style={this.style.otherCardBodyItem}>
                           <FastImage
                             resizeMode="contain"
@@ -121,11 +120,9 @@ export default class Home extends React.Component<HomeProps, any> {
                           </Text>
                           <View style={this.style.cardBodyItemCount}>
                             <Text
-                              style={[
-                                this.style.cardBodyItemCountText,
-                                this.style.cardItemDessert,
-                              ]}>
-                              {campaign?.statistics?.totalPinGiven | 0}
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemDessert]}
+                            >
+                              {campaign?.statistics?.totalPinGiven || 0}
                             </Text>
                           </View>
                         </View>
@@ -137,7 +134,8 @@ export default class Home extends React.Component<HomeProps, any> {
                         key={Math.random() * 100}
                         elevation={6}
                         opacity={0.15}
-                        style={this.style.card}>
+                        style={this.style.card}
+                      >
                         <View style={this.style.otherCardBodyItem}>
                           <FastImage
                             resizeMode="contain"
@@ -150,7 +148,8 @@ export default class Home extends React.Component<HomeProps, any> {
                           </Text>
                           <View style={this.style.cardBodyItemCount}>
                             <Text
-                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}>
+                              style={[this.style.cardBodyItemCountText, this.style.cardItemMeal]}
+                            >
                               5
                             </Text>
                           </View>
@@ -167,7 +166,8 @@ export default class Home extends React.Component<HomeProps, any> {
                   onPress={() => {
                     navigation.navigate('CompanyCampaigns');
                   }}
-                  style={this.style.otherCardBodyItem}>
+                  style={this.style.otherCardBodyItem}
+                >
                   <FastImage
                     resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
@@ -190,7 +190,8 @@ export default class Home extends React.Component<HomeProps, any> {
                   onPress={() => {
                     navigation.navigate('LastTransaction');
                   }}
-                  style={this.style.otherCardBodyItem}>
+                  style={this.style.otherCardBodyItem}
+                >
                   <FastImage
                     resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
@@ -213,7 +214,8 @@ export default class Home extends React.Component<HomeProps, any> {
                   style={this.style.otherCardBodyItem}
                   onPress={() => {
                     navigation.navigate('Statistics');
-                  }}>
+                  }}
+                >
                   <FastImage
                     resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
@@ -233,7 +235,8 @@ export default class Home extends React.Component<HomeProps, any> {
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
                   hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  style={this.style.otherCardBodyItem}>
+                  style={this.style.otherCardBodyItem}
+                >
                   <FastImage
                     resizeMode="contain"
                     style={this.style.cardBodyActionIcon}
@@ -253,8 +256,8 @@ export default class Home extends React.Component<HomeProps, any> {
             </View>
           </ScrollView>
         ) : (
-            <NoCampaign navigation={navigation} />
-          )}
+          <NoCampaign navigation={navigation} />
+        )}
       </View>
     );
   }

@@ -1,4 +1,4 @@
-import {UserCompany} from '../../../schemes/user/UserCompany';
+import { UserCompany } from '../../../schemes/user/UserCompany';
 
 export default class GetCompaniesService {
   static getCompanies(): Promise<Array<UserCompany>> {

@@ -1,6 +1,6 @@
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import firestore, {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
-import {CompanyStatistics} from '../../../schemes/company/Company';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import { CompanyStatistics } from '../../../schemes/company/Company';
 import GeneralStore from '../../../stores/General.store';
 import AuthRole from '../../../schemes/general/AuthRole.enum';
 

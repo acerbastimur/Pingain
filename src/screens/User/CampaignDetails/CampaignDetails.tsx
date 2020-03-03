@@ -1,21 +1,14 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-wrap-multilines */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
 import * as React from 'react';
-import {
-  View, Text, TouchableOpacity, Image, Dimensions, Linking, Platform,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, Dimensions, Linking, Platform } from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import { Card } from 'react-native-shadow-cards';
 import {
-  NavigationScreenProp, NavigationState, NavigationParams, FlatList,
+  NavigationScreenProp,
+  NavigationState,
+  NavigationParams,
+  FlatList,
 } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import { toJS } from 'mobx';
@@ -42,7 +35,8 @@ const Pin = ({ completed, navigation }) => {
           height: itemWidth,
           borderRadius: 12,
           overflow: 'hidden',
-        }}>
+        }}
+      >
         <FastImage
           resizeMode="contain"
           style={{ width: itemWidth, height: itemWidth }}
@@ -54,7 +48,6 @@ const Pin = ({ completed, navigation }) => {
   return (
     <TouchableOpacity
       hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-
       onPress={() => {
         navigation.navigate('QrRead');
         CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
@@ -64,7 +57,8 @@ const Pin = ({ completed, navigation }) => {
         height: itemWidth,
         borderRadius: 12,
         overflow: 'hidden',
-      }}>
+      }}
+    >
       <FastImage
         resizeMode="contain"
         style={{ width: itemWidth, height: itemWidth }}
@@ -73,7 +67,6 @@ const Pin = ({ completed, navigation }) => {
     </TouchableOpacity>
   );
 };
-
 
 const campaignIcon = ({ campaignType }) => {
   const style = CampaignDetailsStyle;
@@ -133,9 +126,7 @@ const campaignCount = ({ campaignType, actionCount }: Campaign, usersPinCount: n
       }
       return (
         <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>
-            {usersPinCount}
-          </Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{usersPinCount}</Text>
           <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>/</Text>
           <Text style={[style.cardBodyItemCountText, style.cardItemCoffee]}>{actionCount}</Text>
         </View>
@@ -173,13 +164,9 @@ const campaignCount = ({ campaignType, actionCount }: Campaign, usersPinCount: n
       }
       return (
         <View style={style.cardBodyItemCount}>
-          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>
-            {usersPinCount}
-          </Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{usersPinCount}</Text>
           <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>/</Text>
-          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>
-            {actionCount}
-          </Text>
+          <Text style={[style.cardBodyItemCountText, style.cardItemDessert]}>{actionCount}</Text>
         </View>
       );
     default:
@@ -191,21 +178,20 @@ const onOtherCampaignCardPress = (campaign: Campaign) => {
   const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
   let isUserJoinedThisCampaign: ActiveCampaign = null;
 
-  isUserJoinedThisCampaign = activeCampaigns
-    && activeCampaigns.length
-    && activeCampaigns.find((activeCampaign) => activeCampaign.campaignId === campaign.campaignId);
+  isUserJoinedThisCampaign =
+    activeCampaigns &&
+    activeCampaigns.length &&
+    activeCampaigns.find(activeCampaign => activeCampaign.campaignId === campaign.campaignId);
 
   setTimeout(() => {
-    const usersPinCount = isUserJoinedThisCampaign
-      ? isUserJoinedThisCampaign.pinEarned
-      : 0;
+    const usersPinCount = isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0;
     const isCompleted = usersPinCount === campaign.actionCount;
 
     if (isCompleted) {
       const { giftCode } = UserStore.userDetails.activeCampaigns.find(
-        (activeCampaign) => campaign.campaignId === activeCampaign.campaignId,
+        activeCampaign => campaign.campaignId === activeCampaign.campaignId,
       );
-      const company = toJS(UserStore.companies.find((cmp) => cmp.companyId === campaign.companyId));
+      const company = toJS(UserStore.companies.find(cmp => cmp.companyId === campaign.companyId));
 
       WinModalStore.winPrizeDetails = {
         campaignType: campaign.campaignType,
@@ -230,38 +216,38 @@ const onOtherCampaignCardPress = (campaign: Campaign) => {
     return null;
   }, 200);
 };
-const otherCampaigns = (campaigns: Campaign[], campaignId: string) => campaigns
-  .map((campaign) => {
-    const style = CampaignDetailsStyle;
+const otherCampaigns = (campaigns: Campaign[], campaignId: string) =>
+  campaigns
+    .map(campaign => {
+      const style = CampaignDetailsStyle;
 
-    const userpins = UserStore.userDetails.activeCampaigns
-      && UserStore.userDetails.activeCampaigns.find(
-        (activeCampaign) => activeCampaign.campaignId === campaign.campaignId,
+      const userpins =
+        UserStore.userDetails.activeCampaigns &&
+        UserStore.userDetails.activeCampaigns.find(
+          activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+        );
+      const isCompleted = userpins?.pinEarned === campaign.actionCount;
+
+      if (campaign.campaignId === campaignId) return null;
+
+      return (
+        <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
+          <TouchableOpacity
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+            style={style.otherCardBodyItem}
+            onPress={() => onOtherCampaignCardPress(campaign)}
+          >
+            {campaignIcon({ campaignType: campaign.campaignType })}
+
+            <Text numberOfLines={1} ellipsizeMode="tail" style={style.otherCardBodyItemName}>
+              {campaign.campaignName}
+            </Text>
+            {campaignCount(campaign, userpins ? userpins.pinEarned : 0)}
+          </TouchableOpacity>
+        </Card>
       );
-    const isCompleted = userpins?.pinEarned === campaign.actionCount;
-
-    if (campaign.campaignId === campaignId) return null;
-
-    return (
-      <Card key={Math.random() * 100} elevation={6} opacity={0.2} style={style.card}>
-        <TouchableOpacity
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          style={style.otherCardBodyItem}
-          onPress={() => onOtherCampaignCardPress(campaign)}>
-          {campaignIcon({ campaignType: campaign.campaignType })}
-
-          <Text numberOfLines={1} ellipsizeMode="tail" style={style.otherCardBodyItemName}>{campaign.campaignName}</Text>
-          {campaignCount(
-            campaign,
-            userpins ? userpins.pinEarned : 0,
-
-          )}
-        </TouchableOpacity>
-      </Card>
-    );
-  })
-  .filter((e) => e);
-
+    })
+    .filter(e => e);
 
 const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
   const style = CampaignDetailsStyle;
@@ -276,8 +262,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
   const { selectedCampaign } = CampaignDetailsModalStore;
   const { companyName, campaigns, companyLogo } = CampaignDetailsModalStore.selectedCompany;
   const userPinCount = CampaignDetailsModalStore.selectedCampaignPinCount;
-  const currentCompany = UserStore.companies.find((company) => company.companyId === companyId);
-
+  const currentCompany = UserStore.companies.find(company => company.companyId === companyId);
 
   return (
     <View style={style.container}>
@@ -291,7 +276,8 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             navigation.navigate('CompanyDetails', { company: currentCompany });
           }, 200);
         }}
-        style={style.cardHeader}>
+        style={style.cardHeader}
+      >
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode={FastImage.resizeMode.cover}
@@ -300,7 +286,9 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
           />
         </View>
 
-        <Text numberOfLines={1} ellipsizeMode="tail" style={style.cardHeaderText}>{companyName}</Text>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={style.cardHeaderText}>
+          {companyName}
+        </Text>
         <FastImage
           resizeMode="contain"
           style={style.headerArrow}
@@ -312,8 +300,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
         {campaignIcon({ campaignType })}
         <Text style={style.cardBodyItemName}>{campaignName}</Text>
 
-        {campaignCount(selectedCampaign,
-          userPinCount > 0 ? userPinCount : 0)}
+        {campaignCount(selectedCampaign, userPinCount > 0 ? userPinCount : 0)}
       </View>
       <View style={style.line} />
       <View style={style.pinsContainer}>
@@ -325,7 +312,8 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             scrollEnabled={false}
             renderItem={({ index }) => (
               <View
-                style={{ marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25 }}>
+                style={{ marginRight: (Dimensions.get('window').width / 100) * 4, marginTop: 25 }}
+              >
                 <Pin completed={userPinCount > index} navigation={navigation} />
               </View>
             )}
@@ -345,48 +333,51 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={
+              nextButton={() => (
                 <Image
                   source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
-              }
-              prevButton={
+              )}
+              prevButton={() => (
                 <Image
                   source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
-              }>
+              )}
+            >
               {otherCampaigns(campaigns, campaignId)}
             </Swiper>
           </View>
         </View>
       ) : (
-          <View style={style.noOtherCampaignsContainer}>
-            <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
-            <Text style={style.shareUsText}>
-              Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
+        <View style={style.noOtherCampaignsContainer}>
+          <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
+          <Text style={style.shareUsText}>
+            Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
-                                                          destek vermek için arkadaşlarını
+            destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
-            </Text>
-            <View style={style.shareButtonContainer}>
-              <Button
-                text="Davet Et"
-                backgroundColor={Colors.INFO}
-                textColor="#fff"
-                shadow
-                onPress={() => {
-                  const whatsappText = Platform.select({
-                    android: "Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim: \n https://",
-                    ios: "Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim:  \n https://"
-                  });
-                  Linking.openURL(`whatsapp://send?text=${whatsappText}`);
-                }}
-              />
-            </View>
+          </Text>
+          <View style={style.shareButtonContainer}>
+            <Button
+              text="Davet Et"
+              backgroundColor={Colors.INFO}
+              textColor="#fff"
+              shadow
+              onPress={() => {
+                const whatsappText = Platform.select({
+                  android:
+                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim: \n https://',
+                  ios:
+                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim:  \n https://',
+                });
+                Linking.openURL(`whatsapp://send?text=${whatsappText}`);
+              }}
+            />
           </View>
-        )}
+        </View>
+      )}
     </View>
   );
 };

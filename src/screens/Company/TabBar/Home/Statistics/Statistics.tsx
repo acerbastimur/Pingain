@@ -1,14 +1,12 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
   NavigationState,
   ScrollView,
 } from 'react-navigation';
-import {Card} from 'react-native-shadow-cards';
+import { Card } from 'react-native-shadow-cards';
 import StatisticsStyle from './Statistics.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 import GetCompanyInfoService from '../../../../../services/company/General/GetCompanyInfo.service';
@@ -32,15 +30,15 @@ export default class Statistics extends React.Component<StatisticsProps, Statist
   }
 
   componentDidMount() {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     GetCompanyInfoService.getCompanyInfo().then(() => {
-      this.setState({loading: false});
+      this.setState({ loading: false });
     });
   }
 
   public render() {
-    const {navigation} = this.props;
-    const {loading} = this.state;
+    const { navigation } = this.props;
+    const { loading } = this.state;
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
@@ -62,7 +60,8 @@ export default class Statistics extends React.Component<StatisticsProps, Statist
         </View>
         <ScrollView
           style={this.style.scrollView}
-          contentContainerStyle={this.style.scrollViewContainer}>
+          contentContainerStyle={this.style.scrollViewContainer}
+        >
           <View style={this.style.listHeader}>
             <Text style={this.style.listHeaderTextLight}>İşletmeni İleriye Taşıyacak</Text>
             <Text numberOfLines={1} style={this.style.listHeaderTextBold}>

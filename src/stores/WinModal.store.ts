@@ -1,5 +1,5 @@
-import {UserCompany} from './../schemes/user/UserCompany';
-import {observable} from 'mobx';
+import { observable } from 'mobx';
+import { UserCompany } from '../schemes/user/UserCompany';
 import CampaignType from '../schemes/company/CampaignType.enum';
 
 class WinModalStore {
@@ -10,6 +10,7 @@ class WinModalStore {
     companyName: string;
     campaignType: CampaignType;
     campaignName: string;
+    companyId: string;
   } = null;
 
   @observable isWinPrizeModalOpened = false;

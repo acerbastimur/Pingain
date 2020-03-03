@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
 import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/Colors';
 
@@ -24,7 +22,10 @@ export default StyleSheet.create({
     height: 25,
   },
   imageContainer: {
-    width: 25, height: 25, borderRadius: 25, overflow: 'hidden',
+    width: 25,
+    height: 25,
+    borderRadius: 25,
+    overflow: 'hidden',
   },
   image: {
     width: 25,

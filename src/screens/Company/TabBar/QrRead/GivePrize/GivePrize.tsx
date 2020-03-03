@@ -1,12 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import { View, Text } from 'react-native';
 
@@ -112,7 +103,7 @@ const GivePrize = ({ campaignType, companyLogo, companyName, campaignName }: Giv
       <View style={style.greetingContainer}>
         <Text style={style.greetingHeaderText}>Ve bir Ödül Daha !</Text>
         <Text style={style.greetingText}>
-          Müşterine yepyeni bir  <Text style={style.textHighlight}>Ödül </Text> verdin!
+          Müşterine yepyeni bir <Text style={style.textHighlight}>Ödül </Text> verdin!
         </Text>
         <Text style={style.greetingText}> Ve müşteri bağlılığını daha da arttırdın!</Text>
         <Animatable.Image

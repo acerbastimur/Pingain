@@ -5,8 +5,6 @@ export default class ReadUserQr {
     scannedQrId: string,
   ): Promise<number> {
     return new Promise((resolve, reject) => {
-      console.log('ReadUserQr API');
-
       const requestOptions = {
         method: 'POST',
         redirect: 'follow',

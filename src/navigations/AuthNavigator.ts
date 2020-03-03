@@ -1,4 +1,4 @@
-import {createStackNavigator} from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 import AuthTypeSelect from '../screens/AuthTypeSelect';
 import UserLogin from '../screens/User/Login';
 import UserRegister from '../screens/User/Register';

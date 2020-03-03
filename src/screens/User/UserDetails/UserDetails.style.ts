@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
 import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../styles/Colors';
 
@@ -82,6 +80,6 @@ export default StyleSheet.create({
     height: 48,
     paddingHorizontal: '6%',
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
 });

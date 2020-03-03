@@ -34,9 +34,10 @@
     "no-use-before-define": "off",
     "react-native/no-unused-styles": "error",
     "react-native/no-inline-styles": "error",
-    "react-native/no-color-literals": "error",
+    "react-native/no-color-literals": "off",
     "react/jsx-one-expression-per-line": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
+    "react/jsx-wrap-multilines": "off",
     "prettier/prettier": ["error"],
     "import/extensions": [
       "error",
@@ -50,7 +51,8 @@
     ],
     "global-require": "off",
     "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
-    "eslint-comments/disable-enable-pair": ["error", { "allowWholeFile": true }]
+    "eslint-comments/disable-enable-pair": ["error", { "allowWholeFile": true }],
+    "react/jsx-curly-newline": "off"
   },
   "overrides": [
     {

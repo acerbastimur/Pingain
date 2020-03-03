@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
@@ -10,7 +8,6 @@ import GeneralStore from '../../../stores/General.store';
 import AuthRole from '../../../schemes/general/AuthRole.enum';
 import CompanyStore from '../../../stores/Company.store';
 import UserStore from '../../../stores/User.store';
-import { toJS } from 'mobx';
 
 interface RightIconProps {
   width?: number;
@@ -20,7 +17,7 @@ interface RightIconProps {
 }
 
 interface RightIconState {
-  isLoadingImage: boolean
+  isLoadingImage: boolean;
 }
 
 @observer
@@ -30,8 +27,8 @@ export default class RightIcon extends React.Component<RightIconProps, RightIcon
   constructor(props: RightIconProps) {
     super(props);
     this.state = {
-      isLoadingImage: true
-    }
+      isLoadingImage: true,
+    };
   }
 
   render() {
@@ -61,18 +58,16 @@ export default class RightIcon extends React.Component<RightIconProps, RightIcon
           source={{ uri: CompanyStore.companyLogo }}
           onLoadEnd={() => {
             this.setState({
-              isLoadingImage: false
+              isLoadingImage: false,
             });
           }}
         >
           <View style={this.s.loadingCenter}>
             <ActivityIndicator animating={isLoadingImage} />
           </View>
-
         </FastImage>
       ) : null;
     }
-    console.log(toJS(UserStore));
 
     return profilePhoto ? (
       <FastImage
@@ -81,14 +76,13 @@ export default class RightIcon extends React.Component<RightIconProps, RightIcon
         source={{ uri: profilePhoto }}
         onLoadEnd={() => {
           this.setState({
-            isLoadingImage: false
+            isLoadingImage: false,
           });
         }}
       >
         <View style={this.s.loadingCenter}>
           <ActivityIndicator animating={isLoadingImage} />
         </View>
-
       </FastImage>
     ) : null;
   }
