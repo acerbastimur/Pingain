@@ -1,15 +1,5 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
 import * as React from 'react';
-import {
-  View, Text, TouchableOpacity, ActivityIndicator,
-} from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 
@@ -160,7 +150,8 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
               onPress={() => {
                 navigation.navigate('CompanyDetails', { company });
               }}
-              style={this.s.cardHeader}>
+              style={this.s.cardHeader}
+            >
               <View style={this.s.cardHeaderImageContainer}>
                 <FastImage
                   style={this.s.cardHeaderImage}
@@ -174,14 +165,17 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                   }}
                   onLoadEnd={() => {
                     this.setState({ companyImageLoading: false });
-                  }}>
+                  }}
+                >
                   <View style={this.s.loadingCenter}>
                     <ActivityIndicator animating={companyImageLoading} />
                   </View>
                 </FastImage>
               </View>
 
-              <Text style={this.s.cardHeaderText} numberOfLines={1} ellipsizeMode="tail" >{company.companyName}</Text>
+              <Text style={this.s.cardHeaderText} numberOfLines={1} ellipsizeMode="tail">
+                {company.companyName}
+              </Text>
 
               <FastImage
                 resizeMode="contain"
@@ -193,13 +187,16 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
           </View>
         )}
         <View style={this.s.cardBody}>
-          {company.campaigns
-            && company.campaigns.map((campaign) => {
+          {company.campaigns &&
+            company.campaigns.map(campaign => {
               const activeCampaigns = toJS(UserStore.userDetails.activeCampaigns);
               let isUserJoinedThisCampaign: ActiveCampaign = null;
-              isUserJoinedThisCampaign = activeCampaigns
-                && activeCampaigns.length
-                && activeCampaigns.find((activeCampaign) => activeCampaign.campaignId === campaign.campaignId);
+              isUserJoinedThisCampaign =
+                activeCampaigns &&
+                activeCampaigns.length &&
+                activeCampaigns.find(
+                  activeCampaign => activeCampaign.campaignId === campaign.campaignId,
+                );
               return (
                 <TouchableOpacity
                   key={Math.random() * 1000}
@@ -213,7 +210,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
 
                     if (isCompleted) {
                       const { giftCode } = UserStore.userDetails.activeCampaigns.find(
-                        (activeCampaign) => campaign.campaignId === activeCampaign.campaignId,
+                        activeCampaign => campaign.campaignId === activeCampaign.campaignId,
                       );
                       WinModalStore.winPrizeDetails = {
                         campaignType: campaign.campaignType,
@@ -234,9 +231,12 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                       ? isUserJoinedThisCampaign?.pinEarned
                       : 0;
                     CampaignDetailsStore.isCampaignDetailsModalOpen = true;
-                  }}>
+                  }}
+                >
                   {this.campaignIcon(campaign)}
-                  <Text style={this.s.cardBodyItemName} numberOfLines={1} ellipsizeMode="tail">{campaign.campaignName}</Text>
+                  <Text style={this.s.cardBodyItemName} numberOfLines={1} ellipsizeMode="tail">
+                    {campaign.campaignName}
+                  </Text>
                   {this.campaignCount(
                     campaign,
                     isUserJoinedThisCampaign ? isUserJoinedThisCampaign.pinEarned : 0,

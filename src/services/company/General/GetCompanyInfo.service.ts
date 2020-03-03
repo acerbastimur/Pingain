@@ -6,7 +6,7 @@ import CompanyStore from '../../../stores/Company.store';
 
 export default class GetCompanyInfoService {
   static async getCompanyInfo(): Promise<Company> {
-    const {uid} = auth().currentUser;
+    const { uid } = auth().currentUser;
     const companyColRef = firestore()
       .collection('companies')
       .doc(uid);

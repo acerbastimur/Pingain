@@ -1,5 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 import GetCompanyCampaignsService from './GetCompanyCampaigns.service';
 
 export default class ChangeCampaignQrService {

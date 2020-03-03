@@ -10,16 +10,17 @@ export default class GetCompanyCampaignsService {
     const userCampaigns: Array<Campaign> = []; // create a blank campaign array to be filled campaigns' details instead of it's key
     if (userCampaignKeys) {
       await Promise.all(
-        userCampaignKeys.map(async campaignKey => { // iterate all campaign keys
+        userCampaignKeys.map(async campaignKey => {
+          // iterate all campaign keys
           const companyColRef = firestore()
             .collection('campaigns')
             .doc(campaignKey);
-          const dataSnapshot = (await companyColRef.get()).data() as Campaign; // get campaign's details 
+          const dataSnapshot = (await companyColRef.get()).data() as Campaign; // get campaign's details
           return dataSnapshot;
         }),
       ).then(values => {
-        userCampaigns.push(...values) // fullfill blank campaign array
-      })
+        userCampaigns.push(...values); // fullfill blank campaign array
+      });
     }
 
     CompanyStore.campaigns = userCampaigns; // update Company Store

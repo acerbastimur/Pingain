@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { NavigationActions, NavigationScreenProp } from 'react-navigation';
@@ -29,10 +27,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
     const { navigation, onLeftPress } = this.props;
 
     if (
-      navigation.state.routeName === 'CampaignsHome'
-      || (navigation.state.routeName === 'QrReadHome' && GeneralStore.authRole === AuthRole.User)
-      || navigation.state.routeName === 'PrizesHome'
-
+      navigation.state.routeName === 'CampaignsHome' ||
+      (navigation.state.routeName === 'QrReadHome' && GeneralStore.authRole === AuthRole.User) ||
+      navigation.state.routeName === 'PrizesHome'
     ) {
       return (
         <TouchableOpacity>
@@ -45,14 +42,21 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       );
     }
 
-    if (navigation.state.routeName === 'QrReadHome'
-      || navigation.state.routeName === 'QrGenerateHome'
-      || navigation.state.routeName === 'Home'
+    if (
+      navigation.state.routeName === 'QrReadHome' ||
+      navigation.state.routeName === 'QrGenerateHome' ||
+      navigation.state.routeName === 'Home'
     ) {
       const {
-        address, companyFeatures, city, companyImages, phoneNumber, companyLogo,
+        address,
+        companyFeatures,
+        city,
+        companyImages,
+        phoneNumber,
+        companyLogo,
       } = CompanyStore.companyDetails;
-      const profileState = address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
+      const profileState =
+        address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
 
       if (profileState) {
         return (
@@ -66,7 +70,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       return (
         <TouchableOpacity
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          style={this.s.stateWrapper} onPress={() => navigation.navigate('CompanyDetailsEdit')}>
+          style={this.s.stateWrapper}
+          onPress={() => navigation.navigate('CompanyDetailsEdit')}
+        >
           <View style={this.s.passiveDot} />
           <Text style={this.s.stateText}>Pasif</Text>
         </TouchableOpacity>
@@ -77,11 +83,11 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       <TouchableOpacity
         style={this.s.backButtonContainer}
         hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
-
         onPress={() => {
           onLeftPress();
           navigation.dispatch(NavigationActions.back());
-        }}>
+        }}
+      >
         <FastImage
           style={this.s.backIcon}
           resizeMode="contain"
@@ -92,9 +98,7 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
   };
 
   render() {
-    const {
-      rightButtonText, onRightPress, rightEditIcon, rightTextColor,
-    } = this.props;
+    const { rightButtonText, onRightPress, rightEditIcon, rightTextColor } = this.props;
 
     return (
       <View style={this.s.container}>
@@ -104,9 +108,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         </View>
         <TouchableOpacity
           hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
-
-          style={[rightButtonText ? this.s.rightTextContainer : this.s.imageContainer]}
-          onPress={onRightPress}>
+          style={rightButtonText ? this.s.rightTextContainer : this.s.imageContainer}
+          onPress={onRightPress}
+        >
           <RightIcon
             rightButtonText={rightButtonText}
             rightTextColor={rightTextColor}

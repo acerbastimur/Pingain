@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
+
 import Colors from '../../../styles/Colors';
 import CampaignColors from '../../../styles/CampaignColors';
 
@@ -38,7 +37,10 @@ export default StyleSheet.create({
     height: 40,
   },
   cardHeaderImageContainer: {
-    width: 32, height: 32, borderRadius: 32, overflow: 'hidden',
+    width: 32,
+    height: 32,
+    borderRadius: 32,
+    overflow: 'hidden',
   },
   cardHeaderImage: {
     width: 32,

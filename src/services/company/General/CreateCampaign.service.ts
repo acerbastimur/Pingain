@@ -5,7 +5,7 @@ import GetCompanyCampaignsService from './GetCompanyCampaigns.service';
 export default class CreateCampaignService {
   static addCampaignToCompany(campaignId: string): Promise<boolean> {
     return new Promise(resolve => {
-      const {uid} = auth().currentUser;
+      const { uid } = auth().currentUser;
 
       firestore()
         .collection('companies')
@@ -26,7 +26,7 @@ export default class CreateCampaignService {
     prizeCount: number,
   ): Promise<boolean> {
     return new Promise(resolve => {
-      const {uid} = auth().currentUser;
+      const { uid } = auth().currentUser;
 
       const campaignColRef = firestore()
         .collection('campaigns')

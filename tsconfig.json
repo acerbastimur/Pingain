@@ -1,3 +1,17 @@
+/* {
+  "strict": true,
+  "noImplicitAny": true,
+  "noImplicitReturns": true,
+  "skipLibCheck": true,
+  "isolatedModules": false,
+  "compilerOptions": {
+    "jsx": "preserve"
+    "experimentalDecorators": true,
+    "lib": ["es2015"]
+  }
+}
+ */
+
 {
   "strict": true,
   "noImplicitAny": true,
@@ -5,7 +19,7 @@
   "skipLibCheck": true,
   "isolatedModules": false,
   "compilerOptions": {
-    "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
+    "jsx": "preserve",
     "experimentalDecorators": true,
     "lib": ["es2015"]
   }

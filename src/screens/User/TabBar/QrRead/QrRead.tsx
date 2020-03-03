@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -49,19 +48,20 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     });
   }
 
-  sendPinRequest = ({ companyId, campaignId, qrCode }): Promise<number> => new Promise((resolve, reject) => {
-    const { uid } = auth().currentUser;
+  sendPinRequest = ({ companyId, campaignId, qrCode }): Promise<number> =>
+    new Promise((resolve, reject) => {
+      const { uid } = auth().currentUser;
 
-    if (!companyId || !campaignId || !qrCode) return; // error on fields
+      if (!companyId || !campaignId || !qrCode) return; // error on fields
 
-    ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
-      .then((result) => {
-        resolve(result);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+      ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
+        .then(result => {
+          resolve(result);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
 
   onSuccess = ({ data }) => {
     const { navigation } = this.props;
@@ -80,20 +80,20 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
       companyId: readQr?.companyId,
       qrCode: readQr?.scannedQrId,
     })
-      .then(async (responseCode) => {
+      .then(async responseCode => {
         // find which company's campaign is scanned
         const scannedCompany = toJS(
-          UserStore.companies.find((company) => company.companyId === readQr.companyId),
+          UserStore.companies.find(company => company.companyId === readQr.companyId),
         );
         const scannedCampaign = toJS(
-          scannedCompany.campaigns.find((campaign) => campaign.campaignId === readQr.campaignId),
+          scannedCompany.campaigns.find(campaign => campaign.campaignId === readQr.campaignId),
         );
 
         // if user has already won a prize on that campaign
         if (responseCode === 302) {
           this.setState({ loading: false });
           const campaignGiftCode = UserStore.userDetails.activeCampaigns.find(
-            (campaign) => campaign.campaignId === scannedCampaign.campaignId,
+            campaign => campaign.campaignId === scannedCampaign.campaignId,
           )?.giftCode;
 
           if (!campaignGiftCode) return; // prevent errors if there is no giftCode
@@ -121,7 +121,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         this.setState({ loading: false });
         // check if user has won a prize at this reading
         const campaignGiftCode = UserStore.userDetails.activeCampaigns.find(
-          (campaign) => campaign.campaignId === scannedCampaign.campaignId,
+          campaign => campaign.campaignId === scannedCampaign.campaignId,
         )?.giftCode;
 
         if (campaignGiftCode) {
@@ -146,6 +146,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           companyLogo: scannedCompany.companyLogo,
           companyName: scannedCompany.companyName,
           campaignName: scannedCampaign.campaignName,
+          companyId: scannedCompany.companyId,
         };
         navigation.navigate('CampaignsHome');
 
@@ -166,62 +167,62 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         <ActivityIndicator size="large" />
       </View>
     ) : (
-        <View style={this.style.container}>
-          <Modal
-            isVisible={WinModalStore.isGetPinModalOpened}
-            swipeDirection={['down']}
-            hardwareAccelerated
-            swipeThreshold={200}
-            hasBackdrop
-            backdropOpacity={0.1}
-            animationOut="slideOutDown"
-            animationOutTiming={350}
-            onBackdropPress={() => {
-              WinModalStore.isGetPinModalOpened = false;
+      <View style={this.style.container}>
+        <Modal
+          isVisible={WinModalStore.isGetPinModalOpened}
+          swipeDirection={['down']}
+          hardwareAccelerated
+          swipeThreshold={200}
+          hasBackdrop
+          backdropOpacity={0.1}
+          animationOut="slideOutDown"
+          animationOutTiming={350}
+          onBackdropPress={() => {
+            WinModalStore.isGetPinModalOpened = false;
+          }}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            margin: 0,
+          }}
+          onSwipeComplete={() => {
+            WinModalStore.isGetPinModalOpened = false;
+          }}
+        >
+          <WinPin navigation={navigation} />
+        </Modal>
+        <View style={this.style.headerContainer}>
+          <TabsHeader
+            navigation={navigation}
+            onRightPress={() => {
+              navigation.navigate('UserDetails');
             }}
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              margin: 0,
-            }}
-            onSwipeComplete={() => {
-              WinModalStore.isGetPinModalOpened = false;
-            }}
-          >
-            <WinPin navigation={navigation} />
-          </Modal>
-          <View style={this.style.headerContainer}>
-            <TabsHeader
-              navigation={navigation}
-              onRightPress={() => {
-                navigation.navigate('UserDetails');
-              }}
-            />
-          </View>
-          <View style={this.style.cameraContainer}>
-            {shouldQrReaderActive && (
-              <QRCodeScanner
-                ref={(node) => {
-                  this.scanner = node;
-                }}
-                cameraStyle={this.style.cameraStyle}
-                onRead={this.onSuccess}
-                fadeIn
-                reactivate
-                vibrate={false}
-                bottomContent={(
-                  <View style={this.style.bottomContentContainer}>
-                    <View style={this.style.bottomContentBackground} />
-                    <Text style={this.style.bottomContentText}>
-                      QR kodu okutarak pini kazanabilirsin.
-                  </Text>
-                  </View>
-                )}
-                bottomViewStyle={this.style.bottomViewStyle}
-              />
-            )}
-            <View style={[this.style.cameraCenterArea]} />
-          </View>
+          />
         </View>
-      );
+        <View style={this.style.cameraContainer}>
+          {shouldQrReaderActive && (
+            <QRCodeScanner
+              ref={node => {
+                this.scanner = node;
+              }}
+              cameraStyle={this.style.cameraStyle}
+              onRead={this.onSuccess}
+              fadeIn
+              reactivate
+              vibrate={false}
+              bottomContent={
+                <View style={this.style.bottomContentContainer}>
+                  <View style={this.style.bottomContentBackground} />
+                  <Text style={this.style.bottomContentText}>
+                    QR kodu okutarak pini kazanabilirsin.
+                  </Text>
+                </View>
+              }
+              bottomViewStyle={this.style.bottomViewStyle}
+            />
+          )}
+          <View style={[this.style.cameraCenterArea]} />
+        </View>
+      </View>
+    );
   }
 }

@@ -13,7 +13,7 @@ export interface NoCampaignProps {
 }
 
 @observer
-export default class NoCampaign extends React.Component<NoCampaignProps, any> {
+export default class NoCampaign extends React.Component<NoCampaignProps> {
   style = NoCampaignStyle;
 
   constructor(props: NoCampaignProps) {

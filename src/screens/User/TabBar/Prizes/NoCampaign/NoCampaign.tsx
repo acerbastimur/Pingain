@@ -1,11 +1,8 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
+import { View, Text } from 'react-native';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import FastImage from 'react-native-fast-image';
 import NoCampaignStyle from './NoCampaign.style';
 
@@ -14,7 +11,7 @@ export interface NoCampaignProps {
 }
 
 @observer
-export default class NoCampaign extends React.Component<NoCampaignProps, any> {
+export default class NoCampaign extends React.Component<NoCampaignProps> {
   style = NoCampaignStyle;
 
   constructor(props: NoCampaignProps) {

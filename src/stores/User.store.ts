@@ -1,5 +1,5 @@
-import {observable} from 'mobx';
-import {UserCompany} from '../schemes/user/UserCompany';
+import { observable } from 'mobx';
+import { UserCompany } from '../schemes/user/UserCompany';
 import User from '../schemes/user/User';
 
 class UserStore {

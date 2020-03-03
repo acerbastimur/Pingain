@@ -1,6 +1,6 @@
-import {observable} from 'mobx';
+import { observable } from 'mobx';
 import Company from '../schemes/company/Company';
-import {Campaign} from '../schemes/company/CompanyCampaign';
+import { Campaign } from '../schemes/company/CompanyCampaign';
 
 class CompanyStore {
   @observable companyDetails: Company = null;

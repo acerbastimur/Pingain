@@ -40,20 +40,8 @@ target 'Pingain' do
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
 
-  target 'PingainTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+   
 
   use_native_modules!
 end
-
-target 'Pingain-tvOS' do
-  # Pods for Pingain-tvOS
-
-  target 'Pingain-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
+ 

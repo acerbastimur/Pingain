@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -34,7 +32,8 @@ const OnboardingComponent = (props: OnboardingProps) => {
             }
             pageImageRefs[2].bounce();
           }}
-          showsButtons={false}>
+          showsButtons={false}
+        >
           <View style={s.itemContainer}>
             <Animatable.Image
               useNativeDriver
@@ -91,7 +90,8 @@ const OnboardingComponent = (props: OnboardingProps) => {
           hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
           onPress={() => {
             navigation.navigate('Auth');
-          }}>
+          }}
+        >
           <Text style={s.startText}>Başlayalım!</Text>
         </TouchableOpacity>
       </View>

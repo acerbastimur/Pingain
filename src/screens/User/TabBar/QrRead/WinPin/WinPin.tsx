@@ -1,12 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -16,6 +7,7 @@ import FastImage from 'react-native-fast-image';
 import WinPinStyle from './WinPin.style';
 import WinModalStore from '../../../../../stores/WinModal.store';
 import CampaignType from '../../../../../schemes/company/CampaignType.enum';
+import UserStore from '../../../../../stores/User.store';
 
 export interface WinPinProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -86,7 +78,14 @@ const campaignCount = (campaignType: CampaignType) => {
 };
 const WinPin = ({ navigation }: WinPinProps) => {
   const style = WinPinStyle;
-  const { campaignType, companyLogo, companyName, campaignName } = WinModalStore.getPinDetails;
+  const {
+    campaignType,
+    companyLogo,
+    companyName,
+    campaignName,
+    companyId,
+  } = WinModalStore.getPinDetails;
+  const company = UserStore.companies.find(_company => _company.companyId === companyId);
   return (
     <View style={style.container}>
       <View style={style.swipeArea} />
@@ -94,9 +93,10 @@ const WinPin = ({ navigation }: WinPinProps) => {
       <TouchableOpacity
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
-          navigation.navigate('CompanyDetails');
+          navigation.navigate('CompanyDetails', { company });
         }}
-        style={style.cardHeader}>
+        style={style.cardHeader}
+      >
         <View style={style.cardHeaderImageContainer}>
           <FastImage
             resizeMode="contain"

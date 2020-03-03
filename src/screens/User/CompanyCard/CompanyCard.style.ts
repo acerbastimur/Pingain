@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
+
 import Colors from '../../../styles/Colors';
 import CampaignColors from '../../../styles/CampaignColors';
 
@@ -46,7 +45,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0.2,
     textAlign: 'left',
-    width: responsiveRate(250)
+    width: responsiveRate(250),
   },
   headerArrow: {
     width: 14,
@@ -62,7 +61,11 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     borderRadius: 50,
   },
-  cardBody: { marginTop: responsiveRate(10), marginHorizontal: screenWidth < 350 ? 30 : 40, marginBottom: responsiveRate(35) },
+  cardBody: {
+    marginTop: responsiveRate(10),
+    marginHorizontal: screenWidth < 350 ? 30 : 40,
+    marginBottom: responsiveRate(35),
+  },
   cardBodyItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -81,7 +84,7 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: responsiveRate(14),
     color: Colors.PRIMARY_LIGHT,
-    width: responsiveRate(180)
+    width: responsiveRate(180),
   },
   cardBodyItemCount: {
     flexDirection: 'row',

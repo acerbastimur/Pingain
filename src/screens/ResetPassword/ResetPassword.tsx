@@ -1,20 +1,9 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {NavigationScreenProp, NavigationParams, NavigationState} from 'react-navigation';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Formik} from 'formik';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import ResetPasswordStyle from './ResetPassword.style';
@@ -42,16 +31,17 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
   }
 
   handleSubmit = () => {
-    this.setState({isModalVisible: true});
+    this.setState({ isModalVisible: true });
   };
 
   public render() {
-    const {navigation} = this.props;
-    const {isModalVisible} = this.state;
+    const { navigation } = this.props;
+    const { isModalVisible } = this.state;
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
-        scrollEnabled={false}>
+        scrollEnabled={false}
+      >
         <View style={this.style.container}>
           <View style={this.style.logoContainer}>
             <Logo />
@@ -72,8 +62,17 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                 .email()
 
                 .required(),
-            })}>
-            {({values, handleChange, handleSubmit, errors, touched, setFieldTouched, isValid}) => (
+            })}
+          >
+            {({
+              values,
+              handleChange,
+              handleSubmit,
+              errors,
+              touched,
+              setFieldTouched,
+              isValid,
+            }) => (
               <View style={this.style.formContainer}>
                 <View style={this.style.inputContainer}>
                   <Text style={this.style.inputText}>Email</Text>
@@ -85,7 +84,8 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                         name: 'email',
                         ref,
                       });
-                    }}>
+                    }}
+                  >
                     <TextInput
                       style={this.style.input}
                       placeholder="Email giriniz"
@@ -154,7 +154,7 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
           isVisible={isModalVisible}
           modalType={1}
           backButton={() => {
-            this.setState({isModalVisible: false});
+            this.setState({ isModalVisible: false });
           }}
         />
       </KeyboardAwareScrollView>

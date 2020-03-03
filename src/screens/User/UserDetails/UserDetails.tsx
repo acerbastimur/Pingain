@@ -1,13 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable jsx-a11y/accessible-emoji */
 import * as React from 'react';
 import { View, Image, Text, ActivityIndicator } from 'react-native';
 import auth from '@react-native-firebase/auth';
@@ -71,56 +61,56 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
         <ActivityIndicator size="large" />
       </View>
     ) : (
-        <View style={this.style.container}>
-          <View style={this.style.headerContainer}>
-            <TabsHeader
-              rightEditIcon
-              navigation={navigation}
-              onRightPress={() => {
-                navigation.navigate('UserDetailsEdit');
+      <View style={this.style.container}>
+        <View style={this.style.headerContainer}>
+          <TabsHeader
+            rightEditIcon
+            navigation={navigation}
+            onRightPress={() => {
+              navigation.navigate('UserDetailsEdit');
+            }}
+            onLeftPress={() => null}
+          />
+        </View>
+        <ScrollView contentContainerStyle={this.style.scrollContainerStyle}>
+          <View style={this.style.profileInfoContainer}>
+            <View style={this.style.ppOverflow}>
+              {profileImageSource ? (
+                <Image source={{ uri: profileImageSource }} style={this.style.profileImage} />
+              ) : null}
+            </View>
+
+            <Text style={this.style.nameText}>{`${name} ${surname}`}</Text>
+          </View>
+          <View style={this.style.cardsContainer}>
+            <Card elevation={6} opacity={0.1} style={[this.style.card, this.style.winCard]}>
+              <Text style={this.style.cardText}>Kazandığın Pin Sayısı</Text>
+              <View style={this.style.cardRight}>
+                <Text style={[this.style.cardText, this.style.textRight]}>{totalPinEarned}</Text>
+              </View>
+            </Card>
+            <Card elevation={6} opacity={0.1} style={this.style.card}>
+              <Text style={this.style.cardText}>Kazandığın Ödül Sayısı</Text>
+              <View style={this.style.cardRight}>
+                <Text style={[this.style.cardText, this.style.textRight]}>{totalPrizeEarned}</Text>
+              </View>
+            </Card>
+          </View>
+          <View style={this.style.logoutButtonContainer}>
+            <Button
+              text="Çıkış yap"
+              backgroundColor={Colors.Background}
+              borderColor={Colors.WARN}
+              borderWidth={0.2}
+              textColor={Colors.WARN}
+              fontWeight="200"
+              onPress={() => {
+                auth().signOut();
               }}
-              onLeftPress={() => null}
             />
           </View>
-          <ScrollView contentContainerStyle={this.style.scrollContainerStyle}>
-            <View style={this.style.profileInfoContainer}>
-              <View style={this.style.ppOverflow}>
-                {profileImageSource ? (
-                  <Image source={{ uri: profileImageSource }} style={this.style.profileImage} />
-                ) : null}
-              </View>
-
-              <Text style={this.style.nameText}>{`${name} ${surname}`}</Text>
-            </View>
-            <View style={this.style.cardsContainer}>
-              <Card elevation={6} opacity={0.1} style={[this.style.card, this.style.winCard]}>
-                <Text style={this.style.cardText}>Kazandığın Pin Sayısı</Text>
-                <View style={this.style.cardRight}>
-                  <Text style={[this.style.cardText, this.style.textRight]}>{totalPinEarned}</Text>
-                </View>
-              </Card>
-              <Card elevation={6} opacity={0.1} style={this.style.card}>
-                <Text style={this.style.cardText}>Kazandığın Ödül Sayısı</Text>
-                <View style={this.style.cardRight}>
-                  <Text style={[this.style.cardText, this.style.textRight]}>{totalPrizeEarned}</Text>
-                </View>
-              </Card>
-            </View>
-            <View style={this.style.logoutButtonContainer}>
-              <Button
-                text="Çıkış yap"
-                backgroundColor={Colors.Background}
-                borderColor={Colors.WARN}
-                borderWidth={0.2}
-                textColor={Colors.WARN}
-                fontWeight="200"
-                onPress={() => {
-                  auth().signOut();
-                }}
-              />
-            </View>
-          </ScrollView>
-        </View>
-      );
+        </ScrollView>
+      </View>
+    );
   }
 }

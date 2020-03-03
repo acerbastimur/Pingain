@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../../styles/Colors';
 import CampaignColors from '../../../../../styles/CampaignColors';
 
@@ -28,7 +26,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     paddingTop: 2,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowColor: '#000',
     shadowOpacity: 0.2,
     backgroundColor: 'white',
@@ -40,7 +38,7 @@ export default StyleSheet.create({
     marginHorizontal: 30,
     height: 40,
   },
-  cardHeaderImageContainer: {width: 32, height: 32, borderRadius: 32, overflow: 'hidden'},
+  cardHeaderImageContainer: { width: 32, height: 32, borderRadius: 32, overflow: 'hidden' },
   cardHeaderImage: {
     width: 32,
     height: 32,
@@ -123,9 +121,9 @@ export default StyleSheet.create({
   cardItemPlus: {
     fontWeight: '600',
   },
-  cardItemPlusDrink: {color: CampaignColors.COFFEE},
-  cardItemPlusMeal: {color: CampaignColors.MEAL},
-  cardItemPlusDessert: {color: CampaignColors.DESSERT},
+  cardItemPlusDrink: { color: CampaignColors.COFFEE },
+  cardItemPlusMeal: { color: CampaignColors.MEAL },
+  cardItemPlusDessert: { color: CampaignColors.DESSERT },
 
   greetingContainer: {
     marginTop: responsiveRate(16),

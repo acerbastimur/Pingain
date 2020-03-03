@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
+
 import Colors from '../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);

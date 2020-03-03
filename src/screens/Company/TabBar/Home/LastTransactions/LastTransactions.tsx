@@ -1,10 +1,11 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable react/jsx-closing-bracket-location */
 import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationScreenProp, NavigationParams, NavigationState, FlatList} from 'react-navigation';
-import FastImage from 'react-native-fast-image';
+import { View, Text } from 'react-native';
+import {
+  NavigationScreenProp,
+  NavigationParams,
+  NavigationState,
+  FlatList,
+} from 'react-navigation';
 import LastTransactionsStyle from './LastTransactions.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 import GetLastTransactionsService from '../../../../../services/company/General/GetLastTransactions.service';
@@ -26,9 +27,9 @@ export default class LastTransactions extends React.Component<
 
   constructor(props: LastTransactionsProps) {
     super(props);
-    this.state = {transactions: null};
+    this.state = { transactions: null };
     GetLastTransactionsService.getLastTransactions().then(transactions => {
-      this.setState({transactions});
+      this.setState({ transactions });
     });
   }
 
@@ -66,8 +67,8 @@ export default class LastTransactions extends React.Component<
   };
 
   public render() {
-    const {navigation} = this.props;
-    const {transactions} = this.state;
+    const { navigation } = this.props;
+    const { transactions } = this.state;
 
     return (
       <View style={this.style.container}>
@@ -107,7 +108,7 @@ export default class LastTransactions extends React.Component<
                   new Date(transactionFirst.transactionDate).getTime(),
               )}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({item: {name, surname, transactionDate}}) =>
+              renderItem={({ item: { name, surname, transactionDate } }) =>
                 this.renderUser(name, surname, transactionDate)
               }
             />

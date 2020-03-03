@@ -1,6 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-color-literals */
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../../../../styles/Colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -18,10 +16,10 @@ export default StyleSheet.create({
     height: '100%',
     paddingHorizontal: '6%',
   },
-  headerContainer: {height: '8%'},
+  headerContainer: { height: '8%' },
   scrollView: {},
-  scrollViewContainer: {paddingBottom: 90, paddingHorizontal: '6%'},
-  listHeader: {paddingTop: 30},
+  scrollViewContainer: { paddingBottom: 90, paddingHorizontal: '6%' },
+  listHeader: { paddingTop: 30 },
   listHeaderTextBold: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
@@ -41,11 +39,11 @@ export default StyleSheet.create({
     textAlign: 'left',
     marginBottom: responsiveRate(4),
   },
-  inputsContainer: {marginTop: responsiveRate(30)},
+  inputsContainer: { marginTop: responsiveRate(30) },
   inputContainer: {
     paddingTop: 20,
   },
-  input: {height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1},
+  input: { height: 40, borderColor: '#D8DFE8', color: Colors.SECONDARY, borderBottomWidth: 1 },
   inputText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '700',
@@ -79,7 +77,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     right: 0,
   },
-  dropdownFullWidth: {width: '100%', borderWidth: 0},
+  dropdownFullWidth: { width: '100%', borderWidth: 0 },
   dropdownPlaceholder: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '400',
@@ -87,11 +85,11 @@ export default StyleSheet.create({
     width: 'auto',
     fontSize: responsiveRate(16),
   },
-  dropdownInputContainerStyle: {borderBottomColor: 'transparent'},
+  dropdownInputContainerStyle: { borderBottomColor: 'transparent' },
   dropdownInnerContainer: {
     top: -10,
   },
-  buttonsContainer: {marginTop: responsiveRate(30)},
+  buttonsContainer: { marginTop: responsiveRate(30) },
   buttonContainer: {
     height: responsiveRate(56),
     marginTop: responsiveRate(10),

@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import { View, Text, TouchableOpacity, Linking } from 'react-native';
@@ -47,7 +45,8 @@ export default class ShareUs extends React.Component<ShareUsProps> {
             Linking.openURL('instagram://user?username=pingain').catch(() => {
               Linking.openURL('https://instagram.com/pingain');
             });
-          }}>
+          }}
+        >
           <FastImage
             resizeMode="contain"
             style={this.style.instaIcon}

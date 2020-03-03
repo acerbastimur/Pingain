@@ -1,12 +1,5 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/no-duplicate-disable */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 
 import ModalContainerStyle from './ModalContainer.style';
@@ -44,7 +37,8 @@ const ModalContainer = ({
       avoidKeyboard
       useNativeDriver
       hideModalContentWhileAnimating
-      animationOutTiming={150}>
+      animationOutTiming={150}
+    >
       <View style={s.contentContainer}>
         <View style={s.contentBox}>
           <Text numberOfLines={2} style={s.headerText}>
