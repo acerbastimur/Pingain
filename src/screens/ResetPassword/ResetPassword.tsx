@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import Modal from 'react-native-modal';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
@@ -163,8 +162,6 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
             this.setState({ isModalVisible: false });
           }}
           onResolveResetPass={() => {
-            console.log('ok');
-
             this.setState({ isModalVisible: false, mailSent: true });
             setTimeout(() => {
               this.setState({ mailSent: false });

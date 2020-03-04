@@ -4,6 +4,7 @@ import 'react-native-gesture-handler';
 import customize from 'react-native-default-props';
 import CodePush, { CodePushOptions } from 'react-native-code-push';
 import SplashScreen from 'react-native-splash-screen';
+import crashlytics from '@react-native-firebase/crashlytics';
 import Navigation from './src/navigations/Navigation';
 
 customize(TouchableOpacity, {
@@ -11,6 +12,8 @@ customize(TouchableOpacity, {
 });
 class App extends React.Component {
   componentDidMount() {
+    crashlytics().setCrashlyticsCollectionEnabled(true);
+
     CodePush.sync({
       installMode: CodePush.InstallMode.ON_NEXT_RESTART,
     })
