@@ -226,7 +226,6 @@ const otherCampaigns = (campaigns: Campaign[], campaignId: string) =>
         UserStore.userDetails.activeCampaigns.find(
           activeCampaign => activeCampaign.campaignId === campaign.campaignId,
         );
-      const isCompleted = userpins?.pinEarned === campaign.actionCount;
 
       if (campaign.campaignId === campaignId) return null;
 
