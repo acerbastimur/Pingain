@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import crashlytics from '@react-native-firebase/crashlytics';
 import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/general/AuthRole.enum';
@@ -29,7 +30,7 @@ export default class Loading extends React.Component<LoadingProps> {
     auth().onAuthStateChanged(async user => {
       if (user) {
         await this.checkUserRole(user);
-
+        await this.setCrashInfo({ email: user.uid, uid: user.uid });
         if (GeneralStore.authRole === AuthRole.Company) {
           // check if company fillfulled their information
 
@@ -55,6 +56,10 @@ export default class Loading extends React.Component<LoadingProps> {
       }
     });
   }
+
+  setCrashInfo = async ({ uid, email }) => {
+    await Promise.all([crashlytics().setUserId(uid), crashlytics().setUserEmail(email)]);
+  };
 
   checkUserRole = async (user: FirebaseAuthTypes.User) => {
     const companyCheckRef = firestore()
