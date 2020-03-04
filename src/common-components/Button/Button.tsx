@@ -13,6 +13,7 @@ interface ButtonProps {
   borderColor?: string;
   shadow?: boolean;
   fontWeight?: TextStyle['fontWeight'];
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -24,12 +25,14 @@ const Button = ({
   borderColor,
   shadow = true,
   fontWeight = '500',
+  disabled = false,
 }: ButtonProps) => {
   const s = ButtonStyle;
 
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disabled}
       hitSlop={{ top: 10, bottom: 20, left: 20, right: 20 }}
       style={{
         ...s.touchable,

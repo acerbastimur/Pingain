@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import Modal from 'react-native-modal';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
@@ -17,6 +18,8 @@ interface ResetPasswordProps {
 }
 interface ResetPasswordState {
   isModalVisible: boolean;
+  email: string;
+  mailSent: boolean;
 }
 export default class ResetPassword extends React.Component<ResetPasswordProps, ResetPasswordState> {
   style = ResetPasswordStyle;
@@ -27,16 +30,18 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
     super(props);
     this.state = {
       isModalVisible: false,
+      email: null,
+      mailSent: false,
     };
   }
 
-  handleSubmit = () => {
-    this.setState({ isModalVisible: true });
+  handleSubmit = ({ email }) => {
+    this.setState({ isModalVisible: true, email });
   };
 
   public render() {
     const { navigation } = this.props;
-    const { isModalVisible } = this.state;
+    const { isModalVisible, email, mailSent } = this.state;
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={this.style.keyboardScrollContainer}
@@ -119,8 +124,8 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
                 </View>
                 <View style={this.style.buttonContainer}>
                   <Button
-                    text="Şifremi Sıfırla"
-                    backgroundColor={Colors.SECONDARY}
+                    text={mailSent ? 'Sana bir email gönderdik!' : 'Şifremi Sıfırla'}
+                    backgroundColor={mailSent ? '#0FBE7C' : Colors.SECONDARY}
                     textColor="#fff"
                     onPress={() => {
                       if (isValid) {
@@ -153,8 +158,20 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
         <ModalContainer
           isVisible={isModalVisible}
           modalType={1}
+          email={email}
           backButton={() => {
             this.setState({ isModalVisible: false });
+          }}
+          onResolveResetPass={() => {
+            console.log('ok');
+
+            this.setState({ isModalVisible: false, mailSent: true });
+            setTimeout(() => {
+              this.setState({ mailSent: false });
+            }, 2000);
+          }}
+          onRejectResetPass={() => {
+            this.setState({ isModalVisible: false, mailSent: false });
           }}
         />
       </KeyboardAwareScrollView>
