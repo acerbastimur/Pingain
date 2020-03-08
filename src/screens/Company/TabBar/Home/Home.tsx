@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { Card } from 'react-native-shadow-cards';
-
+import messaging from '@react-native-firebase/messaging';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import FastImage from 'react-native-fast-image';
@@ -22,6 +22,7 @@ export default class Home extends React.Component<HomeProps> {
   constructor(props: HomeProps) {
     super(props);
     this.state = {};
+    if (!messaging().hasPermission()) messaging().requestPermission();
   }
 
   public render() {

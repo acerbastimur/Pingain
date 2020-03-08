@@ -4,11 +4,11 @@ import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-n
 import Modal from 'react-native-modal';
 
 import { observer } from 'mobx-react';
+import messaging from '@react-native-firebase/messaging';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
 import CampaignDetailsModalStore from '../../../../stores/CampaignDetailsModal.store';
-
 import CampaignDetails from '../../CampaignDetails';
 import WinPrize from '../QrRead/WinPrize';
 import WinModalStore from '../../../../stores/WinModal.store';
@@ -33,6 +33,7 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
       .then(companies => {
         UserStore.companies = companies.length > 0 ? companies : null;
         this.setState({ loading: false });
+        if (!messaging().hasPermission()) messaging().requestPermission();
       })
       .catch(() => {
         UserStore.companies = null;
