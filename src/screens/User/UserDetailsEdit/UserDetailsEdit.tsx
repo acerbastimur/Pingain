@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import { Dropdown } from 'react-native-material-dropdown';
 import FastImage from 'react-native-fast-image';
 import UserDetailsEditStyle from './UserDetailsEdit.style';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import Button from '../../../common-components/Button';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';

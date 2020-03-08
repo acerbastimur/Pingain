@@ -12,7 +12,7 @@ import FastImage from 'react-native-fast-image';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../../common-components/TabsHeader';
 import Button from '../../../../../common-components/Button';
-import Colors from '../../../../../styles/Colors';
+import Colors from '../../../../../global/styles/Colors';
 import CompanyStore from '../../../../../stores/Company.store';
 import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 

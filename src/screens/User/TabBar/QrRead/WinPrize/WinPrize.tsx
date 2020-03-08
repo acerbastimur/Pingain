@@ -7,7 +7,7 @@ import QRCode from 'react-native-qrcode-svg';
 import FastImage from 'react-native-fast-image';
 import firestore from '@react-native-firebase/firestore';
 import WinPrizeStyle from './WinPrize.style';
-import Colors from '../../../../../styles/Colors';
+import Colors from '../../../../../global/styles/Colors';
 import WinModalStore from '../../../../../stores/WinModal.store';
 import CampaignType from '../../../../../schemes/company/CampaignType.enum';
 import User from '../../../../../schemes/user/User';

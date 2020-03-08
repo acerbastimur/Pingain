@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import UserRegisterStyle from './UserRegister.style';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import Logo from '../../../common-components/Logo';
 import Button from '../../../common-components/Button';
 import RegisterService from '../../../services/user/Auth/Register.service';

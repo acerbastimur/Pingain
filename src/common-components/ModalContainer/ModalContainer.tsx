@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 
 import ModalContainerStyle from './ModalContainer.style';
-import Colors from '../../styles/Colors';
+import Colors from '../../global/styles/Colors';
 import Button from '../Button';
 import ResetPasswordService from '../../services/common-services/ResetPassword.service';
 

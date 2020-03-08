@@ -14,7 +14,7 @@ import TabsHeader from '../../../common-components/TabsHeader';
 import GetUserInfoService from '../../../services/user/General/GetUserInfo.service';
 import UserStore from '../../../stores/User.store';
 import Button from '../../../common-components/Button';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 
 interface UserDetailsProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;

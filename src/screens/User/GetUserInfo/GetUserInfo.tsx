@@ -8,7 +8,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import GetUserInfoStyle from './GetUserInfo.style';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import Button from '../../../common-components/Button';
 import ImageUpload from '../../../common-components/ImageUpload';
 import CITIES from '../../../assets/constants/Cities';
