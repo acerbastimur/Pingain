@@ -18,6 +18,7 @@
     "@react-native-firebase/crashlytics": "^6.2.0",
     "@react-native-firebase/firestore": "^6.2.0",
     "@react-native-firebase/functions": "^6.2.0",
+    "@react-native-firebase/messaging": "^6.3.4",
     "@react-native-firebase/storage": "^6.2.0",
     "formik": "^2.0.8",
     "jetifier": "^1.6.5",
