@@ -13,7 +13,7 @@ import LastTransactions from '../screens/Company/TabBar/Home/LastTransactions';
 import Campaigns from '../screens/Company/TabBar/Home/Campaigns';
 import CampaignCreate from '../screens/Company/TabBar/Home/Campaigns/CampaignCreate';
 import CompanyDetailsEdit from '../screens/Company/CompanyDetailsEdit';
-import Colors from '../styles/Colors';
+import Colors from '../global/styles/Colors';
 
 const HomeStack = createStackNavigator(
   {
@@ -82,7 +82,7 @@ const CompanyTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <FastImage
+              <FastImage // TODO: tabbar icons' component should be a function
                 resizeMode="contain"
                 style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/CompanyTab/CampaignsTabIcon.png')}

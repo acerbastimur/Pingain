@@ -13,7 +13,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import { toJS } from 'mobx';
 import CampaignDetailsStyle from './CampaignDetails.style';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import Button from '../../../common-components/Button';
 import CampaignDetailsModalStore from '../../../stores/CampaignDetailsModal.store';
 import CampaignType from '../../../schemes/company/CampaignType.enum';

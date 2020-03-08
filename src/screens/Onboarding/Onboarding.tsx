@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import OnboardingStyle from './Onboarding.style';
-import Colors from '../../styles/Colors';
+import Colors from '../../global/styles/Colors';
 
 interface OnboardingProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;

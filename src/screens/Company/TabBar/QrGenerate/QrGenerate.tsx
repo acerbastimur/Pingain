@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import { toJS } from 'mobx';
 import QrGenerateStyle from './QrGenerate.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import Colors from '../../../../styles/Colors';
+import Colors from '../../../../global/styles/Colors';
 import NoCampaign from '../../NoCampaign';
 import CompanyStore from '../../../../stores/Company.store';
 import { Campaign } from '../../../../schemes/company/CompanyCampaign';

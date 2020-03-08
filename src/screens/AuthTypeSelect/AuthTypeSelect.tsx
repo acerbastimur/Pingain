@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import Button from '../../common-components/Button';
 import AuthTypeSelectStyle from './AuthTypeSelect.style';
-import Colors from '../../styles/Colors';
+import Colors from '../../global/styles/Colors';
 import Logo from '../../common-components/Logo';
 
 interface AuthTypeSelectProps {

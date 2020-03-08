@@ -551,12 +551,6 @@ PODS:
     - Firebase/Core (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBCrashlytics (6.3.4):
-    - Crashlytics (~> 3.14.0)
-    - Fabric (~> 1.10.2)
-    - Firebase/Core (~> 6.13.0)
-    - React
-    - RNFBApp
   - RNFBFirestore (6.3.4):
     - Firebase/Core (~> 6.13.0)
     - Firebase/Firestore (~> 6.13.0)
@@ -805,9 +799,9 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-camera: 1a62f163f06c7e54811fc9396cdb80269a665238
-  react-native-image-picker: 3637d63fef7e32a230141ab4660d3ceb773c824f
-  react-native-image-resizer: b718335229b7be37c809bf9ed81d7a066fbfd2dd
+  react-native-camera: 1f4c5be75a037b5573716a01d84ca0390c162954
+  react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
+  react-native-image-resizer: efae8dd718cbd47755df95aa45ad859e701ad7d8
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -822,12 +816,11 @@ SPEC CHECKSUMS:
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBAuth: ed8b865db45f7ded9dbf535e390cba2ba672aede
-  RNFBCrashlytics: 93e1cc09a93aa4bb1e9b5a07af0efb2702db5a39
   RNFBFirestore: 04c1eb90463c208ee072988d463c74bec09d08c1
   RNFBFunctions: 6975565f0abcc68d9731d05b78778f003db0eca5
   RNFBStorage: 3628afb1f3dd0b3395fc15c95967b9f080897aec
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
-  RNPermissions: 6db7e0a4d94c9c02390d11020b1d3d187aaf77e5
+  RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f

@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import FastImage from 'react-native-fast-image';
 import NoCampaignStyle from './NoCampaign.style';
 import Button from '../../../common-components/Button';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 
 export interface NoCampaignProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;

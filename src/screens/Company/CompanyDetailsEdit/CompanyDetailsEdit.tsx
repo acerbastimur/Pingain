@@ -17,7 +17,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { observer } from 'mobx-react';
 import FastImage from 'react-native-fast-image';
 import CompanyDetailsEditStyle from './CompanyDetailsEdit.style';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import TabsHeader from '../../../common-components/TabsHeader';
 import CITIES from '../../../assets/constants/Cities';
 import ImageUpload from '../../../common-components/ImageUpload';

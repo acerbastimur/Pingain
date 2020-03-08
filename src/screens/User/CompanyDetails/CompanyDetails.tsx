@@ -15,7 +15,7 @@ import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 import CompanyDetailsStyle from './CompanyDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
-import Colors from '../../../styles/Colors';
+import Colors from '../../../global/styles/Colors';
 import CompanyCard from '../CompanyCard';
 import { UserCompany } from '../../../schemes/user/UserCompany';
 

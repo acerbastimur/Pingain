@@ -11,7 +11,7 @@ import Campaigns from '../screens/User/TabBar/Campaigns';
 import QrRead from '../screens/User/TabBar/QrRead';
 import CompanyDetails from '../screens/User/CompanyDetails';
 import Prizes from '../screens/User/TabBar/Prizes';
-import Colors from '../styles/Colors';
+import Colors from '../global/styles/Colors';
 
 const UserDetailsStack = createStackNavigator(
   {
@@ -122,7 +122,7 @@ const UserTabNavigation = createBottomTabNavigator(
         tabBarIcon: e => {
           if (e.focused) {
             return (
-              <FastImage
+              <FastImage // TODO: tabbar icons' component should be a function
                 resizeMode="contain"
                 style={{ width: 30, height: 30, alignSelf: 'center' }}
                 source={require('../assets/image/UserTab/PrizesIcon.png')}
@@ -167,7 +167,7 @@ const UserTabNavigation = createBottomTabNavigator(
         borderTopRightRadius: 40,
       },
 
-      safeAreaInset: { bottom: 'never', top: 'never' }, // <-- this is the solution
+      safeAreaInset: { bottom: 'never', top: 'never' },
     },
   },
 );

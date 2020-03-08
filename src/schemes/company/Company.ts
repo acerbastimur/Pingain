@@ -1,4 +1,4 @@
-export enum CompanyFeatures {
+export enum CompanyFeatures { // TODO: enums should be gethered in a file
   internet,
   electricity,
   animalFriendly,

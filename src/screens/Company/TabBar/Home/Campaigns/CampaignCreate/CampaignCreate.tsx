@@ -12,7 +12,7 @@ import CreateCampaignService from '../../../../../../services/company/General/Cr
 import CampaignCreateStyle from './CampaignCreate.style';
 import TabsHeader from '../../../../../../common-components/TabsHeader';
 import Button from '../../../../../../common-components/Button';
-import Colors from '../../../../../../styles/Colors';
+import Colors from '../../../../../../global/styles/Colors';
 import { Campaign } from '../../../../../../schemes/company/CompanyCampaign';
 
 export interface CampaignCreateProps {

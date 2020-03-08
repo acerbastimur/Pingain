@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-import Colors from '../../../styles/Colors';
-import CampaignColors from '../../../styles/CampaignColors';
+import Colors from '../../../global/styles/Colors';
+import CampaignColors from '../../../global/styles/CampaignColors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
