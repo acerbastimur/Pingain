@@ -332,18 +332,18 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              nextButton={() => (
+              nextButton={
                 <Image
                   source={require('../../../assets/image/right.png')}
                   style={style.swipperButton}
                 />
-              )}
-              prevButton={() => (
+              }
+              prevButton={
                 <Image
                   source={require('../../../assets/image/left.png')}
                   style={style.swipperButton}
                 />
-              )}
+              }
             >
               {otherCampaigns(campaigns, campaignId)}
             </Swiper>
