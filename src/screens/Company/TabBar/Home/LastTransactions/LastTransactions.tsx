@@ -34,10 +34,11 @@ export default class LastTransactions extends React.Component<
   }
 
   renderUser = (name: string, surname: string, transactionDate: Date) => {
-    const getDay =
+    const getDay = // TODO: refactor for new date
       new Date(transactionDate).getDay().toString().length === 1
         ? `0${new Date(transactionDate).getDay().toString()}`
         : new Date(transactionDate).getDay().toString();
+
     const getMonth =
       new Date(transactionDate).getMonth().toString().length === 1
         ? `0${new Date(transactionDate).getMonth().toString()}`

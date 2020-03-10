@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import 'react-native-gesture-handler';
 import customize from 'react-native-default-props';
 import CodePush, { CodePushOptions } from 'react-native-code-push';
@@ -13,8 +13,18 @@ customize(TouchableOpacity, {
 });
 class App extends React.Component {
   componentDidMount() {
-    crashlytics().setCrashlyticsCollectionEnabled(true);
-    messaging().registerForRemoteNotifications();
+    (async () => {
+      await crashlytics().setCrashlyticsCollectionEnabled(true);
+      await messaging().requestPermission();
+      const x = await messaging().getToken();
+      console.log(x);
+
+      await messaging().registerForRemoteNotifications();
+      await messaging().setBackgroundMessageHandler(async remoteMessage => {
+        console.log('Message handled in the background!', remoteMessage);
+        Alert.alert('hello');
+      });
+    })();
 
     CodePush.sync({
       installMode: CodePush.InstallMode.ON_NEXT_RESTART,
@@ -25,9 +35,6 @@ class App extends React.Component {
       .catch(() => {
         SplashScreen.hide();
       });
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage);
-    });
   }
 
   public render() {
