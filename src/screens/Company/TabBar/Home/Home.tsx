@@ -37,6 +37,7 @@ export default class Home extends React.Component<HomeProps> {
             navigation={navigation}
             onRightPress={() => {
               navigation.navigate('CompanyDetailsEdit');
+              return null;
             }}
           />
         </View>
@@ -233,7 +234,7 @@ export default class Home extends React.Component<HomeProps> {
                   </View>
                 </TouchableOpacity>
               </Card>
-              <Card elevation={6} opacity={0.15} style={this.style.card}>
+              {/*   <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
                   hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   style={this.style.otherCardBodyItem}
@@ -252,8 +253,9 @@ export default class Home extends React.Component<HomeProps> {
                       source={require('../../../../assets/image/Company/payNavigationIcon.png')}
                     />
                   </View>
-                </TouchableOpacity>
+                 </TouchableOpacity>
               </Card>
+            */}
             </View>
           </ScrollView>
         ) : (

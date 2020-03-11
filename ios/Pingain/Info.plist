@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.pingain.app</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,10 +30,6 @@
 	<string>8xKF7HapNd9E_nesdAS2WQu-p2W2Kq-E2z75i</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-    <array>
-        <string>com.pingain.app</string>
-</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -46,7 +46,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Profil resmi yüklemek ve Kampanya Qr&apos;larını okuyabilmek için kamera iznine ihtiyacımız var</string>
+	<string>Profil resmi yüklemek ve Kampanya Qr'larını okuyabilmek için kamera iznine ihtiyacımız var</string>
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
