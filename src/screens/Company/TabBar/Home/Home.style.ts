@@ -34,7 +34,6 @@ export default StyleSheet.create({
     marginTop: responsiveRate(30),
     marginBottom: responsiveRate(10),
   },
-  campaignsContainer: {},
   card: {
     marginTop: responsiveRate(15),
     borderRadius: 15,
@@ -42,6 +41,16 @@ export default StyleSheet.create({
     height: responsiveRate(76),
     alignSelf: 'center',
     justifyContent: 'center',
+  },
+  errorCard: {
+    marginTop: responsiveRate(15),
+    borderRadius: 15,
+    width: '88.5%',
+    height: responsiveRate(140),
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderColor: Colors.SECONDARY_DARK,
+    borderWidth: 0.5,
   },
   otherCardBodyItem: {
     paddingHorizontal: '6%',
@@ -68,6 +77,21 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: responsiveRate(16),
     color: Colors.PRIMARY_LIGHT,
+  },
+  errorCardBodyItemName: {
+    paddingLeft: '6%',
+    fontFamily: 'Helvetica Neue',
+    fontWeight: '400',
+    maxWidth: responsiveRate(300),
+    height: responsiveRate(90),
+    fontSize: responsiveRate(15),
+    color: Colors.PRIMARY_LIGHT,
+  },
+  fillProfileCard: {
+    height: responsiveRate(90),
+  },
+  fillProfileText: {
+    marginTop: responsiveRate(30),
   },
   companyStatus: {
     paddingLeft: '2%',

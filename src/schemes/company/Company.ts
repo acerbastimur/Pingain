@@ -33,4 +33,5 @@ export default interface Company {
   registerDate: Date;
   statistics: CompanyStatistics;
   companyId: string;
+  isActive?: boolean;
 }

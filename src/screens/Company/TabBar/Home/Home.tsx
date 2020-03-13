@@ -28,7 +28,19 @@ export default class Home extends React.Component<HomeProps> {
   public render() {
     const { navigation } = this.props;
     const campaigns = toJS(CompanyStore.campaigns);
-    const { companyName } = CompanyStore.companyDetails;
+    const {
+      companyName,
+      address,
+      companyFeatures,
+      city,
+      companyImages,
+      phoneNumber,
+      companyLogo,
+      isActive,
+    } = CompanyStore.companyDetails;
+
+    const profileState =
+      address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
 
     return (
       <View style={this.style.container}>
@@ -44,7 +56,50 @@ export default class Home extends React.Component<HomeProps> {
         {campaigns && campaigns.length > 0 ? (
           <ScrollView style={this.style.scrollViewStyle}>
             <Text style={this.style.headerText}>{companyName}</Text>
-            <View style={this.style.campaignsContainer}>
+            <View>
+              {!isActive ? (
+                <Card
+                  key={Math.random() * 100}
+                  elevation={6}
+                  opacity={0.15}
+                  style={this.style.errorCard}
+                >
+                  <View style={this.style.otherCardBodyItem}>
+                    <FastImage
+                      resizeMode="contain"
+                      style={this.style.cardBodyItemIcon}
+                      source={require('../../../../assets/image/Company/warn.png')}
+                    />
+                    <Text style={this.style.errorCardBodyItemName}>
+                      Hesabın Pingain tarafından onaylandıktan sonra aktif olacaktır. Bu süreçte
+                      herhangi bir sorun olursa info@pingain.co ya mail atabilirsin. Birlikte
+                      büyüyor olmaktan keyif duyuyoruz.
+                    </Text>
+                  </View>
+                </Card>
+              ) : null}
+              {!profileState ? (
+                <Card
+                  key={Math.random() * 100}
+                  elevation={6}
+                  opacity={0.15}
+                  style={[this.style.errorCard, this.style.fillProfileCard]}
+                >
+                  <View style={this.style.otherCardBodyItem}>
+                    <FastImage
+                      resizeMode="contain"
+                      style={this.style.cardBodyItemIcon}
+                      source={require('../../../../assets/image/Company/warn.png')}
+                    />
+                    <Text style={[this.style.errorCardBodyItemName, this.style.fillProfileText]}>
+                      Profilinizi ekranının sağ üstündeki ikona tıklayıp doldurduktan sonra
+                      hesabınız aktif hale gelecektir.
+                    </Text>
+                  </View>
+                </Card>
+              ) : null}
+            </View>
+            <View>
               {campaigns.map(campaign => {
                 switch (campaign.campaignType) {
                   case 1:

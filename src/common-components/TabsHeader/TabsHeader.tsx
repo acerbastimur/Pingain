@@ -54,9 +54,16 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         companyImages,
         phoneNumber,
         companyLogo,
+        isActive,
       } = CompanyStore.companyDetails;
       const profileState =
-        address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
+        address &&
+        companyFeatures &&
+        isActive &&
+        city &&
+        companyImages &&
+        phoneNumber &&
+        companyLogo;
 
       if (profileState) {
         return (
