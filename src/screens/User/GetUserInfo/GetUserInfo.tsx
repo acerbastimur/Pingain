@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -47,8 +47,12 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
     const { isLoading } = this.state;
     return isLoading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <KeyboardAwareScrollView

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Linking } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -59,8 +59,12 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <KeyboardAwareScrollView

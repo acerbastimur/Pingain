@@ -102,7 +102,7 @@ const WinPin = ({ navigation }: WinPinProps) => {
       >
         <View style={style.cardHeaderImageContainer}>
           <FastImage
-            resizeMode="contain"
+            resizeMode={FastImage.resizeMode.cover}
             source={{ uri: companyLogo, priority: 'high' }}
             style={style.cardHeaderImage}
           />

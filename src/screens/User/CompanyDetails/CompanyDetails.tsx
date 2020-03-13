@@ -210,7 +210,7 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                     </View>
                   </FastImage>
                 </View>
-                <Text style={this.style.cardHeaderText} numberOfLines={2} ellipsizeMode="tail">
+                <Text style={this.style.cardHeaderText} numberOfLines={1} ellipsizeMode="tail">
                   {company.companyName}
                 </Text>
                 {company.instagramAccount ? (

@@ -74,6 +74,9 @@ export default class RightIcon extends React.Component<RightIconProps, RightIcon
         style={[this.s.image, this.s.profileImage]}
         resizeMode={FastImage.resizeMode.cover}
         source={{ uri: profilePhoto }}
+        onError={() => {
+          console.warn(profilePhoto);
+        }}
         onLoadEnd={() => {
           this.setState({
             isLoadingImage: false,

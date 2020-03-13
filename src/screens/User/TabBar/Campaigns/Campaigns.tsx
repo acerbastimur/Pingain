@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import Modal from 'react-native-modal';
 
 import { observer } from 'mobx-react';
 import messaging from '@react-native-firebase/messaging';
+import FastImage from 'react-native-fast-image';
 import CampaignsStyle from './Campaigns.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import CompanyCard from '../../CompanyCard';
@@ -56,8 +57,12 @@ export default class Campaigns extends React.Component<CampaignsProps, Campaigns
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <View style={this.style.container}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Image, Text, ActivityIndicator } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {
   NavigationScreenProp,
@@ -9,6 +9,7 @@ import {
 } from 'react-navigation';
 import storage from '@react-native-firebase/storage';
 import { Card } from 'react-native-shadow-cards';
+import FastImage from 'react-native-fast-image';
 import UserDetailsStyle from './UserDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
 import GetUserInfoService from '../../../services/user/General/GetUserInfo.service';
@@ -57,8 +58,12 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
     } = UserStore.userDetails;
     return loading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <View style={this.style.container}>
@@ -102,6 +107,7 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
               backgroundColor={Colors.Background}
               borderColor={Colors.WARN}
               borderWidth={0.2}
+              shadow={false}
               textColor={Colors.WARN}
               fontWeight="200"
               onPress={() => {

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
+import FastImage from 'react-native-fast-image';
 import QrReadStyle from './QrRead.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 import WinPin from './WinPin';
@@ -163,8 +164,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <View style={this.style.container}>
