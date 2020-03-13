@@ -107,7 +107,7 @@ class WinPrize extends React.Component<WinPrizeProps> {
         >
           <View style={style.cardHeaderImageContainer}>
             <FastImage
-              resizeMode="contain"
+              resizeMode={FastImage.resizeMode.cover}
               source={{ uri: companyLogo, priority: 'high' }}
               style={style.cardHeaderImage}
             />

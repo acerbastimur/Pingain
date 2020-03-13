@@ -107,6 +107,7 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
               backgroundColor={Colors.Background}
               borderColor={Colors.WARN}
               borderWidth={0.2}
+              shadow={false}
               textColor={Colors.WARN}
               fontWeight="200"
               onPress={() => {

@@ -103,7 +103,7 @@ const GivePrize = ({ campaignType, companyLogo, companyName, campaignName }: Giv
       <View style={style.greetingContainer}>
         <Text style={style.greetingHeaderText}>Ve bir Ödül Daha !</Text>
         <Text style={style.greetingText}>
-          Müşterine yepyeni bir <Text style={style.textHighlight}>Ödül </Text> verdin!
+          Müşterine yepyeni bir <Text style={style.textHighlight}>Ödül</Text> verdin!
         </Text>
         <Text style={style.greetingText}> Ve müşteri bağlılığını daha da arttırdın!</Text>
         <Animatable.Image

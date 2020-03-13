@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, Text, TextInput } from 'react-native';
 import 'react-native-gesture-handler';
 import customize from 'react-native-default-props';
 import CodePush, { CodePushOptions } from 'react-native-code-push';
@@ -9,10 +10,22 @@ import messaging from '@react-native-firebase/messaging';
 import Navigation from './src/navigations/Navigation';
 
 customize(TouchableOpacity, {
-  activeOpacity: 0.5,
+  activeOpacity: 0.65,
 });
+
+// @ts-ignore-next
+Text.defaultProps = Text.defaultProps || {};
+// @ts-ignore-next
+Text.defaultProps.allowFontScaling = false;
+
+// @ts-ignore-next
+TextInput.defaultProps = Text.defaultProps || {};
+// @ts-ignore-next
+TextInput.defaultProps.allowFontScaling = false;
+
 class App extends React.Component {
   componentDidMount() {
+    if (__DEV__) return SplashScreen.hide();
     (async () => {
       await crashlytics().setCrashlyticsCollectionEnabled(true);
       await messaging().requestPermission();
@@ -20,9 +33,8 @@ class App extends React.Component {
       console.log(x);
 
       await messaging().registerForRemoteNotifications();
-      await messaging().setBackgroundMessageHandler(async remoteMessage => {
-        console.log('Message handled in the background!', remoteMessage);
-        Alert.alert('hello');
+      await messaging().setBackgroundMessageHandler(async () => {
+        return null;
       });
     })();
 
@@ -35,20 +47,28 @@ class App extends React.Component {
       .catch(() => {
         SplashScreen.hide();
       });
+    return null;
   }
 
   public render() {
     return (
-      <SafeAreaView style={styles.safeAreaFlex}>
-        <Navigation />
+      <SafeAreaView style={styles.safeAreaFlexWrapper}>
+        <SafeAreaView style={styles.safeAreaFlex}>
+          <Navigation />
+        </SafeAreaView>
       </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  safeAreaFlexWrapper: {
+    flex: 1,
+    backgroundColor: '#f7fafc',
+  },
   safeAreaFlex: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });
 

@@ -48,7 +48,7 @@ export default StyleSheet.create({
   cardHeaderText: {
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
-    fontSize: responsiveRate(25),
+    fontSize: responsiveRate(24),
     color: Colors.PRIMARY,
     fontStyle: 'normal',
     letterSpacing: 0.2,
