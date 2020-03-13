@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import crashlytics from '@react-native-firebase/crashlytics';
+import FastImage from 'react-native-fast-image';
 import LoadingStyle from './Loading.style';
 import GeneralStore from '../../stores/General.store';
 import AuthRole from '../../schemes/general/AuthRole.enum';
@@ -107,8 +108,12 @@ export default class Loading extends React.Component<LoadingProps> {
   public render() {
     return (
       <View style={this.s.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../assets/image/loading.gif')}
+        />
       </View>
     );
   }

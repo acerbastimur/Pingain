@@ -44,7 +44,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
               source={require('./images/page1.png')}
               style={s.image}
             />
-            <Text style={s.title}>Oğuzhan kafede günde 2 bardak kahve içiyor</Text>
+            <Text style={s.title}>Berk kafede günde 2 bardak kahve içiyor</Text>
             <View style={s.line} />
             <Text style={s.subtitle}>
               Pingain işletmelerden topladığınız pinler sayesinde ödüller kazanmanızı sağlıyor!

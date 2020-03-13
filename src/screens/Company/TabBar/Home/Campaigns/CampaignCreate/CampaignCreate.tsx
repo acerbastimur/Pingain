@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import {
   NavigationScreenProp,
   NavigationParams,
@@ -8,6 +8,7 @@ import {
 } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import { Dropdown } from 'react-native-material-dropdown';
+import FastImage from 'react-native-fast-image';
 import CreateCampaignService from '../../../../../../services/company/General/CreateCampaign.service';
 import CampaignCreateStyle from './CampaignCreate.style';
 import TabsHeader from '../../../../../../common-components/TabsHeader';
@@ -100,8 +101,12 @@ export default class CampaignCreate extends React.Component<
 
     return loading ? (
       <View style={this.style.indicatorContainer}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 100, height: 100 }}
+          source={require('../../../../../../assets/image/loading.gif')}
+        />
       </View>
     ) : (
       <View style={this.style.container}>
