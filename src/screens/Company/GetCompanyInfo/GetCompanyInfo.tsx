@@ -225,7 +225,7 @@ export default class GetCompanyInfo extends React.Component<
                       </Animatable.View>
                     </View>
                     <View style={this.style.inputContainer}>
-                      <Text style={this.style.inputText}>Telefon Numarası</Text>
+                      <Text style={this.style.inputText}>İşletme Telefon Numarası</Text>
                       <Animatable.View
                         ref={ref => {
                           const isThere = this.references.filter(t => t.name === 'phoneNumber')[0];
@@ -238,7 +238,7 @@ export default class GetCompanyInfo extends React.Component<
                       >
                         <TextInput
                           style={this.style.input}
-                          placeholder="İşletmenin telefon numarasını giriniz"
+                          placeholder="(567) 891 23 45"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.phoneNumber}

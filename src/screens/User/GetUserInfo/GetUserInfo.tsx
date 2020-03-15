@@ -223,7 +223,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                     >
                       <TextInput
                         style={this.style.input}
-                        placeholder="Telefon numaranızı giriniz"
+                        placeholder="(567) 891 23 45"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.phoneNumber}
