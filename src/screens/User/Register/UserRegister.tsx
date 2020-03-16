@@ -21,7 +21,7 @@ interface UserRegisterState {
   isErrorModalActive: boolean;
   loading: boolean;
 }
-get
+
 interface RegisterForm {
   email: string;
   password: string;

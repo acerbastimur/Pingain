@@ -22,6 +22,8 @@ Text.defaultProps.allowFontScaling = false;
 TextInput.defaultProps = Text.defaultProps || {};
 // @ts-ignore-next
 TextInput.defaultProps.allowFontScaling = false;
+// @ts-ignore-next
+TextInput.defaultProps.underlineColorAndroid = 'transparent';
 
 class App extends React.Component {
   componentDidMount() {

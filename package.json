@@ -10,7 +10,8 @@
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:ts": "tsc && yarn lint:eslint",
     "lint": "yarn lint:ts",
-    "format": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix"
+    "format": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix",
+    "clear": "rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-*"
   },
   "dependencies": {
     "@react-native-firebase/app": "^6.2.0",
