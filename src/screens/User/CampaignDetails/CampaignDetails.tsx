@@ -12,6 +12,8 @@ import {
 } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import { toJS } from 'mobx';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import CampaignDetailsStyle from './CampaignDetails.style';
 import Colors from '../../../global/styles/Colors';
 import Button from '../../../common-components/Button';
@@ -51,6 +53,12 @@ const Pin = ({ completed, navigation }) => {
       onPress={() => {
         navigation.navigate('QrRead');
         CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+        const { selectedCampaign } = CampaignDetailsModalStore;
+        analytics().logEvent('press_campaignDetails_pin', {
+          uid: auth().currentUser.uid,
+          companyId: selectedCampaign.companyId,
+          campaignId: selectedCampaign.campaignId,
+        });
       }}
       style={{
         width: itemWidth,
@@ -271,6 +279,13 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           CampaignDetailsModalStore.isCampaignDetailsModalOpen = false;
+          analytics().logEvent('press_companyCard_header', {
+            uid: auth().currentUser.uid,
+            companyId,
+          });
+          analytics().logEvent(`company_${companyId}_opened`, {
+            uid: auth().currentUser.uid,
+          });
           setTimeout(() => {
             navigation.navigate('CompanyDetails', { company: currentCompany });
           }, 200);

@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { NavigationActions, NavigationScreenProp } from 'react-navigation';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import FastImage from 'react-native-fast-image';
 import { observer } from 'mobx-react';
 import Logo from '../Logo';
+
 import TabsHeaderStyle from './TabsHeader.style';
 import RightIcon from './RightIcon';
 import GeneralStore from '../../stores/General.store';
@@ -32,7 +35,13 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
       navigation.state.routeName === 'PrizesHome'
     ) {
       return (
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            analytics().logEvent('press_findIcon', {
+              uid: auth().currentUser.uid,
+            });
+          }}
+        >
           <FastImage
             style={this.s.image}
             resizeMode="contain"
@@ -78,7 +87,12 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         <TouchableOpacity
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           style={this.s.stateWrapper}
-          onPress={() => navigation.navigate('CompanyDetailsEdit')}
+          onPress={() => {
+            analytics().logEvent('press_header_company_passiveButton', {
+              uid: auth().currentUser.uid,
+            });
+            return navigation.navigate('CompanyDetailsEdit');
+          }}
         >
           <View style={this.s.passiveDot} />
           <Text style={this.s.stateText}>Pasif</Text>
@@ -92,6 +106,9 @@ class TabsHeader extends React.Component<TabsHeaderProps> {
         hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
         onPress={() => {
           onLeftPress();
+          analytics().logEvent('press_header_backButton', {
+            uid: auth().currentUser.uid,
+          });
           navigation.dispatch(NavigationActions.back());
         }}
       >

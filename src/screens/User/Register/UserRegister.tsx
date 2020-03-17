@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
+import analytics from '@react-native-firebase/analytics';
 import UserRegisterStyle from './UserRegister.style';
 import Colors from '../../../global/styles/Colors';
 import Logo from '../../../common-components/Logo';
@@ -21,7 +22,7 @@ interface UserRegisterState {
   isErrorModalActive: boolean;
   loading: boolean;
 }
-get
+
 interface RegisterForm {
   email: string;
   password: string;
@@ -37,6 +38,10 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
     this.state = { isErrorModalActive: false, loading: false };
   }
 
+  componentDidMount() {
+    analytics().logEvent('userRegister_page_open', {});
+  }
+
   handleSubmit = ({ email, password }: RegisterForm) => {
     this.setState({
       loading: true,
@@ -49,6 +54,7 @@ export default class UserRegister extends React.Component<UserRegisterProps, Use
         this.setState({ loading: false });
         setTimeout(() => {
           this.setState({ isErrorModalActive: true });
+          analytics().logEvent('userRegister_page_open', { error: true });
         }, 1000);
       });
   };

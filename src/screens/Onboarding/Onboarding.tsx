@@ -3,16 +3,24 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import analytics from '@react-native-firebase/analytics';
 import OnboardingStyle from './Onboarding.style';
 import Colors from '../../global/styles/Colors';
 
 interface OnboardingProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
+
+const logEvent = () => {
+  analytics().logEvent('onboarding_page_open', {});
+};
 const OnboardingComponent = (props: OnboardingProps) => {
   const s = OnboardingStyle;
   const pageImageRefs = [];
   const { navigation } = props;
+
+  logEvent();
+
   return (
     <View style={s.container}>
       <View style={s.swiperContainer}>
@@ -44,7 +52,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
               source={require('./images/page1.png')}
               style={s.image}
             />
-            <Text style={s.title}>Mert kafede günde 2 bardak kahve içiyor</Text>
+            <Text style={s.title}>Arda kafede günde 2 bardak kahve içiyor</Text>
             <View style={s.line} />
             <Text style={s.subtitle}>
               Pingain işletmelerden topladığınız pinler sayesinde ödüller kazanmanızı sağlıyor!

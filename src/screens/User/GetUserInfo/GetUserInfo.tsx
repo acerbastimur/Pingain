@@ -3,8 +3,10 @@ import { View, Text, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import auth from '@react-native-firebase/auth';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Formik } from 'formik';
+import analytics from '@react-native-firebase/analytics';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
 import GetUserInfoStyle from './GetUserInfo.style';
@@ -32,12 +34,21 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
   constructor(props: GetUserInfoProps) {
     super(props);
     this.state = { isLoading: false };
+    analytics().logEvent('getUserInfo_page_open', {
+      uid: auth().currentUser.uid,
+      isProfileFilled: false,
+    });
   }
 
   handleSubmit = (name: string, surname: string, phoneNumber: string, city: string) => {
     const { navigation } = this.props;
     const logoUri = this.imageUploadRef.state.imageSource;
     this.setState({ isLoading: true });
+    analytics().logEvent('getUserInfo_page_open', {
+      uid: auth().currentUser.uid,
+      selectedPhoto: true,
+      isProfileFilled: true,
+    });
     SetUserInfoService.setUserInfo(name, surname, phoneNumber, city, logoUri).then(() => {
       navigation.navigate('UserTabNavigation');
     });
@@ -223,7 +234,7 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                     >
                       <TextInput
                         style={this.style.input}
-                        placeholder="(567) 891 23 45"
+                        placeholder="0(567)8912345"
                         placeholderTextColor={Colors.SECONDARY}
                         selectionColor={Colors.PRIMARY}
                         value={values.phoneNumber}
@@ -280,8 +291,13 @@ export default class GetUserInfo extends React.Component<GetUserInfoProps, GetUs
                         const selectedPhoto = this.imageUploadRef.state.imageSource;
 
                         if (isValid) {
-                          if (!selectedPhoto)
+                          if (!selectedPhoto) {
+                            analytics().logEvent('getUserInfo_page_open', {
+                              uid: auth().currentUser.uid,
+                              selectedPhoto: false,
+                            });
                             return this.references.filter(t => t.name === 'image')[0].ref.shake();
+                          }
                           handleSubmit();
                           return null;
                         }

@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FastImage from 'react-native-fast-image';
+import analytics from '@react-native-firebase/analytics';
 import ResetPasswordStyle from './ResetPassword.style';
 import Colors from '../../global/styles/Colors';
 import Logo from '../../common-components/Logo';
@@ -36,6 +37,9 @@ export default class ResetPassword extends React.Component<ResetPasswordProps, R
 
   handleSubmit = ({ email }) => {
     this.setState({ isModalVisible: true, email });
+    analytics().logEvent('reset_password', {
+      email,
+    });
   };
 
   public render() {

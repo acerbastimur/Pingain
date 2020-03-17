@@ -238,7 +238,7 @@ export default class GetCompanyInfo extends React.Component<
                       >
                         <TextInput
                           style={this.style.input}
-                          placeholder="(567) 891 23 45"
+                          placeholder="0(567)8912345"
                           placeholderTextColor={Colors.SECONDARY}
                           selectionColor={Colors.PRIMARY}
                           value={values.phoneNumber}
