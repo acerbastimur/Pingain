@@ -9,6 +9,8 @@ import {
 } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import * as Yup from 'yup';
 import { Dropdown } from 'react-native-material-dropdown';
 import FastImage from 'react-native-fast-image';
@@ -47,6 +49,10 @@ export default class UserDetailsEdit extends React.Component<
   constructor(props: UserDetailsEditProps) {
     super(props);
     this.state = { loading: false };
+  }
+
+  componentDidMount() {
+    analytics().logEvent('userDetailsEdit_page_open', { uid: auth().currentUser.uid });
   }
 
   handleSubmit = async ({ name, surname, password, phoneNumber, city }: UserDetailsForm) => {

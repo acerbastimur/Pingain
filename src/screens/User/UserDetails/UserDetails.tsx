@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-navigation';
 import storage from '@react-native-firebase/storage';
+import analytics from '@react-native-firebase/analytics';
 import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
 import UserDetailsStyle from './UserDetails.style';
@@ -36,6 +37,8 @@ export default class UserDetails extends React.Component<UserDetailsProps, UserD
 
   componentDidMount() {
     this.setState({ loading: true });
+    analytics().logEvent('userDetails_page_open', { uid: auth().currentUser.uid });
+
     GetUserInfoService.getUserInfo().then(() => {
       this.setState({ loading: false });
       storage()

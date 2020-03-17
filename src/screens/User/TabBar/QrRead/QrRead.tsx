@@ -5,6 +5,7 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-n
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import { toJS } from 'mobx';
+import analytics from '@react-native-firebase/analytics';
 import { observer } from 'mobx-react';
 import FastImage from 'react-native-fast-image';
 import QrReadStyle from './QrRead.style';
@@ -57,9 +58,17 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
 
       ReadCampaignQr.readCampaignQr(uid, companyId, campaignId, qrCode)
         .then(result => {
+          analytics().logEvent('read_campaign_qr', {
+            uid: auth().currentUser.uid,
+            companyId,
+            campaignId,
+          });
           resolve(result);
         })
         .catch(error => {
+          analytics().logEvent('read_campaign_qr_error', {
+            uid: auth().currentUser.uid,
+          });
           reject(error);
         });
     });
@@ -108,7 +117,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             campaignId: scannedCampaign.campaignId,
             company: scannedCompany,
           };
-
+          analytics().logEvent('read_campaign_qr', {
+            uid: auth().currentUser.uid,
+            companyId: scannedCampaign.companyId,
+            campaignId: scannedCampaign.campaignId,
+            hasPrize: true,
+          });
           navigation.navigate('PrizesHome');
           setTimeout(() => {
             WinModalStore.isWinPrizeModalOpened = true;
@@ -126,6 +140,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         )?.giftCode;
 
         if (campaignGiftCode) {
+          // if user has already a prize
           WinModalStore.winPrizeDetails = {
             campaignType: scannedCampaign.campaignType,
             companyLogo: scannedCompany.companyLogo,
@@ -135,6 +150,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
             campaignId: scannedCampaign.campaignId,
             company: scannedCompany,
           };
+          analytics().logEvent('read_campaign_qr', {
+            uid: auth().currentUser.uid,
+            companyId: scannedCampaign.companyId,
+            campaignId: scannedCampaign.campaignId,
+            isPrize: true,
+          });
 
           navigation.navigate('PrizesHome');
           WinModalStore.isWinPrizeModalOpened = true;
@@ -149,6 +170,12 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
           campaignName: scannedCampaign.campaignName,
           companyId: scannedCompany.companyId,
         };
+        analytics().logEvent('read_campaign_qr', {
+          uid: auth().currentUser.uid,
+          companyId: scannedCampaign.companyId,
+          campaignId: scannedCampaign.campaignId,
+          isPrize: false,
+        });
         navigation.navigate('CampaignsHome');
 
         WinModalStore.isGetPinModalOpened = true;

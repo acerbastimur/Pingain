@@ -2,7 +2,8 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
-
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
@@ -148,6 +149,13 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
             <TouchableOpacity
               hitSlop={{ top: 10, bottom: 20, left: 20, right: 20 }}
               onPress={() => {
+                analytics().logEvent('press_companyCard_header', {
+                  uid: auth().currentUser.uid,
+                  companyId: company.companyId,
+                });
+                analytics().logEvent(`company_${company.companyId}_opened`, {
+                  uid: auth().currentUser.uid,
+                });
                 navigation.navigate('CompanyDetails', { company });
               }}
               style={this.s.cardHeader}
@@ -208,6 +216,17 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                       : 0;
                     const isCompleted = usersPinCount === campaign.actionCount;
 
+                    analytics().logEvent('press_companyCard_campaign', {
+                      uid: auth().currentUser.uid,
+                      companyId: campaign.companyId,
+                      campaignId: campaign.campaignId,
+                      isCampaignDone: isCompleted,
+                    });
+                    analytics().logEvent(`campaign_${campaign.campaignId}_opened`, {
+                      uid: auth().currentUser.uid,
+                      companyId: campaign.companyId,
+                      campaignId: campaign.campaignId,
+                    });
                     if (isCompleted) {
                       const { giftCode } = UserStore.userDetails.activeCampaigns.find(
                         activeCampaign => campaign.campaignId === activeCampaign.campaignId,

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import analytics from '@react-native-firebase/analytics';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
@@ -34,6 +35,7 @@ export default class UserRegister extends React.Component<UserLoginProps, UserLo
   constructor(props: UserLoginProps) {
     super(props);
     this.state = { isErrorModalActive: false, loading: false };
+    analytics().logEvent('userLogin_page_open', {});
   }
 
   handleSubmit = ({ email, password }: RegisterForm) => {
@@ -43,6 +45,7 @@ export default class UserRegister extends React.Component<UserLoginProps, UserLo
         return null;
       })
       .catch(() => {
+        analytics().logEvent('userRegister_page_open', { error: true });
         this.setState({ isErrorModalActive: true, loading: false });
       });
   };

@@ -12,6 +12,8 @@ import {
 import Swiper from 'react-native-swiper';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import { Card } from 'react-native-shadow-cards';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import FastImage from 'react-native-fast-image';
 import CompanyDetailsStyle from './CompanyDetails.style';
 import TabsHeader from '../../../common-components/TabsHeader';
@@ -218,6 +220,10 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                     style={this.style.followButton}
                     hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                     onPress={() => {
+                      analytics().logEvent('press_companyDetaild_follow', {
+                        uid: auth().currentUser.uid,
+                        companyId: company.companyId,
+                      });
                       Linking.openURL(`https://www.instagram.com/${company.instagramAccount}`);
                     }}
                   >
@@ -240,6 +246,10 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                 style={this.style.phoneArea}
                 onPress={() => {
                   const { phoneNumber } = company;
+                  analytics().logEvent('press_companyDetails_number', {
+                    uid: auth().currentUser.uid,
+                    companyId: company.companyId,
+                  });
                   Linking.openURL(`tel:${phoneNumber}`);
                 }}
               >
@@ -257,6 +267,10 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   const { address } = company;
                   address.split(' ').forEach(word => {
                     urlParams += `${word}+`;
+                  });
+                  analytics().logEvent('press_companyDetails_map', {
+                    uid: auth().currentUser.uid,
+                    companyId: company.companyId,
                   });
                   Linking.openURL(`https://www.google.com/maps/place/${urlParams}`);
                 }}
