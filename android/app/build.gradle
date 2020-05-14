@@ -135,8 +135,8 @@ dexOptions {
         applicationId "com.pingain"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName '1.2.1'
+        versionCode 4
+        versionName '1.2.2'
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
 
