@@ -34,7 +34,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  cameraStyle: { flex: 1 },
+  cameraStyle: { flex: 1, justifyContent: 'flex-end', alignItems: 'center' },
+  cameraWrapper: { flex: 1, width: '100%' },
   cameraCenterArea: {
     position: 'absolute',
     width: responsiveRate(200),
@@ -47,7 +48,7 @@ export default StyleSheet.create({
   bottomViewStyle: { position: 'absolute', bottom: '10%' },
   bottomContentContainer: {
     height: 28,
-    width: '65%',
+    width: '100%',
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
@@ -56,7 +57,8 @@ export default StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     fontWeight: '600',
     fontSize: responsiveRate(14),
-    color: 'black',
+    color: '#232323',
+    padding: 16,
   },
   bottomContentBackground: {
     backgroundColor: 'white',

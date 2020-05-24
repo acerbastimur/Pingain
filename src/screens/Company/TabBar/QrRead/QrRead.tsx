@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, Animated } from 'react-native';
-import QRCodeScanner from 'react-native-qrcode-scanner';
 import Modal from 'react-native-modal';
+import { RNCamera } from 'react-native-camera';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
@@ -27,8 +27,6 @@ export interface QrReadState {
 @observer
 export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   style = QrReadStyle;
-
-  scanner: QRCodeScanner = null;
 
   lastQrValue = null;
 
@@ -190,29 +188,33 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         ) : (
           <View style={this.style.cameraContainer}>
             {shouldQrReaderActive && (
-              <QRCodeScanner
-                ref={node => {
-                  this.scanner = node;
-                }}
-                cameraStyle={this.style.cameraStyle}
-                onRead={this.onSuccess}
-                fadeIn
-                reactivate
-                vibrate={false}
-                bottomContent={
-                  <View style={this.style.bottomContentContainer}>
-                    <View style={this.style.bottomContentBackground} />
-                    <Text style={this.style.bottomContentText}>
-                      Qr kodu okutarak ödülü verebilirsiniz
-                    </Text>
-                  </View>
-                }
-                bottomViewStyle={this.style.bottomViewStyle}
-              />
+              <View style={this.style.cameraWrapper}>
+                <RNCamera
+                  style={this.style.cameraStyle}
+                  type={RNCamera.Constants.Type.back}
+                  captureAudio={false}
+                  onBarCodeRead={this.onSuccess}
+                  flashMode={RNCamera.Constants.FlashMode.off}
+                  androidCameraPermissionOptions={{
+                    title: 'Permission to use camera',
+                    message: 'We need your permission to use your camera',
+                    buttonPositive: 'Ok',
+                    buttonNegative: 'Cancel',
+                  }}
+                />
+              </View>
             )}
             <Animated.View
               style={[this.style.cameraCenterArea, { borderColor: interpolateColor }]}
             />
+            <View style={this.style.bottomViewStyle}>
+              <View style={this.style.bottomContentContainer}>
+                <View style={this.style.bottomContentBackground} />
+                <Text style={this.style.bottomContentText}>
+                  QR kodu okutarak pini kazanabilirsin.
+                </Text>
+              </View>
+            </View>
           </View>
         )}
       </View>
