@@ -166,7 +166,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - CodePush (6.1.0):
+  - CodePush (6.2.0):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.7)
     - React
@@ -183,6 +183,8 @@ PODS:
     - React-Core (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/turbomodule/core (= 0.61.5)
+  - Firebase/Analytics (6.13.0):
+    - Firebase/Core
   - Firebase/Auth (6.13.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.4.0)
@@ -338,7 +340,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Permission-Camera (2.0.9):
+  - Permission-Camera (2.1.5):
     - RNPermissions
   - Protobuf (3.11.4)
   - RCTRequired (0.61.5)
@@ -504,17 +506,17 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-camera (3.19.0):
+  - react-native-camera (3.26.0):
     - React
-    - react-native-camera/RCT (= 3.19.0)
-    - react-native-camera/RN (= 3.19.0)
-  - react-native-camera/RCT (3.19.0):
+    - react-native-camera/RCT (= 3.26.0)
+    - react-native-camera/RN (= 3.26.0)
+  - react-native-camera/RCT (3.26.0):
     - React
-  - react-native-camera/RN (3.19.0):
+  - react-native-camera/RN (3.26.0):
     - React
   - react-native-image-picker (1.1.0):
     - React
-  - react-native-image-resizer (1.2.0):
+  - react-native-image-resizer (1.2.2):
     - React
   - react-native-splash-screen (3.2.0):
     - React
@@ -557,47 +559,50 @@ PODS:
     - React
     - SDWebImage (~> 5.0)
     - SDWebImageWebPCoder (~> 0.2.3)
-  - RNFBAnalytics (6.3.4):
+  - RNFBAnalytics (6.7.2):
+    - Firebase/Analytics (~> 6.13.0)
     - Firebase/Core (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBApp (6.3.4):
+  - RNFBApp (6.7.1):
     - Firebase/Core (~> 6.13.0)
     - React
-  - RNFBAuth (6.3.4):
+  - RNFBAuth (6.7.1):
     - Firebase/Auth (~> 6.13.0)
     - Firebase/Core (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBCrashlytics (6.3.4):
+  - RNFBCrashlytics (6.7.1):
     - Crashlytics (~> 3.14.0)
     - Fabric (~> 1.10.2)
     - Firebase/Core (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBFirestore (6.3.4):
+  - RNFBFirestore (6.7.1):
     - Firebase/Core (~> 6.13.0)
     - Firebase/Firestore (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBFunctions (6.3.4):
+  - RNFBFunctions (6.8.1):
+    - Firebase/Core (~> 6.13.0)
     - Firebase/Functions (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBMessaging (6.3.4):
+  - RNFBMessaging (6.7.1):
+    - Firebase/Core (~> 6.13.0)
     - Firebase/Messaging (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBStorage (6.3.4):
+  - RNFBStorage (6.7.1):
     - Firebase/Core (~> 6.13.0)
     - Firebase/Storage (~> 6.13.0)
     - React
     - RNFBApp
-  - RNGestureHandler (1.6.0):
+  - RNGestureHandler (1.6.1):
     - React
-  - RNPermissions (2.0.9):
+  - RNPermissions (2.1.5):
     - React
-  - RNReanimated (1.7.0):
+  - RNReanimated (1.9.0):
     - React
   - RNScreens (1.0.0-alpha.23):
     - React
@@ -796,7 +801,7 @@ SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  CodePush: 4168faf8315b3629f047929b3c161f64c24861be
+  CodePush: 3285d39e9865e0a37a415417402bf568ce49268a
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
@@ -828,7 +833,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Permission-Camera: 8fe4753b02396489b11c5089e4f57bab7fe1ef42
+  Permission-Camera: afad27bf90337684d4a86f3825112d648c8c4d3b
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
@@ -839,9 +844,9 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-camera: 1f4c5be75a037b5573716a01d84ca0390c162954
+  react-native-camera: 2b74be8edc1103c4c46d1f4e5f41723d9ff052cc
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
-  react-native-image-resizer: efae8dd718cbd47755df95aa45ad859e701ad7d8
+  react-native-image-resizer: e794dc2dbd0db0a1062ac5fa425d5df04c1970ca
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -854,17 +859,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
-  RNFBAnalytics: b8bad44e6653af73219b1a7af24bf3452cb02c1b
-  RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
-  RNFBAuth: ed8b865db45f7ded9dbf535e390cba2ba672aede
-  RNFBCrashlytics: 93e1cc09a93aa4bb1e9b5a07af0efb2702db5a39
-  RNFBFirestore: 04c1eb90463c208ee072988d463c74bec09d08c1
-  RNFBFunctions: 6975565f0abcc68d9731d05b78778f003db0eca5
-  RNFBMessaging: 51cc7f6beaf4c4feac6f18ea941bba5854e3d9c6
-  RNFBStorage: 3628afb1f3dd0b3395fc15c95967b9f080897aec
-  RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
-  RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
-  RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
+  RNFBAnalytics: 29bc4baf70da8dc04238d2e1c050367264d2f440
+  RNFBApp: 7b539bb25520fa73d6a240f5c6ea569e27683645
+  RNFBAuth: c292603069a09065a1b4d3336148beff83e4c897
+  RNFBCrashlytics: b34063b906dd0c57a5d286dd743a40c90c8326c7
+  RNFBFirestore: 23757ad7c33d81587a5d7d7d77f3ea22a1103372
+  RNFBFunctions: 095a760299c21f413e5fed53f5251d914d07b69c
+  RNFBMessaging: c55142d3b2d34d706bf12bd5eef9ef35254c2df1
+  RNFBStorage: 0087dec3c49fcd4c805e9455239d684d8f61a6b0
+  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNPermissions: ad71dd4f767ec254f2cd57592fbee02afee75467
+  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
