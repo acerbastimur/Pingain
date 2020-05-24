@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
@@ -27,8 +27,6 @@ export interface QrReadState {
 @observer
 export default class QrRead extends React.Component<QrReadProps, QrReadState> {
   style = QrReadStyle;
-
-  scanner: QRCodeScanner = null;
 
   lastQrValue = null;
 
@@ -77,6 +75,7 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
     const { navigation } = this.props;
 
     if (data === this.lastQrValue) return; // if still reading the same qr
+
     this.lastQrValue = data;
     let readQr = null;
     try {
@@ -232,27 +231,31 @@ export default class QrRead extends React.Component<QrReadProps, QrReadState> {
         </View>
         <View style={this.style.cameraContainer}>
           {shouldQrReaderActive && (
-            <QRCodeScanner
-              ref={node => {
-                this.scanner = node;
-              }}
-              cameraStyle={this.style.cameraStyle}
-              onRead={this.onSuccess}
-              fadeIn
-              reactivate
-              vibrate={false}
-              bottomContent={
-                <View style={this.style.bottomContentContainer}>
-                  <View style={this.style.bottomContentBackground} />
-                  <Text style={this.style.bottomContentText}>
-                    QR kodu okutarak pini kazanabilirsin.
-                  </Text>
-                </View>
-              }
-              bottomViewStyle={this.style.bottomViewStyle}
-            />
+            <View style={this.style.cameraWrapper}>
+              <RNCamera
+                style={this.style.cameraStyle}
+                type={RNCamera.Constants.Type.back}
+                captureAudio={false}
+                onBarCodeRead={this.onSuccess}
+                flashMode={RNCamera.Constants.FlashMode.off}
+                androidCameraPermissionOptions={{
+                  title: 'Permission to use camera',
+                  message: 'We need your permission to use your camera',
+                  buttonPositive: 'Ok',
+                  buttonNegative: 'Cancel',
+                }}
+              />
+            </View>
           )}
           <View style={[this.style.cameraCenterArea]} />
+          <View style={this.style.bottomViewStyle}>
+            <View style={this.style.bottomContentContainer}>
+              <View style={this.style.bottomContentBackground} />
+              <Text style={this.style.bottomContentText}>
+                QR kodu okutarak pini kazanabilirsin.
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     );
