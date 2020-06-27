@@ -9,8 +9,7 @@ import FastImage from 'react-native-fast-image';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import CompanyStore from '../../../../stores/Company.store';
-
+import CompanyStore from '../../../../stores/Company.store'; 
 export interface HomeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
@@ -41,9 +40,10 @@ export default class Home extends React.Component<HomeProps> {
 
     const profileState =
       address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
-
+   
     return (
       <View style={this.style.container}>
+      
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}

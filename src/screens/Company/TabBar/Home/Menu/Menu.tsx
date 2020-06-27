@@ -13,6 +13,7 @@ import Colors from '../../../../../global/styles/Colors';
 import GetCompanyMenuService from '../../../../../services/company/General/GetCompanyMenu.service';
 import { CompanyMenu, Section } from './../../../../../schemes/company/CompanyMenu';
 import { toJS } from 'mobx';
+import Toast from 'react-native-easy-toast';
 
 export interface MenuProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -49,6 +50,14 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       };
       return menuTypes[menuType];
     };
+    const menuSectionArrow = (menuType: string) => {
+      const menuTypes = {
+        '1': require('../../../../../assets/image/Company/coffeeArrow.png'),
+        '2': require('../../../../../assets/image/Company/statisticsArrow.png'),
+        '3': require('../../../../../assets/image/Company/dessertArrow.png'),
+      };
+      return menuTypes[menuType];
+    };
     return (
       <Card elevation={6} opacity={0.15} key={Math.random() * 100} style={this.style.card}>
         <TouchableOpacity
@@ -67,7 +76,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           <FastImage
             resizeMode="contain"
             style={this.style.cardBodyItemIcon}
-            source={menuSectionImage(sectionType)}
+            source={menuSectionImage(sectionType.toString())}
           />
 
           <Text style={this.style.otherCardBodyItemName}>{sectionName}</Text>
@@ -75,7 +84,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
             <FastImage
               resizeMode="contain"
               style={this.style.arrow}
-              source={require('../../../../../assets/image/Company/coffeeArrow.png')}
+              source={menuSectionArrow(sectionType.toString())}
             />
           </View>
         </TouchableOpacity>
@@ -101,6 +110,23 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       </View>
     ) : (
       <View style={this.style.container}>
+          <Toast
+          ref={(ref: Toast) => (CompanyStore.companyToast = ref)}
+          style={{
+            backgroundColor: 'white',
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+            borderWidth: 0.2,
+            borderColor: Colors.SECONDARY_LIGHT,
+            width: '40%',
+            
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          position="bottom"
+          positionValue={250}
+          textStyle={{ color: Colors.PRIMARY, fontFamily: 'Helvetica Neue' }}
+        />
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}

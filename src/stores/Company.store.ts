@@ -1,3 +1,4 @@
+import  Toast  from 'react-native-easy-toast';
 import { CompanyMenu } from './../schemes/company/CompanyMenu';
 import { observable } from 'mobx';
 import Company from '../schemes/company/Company';
@@ -13,6 +14,8 @@ class CompanyStore {
   @observable companyLogo: string = null;
 
   @observable companyMenu: CompanyMenu = null;
+
+  @observable companyToast: Toast = null;
 }
 
 export default new CompanyStore();

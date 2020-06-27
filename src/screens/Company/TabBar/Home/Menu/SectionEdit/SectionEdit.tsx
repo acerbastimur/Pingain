@@ -278,6 +278,8 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                   try {
                     await UpdateCompanyMenuService.updateCompanyMenu(newCompanyMenu);
                     this.setState({ loading: false });
+                    CompanyStore.companyToast.show('Menu kaydedildi!', 3000);
+                    return navigation.goBack();
                   } catch (err) {
                     console.warn('Error while updating menu', err);
                   }
@@ -306,13 +308,11 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                       };
                       await UpdateCompanyMenuService.createNewCompanyMenu(newCompanyMenu);
                       this.setState({ loading: false });
+                      CompanyStore.companyToast.show('Menu kaydedildi!', 3000);
+                      return navigation.goBack();
                     } catch (err) {
                       console.warn('Error while creating menu', err);
                     }
-                    setTimeout(() => {
-                      this.setState({ loading: false });
-                    }, 1000);
-                    return;
                   }
 
                   // if there is menus and it's a new section
@@ -331,6 +331,9 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                     await UpdateCompanyMenuService.updateCompanyMenu(newCompanyMenu);
 
                     this.setState({ loading: false });
+                    CompanyStore.companyToast.show('Menu kaydedildi!', 3000);
+
+                    return navigation.goBack();
                   } catch (err) {
                     console.warn('Error while updating menu', err);
                   }

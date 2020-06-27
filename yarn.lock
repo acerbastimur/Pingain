@@ -5930,6 +5930,12 @@ react-native-default-props@^1.0.1:
   resolved "https://registry.yarnpkg.com/react-native-default-props/-/react-native-default-props-1.0.1.tgz#176cb363814420ffb94da6cec24a62f132ff4de5"
   integrity sha512-L5fei0RIDI2NS2s0biv2RDgcqbpffmgre+eoY0AkmndK0pn0ELYITw0Nx6YbrE++z0Ub8pSFdUMdiio8+AqJqA==
 
+"react-native-easy-toast@git+https://github.com/acerbastimur/react-native-easy-toast.git":
+  version "1.2.0"
+  resolved "git+https://github.com/acerbastimur/react-native-easy-toast.git#793f43381e262550916b9227b85e745d8aad22aa"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-fast-image@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-7.0.2.tgz#e06b21f42f4a9786eaa86f3db35d919070fb8403"
