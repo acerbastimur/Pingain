@@ -5,6 +5,7 @@
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "build-android": "cd android &&  ./gradlew assembleRelease && cd app && cd build && cd outputs && cd apk && cd release && open . && cd .. && cd .. && cd ..  && cd .. && cd .. && cd ..",
     "deploy-staging": "code-push release-react Pingain android -d Staging && code-push release-react Pingain ios -d Staging",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",

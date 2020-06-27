@@ -244,6 +244,31 @@ export default class Home extends React.Component<HomeProps> {
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
                   hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  style={this.style.otherCardBodyItem}
+                  onPress={() => {
+                    navigation.navigate('Menu');
+                  }}
+                >
+                  <FastImage
+                    resizeMode="contain"
+                    style={this.style.cardBodyActionIcon}
+                    source={require('../../../../assets/image/Company/menuIcon.png')}
+                  />
+
+                  <Text style={this.style.otherCardBodyItemName}>Menü Oluştur / Düzenle</Text>
+                  <View style={this.style.arrowContainer}>
+                    <FastImage
+                      resizeMode="contain"
+                      style={this.style.arrow}
+                      source={require('../../../../assets/image/Company/menuArrow.png')}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </Card>
+
+              <Card elevation={6} opacity={0.15} style={this.style.card}>
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   onPress={() => {
                     navigation.navigate('LastTransaction');
                   }}
@@ -289,28 +314,6 @@ export default class Home extends React.Component<HomeProps> {
                   </View>
                 </TouchableOpacity>
               </Card>
-              {/*   <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <TouchableOpacity
-                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  style={this.style.otherCardBodyItem}
-                >
-                  <FastImage
-                    resizeMode="contain"
-                    style={this.style.cardBodyActionIcon}
-                    source={require('../../../../assets/image/Company/walletIcon.png')}
-                  />
-
-                  <Text style={this.style.otherCardBodyItemName}>Ödeme Ekranı</Text>
-                  <View style={this.style.arrowContainer}>
-                    <FastImage
-                      resizeMode="contain"
-                      style={this.style.arrow}
-                      source={require('../../../../assets/image/Company/payNavigationIcon.png')}
-                    />
-                  </View>
-                 </TouchableOpacity>
-              </Card>
-            */}
             </View>
           </ScrollView>
         ) : (
