@@ -53,8 +53,13 @@ class App extends React.Component {
   }
 
   public render() {
-    return (
-      <SafeAreaView style={styles.safeAreaFlexWrapper}>
+     return (
+      <SafeAreaView
+        style={[
+          styles.safeAreaFlexWrapper,
+          { backgroundColor: '#f0f3f5' },
+        ]}
+      >
         <SafeAreaView style={styles.safeAreaFlex}>
           <Navigation />
         </SafeAreaView>
@@ -66,7 +71,6 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   safeAreaFlexWrapper: {
     flex: 1,
-    backgroundColor: '#f7fafc',
   },
   safeAreaFlex: {
     flex: 1,

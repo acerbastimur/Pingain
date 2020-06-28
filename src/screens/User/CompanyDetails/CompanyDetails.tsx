@@ -242,6 +242,25 @@ class CompanyDetails extends React.Component<CompanyDetailsProps, CompanyDetails
                   {company.companyFeatures.map(featureNo => this.companyFeatureCard(featureNo))}
                 </ScrollView>
               </View>
+              {company.companyMenu ? (
+                <TouchableOpacity
+                  style={this.style.menuArea}
+                  onPress={() => {
+                    navigation.navigate('CompanyMenu', {
+                      company,
+                    });
+                  }}
+                >
+                  <FastImage
+                    style={this.style.menuIcon}
+                    resizeMode={FastImage.resizeMode.contain}
+                    source={require('../../../assets/image/User/menuIcon.png')}
+                  />
+                  <Text style={this.style.contactText} numberOfLines={1}>
+                    Menümüz
+                  </Text>
+                </TouchableOpacity>
+              ) : null}
               <TouchableOpacity
                 style={this.style.phoneArea}
                 onPress={() => {

@@ -368,7 +368,7 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
         <View style={style.noOtherCampaignsContainer}>
           <Text style={style.otherCampaignsHeaderText}>Arkadaşlarına bizden bahset</Text>
           <Text style={style.shareUsText}>
-            Bu veya diğer Pingain üyesi işletmelerin kampanyalarından
+            Bu veya diğer Pingain üyesi işletmelerin kampanyalarını
             <Text style={style.textHighlighted}> arkadaşlarına haber vermek </Text>ve büyümemize
             destek vermek için arkadaşlarını
             <Text style={style.textHighlighted}> Pingain’e davet etmek ister misin?</Text>
@@ -382,9 +382,9 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
               onPress={() => {
                 const whatsappText = Platform.select({
                   android:
-                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim: \n https://',
+                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim: \n https://pingain.co/android',
                   ios:
-                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim:  \n https://',
+                    'Pingain adında bir uygulama keşfettim, gittiğim kafelerde topladığım pinler ile ücretsiz ikramlar alıyorum. Bir bak derim:  \n https://pingain.co/ios',
                 });
                 Linking.openURL(`whatsapp://send?text=${whatsappText}`);
               }}

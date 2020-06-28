@@ -34,6 +34,7 @@
     "react-native-check-box": "^2.1.7",
     "react-native-code-push": "^6.1.0",
     "react-native-default-props": "^1.0.1",
+    "react-native-dynamic": "^1.0.0-rc.4",
     "react-native-easy-toast": "git+https://github.com/acerbastimur/react-native-easy-toast.git",
     "react-native-fast-image": "^7.0.2",
     "react-native-gesture-handler": "^1.5.2",
