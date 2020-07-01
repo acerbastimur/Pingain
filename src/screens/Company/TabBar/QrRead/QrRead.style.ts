@@ -58,7 +58,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: responsiveRate(14),
     color: '#232323',
-    padding: 16,
+    paddingHorizontal: 16,
   },
   bottomContentBackground: {
     backgroundColor: 'white',

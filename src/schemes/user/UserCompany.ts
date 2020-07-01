@@ -1,3 +1,4 @@
+import { CompanyMenu } from './../company/CompanyMenu';
 export interface UserCompany {
   companyLogo: string;
   companyName: string;
@@ -9,6 +10,7 @@ export interface UserCompany {
   city?: string;
   campaigns: Campaign[];
   companyId?: string;
+  companyMenu?: CompanyMenu;
 }
 export interface Campaign {
   campaignId: string;

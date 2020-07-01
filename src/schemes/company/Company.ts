@@ -34,4 +34,5 @@ export default interface Company {
   statistics: CompanyStatistics;
   companyId: string;
   isActive?: boolean;
+  menuRef?: string;
 }

@@ -8,8 +8,7 @@ export default StyleSheet.create({
   indicatorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 
   container: {
-    height: '100%',
-    paddingBottom: 80,
+    height: '100%', 
   },
   headerContainer: { flex: 0.113, paddingHorizontal: '6%' },
   centerText: {
@@ -30,12 +29,12 @@ export default StyleSheet.create({
     padding: 16,
   },
   cameraContainer: {
-    flex: 1,
+    flex: 1.2,
     justifyContent: 'center',
     alignItems: 'center',
   },
   cameraStyle: { flex: 1, justifyContent: 'flex-end', alignItems: 'center' },
-  cameraWrapper: { flex: 1, width: '100%' },
+  cameraWrapper: { flex: 1, width: '100%', },
   cameraCenterArea: {
     position: 'absolute',
     width: responsiveRate(200),
@@ -45,7 +44,7 @@ export default StyleSheet.create({
     borderRadius: 6,
     opacity: 0.4,
   },
-  bottomViewStyle: { position: 'absolute', bottom: '10%' },
+  bottomViewStyle: { position: 'absolute', bottom: '20%' },
   bottomContentContainer: {
     height: 28,
     width: '100%',
@@ -58,7 +57,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: responsiveRate(14),
     color: '#232323',
-    padding: 16,
+    paddingHorizontal: 16,
   },
   bottomContentBackground: {
     backgroundColor: 'white',

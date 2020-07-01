@@ -109,14 +109,15 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   phoneArea: {
-    marginTop: 20,
+    marginTop: 6,
+    marginBottom: 6,
     height: 40,
     alignItems: 'center',
     flexDirection: 'row',
   },
   phoneIcon: {
-    width: 26,
-    height: 36,
+    width: 28,
+    height: 38,
     resizeMode: 'contain',
   },
   locationArea: {
@@ -125,9 +126,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  menuArea: {
+    marginTop: 8,
+    height: 36, 
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   locationIcon: {
-    width: 26,
-    height: 36,
+    width: 28,
+    height: 38,
+  },
+  menuIcon: {
+    width: 20,
+    height: 32,
+    marginLeft:4,
+    marginRight:4
   },
   contactText: {
     width: '90%',

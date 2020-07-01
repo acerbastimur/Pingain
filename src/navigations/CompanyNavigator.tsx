@@ -14,6 +14,8 @@ import Campaigns from '../screens/Company/TabBar/Home/Campaigns';
 import CampaignCreate from '../screens/Company/TabBar/Home/Campaigns/CampaignCreate';
 import CompanyDetailsEdit from '../screens/Company/CompanyDetailsEdit';
 import Colors from '../global/styles/Colors';
+import Menu from '../screens/Company/TabBar/Home/Menu';
+import SectionEdit from '../screens/Company/TabBar/Home/Menu/SectionEdit';
 
 const HomeStack = createStackNavigator(
   {
@@ -34,6 +36,12 @@ const HomeStack = createStackNavigator(
     },
     CompanyDetailsEdit: {
       screen: CompanyDetailsEdit,
+    },
+    Menu: {
+      screen: Menu,
+    },
+    MenuSectionEdit: {
+      screen: SectionEdit,
     },
   },
   {

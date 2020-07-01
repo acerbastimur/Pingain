@@ -12,6 +12,7 @@ import QrRead from '../screens/User/TabBar/QrRead';
 import CompanyDetails from '../screens/User/CompanyDetails';
 import Prizes from '../screens/User/TabBar/Prizes';
 import Colors from '../global/styles/Colors';
+import CompanyMenu from '../screens/User/CompanyDetails/CompanyMenu';
 
 const UserDetailsStack = createStackNavigator(
   {
@@ -38,6 +39,9 @@ const CampaignsStack = createStackNavigator(
     },
     UserDetails: {
       screen: UserDetailsStack,
+    },
+    CompanyMenu: {
+      screen: CompanyMenu,
     },
   },
   {

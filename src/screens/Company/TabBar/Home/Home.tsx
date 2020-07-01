@@ -9,8 +9,7 @@ import FastImage from 'react-native-fast-image';
 import HomeStyle from './Home.style';
 import NoCampaign from '../../NoCampaign';
 import TabsHeader from '../../../../common-components/TabsHeader';
-import CompanyStore from '../../../../stores/Company.store';
-
+import CompanyStore from '../../../../stores/Company.store'; 
 export interface HomeProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
@@ -41,9 +40,10 @@ export default class Home extends React.Component<HomeProps> {
 
     const profileState =
       address && companyFeatures && city && companyImages && phoneNumber && companyLogo;
-
+   
     return (
       <View style={this.style.container}>
+      
         <View style={this.style.headerContainer}>
           <TabsHeader
             navigation={navigation}
@@ -244,6 +244,31 @@ export default class Home extends React.Component<HomeProps> {
               <Card elevation={6} opacity={0.15} style={this.style.card}>
                 <TouchableOpacity
                   hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                  style={this.style.otherCardBodyItem}
+                  onPress={() => {
+                    navigation.navigate('Menu');
+                  }}
+                >
+                  <FastImage
+                    resizeMode="contain"
+                    style={this.style.cardBodyActionIcon}
+                    source={require('../../../../assets/image/Company/menuIcon.png')}
+                  />
+
+                  <Text style={this.style.otherCardBodyItemName}>Menü Oluştur / Düzenle</Text>
+                  <View style={this.style.arrowContainer}>
+                    <FastImage
+                      resizeMode="contain"
+                      style={this.style.arrow}
+                      source={require('../../../../assets/image/Company/menuArrow.png')}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </Card>
+
+              <Card elevation={6} opacity={0.15} style={this.style.card}>
+                <TouchableOpacity
+                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                   onPress={() => {
                     navigation.navigate('LastTransaction');
                   }}
@@ -289,28 +314,6 @@ export default class Home extends React.Component<HomeProps> {
                   </View>
                 </TouchableOpacity>
               </Card>
-              {/*   <Card elevation={6} opacity={0.15} style={this.style.card}>
-                <TouchableOpacity
-                  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                  style={this.style.otherCardBodyItem}
-                >
-                  <FastImage
-                    resizeMode="contain"
-                    style={this.style.cardBodyActionIcon}
-                    source={require('../../../../assets/image/Company/walletIcon.png')}
-                  />
-
-                  <Text style={this.style.otherCardBodyItemName}>Ödeme Ekranı</Text>
-                  <View style={this.style.arrowContainer}>
-                    <FastImage
-                      resizeMode="contain"
-                      style={this.style.arrow}
-                      source={require('../../../../assets/image/Company/payNavigationIcon.png')}
-                    />
-                  </View>
-                 </TouchableOpacity>
-              </Card>
-            */}
             </View>
           </ScrollView>
         ) : (
