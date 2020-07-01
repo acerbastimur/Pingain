@@ -1,16 +1,18 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/destructuring-assignment */
 import * as React from 'react';
 import { View, Text, ScrollView, TextInput } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
-import SectionEditStyle from './SectionEdit.style';
-import TabsHeader from '../../../../../../common-components/TabsHeader';
 import { observer } from 'mobx-react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
-import Button from '../../../../../../common-components/Button';
-import Colors from '../../../../../../global/styles/Colors';
-import { SectionItem, CompanyMenu, Section } from './../../../../../../schemes/company/CompanyMenu';
 import { Dropdown } from 'react-native-material-dropdown';
 import { v4 as uuid } from 'uuid';
+import SectionEditStyle from './SectionEdit.style';
+import TabsHeader from '../../../../../../common-components/TabsHeader';
+import Button from '../../../../../../common-components/Button';
+import Colors from '../../../../../../global/styles/Colors';
+import { SectionItem, CompanyMenu, Section } from '../../../../../../schemes/company/CompanyMenu';
 import UpdateCompanyMenuService from '../../../../../../services/company/General/UpdateCompanyMenu.service';
 import CompanyStore from '../../../../../../stores/Company.store';
 
@@ -74,7 +76,6 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
           <View style={this.style.indicatorContainer}>
             <FastImage
               resizeMode={FastImage.resizeMode.contain}
-              // eslint-disable-next-line react-native/no-inline-styles
               style={{ width: 100, height: 100 }}
               source={require('../../../../../../assets/image/loading.gif')}
             />
@@ -260,10 +261,10 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
               text={isEdit ? 'Menü Bölümünü Güncelle' : 'Yeni Menü Bölümü Oluştur'}
               textColor="#fff"
               shadow
-              onPress={async () => {
+              onPress={async (): Promise<any> => {
                 this.setState({ loading: true });
 
-                //if editing the existing section
+                // if editing the existing section
                 if (isEdit) {
                   const newCompanyMenu: CompanyMenu = CompanyStore.companyMenu;
                   const sectionId = this.props.navigation.getParam('sectionId');
@@ -286,7 +287,6 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                 }
                 // if creating section, not editing
                 else {
-                  const { sectionItems, sectionName, sectionType } = this.state;
                   const {
                     companyDetails: { companyId, menuRef },
                   } = CompanyStore; // get current company's info
@@ -338,6 +338,7 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                     console.warn('Error while updating menu', err);
                   }
                 }
+                return null;
               }}
             />
           </View>

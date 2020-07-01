@@ -19,7 +19,7 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: '#fff',
-    zIndex:9999
+    zIndex: 9999,
   },
   container: {
     height: '100%',
@@ -182,14 +182,14 @@ export default StyleSheet.create({
   menuItem: {},
   menuItemInput: {
     height: 40,
-    width: '62%',
+    width: '60%',
     borderColor: '#D8DFE8',
     color: Colors.SECONDARY,
     borderBottomWidth: 1,
     marginRight: '5%',
   },
   priceContainer: {
-    width: '18%',
+    width: '20%',
     height: responsiveRate(45),
     borderRadius: 5,
     borderColor: Colors.SECONDARY_VERY_LIGHT,

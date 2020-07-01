@@ -24,9 +24,9 @@ export default StyleSheet.create({
   cardHeaderImageContainer: {
     width: 32,
     height: 32,
-    borderRadius: 32, 
-    justifyContent:"center",
-    alignItems:"center"
+    borderRadius: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loadingCenter: { height: '100%', justifyContent: 'center', alignItems: 'center' },
   cardHeaderImage: {
@@ -72,13 +72,13 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: responsiveRate(20),
-    marginBottom:responsiveRate(8)
+    marginBottom: responsiveRate(8),
   },
   cardBodyItemIcon: {
     width: responsiveRate(26),
     height: responsiveRate(26),
     resizeMode: 'contain',
-    alignSelf:"center"
+    alignSelf: 'center',
   },
   row: { flexDirection: 'row' },
   cardBodyItemName: {
@@ -98,13 +98,12 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     borderColor: Colors.SECONDARY_VERY_LIGHT,
     borderRadius: 6,
-   },
+  },
   cardBodyItemCountText: {
     marginHorizontal: 2,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'normal',
-    fontSize: responsiveRate(16),
-    fontStyle: 'normal',
+    fontSize: responsiveRate(18),
   },
   cardItemCoffee: {
     color: CampaignColors.COFFEE,

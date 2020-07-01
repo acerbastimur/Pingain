@@ -1,19 +1,11 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import { Card } from 'react-native-shadow-cards';
 import FastImage from 'react-native-fast-image';
-import analytics from '@react-native-firebase/analytics';
-import auth from '@react-native-firebase/auth';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import { observer } from 'mobx-react';
-import { toJS } from 'mobx';
 import MenuCardStyle from './MenuCard.style';
-import CampaignDetailsStore from '../../../../../stores/CampaignDetailsModal.store';
-import { UserCompany, Campaign } from '../../../../../schemes/user/UserCompany';
 import CampaignType from '../../../../../schemes/company/CampaignType.enum';
-import { ActiveCampaign } from '../../../../../schemes/user/User';
-import UserStore from '../../../../../stores/User.store';
-import WinModalStore from '../../../../../stores/WinModal.store';
 import { Section } from '../../../../../schemes/company/CompanyMenu';
 
 export interface MenuCardProps {
@@ -21,10 +13,8 @@ export interface MenuCardProps {
   section: Section;
 }
 
-export interface MenuCardState {}
-
 @observer
-export default class MenuCard extends React.Component<MenuCardProps, MenuCardState> {
+export default class MenuCard extends React.Component<MenuCardProps, any> {
   s = MenuCardStyle;
 
   constructor(props: MenuCardProps) {
@@ -63,8 +53,8 @@ export default class MenuCard extends React.Component<MenuCardProps, MenuCardSta
     }
   };
 
-  campaignCount = (campaignType: number, price: number) => {
-    switch (campaignType) {
+  cardCount = (cardType: number, price: number) => {
+    switch (cardType) {
       case CampaignType.Drink:
         return (
           <View style={this.s.cardBodyItemCount}>
@@ -112,7 +102,7 @@ export default class MenuCard extends React.Component<MenuCardProps, MenuCardSta
               <Text style={this.s.cardBodyItemName} numberOfLines={1} ellipsizeMode="tail">
                 {itemName}
               </Text>
-              {this.campaignCount(sectionType, itemPrice)}
+              {this.cardCount(sectionType, itemPrice)}
             </View>
           ))}
         </View>
