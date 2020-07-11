@@ -92,12 +92,14 @@ export default StyleSheet.create({
   cardBodyItemCount: {
     flexDirection: 'row',
     position: 'absolute',
+    width: responsiveRate(80),
     right: 0,
     borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderColor: Colors.SECONDARY_VERY_LIGHT,
     borderRadius: 6,
+    justifyContent: 'center',
   },
   cardBodyItemCountText: {
     marginHorizontal: 2,

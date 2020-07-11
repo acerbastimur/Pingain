@@ -283,8 +283,9 @@ const CampaignDetails = ({ navigation }: CampaignDetailsProps) => {
             uid: auth().currentUser.uid,
             companyId,
           });
-          analytics().logEvent(`company_${companyId}_opened`, {
+          analytics().logEvent(`company_details_opened`, {
             uid: auth().currentUser.uid,
+            companyId,
           });
           setTimeout(() => {
             navigation.navigate('CompanyDetails', { company: currentCompany });

@@ -118,8 +118,7 @@ export default StyleSheet.create({
   },
   dropdownText: {
     fontFamily: 'Helvetica Neue',
-    fontSize: responsiveRate(20),
-    color: Colors.COMPANY,
+     color: Colors.COMPANY,
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: 0.3,

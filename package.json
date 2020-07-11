@@ -15,8 +15,8 @@
     "clear": "rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-*"
   },
   "dependencies": {
-    "@react-native-firebase/analytics": "^7.1.6",
-    "@react-native-firebase/app": "^7.3.1",
+    "@react-native-firebase/analytics": "^7.3.1",
+    "@react-native-firebase/app": "^8.2.0",
     "@react-native-firebase/auth": "^8.0.8",
     "@react-native-firebase/crashlytics": "^7.1.7",
     "@react-native-firebase/firestore": "^7.2.2",

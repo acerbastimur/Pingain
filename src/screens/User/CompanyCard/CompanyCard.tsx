@@ -153,8 +153,9 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                   uid: auth().currentUser.uid,
                   companyId: company.companyId,
                 });
-                analytics().logEvent(`company_${company.companyId}_opened`, {
+                analytics().logEvent(`company_details_opened`, {
                   uid: auth().currentUser.uid,
+                  companyId: company.companyId,
                 });
                 navigation.navigate('CompanyDetails', { company });
               }}
@@ -222,7 +223,7 @@ export default class CompanyCard extends React.Component<CompanyCardProps, Compa
                       campaignId: campaign.campaignId,
                       isCampaignDone: isCompleted,
                     });
-                    analytics().logEvent(`campaign_${campaign.campaignId}_opened`, {
+                    analytics().logEvent(`campaign_opened`, {
                       uid: auth().currentUser.uid,
                       companyId: campaign.companyId,
                       campaignId: campaign.campaignId,

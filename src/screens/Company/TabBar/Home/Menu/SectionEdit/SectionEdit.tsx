@@ -61,12 +61,12 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
     const { loading, sectionName, sectionType, sectionItems } = this.state;
     const isEdit = this.props.navigation.getParam('isEdit');
 
-    const priceExtractor = Array(99)
-      .fill(null)
+    const priceExtractor = Array(198)
+      .fill(0)
       .map((_, index) => {
         return {
-          value: index + 1,
-          label: index + 1,
+          value: index * 0.5,
+          label: index * 0.5,
         };
       });
 
@@ -145,8 +145,6 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
 
           <View style={this.style.menuItemsContainer}>
             {sectionItems.map(({ itemDetails, itemId, itemName, itemPrice }) => {
-              console.log(itemName, itemPrice);
-
               return (
                 <View style={this.style.menuItem} key={itemId}>
                   <View style={this.style.row}>
@@ -191,7 +189,7 @@ export default class SectionEdit extends React.Component<SectionEditProps, Secti
                           this.style.transparentBorder,
                         ]}
                         textColor={Colors.COMPANY}
-                        fontSize={18}
+                        fontSize={16}
                       />
                     </View>
                     <TouchableOpacity

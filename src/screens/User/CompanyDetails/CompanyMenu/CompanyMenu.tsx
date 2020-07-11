@@ -3,11 +3,11 @@ import { View, Text, FlatList } from 'react-native';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
 import { observer } from 'mobx-react';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
 import CompanyMenuStyle from './CompanyMenu.style';
 import TabsHeader from '../../../../common-components/TabsHeader';
 
-import UserStore from '../../../../stores/User.store';
-import { toJS } from 'mobx';
 import MenuCard from './MenuCard';
 import { UserCompany } from '../../../../schemes/user/UserCompany';
 
@@ -38,9 +38,11 @@ export default class CompanyMenu extends React.Component<CompanyMenuProps> {
   public render() {
     const { navigation } = this.props;
     const {
-      companyMenu: { sections },
-    }: UserCompany = this.props.navigation.getParam('company');
-    console.log(toJS(sections));
+      companyMenu: { sections, companyId },
+    }: // eslint-disable-next-line react/destructuring-assignment
+    UserCompany = this.props.navigation.getParam('company');
+
+    analytics().logEvent('company_menu_opened', { uid: auth().currentUser.uid, companyId });
 
     return (
       <View style={this.style.container}>
