@@ -6,6 +6,7 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-n
 import analytics from '@react-native-firebase/analytics';
 import OnboardingStyle from './Onboarding.style';
 import Colors from '../../global/styles/Colors';
+import { translate } from '../../translations/Translation';
 
 interface OnboardingProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -52,7 +53,7 @@ const OnboardingComponent = (props: OnboardingProps) => {
               source={require('./images/page1.png')}
               style={s.image}
             />
-            <Text style={s.title}>Arda kafede günde 2 bardak kahve içiyor</Text>
+            <Text style={s.title}>{translate('onboarding.first_header')}</Text>
             <View style={s.line} />
             <Text style={s.subtitle}>
               Pingain işletmelerden topladığınız pinler sayesinde ödüller kazanmanızı sağlıyor!

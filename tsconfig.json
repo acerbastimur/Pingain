@@ -21,6 +21,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "experimentalDecorators": true,
-    "lib": ["es2015"]
+    "lib": ["es2015"],
+    "resolveJsonModule": true
   }
 }
