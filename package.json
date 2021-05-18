@@ -34,7 +34,7 @@
     "react-native-code-push": "^6.1.0",
     "react-native-default-props": "^1.0.1",
     "react-native-easy-toast": "git+https://github.com/acerbastimur/react-native-easy-toast.git",
-    "react-native-fast-image": "^7.0.2",
+    "react-native-fast-image": "^8.3.0",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-image-picker": "^1.1.0",
     "react-native-image-resizer": "^1.1.0",
